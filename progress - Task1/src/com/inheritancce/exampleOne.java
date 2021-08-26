@@ -133,6 +133,7 @@ class LoanAccount extends BankAccount{
 
 public class exampleOne {
     public static void main(String[] s){
+
         SavingsAccount user1 = new SavingsAccount("abishek","D.no12", "d@d.com",10);
         user1.deposit();
         user1.withdraw(20);
@@ -140,5 +141,6 @@ public class exampleOne {
         LoanAccount user2 = new LoanAccount(user1);
         user2.getLoan("Agri", 50);
         System.out.println(user2);
+
     }
 }

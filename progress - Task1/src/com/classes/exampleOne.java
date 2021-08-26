@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 class Student{
+
     private int rollNo;
     private Integer maths[] = new Integer[3], cs[] = new Integer[3];
     private String name;
