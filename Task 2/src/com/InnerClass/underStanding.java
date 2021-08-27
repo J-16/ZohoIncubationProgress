@@ -4,9 +4,10 @@ class OuterClass {
 
     private int y=10; // inner class can access
 
-    class InnerCLass{
+    public class InnerCLass{
 
         public int x=10;
+        //public static int y =10; // not allowed
 
         public void method(){
             System.out.println(x + " " + y);
@@ -17,7 +18,8 @@ class OuterClass {
 //            System.out.println("Static method of inner class");
 //        }
     }
-    private class InnerClass2{ //can be used outside
+
+    private class InnerClass2{ //cannot be used outside
         public int x;
     }
 
@@ -32,11 +34,17 @@ class OuterClass {
 public class underStanding {
 
     public static void main(String[] s){
+
+        //System.out.println();
+
         OuterClass outerClass = new OuterClass();
         outerClass.method();
         OuterClass.InnerCLass innerCLass = outerClass.new InnerCLass();
         innerCLass.method();
         //above is not possible for InnerClass2
+
+
+
     }
 
 }
