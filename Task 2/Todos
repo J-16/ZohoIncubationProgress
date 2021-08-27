@@ -28,7 +28,7 @@
     []  Map
     []  List
     []  Space/Time Complexities
-Collections API 
+[] Collections API 
     []  Iterator/Iterable
     []  Comparator/Comparable
     []  foreach loop
