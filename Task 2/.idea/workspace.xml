@@ -2,13 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b81d5a96-aa99-49d7-9df1-7f9e40050eb9" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/com/InnerClass/Anonymous/exmapleOne.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/InnerClass/exampleOne.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/InnerClass/innerMethod/exmapleOne.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/InnerClass/underStanding.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todos" beforeDir="false" afterPath="$PROJECT_DIR$/Todos" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todos" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -75,9 +86,9 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.exmapleOne (1)">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="com.company.Main" />
       <module name="progress" />
@@ -88,6 +99,66 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="exampleOne" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.InnerClass.exampleOne" />
+      <module name="progress" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.InnerClass.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="exmapleOne (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.InnerClass.Anonymous.exmapleOne" />
+      <module name="progress" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.InnerClass.Anonymous.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="exmapleOne" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.InnerClass.innerMethod.exmapleOne" />
+      <module name="progress" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.InnerClass.innerMethod.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="underStanding" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.InnerClass.underStanding" />
+      <module name="progress" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.InnerClass.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.exmapleOne (1)" />
+        <item itemvalue="Application.exmapleOne" />
+        <item itemvalue="Application.underStanding" />
+        <item itemvalue="Application.exampleOne" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -99,5 +170,16 @@
       <updated>1629987899081</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
