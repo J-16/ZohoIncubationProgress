@@ -44,6 +44,7 @@ class User{
             }
 
         }
+
         User user = new User();
         User.UserException userexception = user.new UserException();
         ErrorCheck errorcheck = new ErrorCheck();
@@ -62,6 +63,7 @@ class User{
         }
         else
             return "ok";
+
     }
 }
 

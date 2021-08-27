@@ -2,26 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b81d5a96-aa99-49d7-9df1-7f9e40050eb9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/InnerClass/Anonymous/understanding.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/InnerClass/MethodLocalInnerClass/exampleTwo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/InnerClass/exampleTwo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/InnerClass/staticInnerClass/exmapleOne.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/lambdas/FunctionalInterface/exampleOne.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/lambdas/exampleOne.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/lambdas/methodReference/constructor/exampleOne.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/lambdas/methodReference/constructor/exampleTwo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/lambdas/methodReference/instance/exampleOne.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/lambdas/methodReference/instance/exampleTwo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/progress/com/InnerClass/Anonymous/Button.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progress/com/InnerClass/Anonymous/Button.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/progress/com/InnerClass/Anonymous/OnDoubleClickListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progress/com/InnerClass/Anonymous/OnDoubleClickListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/progress/com/InnerClass/Anonymous/exmapleOne$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progress/com/InnerClass/Anonymous/exmapleOne$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/progress/com/InnerClass/Anonymous/exmapleOne$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progress/com/InnerClass/Anonymous/exmapleOne$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/progress/com/InnerClass/Anonymous/exmapleOne.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progress/com/InnerClass/Anonymous/exmapleOne.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/progress/com/InnerClass/OuterClass$InnerCLass.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progress/com/InnerClass/OuterClass$InnerCLass.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/progress/com/InnerClass/OuterClass$InnerClass2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progress/com/InnerClass/OuterClass$InnerClass2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/progress/com/InnerClass/OuterClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progress/com/InnerClass/OuterClass.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/progress/com/InnerClass/innerMethod/OuterClass$1methodInnerClass.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/progress/com/InnerClass/innerMethod/OuterClass.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/progress/com/InnerClass/innerMethod/exmapleOne.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/progress/com/InnerClass/underStanding.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progress/com/InnerClass/underStanding.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/InnerClass/Anonymous/exmapleOne.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/InnerClass/Anonymous/exmapleOne.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/InnerClass/innerMethod/exmapleOne.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/InnerClass/MethodLocalInnerClass/exmapleOne.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/InnerClass/underStanding.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/InnerClass/underStanding.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/progress/com/InnerClass/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progress/com/InnerClass/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/progress/com/InnerClass/exampleTwo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progress/com/InnerClass/exampleTwo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/InnerClass/exampleTwo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/InnerClass/exampleTwo.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,15 +91,60 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.lambdas" />
+    </key>
+  </component>
   <component name="RunManager" selected="Application.exampleTwo (1)">
+    <configuration name="exampleOne (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.lambdas.exampleOne" />
+      <module name="progress" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.lambdas.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="exampleOne" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.lambdas.methodReference.instance.exampleOne" />
+      <module name="progress" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.lambdas.methodReference.instance.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="exampleThree" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.lambdas.methodReference.constructor.exampleThree" />
+      <module name="progress" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.lambdas.methodReference.instance.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="exampleTwo (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.InnerClass.exampleTwo" />
+      <option name="MAIN_CLASS_NAME" value="com.lambdas.methodReference.constructor.exampleTwo" />
       <module name="progress" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.InnerClass.*" />
+          <option name="PATTERN" value="com.lambdas.methodReference.constructor.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -116,51 +152,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="exmapleOne (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.InnerClass.Anonymous.exmapleOne" />
+    <configuration name="exampleTwo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.lambdas.methodReference.instance.exampleTwo" />
       <module name="progress" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.InnerClass.Anonymous.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="exmapleOne (2)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.InnerClass.staticInnerClass.exmapleOne" />
-      <module name="progress" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.InnerClass.staticInnerClass.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="underStanding" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.InnerClass.underStanding" />
-      <module name="progress" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.InnerClass.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="understanding" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.InnerClass.Anonymous.understanding" />
-      <module name="progress" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.InnerClass.Anonymous.*" />
+          <option name="PATTERN" value="com.lambdas.methodReference.instance.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -171,10 +168,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.exampleTwo (1)" />
-        <item itemvalue="Application.exmapleOne (1)" />
-        <item itemvalue="Application.underStanding" />
-        <item itemvalue="Application.understanding" />
-        <item itemvalue="Application.exmapleOne (2)" />
+        <item itemvalue="Application.exampleThree" />
+        <item itemvalue="Application.exampleTwo" />
+        <item itemvalue="Application.exampleOne (2)" />
+        <item itemvalue="Application.exampleOne (1)" />
       </list>
     </recent_temporary>
   </component>
