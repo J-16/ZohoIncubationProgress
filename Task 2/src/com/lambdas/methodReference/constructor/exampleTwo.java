@@ -26,7 +26,7 @@ class Student{
 }
 
 interface StudentCreator<T>{
-    List method();
+    T method(int rollNo, String name);
 }
 
 public class exampleTwo {
@@ -40,14 +40,17 @@ public class exampleTwo {
 
     public static void main(String[] s){
 
+        StudentCreator studentCreator = Student::new;
+
         List<Student> studentsList = new ArrayList<Student>();
-        studentsList.add(new Student(100, "stud1"));
-        studentsList.add(new Student(101, "stud2"));
-        studentsList.add(new Student(102, "stud3"));
-        studentsList.add(new Student(103, "stud4"));
+        studentsList.add( new Student(100, "stud1") );
+        studentsList.add( new Student(101, "stud2") );
+        studentsList.add( new Student(102, "stud3") );
+        studentsList.add( new Student(103, "stud4") );
 
 
-        for(Student student : studentsList){
+
+        for( Student student : studentsList){
             System.out.println( student.getName() + " " +  student.getRollNo() );
         }
 

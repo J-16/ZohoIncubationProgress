@@ -7,6 +7,7 @@ interface CharacterInterface{
 }
 
 class CharactersBody {
+    
     private int Blood;
     private String playerName;
     private String Body;
@@ -16,7 +17,6 @@ class CharactersBody {
         this.Blood = blood;
         playerName = name;
         System.out.println("Created Character");
-        return;
     }
 
     public int Hit(){
@@ -53,16 +53,35 @@ public class exampleThree {
             switch (c){
                 case 1 :
                     characterInterface = CharactersBody::new;
-                    System.out.println( characterInterface.SelectCharacter("HulkBody",100,"user1") );
+                    charactersBody = characterInterface.SelectCharacter("HulkBody",100,"user1");
                     break;
                 case 2:
                     characterInterface = CharactersBody::new;
-                    System.out.println( characterInterface.SelectCharacter("IronManBody",80,"user1") );
+                    charactersBody = characterInterface.SelectCharacter("IronManBody",80,"user1");
                     break;
                 default:
                     System.out.println("Only two Characters avail");
             }
         }while( c!=1 && c!=2 );
+
+        System.out.println("Game Started");
+
+        do{
+            System.out.println("Selection Action : 1.Hit 2. Settings 3. quit");
+            c = scanner.nextInt();
+            switch (c){
+                case 1 :
+                    charactersBody.Hit();
+                    break;
+                case 2 :
+                    System.out.println( charactersBody);
+                    break;
+                case 3:
+                    return;
+                default:
+                    System.out.println("Invalid option");
+            }
+        }while( charactersBody.getBlood() > 0 && c != 3);
 
     }
 
