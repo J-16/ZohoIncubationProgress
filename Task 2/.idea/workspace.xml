@@ -2,17 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b81d5a96-aa99-49d7-9df1-7f9e40050eb9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/lambdas/FunctionalInterface/exampleOne.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/lambdas/exampleOne.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/lambdas/methodReference/constructor/exampleOne.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/lambdas/methodReference/constructor/exampleTwo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/lambdas/methodReference/instance/exampleOne.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/lambdas/methodReference/instance/exampleTwo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/lambdas/methodReference/constructor/exampleThree.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/lambdas/methodReference/staticmethod/exampleOne.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/lambdas/methodReference/staticmethod/exampleTwo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/progress/com/InnerClass/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progress/com/InnerClass/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/progress/com/InnerClass/exampleTwo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progress/com/InnerClass/exampleTwo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/InnerClass/exampleTwo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/InnerClass/exampleTwo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/progress/com/lambdas/methodReference/instance/Lambda.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progress/com/lambdas/methodReference/instance/Lambda.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/progress/com/lambdas/methodReference/instance/LambdaMethodReference.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progress/com/lambdas/methodReference/instance/LambdaMethodReference.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/progress/com/lambdas/methodReference/instance/exampleOne.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progress/com/lambdas/methodReference/instance/exampleOne.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/lambdas/methodReference/constructor/exampleTwo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/lambdas/methodReference/constructor/exampleTwo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/lambdas/methodReference/instance/exampleOne.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/lambdas/methodReference/instance/exampleOne.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,13 +97,13 @@
       <recent name="com.lambdas" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.exampleTwo (1)">
-    <configuration name="exampleOne (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.lambdas.exampleOne" />
+  <component name="RunManager" selected="Application.exampleThree">
+    <configuration name="exampleOne (2)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.lambdas.methodReference.staticmethod.exampleOne" />
       <module name="progress" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.lambdas.*" />
+          <option name="PATTERN" value="com.lambdas.methodReference.staticmethod.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -152,12 +150,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="exampleTwo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.lambdas.methodReference.instance.exampleTwo" />
+    <configuration name="exampleTwo (2)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.lambdas.methodReference.staticmethod.exampleTwo" />
       <module name="progress" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.lambdas.methodReference.instance.*" />
+          <option name="PATTERN" value="com.lambdas.methodReference.staticmethod.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -167,11 +165,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.exampleTwo (1)" />
         <item itemvalue="Application.exampleThree" />
-        <item itemvalue="Application.exampleTwo" />
+        <item itemvalue="Application.exampleTwo (2)" />
+        <item itemvalue="Application.exampleOne" />
         <item itemvalue="Application.exampleOne (2)" />
-        <item itemvalue="Application.exampleOne (1)" />
+        <item itemvalue="Application.exampleTwo (1)" />
       </list>
     </recent_temporary>
   </component>

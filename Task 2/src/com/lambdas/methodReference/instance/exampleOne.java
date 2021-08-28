@@ -2,15 +2,15 @@ package com.lambdas.methodReference.instance;
 
 
 interface Lambda{
-    String method(String x);
+    boolean method(String x);
 }
 
 class LambdaMethodReference {
 
-    public String isValid(String x) {
-        if (x.matches(".*[0-9].*"))
-            return "In Valid";
-        return "Valid";
+    public boolean isValid(String x) {
+        if (x.matches(".*[0-9!@#$%^&*()_+].*"))
+            return false;
+        return true;
     }
 }
 
@@ -19,9 +19,8 @@ public class exampleOne {
     public static void main(String[] args) {
 
         LambdaMethodReference lambdaMethodReference = new LambdaMethodReference();
-        Lambda lambda;
 
-        lambda = lambdaMethodReference::isValid;
+        Lambda lambda = lambdaMethodReference::isValid;
         System.out.println(lambda.method("Random"));
 
     }

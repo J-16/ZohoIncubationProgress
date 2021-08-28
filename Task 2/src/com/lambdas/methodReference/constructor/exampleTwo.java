@@ -7,11 +7,10 @@ class Student{
 
     private String name;
     private int rollNo;
-    private static int count = 100;
 
-    public Student(){
-        name  = "dummyName" + count;
-        rollNo = count++;
+    public Student(int rollNo, String name){
+        this.name  = name;
+        this.rollNo = rollNo;
     }
 
     public void setName(){
@@ -26,25 +25,27 @@ class Student{
     }
 }
 
-interface StudentCreationMethod<T>{
-    T method();
+interface StudentCreator<T>{
+    List method();
 }
 
 public class exampleTwo {
 
-    public static <T> List<T> createDummyStudent(int NoOfStd, StudentCreationMethod<T> obj){
+    public static <T> List<T> createDummyStudent(List<T> copyFrom){
 
         List<T> studentsList = new ArrayList<>();
-
-        for(int i = 0 ; i < NoOfStd; i++ )
-            studentsList.add( obj.method() );
 
         return studentsList;
     }
 
     public static void main(String[] s){
 
-        List<Student> studentsList = createDummyStudent(10, Student::new);
+        List<Student> studentsList = new ArrayList<Student>();
+        studentsList.add(new Student(100, "stud1"));
+        studentsList.add(new Student(101, "stud2"));
+        studentsList.add(new Student(102, "stud3"));
+        studentsList.add(new Student(103, "stud4"));
+
 
         for(Student student : studentsList){
             System.out.println( student.getName() + " " +  student.getRollNo() );
