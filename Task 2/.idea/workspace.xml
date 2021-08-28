@@ -3,12 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b81d5a96-aa99-49d7-9df1-7f9e40050eb9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/progress/com/lambdas/methodReference/constructor/Student.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progress/com/lambdas/methodReference/constructor/Student.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/progress/com/lambdas/methodReference/constructor/StudentCreationMethod.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/progress/com/lambdas/methodReference/constructor/exampleThree.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progress/com/lambdas/methodReference/constructor/exampleThree.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/progress/com/lambdas/methodReference/constructor/exampleTwo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progress/com/lambdas/methodReference/constructor/exampleTwo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/lambdas/methodReference/constructor/exampleThree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/lambdas/methodReference/constructor/exampleThree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/lambdas/methodReference/constructor/exampleTwo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/lambdas/methodReference/constructor/exampleTwo.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
