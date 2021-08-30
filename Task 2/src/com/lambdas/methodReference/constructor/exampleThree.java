@@ -81,7 +81,7 @@ public class exampleThree {
                 default:
                     System.out.println("Invalid option");
             }
-        }while( charactersBody.getBlood() > 0 && c != 3);
+        }while( charactersBody.getBlood() > 0 );
 
     }
 
