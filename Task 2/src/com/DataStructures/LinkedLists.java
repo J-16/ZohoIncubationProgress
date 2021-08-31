@@ -116,7 +116,7 @@ public class LinkedLists {
         customLinkedList linkedList = new customLinkedList();
 
         //insert
-        // at end - O(n)
+        // at end - O(1)
         linkedList.insert(1);
         linkedList.insert(2);
         linkedList.insert(3);
@@ -126,7 +126,7 @@ public class LinkedLists {
         linkedList.print();
         System.out.println();
 
-        // at another place - O(n)
+        // at another place - O(1)
         linkedList.insert(4,4);
         linkedList.insert(8,7);
         System.out.println("After insertion at nth place");
@@ -136,7 +136,7 @@ public class LinkedLists {
         //search O(n)
         System.out.println( "Linear Search: " + linkedList.search(1) );
 
-        // Deletion- O(n)
+        // Deletion- O(1)
         System.out.println("After deleting a value");
         linkedList.delete(2);
         linkedList.print();

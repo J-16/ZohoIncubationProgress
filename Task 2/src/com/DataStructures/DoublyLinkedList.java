@@ -1,21 +1,22 @@
 package com.DataStructures;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class DoublyLinkedList {
     public static void main(String[] args){
 
-        LinkedList<String> linkedList = new LinkedList<>();
+        List<String> linkedList = new LinkedList<>();
 
-        //Insert - O(n)
+        //Insert - O(1)
         linkedList.add("one");
         linkedList.add("three");
         linkedList.add("four");
 
-        //Insert at - O(n)
+        //Insert at - O(1)
         linkedList.add(2,"two");
 
-        // remove - O(n)
+        // remove - O(1)
         linkedList.remove("one");
         linkedList.remove(1);
 

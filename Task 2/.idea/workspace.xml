@@ -2,18 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b81d5a96-aa99-49d7-9df1-7f9e40050eb9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/DataStructures/Arrays.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/DataStructures/DoublyLinkedList.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/DataStructures/LinkedLists.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/DataStructures/hashMaps.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/Exceptions/exampleOne.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/Strings/customStringImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/CollectionFrameWork/exampleOne.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/ComparableAndComparator/ComparableExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/ComparableAndComparator/ComparatorTwoDiffClassObject.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/ComparableAndComparator/ComparatorWithMemberFunction.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/progress/com/Strings/exampleOne.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progress/com/Strings/exampleOne.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/progress/com/Strings/performanceIssue.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progress/com/Strings/performanceIssue.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/progress/com/Strings/stringsMethods.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progress/com/Strings/stringsMethods.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/Strings/exampleOne.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Strings/exampleOne.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/Strings/stringsMethods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Strings/stringsMethods.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/progress/com/DataStructures/hashMaps.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progress/com/DataStructures/hashMaps.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/DataStructures/DoublyLinkedList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/DataStructures/DoublyLinkedList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/DataStructures/LinkedLists.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/DataStructures/LinkedLists.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,17 +100,20 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
+    <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="com.ComparableAndComparator" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.lambdas" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.hashMaps">
-    <configuration name="Arrays" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.DataStructures.Arrays" />
+  <component name="RunManager" selected="Application.exampleOne">
+    <configuration name="ComparableExample" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.ComparableAndComparator.ComparableExample" />
       <module name="progress" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.DataStructures.*" />
+          <option name="PATTERN" value="com.ComparableAndComparator.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -122,12 +121,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DoublyLinkedList" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.DataStructures.DoublyLinkedList" />
+    <configuration name="ComparatorTwoDiffClassObject" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.ComparableAndComparator.ComparatorTwoDiffClassObject" />
       <module name="progress" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.DataStructures.*" />
+          <option name="PATTERN" value="com.ComparableAndComparator.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -135,12 +134,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LinkedLists" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.DataStructures.LinkedLists" />
+    <configuration name="ComparatorWithMemberFunction" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.ComparableAndComparator.ComparatorWithMemberFunction" />
       <module name="progress" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.DataStructures.*" />
+          <option name="PATTERN" value="com.ComparableAndComparator.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -149,11 +148,11 @@
       </method>
     </configuration>
     <configuration name="exampleOne" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.Strings.exampleOne" />
+      <option name="MAIN_CLASS_NAME" value="com.CollectionFrameWork.exampleOne" />
       <module name="progress" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.Strings.*" />
+          <option name="PATTERN" value="com.CollectionFrameWork.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -176,11 +175,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.hashMaps" />
-        <item itemvalue="Application.DoublyLinkedList" />
-        <item itemvalue="Application.LinkedLists" />
-        <item itemvalue="Application.Arrays" />
         <item itemvalue="Application.exampleOne" />
+        <item itemvalue="Application.ComparatorTwoDiffClassObject" />
+        <item itemvalue="Application.ComparatorWithMemberFunction" />
+        <item itemvalue="Application.ComparableExample" />
+        <item itemvalue="Application.hashMaps" />
       </list>
     </recent_temporary>
   </component>
