@@ -2,18 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b81d5a96-aa99-49d7-9df1-7f9e40050eb9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/Strings/StringBuilder/exmapleOne.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/Strings/StringBuilder/reverseString.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/Strings/exampleOne.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/Strings/performanceIssue.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/Strings/reverseString.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/Strings/stringBuffer/exampleOne.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/Strings/stringBuffer/reverseString.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/Strings/stringsMethods.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/DataStructures/Arrays.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/DataStructures/DoublyLinkedList.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/DataStructures/LinkedLists.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/DataStructures/hashMaps.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/Exceptions/exampleOne.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/Strings/customStringImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/progress/com/lambdas/methodReference/constructor/CharactersBody.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progress/com/lambdas/methodReference/constructor/CharactersBody.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/progress/com/lambdas/methodReference/constructor/exampleThree.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progress/com/lambdas/methodReference/constructor/exampleThree.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/lambdas/methodReference/constructor/exampleThree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/lambdas/methodReference/constructor/exampleThree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/progress/com/Strings/exampleOne.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progress/com/Strings/exampleOne.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/progress/com/Strings/performanceIssue.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progress/com/Strings/performanceIssue.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/progress/com/Strings/stringsMethods.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progress/com/Strings/stringsMethods.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Strings/exampleOne.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Strings/exampleOne.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Strings/stringsMethods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Strings/stringsMethods.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,13 +108,13 @@
       <recent name="com.lambdas" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.performanceIssue">
-    <configuration name="exampleOne (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.Strings.stringBuffer.exampleOne" />
+  <component name="RunManager" selected="Application.hashMaps">
+    <configuration name="Arrays" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.DataStructures.Arrays" />
       <module name="progress" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.Strings.stringBuffer.*" />
+          <option name="PATTERN" value="com.DataStructures.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -122,12 +122,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="exmapleOne" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.Strings.StringBuilder.exmapleOne" />
+    <configuration name="DoublyLinkedList" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.DataStructures.DoublyLinkedList" />
       <module name="progress" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.Strings.StringBuilder.*" />
+          <option name="PATTERN" value="com.DataStructures.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -135,8 +135,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="performanceIssue" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.Strings.performanceIssue" />
+    <configuration name="LinkedLists" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.DataStructures.LinkedLists" />
+      <module name="progress" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.DataStructures.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="exampleOne" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.Strings.exampleOne" />
       <module name="progress" />
       <extension name="coverage">
         <pattern>
@@ -148,25 +161,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="reverseString (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.Strings.stringBuffer.reverseString" />
+    <configuration name="hashMaps" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.DataStructures.hashMaps" />
       <module name="progress" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.Strings.stringBuffer.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="reverseString (2)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.Strings.StringBuilder.reverseString" />
-      <module name="progress" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.Strings.StringBuilder.*" />
+          <option name="PATTERN" value="com.DataStructures.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -176,11 +176,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.performanceIssue" />
-        <item itemvalue="Application.reverseString (2)" />
-        <item itemvalue="Application.exmapleOne" />
-        <item itemvalue="Application.reverseString (1)" />
-        <item itemvalue="Application.exampleOne (1)" />
+        <item itemvalue="Application.hashMaps" />
+        <item itemvalue="Application.DoublyLinkedList" />
+        <item itemvalue="Application.LinkedLists" />
+        <item itemvalue="Application.Arrays" />
+        <item itemvalue="Application.exampleOne" />
       </list>
     </recent_temporary>
   </component>

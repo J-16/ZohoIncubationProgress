@@ -77,6 +77,14 @@ public class stringsMethods {
         System.out.println( str11 == strCopy9 );
         System.out.println( str9 == strCopy9 );
 
+        strCopy9 = new String(str9);
+        System.out.println( str11 == strCopy9 );
+        System.out.println( str9 == strCopy9 );
+
+        strCopy9 = str9;
+        System.out.println( str11 == strCopy9 );
+        System.out.println( str9 == strCopy9 );
+
         System.out.println(" --- ");
         String str12 = "";
         System.out.println( str12.isEmpty() + " " + str11.isEmpty() );
