@@ -36,14 +36,14 @@ public class exmapleOne {
 
        Button button = new Button();
 
-       button.setOnClickListener(new OnClickListener(){
-           public void onClick(){
-               System.out.println("Clicked");
-           }
-           //static members are not allowed.
-           //static final variables area allowed
-           public static final int X = 10;
-       });
+//       button.setOnClickListener(new OnClickListener(){
+//           public void onClick(){
+//               System.out.println("Clicked");
+//           }
+//           //static members are not allowed.
+//           //static final variables area allowed
+//           public static final int X = 10;
+//       });
 
        Button button2 = new Button(){
            @Override

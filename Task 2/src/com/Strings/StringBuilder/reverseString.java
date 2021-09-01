@@ -1,6 +1,7 @@
 package com.Strings.StringBuilder;
 
 class reverse{
+
     public void rev(String S1, String S2){
 
         StringBuilder sb = new StringBuilder(S1+ S2);

@@ -11,6 +11,7 @@ interface studentsInterface{
 }
 
 class Students implements Comparable<Students>, studentsInterface{
+    public static String Dept = "CSE";
     private int rollNo;
     private String name;
     private int total;
@@ -72,24 +73,24 @@ public class ComparableExample {
         studentsList.add(new Students(1002, "student2",96));
 
         for (Students student : studentsList){
-            System.out.println( student.getrollNO() + " : " + student.getName() + " : " + student.getTotal() );
+            System.out.println( student.getrollNO() + " : " + student.getName() + " : " + student.getTotal() + " : " + Students.Dept );
         }
         System.out.println("-------");
         Collections.sort(studentsList);
         for (Students student : studentsList)
-            System.out.println( student.getrollNO() + " : " + student.getName() + " : " + student.getTotal());
+            System.out.println( student.getrollNO() + " : " + student.getName() + " : " + student.getTotal() + " : " + Students.Dept);
 
         System.out.println("-------");
         CompareTotalInc complexTotal = new CompareTotalInc();
         Collections.sort(studentsList,complexTotal);
         for (Students student : studentsList)
-            System.out.println( student.getrollNO() + " : " + student.getName() + " : " + student.getTotal());
+            System.out.println( student.getrollNO() + " : " + student.getName() + " : " + student.getTotal() + " : " + Students.Dept);
 
         System.out.println("-------");
         CompareTotalDec complexTotaldec = new CompareTotalDec();
         Collections.sort(studentsList,complexTotaldec);
         for (Students student : studentsList)
-            System.out.println( student.getrollNO() + " : " + student.getName() + " : " + student.getTotal());
+            System.out.println( student.getrollNO() + " : " + student.getName() + " : " + student.getTotal() + " : " + Students.Dept);
 
     }
 

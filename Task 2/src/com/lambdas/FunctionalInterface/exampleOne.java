@@ -15,6 +15,9 @@ public class exampleOne{
         };
 
         math.addition(9,5);
+
+        Math math2 = (x,y) -> System.out.println(x+y) ;
+        math2.addition(2,4);
     }
 
 }

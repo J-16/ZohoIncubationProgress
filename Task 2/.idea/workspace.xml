@@ -2,14 +2,44 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b81d5a96-aa99-49d7-9df1-7f9e40050eb9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/CollectionFrameWork/exampleOne.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/ComparableAndComparator/ComparableExample.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/ComparableAndComparator/ComparatorTwoDiffClassObject.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/ComparableAndComparator/ComparatorWithMemberFunction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/CollectionsAPI/exampleOne.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/Enum/exampleOne.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/Enum/exampleTwo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/Exceptions/Checked/exampleTwo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/Exceptions/UnChecked/exampleOne.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/InnerClass/staticInnerClass/exampleTwo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/JVM/classLoaders.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/VarArgs/exampleOne.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/VarArgs/exampleTwo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/primitiveVsObjectWrappersClass/exampleOne.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/progress/com/DataStructures/hashMaps.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progress/com/DataStructures/hashMaps.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/progress/com/CollectionFrameWork/exampleOne.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progress/com/CollectionFrameWork/exampleOne.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/progress/com/ComparableAndComparator/ComparableExample.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progress/com/ComparableAndComparator/ComparableExample.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/progress/com/ComparableAndComparator/CompareTotalDec.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progress/com/ComparableAndComparator/CompareTotalDec.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/progress/com/ComparableAndComparator/CompareTotalInc.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progress/com/ComparableAndComparator/CompareTotalInc.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/progress/com/ComparableAndComparator/Students.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progress/com/ComparableAndComparator/Students.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/progress/com/DataStructures/DoublyLinkedList.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progress/com/DataStructures/DoublyLinkedList.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/progress/com/Exceptions/exampleOne.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progress/com/Exceptions/exampleOne.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/progress/com/InnerClass/Anonymous/exmapleOne$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progress/com/InnerClass/Anonymous/exmapleOne$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/progress/com/InnerClass/Anonymous/exmapleOne$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/progress/com/InnerClass/Anonymous/exmapleOne.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progress/com/InnerClass/Anonymous/exmapleOne.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/progress/com/InnerClass/InnerClassExample.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/progress/com/InnerClass/User$1ErrorCheck.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progress/com/InnerClass/User$1ErrorCheck.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/progress/com/InnerClass/User$UserException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/progress/com/InnerClass/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progress/com/InnerClass/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/progress/com/InnerClass/exampleOne.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/progress/com/InnerClass/exampleTwo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progress/com/InnerClass/exampleTwo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/progress/com/lambdas/FunctionalInterface/exampleOne.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/progress/com/lambdas/FunctionalInterface/exampleOne.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ComparableAndComparator/ComparableExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ComparableAndComparator/ComparableExample.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/DataStructures/DoublyLinkedList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/DataStructures/DoublyLinkedList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/DataStructures/LinkedLists.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/DataStructures/LinkedLists.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Exceptions/exampleOne.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Exceptions/exampleOne.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/InnerClass/Anonymous/exmapleOne.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/InnerClass/Anonymous/exmapleOne.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/InnerClass/exampleOne.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/InnerClass/exampleTwo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/InnerClass/exampleTwo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Strings/StringBuilder/reverseString.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Strings/StringBuilder/reverseString.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Strings/reverseString.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Strings/reverseString.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/lambdas/FunctionalInterface/exampleOne.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/lambdas/FunctionalInterface/exampleOne.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/lambdas/methodReference/constructor/exampleThree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/lambdas/methodReference/constructor/exampleThree.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,39 +137,13 @@
       <recent name="com.lambdas" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.exampleOne">
-    <configuration name="ComparableExample" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.ComparableAndComparator.ComparableExample" />
+  <component name="RunManager" selected="Application.exampleThree">
+    <configuration name="exampleOne (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.Exceptions.UnChecked.exampleOne" />
       <module name="progress" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ComparableAndComparator.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ComparatorTwoDiffClassObject" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.ComparableAndComparator.ComparatorTwoDiffClassObject" />
-      <module name="progress" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ComparableAndComparator.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ComparatorWithMemberFunction" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.ComparableAndComparator.ComparatorWithMemberFunction" />
-      <module name="progress" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ComparableAndComparator.*" />
+          <option name="PATTERN" value="com.Exceptions.UnChecked.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -148,11 +152,11 @@
       </method>
     </configuration>
     <configuration name="exampleOne" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.CollectionFrameWork.exampleOne" />
+      <option name="MAIN_CLASS_NAME" value="com.Exceptions.exampleOne" />
       <module name="progress" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.CollectionFrameWork.*" />
+          <option name="PATTERN" value="com.Exceptions.Checked.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -160,12 +164,51 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="hashMaps" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.DataStructures.hashMaps" />
+    <configuration name="exampleThree" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.lambdas.methodReference.constructor.exampleThree" />
       <module name="progress" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.DataStructures.*" />
+          <option name="PATTERN" value="com.lambdas.methodReference.constructor.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="exampleTwo (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.Enum.exampleTwo" />
+      <module name="progress" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.Enum.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="exampleTwo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.InnerClass.exampleTwo" />
+      <module name="progress" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.InnerClass.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="exampleTwo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.Exceptions.Checked.exampleTwo" />
+      <module name="progress" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.Exceptions.Checked.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -175,11 +218,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.exampleOne" />
-        <item itemvalue="Application.ComparatorTwoDiffClassObject" />
-        <item itemvalue="Application.ComparatorWithMemberFunction" />
-        <item itemvalue="Application.ComparableExample" />
-        <item itemvalue="Application.hashMaps" />
+        <item itemvalue="Application.exampleThree" />
+        <item itemvalue="Application.exampleTwo (1)" />
+        <item itemvalue="Application.exampleTwo (1)" />
+        <item itemvalue="Application.exampleOne (1)" />
+        <item itemvalue="Application.exampleOne (2)" />
       </list>
     </recent_temporary>
   </component>

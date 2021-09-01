@@ -7,6 +7,7 @@ public class reverseString {
 
         String str = S1.concat(S2);
         char[] str1 = str.toCharArray();
+
         int i = 0, j = str.length()-1;
         while(i<j){
             char temp = str1[i];
@@ -17,5 +18,6 @@ public class reverseString {
         }
         str =  new String(str1);
         System.out.println( str );
+
     }
 }

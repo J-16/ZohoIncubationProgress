@@ -22,6 +22,5 @@ public class DoublyLinkedList {
 
         //get - O(n)
         System.out.println( linkedList.get(0) );
-
     }
 }

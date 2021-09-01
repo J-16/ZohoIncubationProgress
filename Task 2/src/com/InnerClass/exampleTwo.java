@@ -1,13 +1,11 @@
 package com.InnerClass;
 
-
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 class User{
 
-    class UserException{
+    class StringException{
         public String emptyException(){
             return "Empty Field is not allowed";
         }
@@ -24,16 +22,22 @@ class User{
 
     public static String checkValidString(String name) {
 
-        Set<String> set = new HashSet<String>();
-        set.add("!");
-        set.add("@");
+        List<Character> symbols = new ArrayList<>();
+        symbols.add('!');
+        symbols.add('@');
+        symbols.add('#');
+        symbols.add('$');
+        symbols.add('%');
+        symbols.add('^');
+        symbols.add('&');
+        symbols.add('*');
 
         class ErrorCheck{
 
             public boolean ContainsSpecialCharacter(){
 
                 for(int i=0;i<name.length();i++){
-                    if( set.contains(name.charAt(i)) )
+                    if( symbols.contains(name.charAt(i)) )
                         return true;
                 }
                 return false;
@@ -46,7 +50,7 @@ class User{
         }
 
         User user = new User();
-        User.UserException userexception = user.new UserException();
+        User.StringException userexception = user.new StringException();
         ErrorCheck errorcheck = new ErrorCheck();
 
         if( name.length() == 0 ){
@@ -70,5 +74,8 @@ class User{
 public class exampleTwo {
     public static void main(String[] s){
         System.out.println(User.checkValidString("ajabcb"));
+
+        System.out.println(User.checkValidString("a$jabcb"));
+        System.out.println(User.checkValidString("aj1abcb"));
     }
 }

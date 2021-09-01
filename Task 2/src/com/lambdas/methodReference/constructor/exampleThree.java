@@ -41,7 +41,7 @@ class CharactersBody {
 public class exampleThree {
 
     public static void main(String[] args){
-        CharacterInterface characterInterface = null;
+        CharacterInterface characterInterface = CharactersBody::new;
         CharactersBody charactersBody = null;
 
         Scanner scanner = new Scanner(System.in);
@@ -52,11 +52,9 @@ public class exampleThree {
             c = scanner.nextInt();
             switch (c){
                 case 1 :
-                    characterInterface = CharactersBody::new;
                     charactersBody = characterInterface.SelectCharacter("HulkBody",100,"user1");
                     break;
                 case 2:
-                    characterInterface = CharactersBody::new;
                     charactersBody = characterInterface.SelectCharacter("IronManBody",80,"user1");
                     break;
                 default:
