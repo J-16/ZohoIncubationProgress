@@ -17,7 +17,7 @@ public class sudokuSolver {
     private static boolean checkColumn( int[][] matrix, int col, int val ){
 
         for(int i=0;i<matrix.length;i++){
-            if( (matrix[i][col] != 0) && (matrix[i][col]^val) == val )
+            if( (matrix[i][col] != 0) && (~(matrix[i][col]) & val) == 0 )
                 return false;
         }
 
@@ -40,15 +40,15 @@ public class sudokuSolver {
 
     public static void main(String[] args) {
 
-        int[][] matrix = { { 3, 0, 6, 5, 0, 8, 4, 0, 0 }, // ROW
-                { 5, 2, 0, 0, 0, 0, 0, 0, 0 },
-                { 0, 8, 7, 0, 0, 0, 0, 3, 1 },  // C
-                { 0, 0, 3, 0, 1, 0, 0, 8, 0 },  // O
-                { 9, 0, 0, 8, 6, 3, 0, 0, 5 },  // L
-                { 0, 5, 0, 0, 9, 0, 6, 0, 0 },
-                { 1, 3, 0, 0, 0, 0, 2, 5, 0 },
-                { 0, 0, 0, 0, 0, 0, 0, 7, 4 },
-                { 0, 0, 5, 2, 0, 6, 3, 0, 0 } };
+        int[][] matrix = { { 0, 7, 0, 0, 2, 0, 0, 4, 6 }, // ROW
+                           { 0, 6, 0, 0, 0, 0, 8, 9, 0 },
+                           { 2, 0, 0, 8, 0, 0, 7, 1, 5 },  // C
+                           { 0, 8, 4, 0, 9, 7, 0, 0, 0 },  // O
+                           { 7, 1, 0, 0, 0, 0, 0, 5, 9 },  // L
+                           { 0, 0, 0, 1, 3, 0, 4, 8, 0 },
+                           { 6, 9, 7, 0, 0, 2, 0, 0, 8 },
+                           { 0, 5, 8, 0, 0, 0, 0, 6, 0 },
+                           { 4, 3, 0, 0, 8, 0, 0, 7, 0 } };
 
         Scanner sc = new Scanner(System.in);
         int value;
