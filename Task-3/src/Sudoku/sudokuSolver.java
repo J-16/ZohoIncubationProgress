@@ -6,8 +6,8 @@ public class sudokuSolver {
     private static boolean checkRow( int[][] matrix, int row, int val ){
 
         for(int i=0;i<matrix.length;i++){
-            if( (matrix[row][i] != 0) && (matrix[row][i] ^ val) == val ){
-                System.out.println("present in row" + matrix[row][i] + " " +val);
+            if( (matrix[row][i] != 0) && (matrix[row][i] ^ val) == 0 ){
+                //System.out.println("present in row" + matrix[row][i] + " " +val);
                 return false;
             }
         }
@@ -16,11 +16,12 @@ public class sudokuSolver {
 
     private static boolean checkColumn( int[][] matrix, int col, int val ){
 
-        for(int i=0;i<matrix.length;i++){
-            if( (matrix[i][col] != 0) && (~(matrix[i][col]) & val) == 0 )
+        for (int[] mat : matrix) {
+            if ((mat[col] != 0) && (mat[col] ^ val) == 0) {
+                //System.out.println(matrix[i][col]);
                 return false;
+            }
         }
-
         return true;
     }
 
@@ -30,7 +31,7 @@ public class sudokuSolver {
         int colStart = col - col%3;
         for(int i=0;i<3;i++){
             for(int j=0;j<3;j++){
-                if( (matrix[i + rowStart][j+colStart] != 0) && ((matrix[i + rowStart][j+colStart] ^ val) == val))
+                if( (matrix[i + rowStart][j+colStart] != 0) && ((matrix[i + rowStart][j+colStart] ^ val) == 0))
                     return false;
             }
         }
