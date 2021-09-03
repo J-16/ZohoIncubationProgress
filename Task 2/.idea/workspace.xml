@@ -2,7 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b81d5a96-aa99-49d7-9df1-7f9e40050eb9" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../Task-3/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Task-3/src/FoodDelivery/CustomComparators/FoodComparator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Task-3/src/FoodDelivery/CustomList/FoodList.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Task-3/src/FoodDelivery/CustomList/OrderHistory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Task-3/src/FoodDelivery/CustomList/OrderList.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Task-3/src/FoodDelivery/CustomList/RecentOrder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Task-3/src/FoodDelivery/Enum/FoodStatus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Task-3/src/FoodDelivery/Enum/FoodTag.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Task-3/src/FoodDelivery/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Task-3/src/FoodDelivery/PaymentGateWay/GpayInterface.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Task-3/src/FoodDelivery/PaymentGateWay/PayPalInterface.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Task-3/src/FoodDelivery/RestaurantClass.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Task-3/src/FoodDelivery/Restaurants/RestaurantOne.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Task-3/src/FoodDelivery/Users/UserOne.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Task-3/src/FoodDelivery/Users/Users.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task-3/out/production/Task-3/Sudoku/sudokuSolver.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Task-3/out/production/Task-3/Sudoku/sudokuSolver.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,8 +105,10 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Task-3" />
   </component>
   <component name="RecentsManager">
     <key name="ExtractSuperBase.RECENT_KEYS">
@@ -185,7 +203,6 @@
         <item itemvalue="Application.exampleTwo (1)" />
         <item itemvalue="Application.exampleTwo (1)" />
         <item itemvalue="Application.exampleOne (1)" />
-        <item itemvalue="Application.exampleOne (2)" />
       </list>
     </recent_temporary>
   </component>
