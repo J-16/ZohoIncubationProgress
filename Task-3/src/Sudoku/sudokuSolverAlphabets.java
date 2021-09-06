@@ -41,7 +41,8 @@ public class sudokuSolverAlphabets {
 
     public static void main(String[] args) {
 
-        char[][] matrix = { { '0', 'G', '0', '0', 'C', '0', '0', 'D', 'F' }, // ROW
+        char[][] matrix = {
+                { '0', 'G', '0', '0', 'C', '0', '0', 'D', 'F' }, // ROW
                 { '0', 'F', '0', '0', '0', '0', 'H', 'I', '0' },
                 { 'B', '0', '0', 'H', '0', '0', 'G', 'A', 'E' },  // C
                 { '0', 'H', 'D', '0', 'I', 'G', '0', '0', '0' },  // O
