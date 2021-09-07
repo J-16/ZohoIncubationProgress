@@ -1,7 +1,7 @@
 package com.Exceptions;
 
 public class UserNotFoundException extends RuntimeException{
-    public UserNotFoundException(){
-        super("Invalid ATM card");
+    public UserNotFoundException(String s){
+        super(s);
     }
 }

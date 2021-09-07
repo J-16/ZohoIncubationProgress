@@ -17,12 +17,13 @@ public class Program {
         return y % x == 0;
     }
 
-    static int prev = 0;
-    static int val = 0;
+    private static int val = 0;
+    private static int prev = 0;
+        
     private static boolean traps(int x, int y){
         if(prev == x)
             return false;
-        if( x == y || isMultiple(x,y) ) {
+        if( x == y || isMultiple(x,y)  ) {
             System.out.print( val + " ");
             return true;
         }
@@ -33,7 +34,7 @@ public class Program {
         }
     }
 
-    private static boolean generate(int n1, int n2, int y){
+    private static void generate(int n1, int n2, int y){
         for(int x=n1; x<=n2; x++ ){
             val = x;
             if( traps(x,y) ){
@@ -42,7 +43,6 @@ public class Program {
             else y--;
             if(y < 3) y=3;
         }
-        return false;
     }
 
     public static void main(String[] args){
