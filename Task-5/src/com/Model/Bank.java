@@ -4,8 +4,8 @@ import com.Enum.WithDrawMode;
 
 public abstract class Bank{
 
-    private long AtmCardNo;
-    private int pin;
+    private final long AtmCardNo;
+    private final int pin;
     private double balance;
 
     private static final double MIN_BALANCE = 100D;

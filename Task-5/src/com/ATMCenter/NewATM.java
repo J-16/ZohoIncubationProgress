@@ -15,5 +15,4 @@ public class NewATM extends ATM {
         ATMController atmController = new ATMController(atmCheck);
         atmController.ATM();
     }
-
 }

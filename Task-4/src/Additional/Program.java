@@ -35,6 +35,10 @@ public class Program {
     }
 
     private static void generate(int n1, int n2, int y){
+        if(n1>n2 || n1==n2){
+            System.out.println("N1 must be smaller than n2");
+            return;
+        }
         for(int x=n1; x<=n2; x++ ){
             val = x;
             if( traps(x,y) ){

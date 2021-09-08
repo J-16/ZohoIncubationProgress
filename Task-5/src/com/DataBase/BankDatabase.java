@@ -7,14 +7,7 @@ import com.Model.User;
 import java.util.HashMap;
 
 public class BankDatabase {
-    private HashMap<Long, Bank> userDb = new HashMap<>();
-
-    {
-        registerUser(987456,1234);
-        registerUser(987453,1234);
-        registerAgent(5555,1234);
-        registerAgent(5566,1233);
-    }
+    private static HashMap<Long, Bank> userDb = new HashMap<>();
 
     public void registerUser(long ATMCardNo, int pin){
         userDb.put(ATMCardNo, new User(ATMCardNo, pin));

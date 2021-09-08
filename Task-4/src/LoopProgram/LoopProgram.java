@@ -1,8 +1,6 @@
 package LoopProgram;
 
-
-
-public class Program {
+public class LoopProgram {
 
     private static int parition(int arr[] ,int start, int end){
         int pivot = arr[end];
@@ -20,7 +18,7 @@ public class Program {
         return piv;
     }
 
-    private static void quickSort(int arr[], int start, int end){
+    public static void quickSort(int arr[], int start, int end){
         if(start < end){
             int pivot = parition(arr,start,end);
             quickSort(arr, start, pivot-1);
@@ -29,6 +27,10 @@ public class Program {
     }
 
     private static void kthSmallest(int arr[], int k){
+        if(arr.length == 0){
+            System.out.println("Empty array");
+            return;
+        }
         System.out.println( k + " smallest element " + arr[k-1] );
         kthLargest(arr,k);
     }

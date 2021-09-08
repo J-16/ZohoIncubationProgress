@@ -33,6 +33,10 @@ class WordFormat{
     }
 
     static void wordFormat(String[] res, int len){
+        if( res.length == 0 ){
+            System.out.println("Empty array");
+            return;
+        }
         int start = 0 ;
         int wordCount=0;
         for(int i=0; i<res.length;){
@@ -52,9 +56,13 @@ class WordFormat{
 public class Program {
 
     private static void reverseString(String s){
+        if(s.length() == 0){
+            System.out.println("Empty array");
+            return;
+        }
         char[] c = s.toCharArray();
         int i = 0 ,j = s.length()-1;
-        while( i <j){
+        while( i < j ){
             char temp = c[i];
             c[i] = c[j];
             c[j] = temp;
@@ -65,6 +73,10 @@ public class Program {
     }
 
     private static void repeatingSubString(String string){
+        if(string.length() == 0){
+            System.out.println("Empty array");
+            return;
+        }
         char[] str = string.toLowerCase().toCharArray();
         StringBuilder result = new StringBuilder();
         for( int i=0; i<str.length; i++ ){

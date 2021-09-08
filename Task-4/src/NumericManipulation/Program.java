@@ -3,6 +3,17 @@ package NumericManipulation;
 public class Program{
 
     private static void reverseNumber(int num){
+
+        if(num < 0){
+            System.out.println("No negative numbers allowed");
+            return;
+        }
+
+        if(num > 0 && num < 10){
+            System.out.println(num);
+            return;
+        }
+
         int result = 0;
         int temp = num;
 
@@ -34,22 +45,35 @@ public class Program{
     }
 
     private static void steppingNumber(int start, int end){
+
+        int length = 0;
+        if(start > end){
+            System.out.println("start value must be smaller than end value");
+            return;
+        }
         for(int i=start; i<=end;i++){
             if(i<10){
                 System.out.print(i + " ");
+                length++;
             }
             else if(check(i)){
                 System.out.print(i + " ");
+                length++;
             }
+        }
+        if(length == 0){
+            System.out.println("No stepping numbers");
         }
     }
 
     public static void main(String[] args){
-        reverseNumber(1001);
+        reverseNumber(1111);
         System.out.println();
         steppingNumber( 4000, 5000 );
         System.out.println();
         steppingNumber( 0, 21 );
+        System.out.println();
+        steppingNumber( 100, 150 );
     }
 
 }

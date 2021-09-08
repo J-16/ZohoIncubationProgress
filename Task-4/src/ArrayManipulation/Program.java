@@ -1,11 +1,41 @@
 package ArrayManipulation;
 
-import java.util.Arrays;
+
+class QuickSort{
+
+    private static int parition(int[] arr, int start, int end, int forval){
+        int pivot = arr[end];
+        int piv = start;
+        for(int i=start; i<end; i++){
+            if( arr[i] > forval && arr[i] <= pivot ){
+                int temp = arr[i];
+                arr[i] = arr[piv];
+                arr[piv++] = temp;
+            }
+        }
+        int temp = arr[piv];
+        arr[piv] = arr[end];
+        arr[end] = temp;
+        return piv;
+    }
+
+    public static void quickSort(int[] arr, int start, int end, int forval){
+        if(start < end){
+            int pivot = parition(arr,start,end, forval);
+            quickSort(arr, start, pivot-1, forval);
+            quickSort(arr, pivot+1, end, forval);
+        }
+    }
+}
 
 public class Program {
 
     static int start = 0, end = 0;
     private static void findLargestSubArray(int[] arr){
+        if(arr.length == 0 ){
+            System.out.println("empty array");
+            return;
+        }
         int countSoFar = -1;
         for(int i=0;i<arr.length;i++){
             int count0 = 0;
@@ -33,6 +63,10 @@ public class Program {
     }
 
     private static void nextGreaterNumber(int[] arr){
+        if(arr.length == 0){
+            System.out.println("Empty array");
+            return;
+        }
         for(int i = 0; i<arr.length; i++){
             int maxSorFar = Integer.MAX_VALUE;
             for(int j=i+1; j<arr.length; j++){
@@ -48,10 +82,15 @@ public class Program {
     }
 
     private static void nextGreaterNumber2(int[] arr){
+        if(arr.length == 0){
+            System.out.println("Empty array");
+            return;
+        }
         for(int i = 0; i<arr.length; i++){
             int[] result = arr.clone();
-            Arrays.sort(result, i+1, result.length);
-            if( i+1 < arr.length && arr[i] < result[i+1] ) arr[i] = result[i+1];
+            QuickSort.quickSort(result, i+1, result.length-1, arr[i]);
+            if( i+1 < arr.length && arr[i] < result[i+1] )
+                arr[i] = result[i+1];
             else arr[i] = -1;
         }
         for(int i : arr)
@@ -59,6 +98,10 @@ public class Program {
     }
 
     private static void arrangeArray(char[] arr){
+        if(arr.length == 0){
+            System.out.println("empty array");
+            return;
+        }
         char firstOcc = ' ';
         char secondOcc = ' ';
         char thirdOcc = ' ';
@@ -81,6 +124,7 @@ public class Program {
         }
 
         int i=0;
+
         while(count[firstOcc - 65] > 0){
             arr[i++] = firstOcc;
             count[firstOcc - 65]--;
@@ -102,16 +146,17 @@ public class Program {
     }
 
     public static void main(String[] args){
-        int[] arr  = {1,0,1,1,1,0,0,0};
+        int[] arr  = {1,1,1,1};
         findLargestSubArray(arr);
 
         System.out.println();
         int[] arr2 = {2, 4, 8, 90, 77, 54};
-        nextGreaterNumber(arr2);
+        int[] arr3 = {2, -1, 0, -1, 3};
+        nextGreaterNumber(arr3);
 
         System.out.println();
-        int[] arr3 = {2, 4, 8, 90, 77, 54};
-        nextGreaterNumber2(arr3);
+        int[] arr4 = {2, -1, 0, -1, 3};
+        nextGreaterNumber2(arr4);
 
         System.out.println();
         System.out.println();
