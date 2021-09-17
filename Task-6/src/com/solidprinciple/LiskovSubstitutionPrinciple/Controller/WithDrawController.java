@@ -1,12 +1,12 @@
 package com.solidprinciple.LiskovSubstitutionPrinciple.Controller;
 
-import com.solidprinciple.LiskovSubstitutionPrinciple.Abstract.WithDrawableAccount;
+import com.solidprinciple.LiskovSubstitutionPrinciple.Abstract.LimitedTransactionAccount;
 
 public class WithDrawController {
 
-    private final WithDrawableAccount withDrawableAccount;
+    private final LimitedTransactionAccount withDrawableAccount;
 
-    public WithDrawController(WithDrawableAccount withDrawableAccount){
+    public WithDrawController(LimitedTransactionAccount withDrawableAccount){
         this.withDrawableAccount =  withDrawableAccount;
     }
 

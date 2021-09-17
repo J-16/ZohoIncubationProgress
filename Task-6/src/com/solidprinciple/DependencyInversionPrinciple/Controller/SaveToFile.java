@@ -3,7 +3,7 @@ package com.solidprinciple.DependencyInversionPrinciple.Controller;
 import com.solidprinciple.DependencyInversionPrinciple.Interface.SaveInterface;
 import com.solidprinciple.DependencyInversionPrinciple.Invoice.Invoice;
 
-public class SaveToFile implements SaveInterface {
+public class SaveToFile implements SaveInterface{
 
     private final Invoice invoice;
 
@@ -12,7 +12,7 @@ public class SaveToFile implements SaveInterface {
     }
 
     @Override
-    public void save()  {
+    public void save(){
         //Save to file
         System.out.println("Saved to file");
     }

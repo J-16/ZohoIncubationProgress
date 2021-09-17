@@ -1,31 +1,30 @@
 package com.solidprinciple.LiskovSubstitutionPrinciple;
 
+import com.solidprinciple.LiskovSubstitutionPrinciple.Controller.TransactionController;
 import com.solidprinciple.LiskovSubstitutionPrinciple.Model.Current;
-import com.solidprinciple.LiskovSubstitutionPrinciple.Model.FixedDeposit;
 import com.solidprinciple.LiskovSubstitutionPrinciple.Model.Savings;
-import com.solidprinciple.LiskovSubstitutionPrinciple.Controller.DepositController;
-import com.solidprinciple.LiskovSubstitutionPrinciple.Controller.WithDrawController;
 
 public class Main {
 
     public static void main(String ...args){
 
-        Current current = new Current(123654,"u1",100);
-        Savings savings = new Savings(412354,"u2",150);
-        FixedDeposit fixedDeposit = new FixedDeposit(523654,"u3",100);
+        Current current = new Current(123654,"u1",1000);
+        Savings savings = new Savings(412354,"u2",1500);
 
-        DepositController depositController = new DepositController(current);
-        WithDrawController withDrawController = new WithDrawController(current);
+        TransactionController transactionController = new TransactionController(current);
+        transactionController.transaction(200);
+        transactionController.transaction(200);
+        transactionController.transaction(200);
+        transactionController.transaction(200);
 
-        depositController.deposit(100);
-        withDrawController.withDraw(50);
+        System.out.println();
 
-        withDrawController= new WithDrawController(savings);
-        depositController.deposit(100);
-        withDrawController.withDraw(50);
+        transactionController = new TransactionController(savings);
+        transactionController.transaction(200);
+        transactionController.transaction(200);
+        transactionController.transaction(200);
+        transactionController.transaction(200);
 
-        depositController = new DepositController(savings);
-        depositController.deposit(150);
 
     }
 

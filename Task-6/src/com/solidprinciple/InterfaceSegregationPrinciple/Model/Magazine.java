@@ -8,6 +8,12 @@ public class Magazine implements ItemWithPublisher {
     private double price;
     private String publisher;
 
+    public Magazine(String name, String publisher, double price){
+        this.name = name;
+        this.publisher = publisher;
+        this.price = price;
+    }
+
     @Override
     public String getName() {
         return name;

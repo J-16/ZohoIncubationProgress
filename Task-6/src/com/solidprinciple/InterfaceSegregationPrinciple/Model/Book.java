@@ -7,6 +7,12 @@ public class Book implements ItemWithAuthor {
     private double price;
     private String author;
 
+    public Book(String name, String author, double price){
+        this.name = name;
+        this.author = author;
+        this.price = price;
+    }
+
     @Override
     public String getName() {
         return null;

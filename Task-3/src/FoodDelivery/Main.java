@@ -1,11 +1,9 @@
 package FoodDelivery;
 
 import FoodDelivery.Controllers.LoginController;
-
 import java.util.*;
 
 public class Main {
-
 
     private static Scanner sc = new Scanner(System.in);
 

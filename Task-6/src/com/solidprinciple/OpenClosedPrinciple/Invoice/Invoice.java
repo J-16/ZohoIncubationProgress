@@ -1,7 +1,7 @@
 package com.solidprinciple.OpenClosedPrinciple.Invoice;
 
-import com.solidprinciple.OpenClosedPrinciple.Controller.DatabaseController;
-import com.solidprinciple.OpenClosedPrinciple.Controller.PdfController;
+import com.solidprinciple.OpenClosedPrinciple.Controller.SaveToDb;
+import com.solidprinciple.OpenClosedPrinciple.Controller.SaveToFile;
 import com.solidprinciple.OpenClosedPrinciple.Model.Book;
 
 public class Invoice{
@@ -17,10 +17,10 @@ public class Invoice{
         this.total = calculateTotal();
         InvoiceGenerator invoiceGenerator = new InvoiceGenerator(this);
         invoiceGenerator.printInvoice();
-        DatabaseController databaseController = new DatabaseController(this);
+        SaveToDb databaseController = new SaveToDb(this);
         databaseController.save();
-        PdfController pdfController = new PdfController(this);
-        pdfController.save();
+        databaseController = new SaveToFile(this);
+        databaseController.save();
     }
 
     public Book getBook() {

@@ -1,10 +1,11 @@
 package com.solidprinciple.SingleResponsibilityPrinciple.Invoice;
 
 
-import com.solidprinciple.SingleResponsibilityPrinciple.Controller.DatabaseController;
+import com.solidprinciple.SingleResponsibilityPrinciple.Controller.SaveToDb;
 import com.solidprinciple.SingleResponsibilityPrinciple.Model.Book;
 
 public class Invoice{
+
     public final static double TAX = 12;
 
     private final Book book;
@@ -16,7 +17,7 @@ public class Invoice{
         this.quantity = quantity;
         this.total = calculateTotal();
         new InvoiceGenerator(this).printInvoice();
-        new DatabaseController(this).saveInvoice();
+        new SaveToDb(this).save();
     }
 
     public Book getBook() {

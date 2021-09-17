@@ -2,13 +2,65 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b81d5a96-aa99-49d7-9df1-7f9e40050eb9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../Task-4/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Task-4/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Task-4/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Task-4/src/ArrayManipulation/Program.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Task-4/src/LoopProgram/Program.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Task-4/src/NumericManipulation/Program.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Task-4/src/StringManipulation/Program.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/IteratorAndIterable/CustomArrayList.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/IteratorAndIterable/IterableExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/IteratorAndIterable/IteratorExample.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/InterfaceSegregationPrinciple/Databse/Database.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/InterfaceSegregationPrinciple/Invoice/Invoice.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/InterfaceSegregationPrinciple/Invoice/InvoiceGenerator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/InterfaceSegregationPrinciple/Presenter/InvoicePresenter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/InterfaceSegregationPrinciple/Presenter/SaveToDb.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/LiskovSubstitutionPrinciple/Abstract/LimitedTransactionAccount.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/LiskovSubstitutionPrinciple/Controller/TransactionController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Task-7/Task-7.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task-3/src/FoodDelivery/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Task-3/src/FoodDelivery/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task-5/src/com/Model/ATM.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Task-5/src/com/Model/ATM.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task-6/out/production/Task-6/com/solidprinciple/DependencyInversionPrinciple/Controller/InvoiceController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Task-6/out/production/Task-6/com/solidprinciple/DependencyInversionPrinciple/Controller/InvoiceController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task-6/out/production/Task-6/com/solidprinciple/DependencyInversionPrinciple/Controller/SaveItemsController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task-6/out/production/Task-6/com/solidprinciple/DependencyInversionPrinciple/Controller/SaveToFile.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Task-6/out/production/Task-6/com/solidprinciple/DependencyInversionPrinciple/Controller/SaveToFile.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task-6/out/production/Task-6/com/solidprinciple/InterfaceSegregationPrinciple/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Task-6/out/production/Task-6/com/solidprinciple/InterfaceSegregationPrinciple/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task-6/out/production/Task-6/com/solidprinciple/InterfaceSegregationPrinciple/Model/Book.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Task-6/out/production/Task-6/com/solidprinciple/InterfaceSegregationPrinciple/Model/Book.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task-6/out/production/Task-6/com/solidprinciple/InterfaceSegregationPrinciple/Model/Magazine.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Task-6/out/production/Task-6/com/solidprinciple/InterfaceSegregationPrinciple/Model/Magazine.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task-6/out/production/Task-6/com/solidprinciple/InterfaceSegregationPrinciple/Model/NewsPaper.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Task-6/out/production/Task-6/com/solidprinciple/InterfaceSegregationPrinciple/Model/NewsPaper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task-6/out/production/Task-6/com/solidprinciple/LiskovSubstitutionPrinciple/Abstract/WithDrawableAccount.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task-6/out/production/Task-6/com/solidprinciple/LiskovSubstitutionPrinciple/Controller/DepositController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Task-6/out/production/Task-6/com/solidprinciple/LiskovSubstitutionPrinciple/Controller/DepositController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task-6/out/production/Task-6/com/solidprinciple/LiskovSubstitutionPrinciple/Controller/WithDrawController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Task-6/out/production/Task-6/com/solidprinciple/LiskovSubstitutionPrinciple/Controller/WithDrawController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task-6/out/production/Task-6/com/solidprinciple/LiskovSubstitutionPrinciple/Interface/Account.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task-6/out/production/Task-6/com/solidprinciple/LiskovSubstitutionPrinciple/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Task-6/out/production/Task-6/com/solidprinciple/LiskovSubstitutionPrinciple/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task-6/out/production/Task-6/com/solidprinciple/LiskovSubstitutionPrinciple/Model/Current.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Task-6/out/production/Task-6/com/solidprinciple/LiskovSubstitutionPrinciple/Model/Current.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task-6/out/production/Task-6/com/solidprinciple/LiskovSubstitutionPrinciple/Model/FixedDeposit.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task-6/out/production/Task-6/com/solidprinciple/LiskovSubstitutionPrinciple/Model/Savings.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Task-6/out/production/Task-6/com/solidprinciple/LiskovSubstitutionPrinciple/Model/Savings.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task-6/out/production/Task-6/com/solidprinciple/OpenClosedPrinciple/Controller/DatabaseController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task-6/out/production/Task-6/com/solidprinciple/OpenClosedPrinciple/Controller/PdfController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task-6/out/production/Task-6/com/solidprinciple/OpenClosedPrinciple/Invoice/Invoice.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Task-6/out/production/Task-6/com/solidprinciple/OpenClosedPrinciple/Invoice/Invoice.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task-6/out/production/Task-6/com/solidprinciple/singleresponsibilityprinciple/Controller/DatabaseController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task-6/out/production/Task-6/com/solidprinciple/singleresponsibilityprinciple/Databse/Database.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Task-6/out/production/Task-6/com/solidprinciple/singleresponsibilityprinciple/Databse/Database.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task-6/out/production/Task-6/com/solidprinciple/singleresponsibilityprinciple/Invoice/Invoice.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Task-6/out/production/Task-6/com/solidprinciple/singleresponsibilityprinciple/Invoice/Invoice.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task-6/out/production/Task-6/com/solidprinciple/singleresponsibilityprinciple/Model/Book.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Task-6/out/production/Task-6/com/solidprinciple/singleresponsibilityprinciple/Model/Book.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/DependencyInversionPrinciple/Controller/SaveToFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/DependencyInversionPrinciple/Controller/SaveToFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/InterfaceSegregationPrinciple/Interface/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/InterfaceSegregationPrinciple/Interface/Item.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/InterfaceSegregationPrinciple/Interface/ItemWithAuthor.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/InterfaceSegregationPrinciple/Interface/ItemWithAuthor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/InterfaceSegregationPrinciple/Interface/ItemWithPublisher.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/InterfaceSegregationPrinciple/Interface/ItemWithPublisher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/InterfaceSegregationPrinciple/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/InterfaceSegregationPrinciple/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/InterfaceSegregationPrinciple/Model/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/InterfaceSegregationPrinciple/Model/Book.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/InterfaceSegregationPrinciple/Model/Magazine.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/InterfaceSegregationPrinciple/Model/Magazine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/InterfaceSegregationPrinciple/Model/NewsPaper.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/InterfaceSegregationPrinciple/Model/NewsPaper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/LiskovSubstitutionPrinciple/Abstract/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/LiskovSubstitutionPrinciple/Abstract/Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/LiskovSubstitutionPrinciple/Abstract/WithDrawableAccount.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/LiskovSubstitutionPrinciple/Controller/WithDrawController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/LiskovSubstitutionPrinciple/Controller/WithDrawController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/LiskovSubstitutionPrinciple/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/LiskovSubstitutionPrinciple/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/LiskovSubstitutionPrinciple/Model/Current.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/LiskovSubstitutionPrinciple/Model/Current.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/LiskovSubstitutionPrinciple/Model/FixedDeposit.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/LiskovSubstitutionPrinciple/Model/Savings.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/LiskovSubstitutionPrinciple/Model/Savings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/OpenClosedPrinciple/Controller/DatabaseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/OpenClosedPrinciple/Controller/SaveToDb.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/OpenClosedPrinciple/Controller/PdfController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/OpenClosedPrinciple/Controller/SaveToFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/OpenClosedPrinciple/Invoice/Invoice.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/OpenClosedPrinciple/Invoice/Invoice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/SingleResponsibilityPrinciple/Controller/DatabaseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/SingleResponsibilityPrinciple/Controller/SaveToDb.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/SingleResponsibilityPrinciple/Databse/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/SingleResponsibilityPrinciple/Databse/Database.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/SingleResponsibilityPrinciple/Invoice/Invoice.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/SingleResponsibilityPrinciple/Invoice/Invoice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/SingleResponsibilityPrinciple/Invoice/InvoiceGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/SingleResponsibilityPrinciple/Invoice/InvoiceGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/SingleResponsibilityPrinciple/Model/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Task-6/src/com/solidprinciple/SingleResponsibilityPrinciple/Model/Book.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +150,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Task-3" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
     <key name="ExtractSuperBase.RECENT_KEYS">
@@ -108,13 +160,13 @@
       <recent name="com.lambdas" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.exampleThree">
-    <configuration name="exampleOne (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.Exceptions.UnChecked.exampleOne" />
+  <component name="RunManager" selected="Application.CustomArrayList">
+    <configuration name="CustomArrayList" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.IteratorAndIterable.CustomArrayList" />
       <module name="progress" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.Exceptions.UnChecked.*" />
+          <option name="PATTERN" value="com.IteratorAndIterable.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -122,12 +174,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="exampleOne" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.Exceptions.exampleOne" />
+    <configuration name="IterableExample" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.IteratorAndIterable.IterableExample" />
       <module name="progress" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.Exceptions.Checked.*" />
+          <option name="PATTERN" value="com.IteratorAndIterable.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="IteratorExample" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.IteratorAndIterable.IteratorExample" />
+      <module name="progress" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.IteratorAndIterable.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -162,19 +227,6 @@
       </method>
     </configuration>
     <configuration name="exampleTwo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.InnerClass.exampleTwo" />
-      <module name="progress" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.InnerClass.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="exampleTwo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.Exceptions.Checked.exampleTwo" />
       <module name="progress" />
       <extension name="coverage">
@@ -189,10 +241,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.CustomArrayList" />
+        <item itemvalue="Application.IterableExample" />
+        <item itemvalue="Application.IteratorExample" />
         <item itemvalue="Application.exampleThree" />
         <item itemvalue="Application.exampleTwo (1)" />
-        <item itemvalue="Application.exampleTwo (1)" />
-        <item itemvalue="Application.exampleOne (1)" />
       </list>
     </recent_temporary>
   </component>

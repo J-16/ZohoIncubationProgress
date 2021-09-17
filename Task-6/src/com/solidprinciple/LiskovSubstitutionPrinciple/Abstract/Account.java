@@ -19,5 +19,19 @@ public abstract class Account{
         return balance;
     }
 
-    public abstract void deposit(double amount);
+    public void deposit(double amount) {
+        setBalance(amount);
+        System.out.println("Balance : " + getBalance());
+    }
+
+    public void withDraw(double amount){
+        setBalance(-amount);
+        System.out.println("Balance: " + getBalance());
+    }
+
+    public void transaction(double amount){
+        setBalance(-amount);
+        System.out.println("Balance: " + getBalance());
+    }
+
 }

@@ -1,6 +1,5 @@
 package com.solidprinciple.SingleResponsibilityPrinciple.Databse;
 
-
 import com.solidprinciple.SingleResponsibilityPrinciple.Invoice.Invoice;
 import com.solidprinciple.SingleResponsibilityPrinciple.Model.Book;
 

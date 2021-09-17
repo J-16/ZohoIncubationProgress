@@ -1,6 +1,7 @@
 package com.solidprinciple.SingleResponsibilityPrinciple.Model;
 
 public class Book {
+
     private final String name;
     private final String author;
     private double price;
