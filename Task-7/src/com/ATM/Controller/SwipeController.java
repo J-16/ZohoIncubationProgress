@@ -1,26 +1,25 @@
 package com.ATM.Controller;
 
-import com.ATM.Controller.Helper.ConcreteValidityClass.ATMPinValidity;
-import com.ATM.Controller.Helper.ConcreteValidityClass.UserValidity;
-import com.ATM.Controller.Helper.Interface.IPinValidity;
-import com.ATM.Enum.WithDrawMode;
+import com.ATM.Controller.Helper.PinValidity;
+import com.ATM.Controller.Helper.UserValidity;
+import com.ATM.Model.TransactionMode;
 import com.ATM.Exceptions.BalanceExceptions;
-import com.ATM.Model.ConcreteClass.User;
+import com.ATM.Model.Account;
 
 import java.util.Scanner;
 
 public class SwipeController {
 
-    private final IPinValidity atmPinValidity = new ATMPinValidity();
+    private final PinValidity aTMValidity = new PinValidity();
     private UserValidity userValidity  = new UserValidity();
 
     private final Scanner sc = new Scanner(System.in);
-    private User user;
+    private Account account;
 
     public void withdraw(){
-        user = userValidity.isValidUser();
+        account = userValidity.isValidUser();
 
-        if(!atmPinValidity.isValidPin(user)){
+        if(!aTMValidity.isValidPin(account)){
             System.out.println("Invalid pin");
             return;
         }
@@ -28,7 +27,7 @@ public class SwipeController {
         System.out.println("Enter amount to swipe");
         double amount = sc.nextDouble();
         try {
-            user.withdraw(amount, WithDrawMode.SWIPE);
+            account.swipe(amount);
         }catch(BalanceExceptions e){
             System.out.println(e.getMessage());
         }

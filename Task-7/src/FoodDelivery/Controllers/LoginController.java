@@ -1,26 +1,21 @@
 package FoodDelivery.Controllers;
 
 import FoodDelivery.Database.Database;
-import FoodDelivery.Model.RestaurantAbstract.Restaurant;
-import FoodDelivery.Model.Users.Users;
+import FoodDelivery.Model.Customer;
+import FoodDelivery.Model.Restaurant;
+import FoodDelivery.Model.Service.OrderService;
+
 import java.util.Scanner;
 
 public class LoginController extends Database{
 
     private Scanner sc  = new Scanner(System.in);
     private RestaurantController restaurantController;
-
-    public LoginController(){
-        restaurantController = new RestaurantController();
-    }
+    private Database database = new Database();
+    private OrderService orderService = new OrderService();
+    private DeliveryController deliveryController;
 
     public void restaurantLoginController(){
-        try{
-
-        }
-        catch(Exception e){
-            System.err.println(e.getMessage());
-        }
         int c;
         String restaurantName;
         String password;
@@ -32,8 +27,10 @@ public class LoginController extends Database{
             System.out.println("Enter Password :");
             password = sc.nextLine();
 
-            if( restaurantsList.containsKey( restaurantName ) ){
-                Restaurant restaurant = restaurantsList.get( restaurantName );
+            if( database.isRestaurant( restaurantName ) ){
+
+                Restaurant restaurant = database.getRestaurantByName( restaurantName );
+                restaurantController = new RestaurantController(restaurant, orderService);
 
                 if( restaurant.getPassword().equals(password) ){
 
@@ -48,23 +45,22 @@ public class LoginController extends Database{
 
                         switch(c){
                             case 1:
-                                restaurantController.displayOrderList( restaurant );
+                                restaurantController.displayOrders();
                                 break;
                             case 2:
-                                restaurantController.updateOrderList( restaurant );
+                                restaurantController.updateOrder();
                                 break;
                             case 3:
-                                restaurantController.addFood( restaurant );
+                                restaurantController.addFoodById();
                                 break;
                             case 4:
-                                restaurantController.updateFood(restaurant);
+                                restaurantController.updateFood();
                                 break;
                             default:
                                 System.out.println("Enter a valid option or 0 to quit");
                         }
 
                     }while( c!=0);
-
 
                 }
 
@@ -77,24 +73,22 @@ public class LoginController extends Database{
     }
 
     public void userLoginController(){
-
         int c;
-        String email;
+        String username;
         String password;
 
         do{
             System.out.println("Welcome to online food delivery");
             System.out.println("Enter Q to quit");
-            System.out.println("Enter email : ");
-            email = sc.nextLine();
+            System.out.println("Enter Username : ");
+            username = sc.nextLine();
             System.out.println("Enter Password : ");
             password = sc.nextLine();
 
-
-
-            if( userList.containsKey(email) ){
-                Users user = userList.get(email);
-                if( user.getPassword().equals(password) ){
+            if( database.isCustomer(username) ){
+                Customer customer = database.getCustomerByName(username);
+                deliveryController = new DeliveryController(customer, database, orderService);
+                if( customer.getPassword().equals(password) ){
                     do{
                         System.out.println("Select any option : \n"+
                                 "1. Restaurant \n" +
@@ -104,22 +98,22 @@ public class LoginController extends Database{
                         c = sc.nextInt();
                         switch(c){
                             case 1:
-                                restaurantController.selectRestaurant(user);
+                                deliveryController.selectRestaurant();
                                 break;
                             case 2:
-                                user.displayOrderHistory();
+                                System.out.println("Not implemented yet");
+                                //customer.displayOrderHistory();
                                 break;
                             case 3:
-                                int index = restaurantController.searchRestaurant();
-                                if( index > 0 )
-                                    restaurantController.foodInRestaurant(index, user);
-                                else System.out.println("restaurant not found");
+                                String restaurantName = deliveryController.searchRestaurant();
+                                if(restaurantName != null)
+                                    deliveryController.foodInRestaurant( restaurantName );
                                 break;
 //                            case 4:
 //                                restaurantController.searchFood();
 //                                break;
                             case 4:
-                                restaurantController.trackOrder(user);
+                                deliveryController.trackOrder();
                                 break;
                             default:
                                 System.out.println("Enter a valid option or 0 to quit");
@@ -134,7 +128,7 @@ public class LoginController extends Database{
                 System.out.println("Check your user name and password");
             }
 
-        }while( !email.equals("Q") && !password.equals("Q") );
+        }while( !username.equals("Q") && !password.equals("Q") );
     }
 
 }

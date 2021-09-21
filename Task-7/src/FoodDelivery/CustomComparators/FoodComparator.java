@@ -1,10 +1,9 @@
 package FoodDelivery.CustomComparators;
 
-import FoodDelivery.Model.CustomList.FoodList;
+import FoodDelivery.Model.FoodList;
 
 public class FoodComparator{
     public static int sortBYRating(FoodList f1, FoodList f2){
-
         if(f1.getRating() > f2.getRating())
             return 1;
         if(f1.getRating() < f2.getRating())
@@ -18,5 +17,4 @@ public class FoodComparator{
             return -1;
         else return 0;
     }
-
 }

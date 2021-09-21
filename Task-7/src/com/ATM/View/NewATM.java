@@ -1,13 +1,12 @@
 package com.ATM.View;
 
-import com.ATM.Controller.ATMController;
-import com.ATM.Controller.Helper.ConcreteValidityClass.BiometricValidity;
+import com.ATM.Controller.NewATMController;
 
 public class NewATM {
 
     public void call(){
-        ATMController atmController = new ATMController(new BiometricValidity());
-        atmController.ATM();
+        NewATMController NewATMController = new NewATMController();
+        NewATMController.ATM();
     }
 
 }

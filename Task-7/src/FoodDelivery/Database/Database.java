@@ -1,29 +1,72 @@
 package FoodDelivery.Database;
 
-import FoodDelivery.Model.DeliveryAgent.DeliveryAgent;
-import FoodDelivery.Model.RestaurantAbstract.Restaurant;
-import FoodDelivery.Model.Restaurants.RestaurantOne;
-import FoodDelivery.Model.Restaurants.RestaurantThree;
-import FoodDelivery.Model.Restaurants.RestaurantTwo;
-import FoodDelivery.Model.Users.Users;
+import FoodDelivery.Model.Customer;
+import FoodDelivery.Model.DeliveryAgent;
+import FoodDelivery.Model.Restaurant;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Database {
 
-    protected static HashMap<String, Restaurant> restaurantsList = new HashMap<>();
-    protected static HashMap<String, Users> userList = new HashMap<>();
-    protected static HashMap<String, DeliveryAgent> deliveryAgent = new HashMap<>();
+    private HashMap<String, Long> restaurants = new HashMap<>();
 
-    {
-        restaurantsList.put("r1", new RestaurantOne("r1", "r1@r.c", "123",9164782130L,"location1"));
-        restaurantsList.put("r2", new RestaurantTwo("r2", "r1@r.c", "123",9164782130L,"location2"));
-        restaurantsList.put("r3", new RestaurantThree("r3", "r1@r.c", "123",9164782130L,"location3"));
+    private static HashMap<String, Restaurant> restaurantsListDB = new HashMap<>();
+    private static HashMap<String, Customer> customerListDB = new HashMap<>();
+    private static HashMap<String, DeliveryAgent> deliveryAgentDB = new HashMap<>();
 
-        userList.put("u1", new Users("u1", "123", "u@u.c", "location1", 987456213L));
-        userList.put("u2", new Users("u2", "123", "u@u.c", "location1", 987456213));
+    public ArrayList<String> getAllRestaurant() {
+        ArrayList<String> restaurantDetails = new ArrayList<>();
+        restaurantsListDB.forEach( (id,restaurant)->{
+            restaurantDetails.add(restaurant.toString());
+        });
+        return restaurantDetails;
+    }
 
-        deliveryAgent.put("d1", new DeliveryAgent("d1","123","d@d.c",9874562130L));
+    public Restaurant getRestaurantByName(String restaurantName) {
+        return restaurantsListDB.get(restaurantName);
+    }
+
+    private Restaurant restaurant = null;
+
+    public Restaurant getRestaurantById(long restaurantId) {
+        restaurantsListDB.forEach( (id, res)->{
+            if(restaurantId == res.getId()){
+                restaurant = res;
+            }
+        });
+        return restaurant;
+    }
+
+    public boolean isRestaurant(String restaurantName){
+        return restaurantsListDB.containsKey(restaurantName);
+    }
+
+    public void registerRestaurant(String name, String email, String password, long contactNo, String address) {
+        Restaurant restaurant = new Restaurant(name, email, password, contactNo, address);
+        Database.restaurantsListDB.put(restaurant.getName(), restaurant);
+    }
+
+    public Customer getCustomerByName(String customerName) {
+        return customerListDB.get(customerName);
+    }
+
+    public boolean isCustomer(String userName){
+        return customerListDB.containsKey(userName);
+    }
+
+    public void registerCustomer(String name, String password, long contactNo, String address) {
+        Customer customer = new Customer(name, password, address, contactNo);
+        Database.customerListDB.put(customer.getName(), customer);
+    }
+
+    public DeliveryAgent getDeliveryAgent() {
+        return null;
+    }
+
+    public void registerDeliveryAgent(String name, String email, String password, long contactNo) {
+        DeliveryAgent delivery = new DeliveryAgent(name, password, email, contactNo);
+        Database.deliveryAgentDB.put(delivery.getName(), delivery);
     }
 
 }

@@ -1,31 +1,25 @@
 package com.ATM.Controller;
 
-import com.ATM.Controller.Helper.ConcreteValidityClass.ATMPinValidity;
-import com.ATM.Controller.Helper.ConcreteValidityClass.UserValidity;
-import com.ATM.Controller.Helper.Interface.IPinValidity;
-import com.ATM.Exceptions.AmountException;
-import com.ATM.Exceptions.BalanceExceptions;
-import com.ATM.Model.ConcreteClass.User;
+import com.ATM.Controller.Helper.PinValidity;
+import com.ATM.Controller.Helper.UserValidity;
+import com.ATM.Model.Account;
+
 import java.util.Scanner;
 
-public class ATMController {
+public class ATMController extends TransactionController{
 
-    private final IPinValidity atmCheck;
+    private final PinValidity atmValidity = new PinValidity();
     private final UserValidity userValidity = new UserValidity();
-    private User user;
+    private Account account;
 
     private final Scanner sc = new Scanner(System.in);
 
-    public ATMController(ATMPinValidity atmCheck){
-        this.atmCheck = atmCheck;
-    }
-
     public void ATM(){
-        user = userValidity.isValidUser();
-        if( user == null )
+        account = userValidity.isValidUser();
+
+        if( !atmValidity.isValidPin(account) )
             return;
-        if( !atmCheck.isValidPin(user) )
-            return;
+
         do{
             System.out.println("1.Balance 2.Withdraw 3.Deposit 0.Quit");
             int option = sc.nextInt();
@@ -34,13 +28,13 @@ public class ATMController {
                 case 0:
                     return;
                 case 1:
-                    showBalance();
+                    showBalance(account);
                     break;
                 case 2:
-                    withDraw();
+                    withDraw(account);
                     break;
                 case 3:
-                    deposit();
+                    deposit(account);
                     break;
                 default:
                     System.out.println("Invalid option");
@@ -48,32 +42,6 @@ public class ATMController {
         }while(true);
     }
 
-    private void deposit(){
-        System.out.println("Enter amount to deposit");
-        double amount = sc.nextDouble();
-        try{
-            user.deposit(amount);
-            showBalance();
-        }
-        catch(AmountException | BalanceExceptions e){
-            System.out.println(e.getMessage());
-        }
-    }
 
-    private void withDraw(){
-        System.out.println("Enter amount to withdraw");
-        double amount = sc.nextDouble();
-        try{
-            user.withdraw(amount);
-            showBalance();
-        }
-        catch(AmountException | BalanceExceptions e){
-            System.out.println(e.getMessage());
-        }
-    }
-
-    private void showBalance(){
-        System.out.println( "Balance : " + (int) user.getBalance() );
-    }
 
 }

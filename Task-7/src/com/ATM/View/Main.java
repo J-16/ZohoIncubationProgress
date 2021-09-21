@@ -1,8 +1,9 @@
 package com.ATM.View;
 
 import com.ATM.Controller.SwipeController;
-import com.ATM.Controller.DatabaseController;
-
+import com.ATM.DataBase.BankDatabase;
+import com.ATM.Model.CurrentAccount;
+import com.ATM.Model.SavingsAccount;
 import java.util.Scanner;
 
 public class Main {
@@ -10,14 +11,13 @@ public class Main {
     public static void main(String[] args) {
 
         {
-            DatabaseController databaseController = new DatabaseController();
-            databaseController.registerUser(987456,1234);
-            databaseController.registerUser(987453,1234);
+            BankDatabase.registerCustomer(987456, new CurrentAccount("user1",987456,1234));
+            BankDatabase.registerCustomer(987453, new SavingsAccount("user2",987453,1234));
         }
 
         Scanner sc = new Scanner(System.in);
         ATM atm = new ATM();
-        NewATM Natm = new NewATM();
+        NewATM newatm = new NewATM();
         SwipeController swipeController = new SwipeController();
 
         int c;
@@ -31,7 +31,7 @@ public class Main {
                     atm.call();
                     break;
                 case 2:
-                    Natm.call();
+                    newatm.call();
                     break;
                 case 3:
                     swipeController.withdraw();

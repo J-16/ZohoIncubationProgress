@@ -8,8 +8,9 @@ public class Main {
     private static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args){
+        Test.addDetails();
         try{
-            int c =0;
+            int c = 0;
             LoginController loginController = new LoginController();
             do{
                 System.out.println("Select 1.Restaurant Login   2.User Login   0.Quit");
