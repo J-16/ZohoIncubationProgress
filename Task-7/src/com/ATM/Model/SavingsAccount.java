@@ -30,7 +30,7 @@ public class SavingsAccount extends Account{
         if( !checkBalance(withDrawAmount) )
             throw new BalanceExceptions("You don't have enough balance to make this transaction");
         transactionCount++;
-        setBalance(-withDrawAmount);
+        setBalance(getBalance()-withDrawAmount);
     }
 
 }

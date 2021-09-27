@@ -6,8 +6,8 @@ public class OrderDetails{
     private final long FOOD_ID;
     private final long CUSTOMER_ID;
     private final double AMOUNT;
-    private long DELIVERY_AGENT_ID;
     private final long ORDER_ID;
+    //private final long DELIVERY_AGENT_ID;
     //private final long PAYMENT_TYPE;
 
     private FoodStatus orderStatus;
@@ -38,13 +38,9 @@ public class OrderDetails{
         return CUSTOMER_ID;
     }
 
-    public long getDeliveryAgentId(){
-        return DELIVERY_AGENT_ID;
-    }
-
-    public void setDeliveryAgentId(long DELIVERY_AGENT_ID){
-        this.DELIVERY_AGENT_ID = DELIVERY_AGENT_ID;
-    }
+//    public long getDeliveryAgentId(){
+//        return DELIVERY_AGENT_ID;
+//    }
 
     public long getOrderId(){
         return ORDER_ID;

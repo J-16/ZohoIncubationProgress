@@ -1,19 +1,18 @@
 package com.ATM.View;
 
 import com.ATM.Controller.SwipeController;
-import com.ATM.DataBase.BankDatabase;
-import com.ATM.Model.CurrentAccount;
-import com.ATM.Model.SavingsAccount;
+
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
-        {
-            BankDatabase.registerCustomer(987456, new CurrentAccount("user1",987456,1234));
-            BankDatabase.registerCustomer(987453, new SavingsAccount("user2",987453,1234));
-        }
+//        {
+//            BankDatabase.registerCustomer(new CurrentAccount("user1",987456,1234));
+//            BankDatabase.registerCustomer(new SavingsAccount("user2",987453,1234));
+//        }
 
         Scanner sc = new Scanner(System.in);
         ATM atm = new ATM();

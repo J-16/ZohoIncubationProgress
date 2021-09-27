@@ -1,6 +1,8 @@
 package com.ATM.Model;
 
-public class CustomerInfo {
+import java.io.Serializable;
+
+public class CustomerInfo implements Serializable {
     private String name;
     private long ATMNumber;
     private long pin;
@@ -20,4 +22,10 @@ public class CustomerInfo {
     public long getPin(){
         return pin;
     }
+
+    @Override
+    public String toString(){
+        return name + " " + ATMNumber + " " + pin;
+    }
+
 }

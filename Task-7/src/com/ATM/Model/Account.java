@@ -2,9 +2,18 @@ package com.ATM.Model;
 
 import com.ATM.Exceptions.BalanceExceptions;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class Account{
+class Transaction{
+    double amount;
+}
+
+//enum TransactionType {
+//    CREDITED, DEBITED;
+//}
+
+public abstract class Account implements Serializable {
 
     private final static double MIN_TRANSACTION_CHARGE = 0.02D;
     private final static double MAX_TRANSACTION_CHARGE = 0.04D;
@@ -21,12 +30,17 @@ public abstract class Account{
         this.customerInfo = new CustomerInfo(name, ATMNumber, pin);
     }
 
-    public double getBalance() {
+    public Account(String name, long ATMNumber, long pin, double balance){
+        this.customerInfo = new CustomerInfo(name, ATMNumber, pin);
+        this.balance = balance;
+    }
+
+    public double getBalance(){
         return balance;
     }
 
     public void setBalance(double amount){
-        this.balance += amount;
+        this.balance = amount;
     }
 
     public CustomerInfo getCustomerInfo(){
@@ -36,7 +50,7 @@ public abstract class Account{
     public void deposit(double amount){
         if(amount < 0)
             throw new BalanceExceptions("Invalid amount");
-        setBalance(amount);
+        setBalance(getBalance()+amount);
     }
 
     protected boolean isValidAmount(double amount){
@@ -88,6 +102,11 @@ public abstract class Account{
 
     public Transaction getTransaction(int limit){
         return null;
+    }
+
+    @Override
+    public String toString(){
+        return  customerInfo + " " + " " +  balance;
     }
 
     public abstract void withdraw(double amount);

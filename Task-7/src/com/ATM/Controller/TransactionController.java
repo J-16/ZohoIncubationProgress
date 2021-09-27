@@ -1,9 +1,12 @@
 package com.ATM.Controller;
 
+import FoodDelivery.Database.Database;
+import com.ATM.DataBase.BankDatabase;
 import com.ATM.Exceptions.AmountException;
 import com.ATM.Exceptions.BalanceExceptions;
 import com.ATM.Model.Account;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class TransactionController {
@@ -16,8 +19,9 @@ public class TransactionController {
         try{
             account.deposit(amount);
             showBalance(account);
+            BankDatabase.updateCustomer(account);
         }
-        catch(AmountException | BalanceExceptions e){
+        catch(AmountException | BalanceExceptions | IOException | ClassNotFoundException e){
             System.out.println(e.getMessage());
         }
     }
@@ -28,8 +32,9 @@ public class TransactionController {
         try{
             account.withdraw(amount);
             showBalance(account);
+            BankDatabase.updateCustomer(account);
         }
-        catch(AmountException | BalanceExceptions e){
+        catch(AmountException | BalanceExceptions | IOException | ClassNotFoundException e){
             System.out.println(e.getMessage());
         }
     }

@@ -8,6 +8,12 @@ import FoodDelivery.Model.*;
 
 import java.util.*;
 
+enum UpdateQuantity {
+    ADD,REMOVE;
+}
+
+
+
 public class OrderService{
 
     private final static int CANCELLATION_PENALTY = 15;

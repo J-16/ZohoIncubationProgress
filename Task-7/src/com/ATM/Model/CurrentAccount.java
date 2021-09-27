@@ -22,7 +22,7 @@ public class CurrentAccount extends Account {
         if( !checkBalance(withDrawAmount) )
             throw new BalanceExceptions("You don't have enough balance to make this transaction");
 
-        setBalance(-withDrawAmount);
+        setBalance(getBalance()-withDrawAmount);
     }
 
 }

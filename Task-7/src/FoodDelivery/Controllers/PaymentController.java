@@ -7,6 +7,10 @@ import FoodDelivery.Model.Service.PayPalPaymentProcessor;
 
 import java.util.Scanner;
 
+enum PaymentMode {
+    CASH_ON_DELIVERY,G_PAY,PAY_PAL;
+}
+
 public class PaymentController {
     public IPaymentProcessor getPaymentMethod(double balance){
 

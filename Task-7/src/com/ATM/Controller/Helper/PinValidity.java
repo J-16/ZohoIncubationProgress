@@ -9,7 +9,12 @@ public class PinValidity implements IATMPin{
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter pin :");
         long pin = sc.nextLong();
-        return account.getCustomerInfo().getPin() == pin;
+        boolean valid = account.getCustomerInfo().getPin() == pin;
+        if(!valid){
+            System.out.println("Invalid Pin");
+            return false;
+        }
+        return true;
     }
 
 }

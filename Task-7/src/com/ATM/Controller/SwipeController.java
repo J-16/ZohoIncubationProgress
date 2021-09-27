@@ -2,11 +2,14 @@ package com.ATM.Controller;
 
 import com.ATM.Controller.Helper.PinValidity;
 import com.ATM.Controller.Helper.UserValidity;
-import com.ATM.Model.TransactionMode;
 import com.ATM.Exceptions.BalanceExceptions;
 import com.ATM.Model.Account;
 
 import java.util.Scanner;
+
+enum TransactionMode {
+    ATM,SWIPE;
+}
 
 public class SwipeController {
 

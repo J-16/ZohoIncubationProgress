@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class UserValidity{
 
-    private Account getUser(long cardNo ){
+    private Account getUser(long cardNo ) throws Exception {
         return BankDatabase.getCustomer(cardNo);
     }
 
@@ -15,7 +15,12 @@ public class UserValidity{
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter ATM Card Number");
         long cardNo = sc.nextLong();
-        return getUser(cardNo);
+        try {
+            return getUser(cardNo);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
     }
 
 }

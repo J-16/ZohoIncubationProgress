@@ -17,6 +17,9 @@ public class ATMController extends TransactionController{
     public void ATM(){
         account = userValidity.isValidUser();
 
+        if(account == null)
+            return;
+
         if( !atmValidity.isValidPin(account) )
             return;
 
@@ -41,7 +44,5 @@ public class ATMController extends TransactionController{
             }
         }while(true);
     }
-
-
 
 }
