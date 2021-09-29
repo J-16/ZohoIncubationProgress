@@ -19,27 +19,6 @@ public class CompanyController {
         this.productService = new ProductService(company);
     }
 
-    public ArrayList<Product> getProducts(){
-        ArrayList<Product> products = company.getProducts();
-        if(products.size() == 0)
-            throw new InvalidException("No products found Exception");
-        return products;
-    }
-
-    public ArrayList<SubscriptionPlan> getSubscriptionPlanByProduct(String productName){
-        ArrayList<Product> products = getProducts();
-        if(products.size() == 0)
-            throw new InvalidException("No products found Exception");
-        ArrayList<SubscriptionPlan> subscriptionPlans = null;
-        for(Product product : products){
-            if(product.getProductName().equals(productName))
-                subscriptionPlans = product.getSubscriptionPlan();
-        }
-        if(subscriptionPlans == null)
-            throw new InputException("Invalid product name");
-        return subscriptionPlans;
-    }
-
     public void addProduct(String name, int trailDays, double price){
         productService.addProduct(name, trailDays, price);
     }
@@ -69,6 +48,27 @@ public class CompanyController {
         productService.addCoupon(product, coupon, expiryDate, discount);
     }
 
+    public ArrayList<Product> getProducts(){
+        ArrayList<Product> products = company.getProducts();
+        if(products.size() == 0)
+            throw new InvalidException("No products found Exception");
+        return products;
+    }
+
+    public ArrayList<SubscriptionPlan> getSubscriptionPlanByProduct(String productName){
+        ArrayList<Product> products = getProducts();
+        if(products.size() == 0)
+            throw new InvalidException("No products found Exception");
+        ArrayList<SubscriptionPlan> subscriptionPlans = null;
+        for(Product product : products){
+            if(product.getProductName().equals(productName))
+                subscriptionPlans = product.getSubscriptionPlan();
+        }
+        if(subscriptionPlans == null)
+            throw new InputException("Invalid product name");
+        return subscriptionPlans;
+    }
+
     private Product getProductByName(String productName){
         ArrayList<Product> products = getProducts();
         for(Product product : products){
@@ -88,4 +88,6 @@ public class CompanyController {
         }
         return null;
     }
+
+
 }

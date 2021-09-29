@@ -43,6 +43,7 @@ public class ProductService{
         product.setCoupons( new Coupon(couponName, expiryDate, discount) );
     }
 
+    //TODO: check this
     public void autoRenewal(){
         ArrayList<Product> products = companyAccount.getProducts();
         for(Product product : products){

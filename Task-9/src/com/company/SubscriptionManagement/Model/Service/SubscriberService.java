@@ -4,11 +4,11 @@ import com.company.SubscriptionManagement.Model.*;
 
 import java.util.HashMap;
 
-public class SubscriptionService {
+public class SubscriberService {
 
     private ISubscriber subscriberAccount;
 
-    public SubscriptionService(ISubscriber subscriberAccount){
+    public SubscriberService(ISubscriber subscriberAccount){
         this.subscriberAccount = subscriberAccount;
     }
 

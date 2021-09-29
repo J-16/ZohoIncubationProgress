@@ -1,6 +1,6 @@
 package com.company.SubscriptionManagement.View;
 
-import com.company.SubscriptionManagement.Controllers.SubscriptionController;
+import com.company.SubscriptionManagement.Controllers.SubscriberController;
 import com.company.SubscriptionManagement.Exception.InvalidException;
 import com.company.SubscriptionManagement.Exception.SubscriptionException;
 import com.company.SubscriptionManagement.Model.CurrentSubscription;
@@ -10,16 +10,16 @@ import java.util.Scanner;
 
 public class SubscriberDashboard {
 
-    private SubscriptionController subscriberController;
+    private SubscriberController subscriberController;
 
-    public SubscriberDashboard(SubscriptionController subscriberController){
+    public SubscriberDashboard(SubscriberController subscriberController){
         this.subscriberController = subscriberController;
     }
-
+    
     public void control(){
         Scanner sc = new Scanner(System.in);
         do{
-            System.out.print("0.Quit 1.Active Subscription 2.Change subscription plan 3.Subscribe to news letter 4.Notification 5.Gift a Subscription");
+            System.out.print("0.Quit 1.Active Subscription 2.News Letter 3.Gift a Subscription 4.Notification");
             int option = sc.nextInt();
             switch(option){
                 case 0:
@@ -28,16 +28,13 @@ public class SubscriberDashboard {
                     activeSubscription();
                     break;
                 case 2:
-                    changeSubscriptionPlan();
+                    newsletter();
                     break;
                 case 3:
-                    subscribeNewsLetter();
+                    giftSubscription();
                     break;
                 case 4:
                     notification();
-                    break;
-                case 5:
-                    gitSubscription();
                     break;
                 default:
                     System.out.println("Invalid option");
@@ -45,80 +42,113 @@ public class SubscriberDashboard {
         }while(true);
     }
 
-    private void gitSubscription(){
-
-    }
-
-    private void notification() {
-        try {
-            for(String notification : subscriberController.getNotification()){
-                System.out.println(notification);
-            }
-        }catch(InvalidException e){
-            System.out.println(e.getMessage());
-        }
-    }
-
     private void activeSubscription(){
         HashMap<String, CurrentSubscription> subscriptions = subscriberController.getSubscriptionBySubscriber();
         Scanner sc =  new Scanner(System.in);
         if(subscriptions.size() == 0){
             System.out.println("You don't have any active product subscription");
+            return;
         }
-        else {
-            subscriptions.forEach((product, currentSubscription)->{
-                System.out.println("Product : " + product);
-                if(!currentSubscription.isCurrentlySubscribed()){
-                    if(currentSubscription.getCancelledDated() == 0)
-                        System.out.println("Cancelled Date : " + currentSubscription.getCancelledDated());
-                    else {
-                        System.out.println("Paused date : " + currentSubscription.getPausedDate());
-                        System.out.println("Resume subscription date : " + currentSubscription.getResumeSubscriptionDate());
-                    }
-                }
+        subscriptions.forEach((product, currentSubscription)->{
+            System.out.println("Product : " + product);
+            if(!currentSubscription.isCurrentlySubscribed()){
+                if(currentSubscription.getCancelledDated() == 0)
+                    System.out.println("Cancelled Date : " + currentSubscription.getCancelledDated());
                 else {
-                    System.out.println("Subscription Plan : " + currentSubscription.getSubscriptionPlan().getPlanName());
-                    System.out.println("Subscribed Date : " + currentSubscription.getFirstSubscribedDate());
+                    System.out.println("Paused date : " + currentSubscription.getPausedDate());
+                    System.out.println("Resume subscription date : " + currentSubscription.getResumeSubscriptionDate());
                 }
-            });
+            }
+            else {
+                System.out.println("Subscription Plan : " + currentSubscription.getSubscriptionPlan().getPlanName());
+                System.out.println("Subscribed Date : " + currentSubscription.getFirstSubscribedDate());
+            }
+        });
+        do{
+            System.out.print("0.Quit 1.Cancel Subscription 2.Pause subscription 3.Change subscription plan ");
+            System.out.println();
+            int option = sc.nextInt();
+            switch(option){
+                case 0 :
+                    break;
+                case 1 :
+                    cancelSubscription();
+                    break;
+                case 2:
+                    pauseSubscription();
+                    break;
+                case 3:
+                    changeSubscriptionPlan();
+                    break;
+                default:
+                    System.out.println("Invalid option");
+            }
+        }while(true);
+    }
+
+    private void cancelSubscription(){
+        Scanner sc = new Scanner(System.in);
+        try {
+            do {
+                System.out.println("1.Cancel product subscription or any other key to quit");
+                int option = sc.nextInt();
+                if(option != 1)
+                    return;
+                System.out.println("Enter Product name to cancel subscription");
+                String productName = sc.next();
+                subscriberController.cancelSubscription(productName);
+                return;
+            }while(true);
+        }catch(InvalidException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void pauseSubscription() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter Product name to pause subscription");
+        String productName = sc.next();
+        System.out.println("Enter re subscription date");
+        int date = sc.nextInt();
+        subscriberController.pauseSubscription(productName, date);
+    }
+
+    private void newsletter(){
+        Scanner sc = new Scanner(System.in);
+        try{
             do{
-                System.out.print("0.Quit 1.Cancel Subscription 2.Pause subscription");
-                System.out.println();
+                System.out.println("0.Quit 1.Subscribe to newsletter 2.Unsubscribe news letter");
                 int option = sc.nextInt();
                 switch(option){
-                    case 0 :
-                        break;
-                    case 1 :
-                        cancelSubscription();
+                    case 0:
+                        return;
+                    case 1:
+                        subscribeNewsLetter();
                         break;
                     case 2:
-                        pauseSubscription();
-                        break;
-                    default:
-                        System.out.println("Invalid option");
+                        unSubscribeNewsletter();
                 }
             }while(true);
-        }
-        System.out.print("0.Quit 1.Cancel news letter Subscription ");
-        int option = sc.nextInt();
-        if(option == 1)
-            unSubscribeNewsletter();
+        }catch(InvalidException e){
+        System.out.println(e.getMessage());
+    }
     }
 
     private void subscribeNewsLetter(){
-        System.out.println("Products");
-        for(String product : subscriberController.getProductsByCompany()){
-            System.out.println(product);
-        }
-        System.out.println("Enter product names to subscribe newsletter or 0 to quit");
-        Scanner sc = new Scanner(System.in);
-        String productName  = sc.nextLine();
-        if(productName.equals("0"))
-            return;
 
-        subscriberController.subscribeNewsletter(getProductArray(productName));
+
+            System.out.println("Products");
+            for(String product : subscriberController.getProductsByCompany()){
+                System.out.println(product);
+            }
+            System.out.println("Enter product names to subscribe newsletter or 0 to quit");
+            Scanner sc = new Scanner(System.in);
+            String productName  = sc.nextLine();
+            if(productName.equals("0"))
+                return;
+            subscriberController.subscribeNewsletter(getProductArray(productName));
+
     }
-
 
     private void changeSubscriptionPlan(){
         HashMap<String, CurrentSubscription> subscriptions = subscriberController.getSubscriptionBySubscriber();
@@ -141,7 +171,6 @@ public class SubscriberDashboard {
                     subscriberController.requestDownGrade();
                     break;
             }
-
         }while(true);
     }
 
@@ -158,26 +187,6 @@ public class SubscriberDashboard {
         }
     }
 
-    private void cancelSubscription(){
-        Scanner sc = new Scanner(System.in);
-        do{
-            System.out.println("0.Quit 1.Cancel newsletter subscription 2.Cancel product subscription");
-            int option = sc.nextInt();
-            switch(option){
-                case 0:
-                    break;
-                case 1:
-                    unSubscribeNewsletter();
-                    break;
-                case 2:
-                    System.out.println("Enter Product name to cancel subscription");
-                    String productName = sc.next();
-                    subscriberController.cancelSubscription(productName);
-                    break;
-            }
-        }while(true);
-    }
-
     private void unSubscribeNewsletter() {
         try {
             for (String product : subscriberController.getSubscribedNewsletter()) {
@@ -190,15 +199,6 @@ public class SubscriberDashboard {
         }catch(SubscriptionException e){
             System.out.println(e.getMessage());
         }
-    }
-
-    private void pauseSubscription() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter Product name to pause subscription");
-        String productName = sc.next();
-        System.out.println("Enter re subscription date");
-        int date = sc.nextInt();
-        subscriberController.pauseSubscription(productName, date);
     }
 
     private String[] getProductArray(String productName){
@@ -224,6 +224,21 @@ public class SubscriberDashboard {
         }
         s[len] = sb.toString();
         return s;
+    }
+
+    private void notification() {
+        try {
+            for(String notification : subscriberController.getNotification()){
+                System.out.println(notification);
+            }
+        }catch(InvalidException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void giftSubscription(){
+        //TODO :
+        System.out.println("Yet tot Implement");
     }
 
 

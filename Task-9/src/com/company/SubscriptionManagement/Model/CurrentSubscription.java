@@ -11,7 +11,7 @@ public class CurrentSubscription {
     private int cancelledDated;
     private int pausedDate;
     private int resumeSubscriptionDate;
-    //private double ArrayList<>; date , amountPaid
+    //private double HashMap<>; date , amountPaid
 
     public CurrentSubscription(String subscriberEmail, SubscriptionPlan subscriptionPlan, PaymentDetails paymentDetails){
         this.subscriberEmail = subscriberEmail;

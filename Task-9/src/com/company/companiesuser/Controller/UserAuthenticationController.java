@@ -1,6 +1,6 @@
 package com.company.companiesuser.Controller;
 
-import com.company.SubscriptionManagement.Controllers.SubscriptionController;
+import com.company.SubscriptionManagement.Controllers.SubscriberController;
 import com.company.SubscriptionManagement.Exception.InputException;
 import com.company.SubscriptionManagement.Exception.UserException;
 import com.company.companiesuser.Model.UserAccount;
@@ -19,13 +19,13 @@ public class UserAuthenticationController {
         registerSubscriber(name, email, password);
     }
 
-    public SubscriptionController login(String email, String password) {
+    public SubscriberController login(String email, String password) {
         UserAccount userAccount = getSubscribersByEmail(email);
         if( userAccount == null )
             throw new UserException("No such Subscriber found");
         if( !userAccount.getPassword().equals(password) )
             throw new UserException("Password doesn't match");
-        return new SubscriptionController(userAccount.getEmail(), userAccount.getName());
+        return new SubscriberController(userAccount.getEmail(), userAccount.getName());
     }
 
 }

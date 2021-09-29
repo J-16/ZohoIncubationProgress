@@ -3,14 +3,14 @@ package com.company.companiesuser.View;
 import com.company.SubscriptionManagement.View.CompanyPortal;
 import com.company.SubscriptionManagement.View.ProductView;
 import com.company.companiesuser.Controller.UserAuthenticationController;
-import com.company.SubscriptionManagement.Controllers.SubscriptionController;
+import com.company.SubscriptionManagement.Controllers.SubscriberController;
 
 import java.util.Scanner;
 
 public class UserPortal {
 
     private UserAuthenticationController userAuthenticationController = new UserAuthenticationController();
-    private SubscriptionController subscriptionController;
+    private SubscriberController subscriptionController;
     private String companyName;
 
     public UserPortal(String companyName){

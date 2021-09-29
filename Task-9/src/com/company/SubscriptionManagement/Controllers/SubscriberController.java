@@ -4,56 +4,29 @@ import com.company.SubscriptionManagement.Database.Database;
 import com.company.SubscriptionManagement.Exception.InvalidException;
 import com.company.SubscriptionManagement.Exception.SubscriptionException;
 import com.company.SubscriptionManagement.Model.*;
-import com.company.SubscriptionManagement.Model.Service.SubscriptionService;
+import com.company.SubscriptionManagement.Model.Service.SubscriberService;
 import com.company.SubscriptionManagement.View.SubscriberDashboard;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class SubscriptionController {
+public class SubscriberController {
 
     private String email;
     private String name;
     private Company company;
-    private SubscriptionService subscriptionService;
+    private SubscriberService subscriptionService;
 
-    public SubscriptionController(String email, String name){
+    public SubscriberController(String email, String name){
         this.email = email;
         this.name = name;
-    }
-
-    public void setCompany(String companyName) {
-        this.company = getCompany(companyName);
-    }
-
-    public ArrayList<String> getProductsByCompany() {
-        ArrayList<String> products = new ArrayList<>();
-        for(Product product : company.getProducts()){
-            products.add(product.getProductName());
-        }
-        if(products.size() == 0)
-            throw new InvalidException("No Products available at the moment");
-        return products;
-    }
-
-    public ArrayList<SubscriptionPlan> getSubscriptionPlanByCompany(String productName){
-        ArrayList<SubscriptionPlan> subscriptionPlan = null;
-        for(Product product : company.getProducts()){
-            if(product.getProductName().equals(productName)){
-                subscriptionPlan = product.getSubscriptionPlan();
-                break;
-            }
-        }
-        if(subscriptionPlan == null)
-            throw new InvalidException("No subscription plans are available for this product at the moment");
-        return subscriptionPlan;
     }
 
     public void activateTrail(String productName) {
         Product product = getProductByCompany(productName);
         isSubscribed(productName);
         ISubscriber subscriber = isSubscriber();
-        subscriptionService = new SubscriptionService(subscriber);
+        subscriptionService = new SubscriberService(subscriber);
         subscriptionService.activateTrail(product);
     }
 
@@ -81,7 +54,7 @@ public class SubscriptionController {
                             price = price + (coupon.getDiscount()/100);
                         }
                         ISubscriber subscriber = isSubscriber();
-                        subscriptionService = new SubscriptionService(subscriber);
+                        subscriptionService = new SubscriberService(subscriber);
                         new PaymentController().processPayment(price,subscriber);
                         subscriptionService.subscribeProduct(product,subscriptionPlan);
                         return;
@@ -104,10 +77,6 @@ public class SubscriptionController {
         throw new InvalidException("Invalid coupon");
     }
 
-    public void dashBoard(){
-        new SubscriberDashboard(this).control();
-    }
-
     public void upgradeSubscriptionPlan(String productName, String subscriptionPlan){
         Product product = getProductByCompany(productName);
         checkUpgrade(product, subscriptionPlan);
@@ -123,7 +92,7 @@ public class SubscriptionController {
     }
 
     public void requestDownGrade() {
-        //customer care will contact for enquiries
+        //customer care will contact for enquiries, queries will be added to queue
     }
 
     public void pauseSubscription(String productName, int resumeDate){
@@ -135,7 +104,52 @@ public class SubscriptionController {
 
     public void cancelSubscription(String productName){
         Product product = getProductByCompany(productName);
+        if(product.getProductSubscribers(email) == null)
+            throw new InvalidException("Invalid operation");
         subscriptionService.cancelSubscription(product);
+    }
+
+    public void setCompany(String companyName) {
+        this.company = getCompany(companyName);
+    }
+
+    public void unSubscribeNewsletter(String ...productName) {
+        for(String product : productName){
+            subscriptionService.cancelNewsLetterSubscription(email, getProductByCompany(product));
+        }
+    }
+
+    public void subscribeNewsletter(String ...productName) {
+        for(String product : productName){
+            subscriptionService.subscribeNewsLetter(email, getProductByCompany(product));
+        }
+    }
+
+    public void dashBoard(){
+        new SubscriberDashboard(this).control();
+    }
+
+    public ArrayList<String> getProductsByCompany() {
+        ArrayList<String> products = new ArrayList<>();
+        for(Product product : company.getProducts()){
+            products.add(product.getProductName());
+        }
+        if(products.size() == 0)
+            throw new InvalidException("No Products available at the moment");
+        return products;
+    }
+
+    public ArrayList<SubscriptionPlan> getSubscriptionPlanByCompany(String productName){
+        ArrayList<SubscriptionPlan> subscriptionPlan = null;
+        for(Product product : company.getProducts()){
+            if(product.getProductName().equals(productName)){
+                subscriptionPlan = product.getSubscriptionPlan();
+                break;
+            }
+        }
+        if(subscriptionPlan == null)
+            throw new InvalidException("No subscription plans are available for this product at the moment");
+        return subscriptionPlan;
     }
 
     public HashMap<String,CurrentSubscription> getSubscriptionBySubscriber(){
@@ -191,18 +205,6 @@ public class SubscriptionController {
     public int getTrailDays(String productName) {
         return getProductByCompany(productName).getTrailDays();
 
-    }
-
-    public void unSubscribeNewsletter(String ...productName) {
-        for(String product : productName){
-            subscriptionService.cancelNewsLetterSubscription(email, getProductByCompany(product));
-        }
-    }
-
-    public void subscribeNewsletter(String ...productName) {
-        for(String product : productName){
-            subscriptionService.subscribeNewsLetter(email, getProductByCompany(product));
-        }
     }
 
     public ArrayList<String> getNotification(){

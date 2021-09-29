@@ -1,6 +1,6 @@
 package com.company.SubscriptionManagement.View;
 
-import com.company.SubscriptionManagement.Controllers.SubscriptionController;
+import com.company.SubscriptionManagement.Controllers.SubscriberController;
 import com.company.SubscriptionManagement.Model.SubscriptionPlan;
 
 import java.util.ArrayList;
@@ -9,10 +9,10 @@ import java.util.Scanner;
 public class ProductView {
 
     private Scanner sc = new Scanner(System.in);
-    private SubscriptionController subscribeController;
+    private SubscriberController subscribeController;
     private String companyName;
 
-    public ProductView(SubscriptionController subscriberController, String companyName) {
+    public ProductView(SubscriberController subscriberController, String companyName) {
         this.subscribeController = subscriberController;
         this.companyName = companyName;
     }
