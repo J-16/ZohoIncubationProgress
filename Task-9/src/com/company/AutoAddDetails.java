@@ -1,9 +1,9 @@
 package com.company;
 
-import com.company.SubscriptionManagement.Controllers.CompanyAuthenticationController;
-import com.company.SubscriptionManagement.Controllers.CompanyController;
-import com.company.companiesuser.Controller.UserAuthenticationController;
-import com.company.SubscriptionManagement.Model.SubscriptionPlan;
+import com.company.subscriptionmanagement.controllers.CompanyAuthenticationController;
+import com.company.subscriptionmanagement.controllers.CompanyController;
+import com.company.companiesuser.controller.UserAuthenticationController;
+import com.company.subscriptionmanagement.model.SubscriptionPlan;
 
 public class AutoAddDetails {
 
