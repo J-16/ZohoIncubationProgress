@@ -10,12 +10,13 @@ public class Company implements ICompany{
     private IPasswordAccount account;
     private ArrayList<Product> products;
     private LinkedList<Issue> issueQueue; //TODO: add company functionality (get the issue);
-    private HashMap<LocalDate, ArrayList<CurrentSubscription> > autoRenewal;
+    private HashMap<LocalDate, LinkedList<CurrentSubscription> > autoRenewal;
 
     public Company(String name, String email, String password){
-        this.account = new PasswordAccount(name,email, password);
+        this.account = new PasswordAccount(name,email,password);
         this.products = new ArrayList<>();
         this.issueQueue = new LinkedList<>();
+        this.autoRenewal = new HashMap<>();
     }
 
     public void setAccount(IPasswordAccount account) {
@@ -42,11 +43,15 @@ public class Company implements ICompany{
         return issueQueue.removeFirst();
     }
 
-    public void setAutoRenewal(LocalDate date, ArrayList<CurrentSubscription> subscriber){
+    public void setAutoRenewal(LocalDate date, LinkedList<CurrentSubscription> subscriber){
         this.autoRenewal.put(date,subscriber);
     }
 
-    public HashMap<LocalDate, ArrayList<CurrentSubscription>> getAutoRenewal(){
+    public void setAutoRenewal( HashMap<LocalDate, LinkedList<CurrentSubscription>> autoRenewal ){
+        this.autoRenewal= autoRenewal;
+    }
+
+    public HashMap<LocalDate, LinkedList<CurrentSubscription>> getAutoRenewal(){
         return this.autoRenewal;
     }
 

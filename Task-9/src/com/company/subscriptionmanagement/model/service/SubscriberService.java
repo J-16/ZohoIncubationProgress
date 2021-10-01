@@ -9,15 +9,16 @@ import com.company.subscriptionmanagement.model.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 
 public class SubscriberService {
 
     private ISubscriber subscriber;
     private String email;
     private String name;
-    private Company company;
+    private ICompany company;
 
-    public SubscriberService(String email, String name, Company company){
+    public SubscriberService(String email, String name, ICompany company){
         this.email = email;
         this.name = name;
         this.company = company;
@@ -25,8 +26,9 @@ public class SubscriberService {
 
     public void activateTrail(String productName) {
         Product product = getProductByCompany(productName);
-        isSubscribed(productName);
-        if(product.isTrailSubscribers(email) != null){
+        if(isSubscribed(productName))
+            throw new SubscriptionException("You have subscribed to the product already");
+        if(product.getTrailSubscribers(email) != null){
             throw new InvalidException("You have already enabled trail version");
         }
         subscriber = registerSubscriber();
@@ -34,9 +36,13 @@ public class SubscriberService {
     }
 
     public void subscribeProduct(String productName, String planName, String couponName){
-        isSubscribed(productName);
+        if(isSubscribed(productName))
+            throw new SubscriptionException("You have subscribed to the product already");
         Product product  = getProductByCompany(productName);
         SubscriptionPlan subscriptionPlan = getSubscriptionPlanByProduct(product, planName);
+        if(product.getTrailSubscribers(email) != null){
+           product.setTrailSubscribers(email, LocalDate.now().minusDays(1));
+        }
         double price = subscriptionPlan.getPrice();
         if(couponName != null){
             Coupon coupon = getCoupon(product, couponName);
@@ -58,14 +64,16 @@ public class SubscriberService {
         setAutoRenewal(product.getProductSubscribers(email));
     }
 
-    //TODO:Check this working
     public void pauseSubscription(String productName, LocalDate resumeDate){
+        if(!isSubscribed(productName))
+            throw new SubscriptionException("You have not subscribed to this product to pause");
         if(resumeDate.getDayOfMonth() < LocalDate.now().getDayOfMonth() && resumeDate.getMonthValue() < LocalDate.now().getMonthValue() && resumeDate.getYear() < LocalDate.now().getYear())
             throw new InvalidException("Invalid date");
         Product product = getProductByCompany(productName);
         if(product.getProductSubscribers(email) == null)
             throw new InvalidException("You have not subscribed to perform this operation");
-        CurrentSubscription currentSubscription = getProductSubscriberByEmail(product, subscriber.getAccount().getEmail());
+        CurrentSubscription currentSubscription = product.getProductSubscribers(email);
+        cancelAutoRenewal(currentSubscription);
         currentSubscription.setCurrentlySubscribed(false);
         currentSubscription.setPausedDate(LocalDate.now());
         currentSubscription.setResumeSubscriptionDate(resumeDate);
@@ -73,14 +81,15 @@ public class SubscriberService {
     }
 
     public void cancelSubscription(String productName){
-        Product product = getProductByCompany(productName);
-        if(product.getProductSubscribers(email) == null)
+        if(!isSubscribed(productName)) {
             throw new InvalidException("You have not subscribed to perform this operation");
-        CurrentSubscription currentSubscription = getProductSubscriberByEmail(product, subscriber.getAccount().getEmail());
+        }
+        Product product = getProductByCompany(productName);
+        CurrentSubscription currentSubscription = product.getProductSubscribers(email);
+        cancelAutoRenewal(currentSubscription);
         currentSubscription.setCurrentlySubscribed(false);
         currentSubscription.setCancelledDate(LocalDate.now());
         currentSubscription.setResumeSubscriptionDate(null);
-        cancelAutoRenewal(currentSubscription);
     }
 
     public void subscribeNewsLetter(String subscriberEmail, String productName){
@@ -91,11 +100,6 @@ public class SubscriberService {
     public void cancelNewsLetterSubscription(String subscriberEmail, String productName){
         Product product = getProductByCompany(productName);
         product.setNewsLetterSubscribedUsers(subscriberEmail, false);
-    }
-
-    private CurrentSubscription getProductSubscriberByEmail(Product product, String email){
-        HashMap<String, CurrentSubscription> productSubscribers = product.getProductSubscribers();
-        return productSubscribers.get(email);
     }
 
     public SubscriptionPlan getSubscriptionPlan(Product product, String newSubscriptionPlan){
@@ -127,24 +131,32 @@ public class SubscriberService {
     }
 
     public void setAutoRenewal(CurrentSubscription currentSubscription){
-        HashMap<LocalDate, ArrayList<CurrentSubscription>> autoRenewal = company.getAutoRenewal();
-        ArrayList<CurrentSubscription> currentSubscriptions = new ArrayList<>();
+        HashMap<LocalDate, LinkedList<CurrentSubscription>> autoRenewal = company.getAutoRenewal();
+        LinkedList<CurrentSubscription> currentSubscriptions;
         if(autoRenewal.containsKey(currentSubscription.getExpireDate())){
-            ArrayList<CurrentSubscription> currentSubscriptionsOne = autoRenewal.get(currentSubscription.getExpireDate());
-            currentSubscriptionsOne.remove(currentSubscription);
-            currentSubscriptions.addAll(currentSubscriptionsOne);
+            currentSubscriptions = autoRenewal.get(currentSubscription.getExpireDate());
+            currentSubscriptions.add(currentSubscription);
+            autoRenewal.put(currentSubscription.getExpireDate(), currentSubscriptions);
+            company.setAutoRenewal(autoRenewal);
+            return;
         }
+        currentSubscriptions = new LinkedList<>();
         currentSubscriptions.add(currentSubscription);
-        company.setAutoRenewal(currentSubscription.getExpireDate(),currentSubscriptions);
+        autoRenewal.put(currentSubscription.getExpireDate(), currentSubscriptions);
+        company.setAutoRenewal(autoRenewal);
     }
 
     private void cancelAutoRenewal(CurrentSubscription currentSubscription){
-        HashMap<LocalDate, ArrayList<CurrentSubscription>> autoRenewal = company.getAutoRenewal();
-        ArrayList<CurrentSubscription> currentSubscriptions = new ArrayList<>();
-        ArrayList<CurrentSubscription> currentSubscriptionsOne = autoRenewal.get(currentSubscription.getExpireDate());
-        currentSubscriptionsOne.remove(currentSubscription);
-        currentSubscriptions.addAll(currentSubscriptionsOne);
-        company.setAutoRenewal(currentSubscription.getExpireDate(),currentSubscriptions);
+        HashMap<LocalDate, LinkedList<CurrentSubscription>> autoRenewal = company.getAutoRenewal();
+        LinkedList<CurrentSubscription> currentSubscriptions = autoRenewal.get(currentSubscription.getExpireDate());
+        for(int i =0; i< currentSubscriptions.size(); i++){
+            System.out.println( currentSubscriptions.get(i).getSubscriber().getAccount().getEmail() );
+            if(currentSubscriptions.get(i).getSubscriber().getAccount().getEmail().equals(currentSubscription.getSubscriber().getAccount().getEmail())) {
+                currentSubscriptions.removeFirstOccurrence(i);
+            }
+        }
+        autoRenewal.put(currentSubscription.getExpireDate(), currentSubscriptions);
+        company.setAutoRenewal(autoRenewal);
     }
 
     public ArrayList<SubscriptionPlan> getAllSubscriptionPlanByCompany(String productName){
@@ -203,21 +215,23 @@ public class SubscriberService {
     private Coupon getCoupon(Product product, String couponName) {
         if(product.getCoupons().size() == 0)
             throw new InvalidException("Invalid coupon");
-
+        LocalDate date = LocalDate.now();
         for(Coupon coupon : product.getCoupons()){
-            if(coupon.getCouponName().equals(couponName))
+            if(coupon.getCouponName().equals(couponName) && date.getDayOfMonth() <= coupon.getExpiryDate().getDayOfMonth()
+                    && date.getMonthValue() <= coupon.getExpiryDate().getMonthValue() && date.getYear() <= coupon.getExpiryDate().getYear())
                 return coupon;
         }
         throw new InvalidException("Invalid coupon");
     }
 
-    private void isSubscribed(String productName){
+    private boolean isSubscribed(String productName){
         for(Product product : company.getProducts()){
             if(product.getProductName().equals(productName)){
-                if(product.getProductSubscribers(email) != null)
-                    throw new SubscriptionException("You have already subscribed to the service");
+                if(product.getProductSubscribers(email) != null && product.getProductSubscribers(email).isCurrentlySubscribed())
+                    return true;
             }
         }
+        return false;
     }
 
     private void checkUpgrade(Product product, String subscriptionPlan){
@@ -239,8 +253,11 @@ public class SubscriberService {
     public HashMap<String, LocalDate> getTrailSubscribedProducts() {
         HashMap<String, LocalDate> trail = new HashMap<String, LocalDate>();
         for(Product product : company.getProducts()){
-            if(product.isTrailSubscribers(email) != null)
-                trail.put(product.getProductName(),product.isTrailSubscribers(email));
+            LocalDate date = LocalDate.now();
+            LocalDate expiryDate = product.getTrailSubscribers(email);
+            if( expiryDate != null && date.getDayOfMonth() <= expiryDate.getDayOfMonth()
+                    && date.getMonthValue() <= expiryDate.getMonthValue() && date.getYear() <= expiryDate.getYear())
+                trail.put(product.getProductName(),product.getTrailSubscribers(email));
         }
         if(trail.size() == 0)
             return null;
@@ -249,11 +266,12 @@ public class SubscriberService {
 
     public void giftSubscription(String productName, String planName, String coupon, String email) {
         //TODO: // check mail with the company and mail user with the subscription plan
-        // if company doesn't provide such api mail company and proceed.
+        // Handle payment new PaymentController().processPayment(price,subscriber);
         new NotificationService().sendMail();
     }
 
     public void raiseIssue(String message){
         company.addIssue(new Issue(email,LocalDate.now(),message));
     }
+
 }

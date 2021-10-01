@@ -1,11 +1,14 @@
 package com.company.subscriptionmanagement.model;
 
-public class PaymentDetails{
-    private Long cardNumber;
-    private Integer cvv;
-    private String expiryDate;
+import java.time.LocalDate;
 
-    public PaymentDetails(Long cardNumber, Integer cvv, String expiryDate){
+public class PaymentDetails{
+
+    private long cardNumber;
+    private int cvv;
+    private LocalDate expiryDate;
+
+    public PaymentDetails(long cardNumber, int cvv, LocalDate expiryDate){
         this.cardNumber = cardNumber;
         this.cvv = cvv;
         this.expiryDate = expiryDate;
@@ -27,11 +30,12 @@ public class PaymentDetails{
         this.cvv = cvv;
     }
 
-    public String getExpiryDate() {
+    public LocalDate getExpiryDate() {
         return expiryDate;
     }
 
-    public void setExpiryDate(String expiryDate) {
+    public void setExpiryDate(LocalDate expiryDate) {
         this.expiryDate = expiryDate;
     }
+
 }

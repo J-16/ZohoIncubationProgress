@@ -1,7 +1,6 @@
-package com.company.subscriptionmanagement.view;
+package com.company.companiesuser.view;
 
 import com.company.subscriptionmanagement.controllers.CompanyListController;
-import com.company.companiesuser.view.UserPortal;
 
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -12,12 +11,11 @@ public class CompanyListView {
         Scanner sc = new Scanner(System.in);
         CompanyListController companyListController = new CompanyListController();
         ArrayList<String> companies = companyListController.getCompanies();
+        System.out.print("Company list : ");
         for(String company : companies){
-            System.out.println(company);
+            System.out.print(company + " ");
         }
-        System.out.println("Enter company name");
-        String companyName = sc.next();
-        new UserPortal(companyName).control();
+        System.out.println();
     }
 
 }

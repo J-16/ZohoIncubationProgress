@@ -4,39 +4,25 @@ import com.company.subscriptionmanagement.exception.InputException;
 import com.company.subscriptionmanagement.exception.InvalidException;
 import com.company.subscriptionmanagement.model.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ProductService{
 
-    private Company company;
+    private ICompany company;
 
-    public ProductService(Company company){
+    public ProductService(ICompany company){
         this.company = company;
     }
 
     public void addProduct(String name, int trailDays, double price){
-        if(price < 0)
-            throw new InputException("Invalid price");
-        if(trailDays < 0)
-            throw new InputException("Invalid days count");
         company.setProducts(new Product(name,trailDays, price));
     }
 
     public void addSubscriptionPlan(String productName, String planName, SubscriptionPlan.SubscriptionType subscriptionType, double discount){
         Product product = getProductByName(productName);
-        if( planName.isEmpty() )
-            throw new InputException("Empty fields are not allowed");
-        if( discount < 0 )
-            throw new InputException("discount cannot be negative value");
-        product.setSubscriptionPlan( new SubscriptionPlan(planName, subscriptionType, discount, product.getPrice()) );
-    }
 
-    public void updateSubscriptionPlan(String productName, String subscriptionName, String newPlanName, SubscriptionPlan.SubscriptionType newSubscriptionType, double newDiscount){
-        Product product = getProductByName(productName);
-        SubscriptionPlan subscriptionPlan = getSubscriptionPlanByName(product, subscriptionName);
-        subscriptionPlan.setPlanName(newPlanName);
-        subscriptionPlan.setSubscriptionType(newSubscriptionType);
-        subscriptionPlan.setDiscount(newDiscount);
+        product.setSubscriptionPlan( new SubscriptionPlan(planName, subscriptionType, discount, product.getPrice()) );
     }
 
     public void updateSubscriptionPlan(String productName, String subscriptionName, String newPlanName){
@@ -57,7 +43,7 @@ public class ProductService{
         subscriptionPlan.setDiscount(newDiscount);
     }
 
-    public void addCoupon(String productName, String couponName, int expiryDate, double discount){
+    public void addCoupon(String productName, String couponName, LocalDate expiryDate, double discount){
         Product product = getProductByName(productName);
         product.setCoupons( new Coupon(couponName, expiryDate, discount) );
     }
@@ -101,6 +87,14 @@ public class ProductService{
                 return subscriptionPlan;
         }
         throw new InputException("No such subscription");
+    }
+
+    public void sendMail(String message){
+        new NotificationService().sendMail(company, message);
+    }
+
+    public void sendNotification(String message){
+        new NotificationService().sendNotification(company, message);
     }
 
 }

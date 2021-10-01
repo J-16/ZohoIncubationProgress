@@ -107,7 +107,12 @@ public class Product{
         return trailSubscribers;
     }
 
-    public LocalDate isTrailSubscribers(String email) {
+    public LocalDate getTrailSubscribers(String email) {
         return trailSubscribers.get(email);
     }
+
+    public LocalDate setTrailSubscribers(String email, LocalDate endDate) {
+        return trailSubscribers.put(email, endDate);
+    }
+
 }

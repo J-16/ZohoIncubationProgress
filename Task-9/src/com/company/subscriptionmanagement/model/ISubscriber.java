@@ -2,7 +2,8 @@ package com.company.subscriptionmanagement.model;
 
 import java.util.ArrayList;
 
-public interface ISubscriber {
+public interface ISubscriber{
+
     IAccount getAccount();
     void setAccount(Account account);
     PaymentDetails getPaymentDetails();
@@ -10,4 +11,5 @@ public interface ISubscriber {
     long getUserId();
     void sendNotification(String notification);
     ArrayList<String> getNotification();
+
 }

@@ -8,7 +8,7 @@ public class SubscriptionPlan{
         SubscriptionType(int value){
             this.value = value;
         }
-        public int getValue() {
+        public int getValue(){
             return value;
         }
     }
@@ -59,4 +59,5 @@ public class SubscriptionPlan{
         this.discount = discount;
         setPrice(discount);
     }
+
 }

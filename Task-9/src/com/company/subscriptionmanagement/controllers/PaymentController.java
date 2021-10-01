@@ -8,6 +8,7 @@ import com.company.subscriptionmanagement.model.service.NotificationService;
 import com.company.subscriptionmanagement.model.service.PaymentService;
 import com.company.subscriptionmanagement.view.PaymentView;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 
 public class PaymentController{
@@ -19,7 +20,7 @@ public class PaymentController{
             generatePaymentDetails(subscriber);
         }
         else{
-            if( paymentView.getPaymentMethod() == 1){
+            if( paymentView.getPaymentMethod() != 1){
                 generatePaymentDetails(subscriber);
             }
         }
@@ -36,7 +37,8 @@ public class PaymentController{
     private void generatePaymentDetails(ISubscriber subscriber){
         HashMap<String, String> paymentDetails = paymentView.view();
         isValidDetails(paymentDetails);
-        subscriber.setPaymentDetails( new PaymentDetails( Long.parseLong(paymentDetails.get("cardNo")), Integer.parseInt(paymentDetails.get("cvv")), paymentDetails.get("expDate") ));
+        subscriber.setPaymentDetails( new PaymentDetails( Long.parseLong(paymentDetails.get("cardNo")), Integer.parseInt(paymentDetails.get("cvv")),
+                LocalDate.parse(paymentDetails.get("expDate")) ));
     }
 
     private void isValidDetails(HashMap<String, String> paymentDetails) {

@@ -50,6 +50,7 @@ public class SubscriberDashboard {
     private void activeSubscription(){
         HashMap<String, LocalDate> trailSubscriptions = subscriberController.getTrailSubscribedProducts();
         if(trailSubscriptions != null){
+            System.out.println("Trail versions");
             trailSubscriptions.forEach((product, date)->{
                 System.out.println("Product : " + product + "  Expiry Date : " + date);
             });
@@ -61,7 +62,7 @@ public class SubscriberDashboard {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
             System.out.println("Product : " + product);
             if(!currentSubscription.isCurrentlySubscribed()){
-                if(currentSubscription.getCancelledDate() == null)
+                if(currentSubscription.getCancelledDate() != null)
                     System.out.println("Cancelled Date : " + currentSubscription.getCancelledDate().format(formatter));
                 else {
                     System.out.println("Paused date : " + currentSubscription.getPausedDate().format(formatter));
@@ -81,7 +82,7 @@ public class SubscriberDashboard {
             int option = sc.nextInt();
             switch(option){
                 case 0 :
-                    break;
+                    return;
                 case 1 :
                     cancelSubscription();
                     break;
@@ -108,6 +109,7 @@ public class SubscriberDashboard {
                 System.out.println("Enter Product name to cancel subscription");
                 String productName = sc.next();
                 subscriberController.cancelSubscription(productName);
+                System.out.println("Subscription cancelled");
                 return;
             }while(true);
         }catch(InvalidException e){
@@ -116,13 +118,17 @@ public class SubscriberDashboard {
     }
 
     private void pauseSubscription() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter Product name to pause subscription");
-        String productName = sc.next();
-        System.out.println("Enter date to resume subscription in dd-mm-yyy");
-        String getDate = sc.next();
-        LocalDate date = LocalDate.parse(getDate);
-        subscriberController.pauseSubscription(productName, date);
+        try{
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Enter Product name to pause subscription");
+            String productName = sc.next();
+            System.out.println("Enter date to resume subscription in yyyy-MM-dd");
+            String getDate = sc.next();
+            LocalDate date = LocalDate.parse(getDate);
+            subscriberController.pauseSubscription(productName, date);
+        }catch(InvalidException | SubscriptionException e){
+            System.out.println(e.getMessage());
+        }
     }
 
     private void newsletter(){
@@ -147,19 +153,16 @@ public class SubscriberDashboard {
     }
 
     private void subscribeNewsLetter(){
-
-
-            System.out.println("Products");
-            for(String product : subscriberController.getProductsByCompany()){
-                System.out.println(product);
-            }
-            System.out.println("Enter product names to subscribe newsletter or 0 to quit");
-            Scanner sc = new Scanner(System.in);
-            String productName  = sc.nextLine();
-            if(productName.equals("0"))
-                return;
-            subscriberController.subscribeNewsletter(getProductArray(productName));
-
+        System.out.println("Products");
+        for(String product : subscriberController.getProductsByCompany()){
+            System.out.println(product);
+        }
+        System.out.println("Enter product names to subscribe newsletter or 0 to quit");
+        Scanner sc = new Scanner(System.in);
+        String productName  = sc.nextLine();
+        if(productName.equals("0"))
+            return;
+        subscriberController.subscribeNewsletter(getProductArray(productName));
     }
 
     private void changeSubscriptionPlan(){
@@ -247,7 +250,6 @@ public class SubscriberDashboard {
             System.out.println(e.getMessage());
         }
     }
-
 
     private void raiseIssue() {
         Scanner sc = new Scanner(System.in);

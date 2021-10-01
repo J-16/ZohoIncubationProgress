@@ -1,17 +1,19 @@
 package com.company.subscriptionmanagement.view;
 
 import com.company.AutoAddDetails;
+import com.company.companiesuser.view.UserPortal;
 
 import java.util.Scanner;
 
 public class Main{
+
     public static void main(String[] args){
         try {
             new AutoAddDetails();
             Scanner scanner = new Scanner(System.in);
             do {
                 System.out.println();
-                System.out.println("0.Quit 1.Company Portal 2.View Companies");
+                System.out.println("0.Quit 1.Company Portal 2.User Portal(as per company)");
                 int option = scanner.nextInt();
                 switch (option) {
                     case 0:
@@ -20,7 +22,7 @@ public class Main{
                         new CompanyPortal().main();
                         break;
                     case 2:
-                        new CompanyListView().displayCompanies();
+                        new UserPortal().control();
                         break;
                     default:
                         System.out.println("Invalid option");
@@ -30,4 +32,5 @@ public class Main{
             System.out.println(e.getMessage());
         }
     }
+
 }

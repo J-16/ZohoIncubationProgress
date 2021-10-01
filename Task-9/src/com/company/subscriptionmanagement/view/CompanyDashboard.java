@@ -6,6 +6,7 @@ import com.company.subscriptionmanagement.exception.InvalidException;
 import com.company.subscriptionmanagement.model.Product;
 import com.company.subscriptionmanagement.model.SubscriptionPlan;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -45,42 +46,29 @@ public class CompanyDashboard {
 
     public void addProduct(){
         System.out.println("Products Details : ");
-        String name = null;
         int trailDays = -1;
-        Double price = null;
-
-        while(name == null){
-            System.out.println("Enter Product Name");
-            name = sc.next();
-        }
-
-        while(trailDays == -1){
+        double price  = -1;
+        System.out.println("Enter Product Name");
+        String name = sc.next();
+        while(trailDays < 0){
             System.out.println("Enter Trail days if any else 0");
             trailDays = sc.nextInt();
         }
-
-        while(price == null){
+        while(price < 0){
             System.out.println("Enter Product price");
             price = sc.nextDouble();
         }
-
         companyController.addProduct(name, trailDays, price);
     }
 
     public void addSubscriptionPlan() {
-        String productName = null;
-        String subscriptionName = null;
+        String subscriptionName;
         SubscriptionPlan.SubscriptionType subscriptionType = null;
         int subType = -1;
         double discount = -1;
-
-        while(productName == null){
-            displayProducts();
-            System.out.println("Enter Product name");
-            productName = sc.next();
-        }
-
-
+        displayProducts();
+        System.out.println("Enter Product name");
+        String productName =  sc.next();
         System.out.println("Enter Subscription Name");
         subscriptionName = sc.next();
 
@@ -152,16 +140,14 @@ public class CompanyDashboard {
         String productName = sc.next();
         System.out.println("Enter coupon Code");
         String coupon = sc.next();
-        int expDate = -1;
-        while(expDate < 1){
-            System.out.println("Enter expiry date");
-            expDate = sc.nextInt();
-        }
+        System.out.println("Enter expiry date - yyyy-MM-dd");
+        String date = sc.next();
         double discount = 0;
         while(discount < 1){
             System.out.println("Enter discount");
             discount = sc.nextDouble();
         }
+        LocalDate expDate = LocalDate.parse(date);
         companyController.addCoupon(productName, coupon, expDate, discount);
     }
 

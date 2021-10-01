@@ -1,6 +1,7 @@
 package com.company.subscriptionmanagement.model;
 
 public class PasswordAccount extends Account implements IPasswordAccount {
+
     private String password;
     public PasswordAccount(String name, String email, String password) {
         super(name, email);
@@ -16,4 +17,5 @@ public class PasswordAccount extends Account implements IPasswordAccount {
     public void setPassword(String password) {
         this.password = password;
     }
+
 }

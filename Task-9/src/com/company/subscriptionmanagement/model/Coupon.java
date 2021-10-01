@@ -1,11 +1,14 @@
 package com.company.subscriptionmanagement.model;
 
+import java.time.LocalDate;
+
 public class Coupon{
+
     private String couponName;
-    private int expiryDate;
+    private LocalDate expiryDate;
     private double discount;
 
-    public Coupon(String couponName, int expiryDate, double discount){
+    public Coupon(String couponName, LocalDate expiryDate, double discount){
         this.couponName = couponName;
         this.expiryDate = expiryDate;
         this.discount = discount;
@@ -19,11 +22,11 @@ public class Coupon{
         this.couponName = couponName;
     }
 
-    public int getExpiryDate(){
+    public LocalDate getExpiryDate(){
         return expiryDate;
     }
 
-    public void setExpiryDate(int expiryDate){
+    public void setExpiryDate(LocalDate expiryDate){
         this.expiryDate = expiryDate;
     }
 

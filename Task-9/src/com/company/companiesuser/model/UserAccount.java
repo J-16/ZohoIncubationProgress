@@ -1,6 +1,7 @@
 package com.company.companiesuser.model;
 
 public class UserAccount {
+
     private String name;
     private String email;
     private String password;
@@ -34,4 +35,5 @@ public class UserAccount {
     public void setPassword(String password) {
         this.password = password;
     }
+
 }

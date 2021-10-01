@@ -11,7 +11,7 @@ public class PaymentView{
         long cardNo = sc.nextLong();
         System.out.println("Enter cvv");
         int cvv = sc.nextInt();
-        System.out.print("Enter Exp date");
+        System.out.print("Enter Exp date yyyy-MM-dd");
         String expDate = sc.next();
         HashMap<String, String> paymentDetails = new HashMap<>();
         paymentDetails.put("cardNo", Long.toString(cardNo));

@@ -1,6 +1,7 @@
 package com.company.subscriptionmanagement.controllers;
 
 import com.company.subscriptionmanagement.database.Database;
+import com.company.subscriptionmanagement.exception.InputException;
 import com.company.subscriptionmanagement.model.*;
 import com.company.subscriptionmanagement.model.service.SubscriberService;
 import com.company.subscriptionmanagement.view.SubscriberDashboard;
@@ -14,7 +15,7 @@ public class SubscriberController {
     private String email;
     private String name;
     private SubscriberService subscriptionService;
-    private Company company;
+    private ICompany company;
 
     public SubscriberController(String email, String name, String companyName){
         this.email = email;
@@ -24,6 +25,8 @@ public class SubscriberController {
     }
 
     public void activateTrail(String productName) {
+        if(productName == null)
+            throw new InputException("product name cannot be empty");
         subscriptionService.activateTrail(productName);
     }
 
@@ -95,7 +98,7 @@ public class SubscriberController {
         return subscriptionService.getSubscribedNewsletter();
     }
 
-    private Company getCompany(String companyName){
+    private ICompany getCompany(String companyName){
         return Database.getCompanyByName(companyName);
     }
 
@@ -106,4 +109,5 @@ public class SubscriberController {
     public void raiseIssue(String complain){
         subscriptionService.raiseIssue(complain);
     }
+
 }

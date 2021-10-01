@@ -33,9 +33,16 @@ public class ProductView {
         }
         for(String product : products)
             System.out.println(product);
-        System.out.println("Enter product you want to subscribe");
-        String productName = sc.next();
-        displaySubscription(productName);
+        do{
+            System.out.println("1.Subscribe Product or any other number to go back");
+            int option = sc.nextInt();
+            if(option == 1){
+                System.out.println("Enter product to view details");
+                String productName = sc.next();
+                displaySubscription(productName);
+            }
+            return;
+        }while(true);
     }
 
     public void displaySubscription(String productName){
@@ -95,7 +102,7 @@ public class ProductView {
         try{
             subscribeController.activateTrail(productName);
             System.out.println("trail version activated");
-        }catch(InvalidException e){
+        }catch(InvalidException | SubscriptionException e){
             System.out.println(e.getMessage());
         }
     }
@@ -120,7 +127,6 @@ public class ProductView {
             String email = sc.next();
             subscribeController.giftSubscription(productName, planName, coupon, email);
             System.out.println("Subscription sent");
-
         }catch(InvalidException | SubscriptionException e){
             System.out.println(e.getMessage());
         }
