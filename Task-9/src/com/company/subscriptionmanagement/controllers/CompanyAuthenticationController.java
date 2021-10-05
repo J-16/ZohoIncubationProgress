@@ -28,7 +28,6 @@ public class CompanyAuthenticationController {
 
     private boolean isValidEmail(String email){
         Pattern pattern = Pattern.compile("^[a-z1-9]+@[a-z]+.[a-z]+$");
-        System.out.println(email);
         return pattern.matcher(email).matches();
     }
 

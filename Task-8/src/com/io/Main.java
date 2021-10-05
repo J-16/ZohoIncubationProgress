@@ -1,4 +1,4 @@
-package com.company;
+package com.io;
 
 import java.io.*;
 
@@ -9,7 +9,7 @@ public class Main {
 
         String filename = "temp.txt";
         File file = new File(filename);
-        file.setWritable(false);
+        file.setWritable(true);
 
         try{
             FileWriter fileWriter = new FileWriter(file, true);
@@ -43,6 +43,13 @@ public class Main {
                 System.out.print( (char) i);
         }catch(IOException e){
             System.out.println(e.getMessage());
+        }
+
+        try{
+            FileOutputStream fileOutputStream = new FileOutputStream(file);
+            fileOutputStream.write("ok ok ok ok".getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
     }

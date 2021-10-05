@@ -15,7 +15,7 @@ public class AutoAddDetails {
     {
         CompanyAuthenticationController controller = new CompanyAuthenticationController();
         controller.register("c", "c", "123");
-        controller.register("company1", "company@gmail.com", "123");
+        controller.register("company1", "company1@gmail.com", "123");
         controller.register("company2", "company2@gmail.com", "123");
 
         CompanyController company = new CompanyAuthenticationController().login("c", "123");
