@@ -2,9 +2,9 @@ package com.company.subscriptionmanagement.model;
 
 import java.util.ArrayList;
 
-public class Subscriber implements ISubscriber {
+public class Subscriber implements ISubscriber{
 
-    private IAccount account;
+    private Account account;
     private PaymentDetails paymentDetails;
     private final long userId;
     private ArrayList<String> notification;
@@ -18,27 +18,25 @@ public class Subscriber implements ISubscriber {
     }
 
     @Override
-    public IAccount getAccount() {
+    public Account getAccount(){
         return account;
     }
 
-    @Override
-    public void setAccount(Account account) {
+    public void setAccount(Account account){
         this.account = account;
     }
 
     @Override
-    public PaymentDetails getPaymentDetails() {
+    public PaymentDetails getPaymentDetails(){
         return paymentDetails;
     }
 
     @Override
-    public void setPaymentDetails(PaymentDetails paymentDetails) {
+    public void setPaymentDetails(PaymentDetails paymentDetails){
         this.paymentDetails = paymentDetails;
     }
 
-    @Override
-    public long getUserId() {
+    public long getUserId(){
         return userId;
     }
 

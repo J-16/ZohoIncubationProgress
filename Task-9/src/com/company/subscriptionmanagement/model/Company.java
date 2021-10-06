@@ -7,7 +7,7 @@ import java.util.LinkedList;
 
 public class Company implements ICompany{
 
-    private IPasswordAccount account;
+    private PasswordAccount account;
     private ArrayList<Product> products;
     private LinkedList<Issue> issueQueue; //TODO: add company functionality (get the issue);
     private HashMap<LocalDate, LinkedList<CurrentSubscription> > autoRenewal;
@@ -19,11 +19,11 @@ public class Company implements ICompany{
         this.autoRenewal = new HashMap<>();
     }
 
-    public void setAccount(IPasswordAccount account) {
+    public void setAccount(PasswordAccount account) {
         this.account = account;
     }
 
-    public IPasswordAccount getAccount(){
+    public PasswordAccount getAccount(){
         return account;
     }
 

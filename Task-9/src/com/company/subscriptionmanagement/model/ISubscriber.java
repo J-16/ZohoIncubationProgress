@@ -4,11 +4,9 @@ import java.util.ArrayList;
 
 public interface ISubscriber{
 
-    IAccount getAccount();
-    void setAccount(Account account);
+    Account getAccount();
     PaymentDetails getPaymentDetails();
     void setPaymentDetails(PaymentDetails paymentDetails);
-    long getUserId();
     void sendNotification(String notification);
     ArrayList<String> getNotification();
 

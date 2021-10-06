@@ -1,6 +1,6 @@
 package com.company.subscriptionmanagement.model;
 
-public class Account implements IAccount{
+public class Account{
 
     private String name;
     private String email;
