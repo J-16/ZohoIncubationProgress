@@ -1,13 +1,15 @@
 package com.company.subscriptionmanagement.view;
 
 import com.company.subscriptionmanagement.controllers.CompanyController;
+import com.company.subscriptionmanagement.exception.DatabaseException;
 import com.company.subscriptionmanagement.exception.InputException;
-import com.company.subscriptionmanagement.exception.InvalidException;
 import com.company.subscriptionmanagement.model.Product;
 import com.company.subscriptionmanagement.model.SubscriptionPlan;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class CompanyDashboard {
@@ -20,28 +22,32 @@ public class CompanyDashboard {
     }
 
     public void control(){
-        do{
-            System.out.println("0.Quit 1.Add product 2.Add Subscription Plan 3.Change Subscription Plan 4.Add Coupon");
-            int option = sc.nextInt();
-            switch(option){
-                case 0:
-                    return;
-                case 1:
-                    addProduct();
-                    break;
-                case 2:
-                    addSubscriptionPlan();
-                    break;
-                case 3:
-                    updateSubscriptionPlan();
-                    break;
-                case 4:
-                    addCoupon();
-                    break;
-                default :
-                    System.out.println("Invalid option");
-            }
-        }while(true);
+        try{
+            do{
+                int option = getIntegerValue(0, "0.Logout 1.Add product 2.Add Subscription Plan 3.Change Subscription Plan 4.Add Coupon");
+                switch(option){
+                    case 0:
+                        return;
+                    case 1:
+                        addProduct();
+                        break;
+                    case 2:
+                        addSubscriptionPlan();
+                        break;
+                    case 3:
+                        updateSubscriptionPlan();
+                        break;
+                    case 4:
+                        addCoupon();
+                        break;
+                    default :
+                        System.out.println("Invalid option");
+                        System.out.println("0.Logout 1.Add product 2.Add Subscription Plan 3.Change Subscription Plan 4.Add Coupon");
+                }
+            }while(true);
+        }catch (DatabaseException e){
+            System.out.println(e.getMessage());
+        }
     }
 
     public void addProduct(){
@@ -50,14 +56,8 @@ public class CompanyDashboard {
         double price  = -1;
         System.out.println("Enter Product Name");
         String name = sc.next();
-        while(trailDays < 0){
-            System.out.println("Enter Trail days if any else 0");
-            trailDays = sc.nextInt();
-        }
-        while(price < 0){
-            System.out.println("Enter Product price");
-            price = sc.nextDouble();
-        }
+        trailDays = getIntegerValue(0,"Enter Trail days if any else 0");
+        price = getIntegerValue(0,"Enter Product price");
         companyController.addProduct(name, trailDays, price);
     }
 
@@ -71,10 +71,7 @@ public class CompanyDashboard {
         String productName =  sc.next();
         System.out.println("Enter Subscription Name");
         subscriptionName = sc.next();
-
-        while(subType < 0){
-            System.out.println("Choose subscription plan 1.Monthly 2.Quarterly 3.Yearly");
-            subType = sc.nextInt();
+        while( (subType = getIntegerValue(0,"Choose subscription plan 1.Monthly 2.Quarterly 3.Yearly")) > 3){
             switch(subType){
                 case 1:
                     subscriptionType = SubscriptionPlan.SubscriptionType.MONTHLY;
@@ -88,49 +85,43 @@ public class CompanyDashboard {
                     System.out.println("Choose a valid subscription plan");
             }
         }
-
-        while(discount < 0){
-            System.out.println("Enter discount if any or 0");
-            discount = sc.nextDouble();
-        }
+        discount = getDoubleValue(0,"Enter discount if any or 0");
         companyController.addSubscriptionPlan(productName, subscriptionName, subscriptionType, discount);
     }
 
     public void updateSubscriptionPlan(){
         displayProducts();
-        String productName = null;
+        String productName;
         System.out.println("Select Product ");
         productName = sc.next();
-
         displaySubscriptions(productName);
-
-        String subscriptionName = null;
-        String newSubscriptionName = null;
+        String subscriptionName;
+        String newSubscriptionName;
         SubscriptionPlan.SubscriptionType subscriptionType = null;
-        int subType = -1;
-        Double discount = null;
-
+        int subType = 10;
+        double discount = -1;
         System.out.println("Select Subscription you want to change");
         subscriptionName = sc.next();
-
         System.out.println("Enter New Subscription Name if applicable or \"null\" for no changes");
         newSubscriptionName = sc.next();
-        System.out.println("Choose new subscription plan 1.Monthly 2.Quarterly 3.Yearly or 0 for no changes");
-        subType = sc.nextInt();
-        switch(subType){
-            case 1:
-                subscriptionType = SubscriptionPlan.SubscriptionType.MONTHLY;
-                break;
-            case 2:
-                subscriptionType = SubscriptionPlan.SubscriptionType.QUARTERLY;
-                break;
-            case 3:
-                subscriptionType = SubscriptionPlan.SubscriptionType.YEARLY;
+        System.out.println();
+        while( subType > 4){
+            subType = getIntegerValue(0, "Choose new subscription plan 1.Monthly 2.Quarterly 3.Yearly or 0 for no changes")
+            switch(subType){
+                case 1:
+                    subscriptionType = SubscriptionPlan.SubscriptionType.MONTHLY;
+                    break;
+                case 2:
+                    subscriptionType = SubscriptionPlan.SubscriptionType.QUARTERLY;
+                    break;
+                case 3:
+                    subscriptionType = SubscriptionPlan.SubscriptionType.YEARLY;
+                default:
+                    System.out.println("invalid option");
             }
-
+        }
         System.out.println("Enter discount if any or -1 if no changes");
-        discount = sc.nextDouble();
-
+        discount = getDoubleValue(0,"Enter discount if any or 0");
         companyController.updateSubscriptionPlan(productName, subscriptionName, newSubscriptionName, subscriptionType, discount);
     }
 
@@ -141,21 +132,29 @@ public class CompanyDashboard {
         System.out.println("Enter coupon Code");
         String coupon = sc.next();
         System.out.println("Enter expiry date - yyyy-MM-dd");
-        String date = sc.next();
-        double discount = 0;
-        while(discount < 1){
-            System.out.println("Enter discount");
-            discount = sc.nextDouble();
+        String date = null;
+        LocalDate expDate = null;
+        boolean isDate = false;
+        while(!isDate){
+            try{
+                System.out.print("Enter Exp date yyyy-MM-dd");
+                date = sc.next();
+                expDate = LocalDate.parse(date);
+                isDate = true;
+            }catch(DateTimeParseException e){
+                System.out.println("Incorrect date format, enter yyyy-MM-dd");
+                date = sc.next();
+            }
         }
-        LocalDate expDate = LocalDate.parse(date);
+        double discount = getDoubleValue(1,"Enter discount in % example - 10");
         companyController.addCoupon(productName, coupon, expDate, discount);
     }
 
     private void displayProducts(){
-        ArrayList<Product> products = null;
+        ArrayList<Product> products;
         try{
             products = companyController.getProducts();
-        }catch(InvalidException e){
+        }catch(DatabaseException e){
             System.out.println(e.getMessage());
             return;
         }
@@ -165,10 +164,10 @@ public class CompanyDashboard {
     }
 
     private void displaySubscriptions(String productName){
-        ArrayList<SubscriptionPlan> subscriptionPlans = null;
+        ArrayList<SubscriptionPlan> subscriptionPlans;
         try{
             subscriptionPlans = companyController.getSubscriptionPlanByProduct(productName);
-        }catch(InvalidException | InputException e){
+        }catch(DatabaseException | InputException e){
             System.out.println( e.getMessage() );
             return;
         }
@@ -177,20 +176,32 @@ public class CompanyDashboard {
         });
     }
 
-    private void displaySubscriptionsByName(String productName, String subscriptionName){
-        ArrayList<SubscriptionPlan> subscriptionPlans = null;
-        try{
-            subscriptionPlans = companyController.getSubscriptionPlanByProduct(productName);
-        }catch(InvalidException | InputException e){
-            System.out.println( e.getMessage() );
-            return;
+    private int getIntegerValue(int minLimit, String message){
+        int value = -1;
+        while(value < minLimit){
+            try{
+                System.out.println(message);
+                value = sc.nextInt();
+            }catch(InputMismatchException e){
+                System.out.println("Invalid input");
+                sc.nextLine();
+            }
         }
-        System.out.println("Plan Name     |     Subscription Plan   |    Discount    |     price");
-        subscriptionPlans.forEach(subscriptionPlan -> {
-            if(subscriptionPlan.getPlanName().equals(subscriptionName))
-                System.out.println( subscriptionPlan.getPlanName() + " " +  subscriptionPlan.getSubscriptionType() + " " +
-                        subscriptionPlan.getDiscount() + " " + subscriptionPlan.getPrice());
-        });
+        return value;
+    }
+
+    private double getDoubleValue(int minLimit, String message){
+        int value = -1;
+        while(value < minLimit){
+            try{
+                System.out.println(message);
+                value = sc.nextInt();
+            }catch(InputMismatchException e){
+                System.out.println("Invalid input");
+                sc.nextLine();
+            }
+        }
+        return value;
     }
 
 }

@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class CurrentSubscription {
 
-    private ISubscriber subscriber;
+    private Subscriber subscriber;
     private SubscriptionPlan subscriptionPlan;
     private boolean isCurrentlySubscribed;
     private PaymentDetails paymentDetails;
@@ -14,7 +14,7 @@ public class CurrentSubscription {
     private LocalDate resumeDate;
     private LocalDate expireDate;
 
-    public CurrentSubscription(ISubscriber subscriberEmail, SubscriptionPlan subscriptionPlan, PaymentDetails paymentDetails){
+    public CurrentSubscription(Subscriber subscriberEmail, SubscriptionPlan subscriptionPlan, PaymentDetails paymentDetails){
         this.subscriber = subscriberEmail;
         this.subscriptionPlan = subscriptionPlan;
         FIRST_SUBSCRIBED_DATE = LocalDate.now();
@@ -23,11 +23,11 @@ public class CurrentSubscription {
         this.expireDate = FIRST_SUBSCRIBED_DATE.plusDays(subscriptionPlan.getSubscriptionType().getValue());
     }
 
-    public ISubscriber getSubscriber(){
+    public Subscriber getSubscriber(){
         return subscriber;
     }
 
-    public void setSubscriber(ISubscriber subscriber){
+    public void setSubscriber(Subscriber subscriber){
         this.subscriber = subscriber;
     }
 

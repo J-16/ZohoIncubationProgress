@@ -1,7 +1,8 @@
 package com.company.subscriptionmanagement.model.service;
 
+import com.company.subscriptionmanagement.exception.DatabaseException;
+import com.company.subscriptionmanagement.exception.ExceptionType;
 import com.company.subscriptionmanagement.exception.InputException;
-import com.company.subscriptionmanagement.exception.InvalidException;
 import com.company.subscriptionmanagement.model.*;
 
 import java.time.LocalDate;
@@ -9,9 +10,10 @@ import java.util.ArrayList;
 
 public class ProductService{
 
-    private ICompany company;
+    private Company company;
+    private NotificationService notificationService;
 
-    public ProductService(ICompany company){
+    public ProductService(Company company){
         this.company = company;
     }
 
@@ -51,14 +53,14 @@ public class ProductService{
     public ArrayList<Product> getProducts(){
         ArrayList<Product> products = company.getProducts();
         if(products.size() == 0)
-            throw new InvalidException("No products found Exception");
+            throw new DatabaseException("No products found Exception", ExceptionType.NOT_FOUND_EXCEPTION);
         return products;
     }
 
     public ArrayList<SubscriptionPlan> getSubscriptionPlanByProduct(String productName){
         ArrayList<Product> products = getProducts();
         if(products.size() == 0)
-            throw new InvalidException("No products found Exception");
+            throw new DatabaseException("No products found Exception", ExceptionType.NOT_FOUND_EXCEPTION);
         ArrayList<SubscriptionPlan> subscriptionPlans = null;
         for(Product product : products){
             if(product.getProductName().equals(productName))
@@ -81,7 +83,7 @@ public class ProductService{
     private SubscriptionPlan getSubscriptionPlanByName(Product product, String planName){
         ArrayList<SubscriptionPlan> subscriptionPlans = product.getSubscriptionPlan();
         if( subscriptionPlans.size() == 0)
-            throw new InvalidException("No subscription plan available so far");
+            throw new DatabaseException("No subscription plan available so far", ExceptionType.NOT_FOUND_EXCEPTION);
         for(SubscriptionPlan  subscriptionPlan : subscriptionPlans){
             if( planName.equals(subscriptionPlan.getPlanName() ) )
                 return subscriptionPlan;
@@ -89,12 +91,18 @@ public class ProductService{
         throw new InputException("No such subscription");
     }
 
+    public void setNotificationService(NotificationService notificationService){
+        this.notificationService = notificationService;
+    }
+
     public void sendMail(String message){
-        new NotificationService().sendMail(company, message);
+        notificationService = new MailNotificationService();
+        notificationService.send(company, message);
     }
 
     public void sendNotification(String message){
-        new NotificationService().sendNotification(company, message);
+        notificationService = new PushNotificationService();
+        notificationService.send(company, message);
     }
 
 }

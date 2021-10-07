@@ -1,8 +1,8 @@
 package com.company.subscriptionmanagement.model.service;
 
 import com.company.subscriptionmanagement.database.Database;
+import com.company.subscriptionmanagement.model.Company;
 import com.company.subscriptionmanagement.model.CurrentSubscription;
-import com.company.subscriptionmanagement.model.ICompany;
 
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -11,8 +11,8 @@ import java.util.LinkedList;
 public class AutoRenewalService{
 
     public void autoRenewal(){
-        HashMap<String, ICompany> companies = Database.getCompanies();
-        for(ICompany company : companies.values()){
+        HashMap<String, Company> companies = Database.getCompanies();
+        for(Company company : companies.values()){
             HashMap<LocalDate, LinkedList<CurrentSubscription>> autoRenewal = company.getAutoRenewal();
             LinkedList<CurrentSubscription> currentSubscriptions = autoRenewal.get(LocalDate.now());
             for(CurrentSubscription currentSubscription : currentSubscriptions){

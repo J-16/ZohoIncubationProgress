@@ -13,7 +13,7 @@ public class CompanyListView {
         ArrayList<String> companies = companyListController.getCompanies();
         System.out.print("Company list : ");
         for(String company : companies){
-            System.out.print(company + " ");
+            System.out.print( company + ", ");
         }
         System.out.println();
     }

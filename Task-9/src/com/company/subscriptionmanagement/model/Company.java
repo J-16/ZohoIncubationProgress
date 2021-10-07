@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-public class Company implements ICompany{
+public class Company{
 
     private PasswordAccount account;
     private ArrayList<Product> products;

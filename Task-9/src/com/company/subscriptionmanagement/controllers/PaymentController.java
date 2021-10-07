@@ -1,11 +1,12 @@
 package com.company.subscriptionmanagement.controllers;
 
 import com.company.subscriptionmanagement.exception.InputException;
-import com.company.subscriptionmanagement.model.ISubscriber;
 import com.company.subscriptionmanagement.model.PaymentDetails;
+import com.company.subscriptionmanagement.model.Subscriber;
 import com.company.subscriptionmanagement.model.service.InvoiceService;
 import com.company.subscriptionmanagement.model.service.NotificationService;
 import com.company.subscriptionmanagement.model.service.PaymentService;
+import com.company.subscriptionmanagement.model.service.PushNotificationService;
 import com.company.subscriptionmanagement.view.PaymentView;
 
 import java.time.LocalDate;
@@ -14,8 +15,9 @@ import java.util.HashMap;
 public class PaymentController{
 
     private PaymentView paymentView = new PaymentView();
+    private NotificationService notificationService;
 
-    public void processPayment(double price, ISubscriber subscriber){
+    public void processPayment(double price, Subscriber subscriber){
         if(subscriber.getPaymentDetails() == null){
             generatePaymentDetails(subscriber);
         }
@@ -27,14 +29,15 @@ public class PaymentController{
         makePayment(price, subscriber);
     }
 
-    private void makePayment(double price, ISubscriber subscriber){
+    private void makePayment(double price, Subscriber subscriber){
         PaymentService paymentService = new PaymentService();
         paymentService.makePayment();
         String invoice = new InvoiceService().generateInvoice(price, subscriber);
-        new NotificationService().sendNotification(invoice, subscriber);
+        notificationService = new PushNotificationService();
+        notificationService.send(invoice, subscriber);
     }
 
-    private void generatePaymentDetails(ISubscriber subscriber){
+    private void generatePaymentDetails(Subscriber subscriber){
         HashMap<String, String> paymentDetails = paymentView.view();
         isValidDetails(paymentDetails);
         subscriber.setPaymentDetails( new PaymentDetails( Long.parseLong(paymentDetails.get("cardNo")), Integer.parseInt(paymentDetails.get("cvv")),

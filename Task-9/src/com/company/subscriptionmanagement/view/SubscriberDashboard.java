@@ -1,7 +1,8 @@
 package com.company.subscriptionmanagement.view;
 
 import com.company.subscriptionmanagement.controllers.SubscriberController;
-import com.company.subscriptionmanagement.exception.InvalidException;
+import com.company.subscriptionmanagement.exception.DatabaseException;
+import com.company.subscriptionmanagement.exception.InputException;
 import com.company.subscriptionmanagement.exception.SubscriptionException;
 import com.company.subscriptionmanagement.model.CurrentSubscription;
 
@@ -22,7 +23,7 @@ public class SubscriberDashboard {
         Scanner sc = new Scanner(System.in);
         try{
             do{
-                System.out.print("0.Quit 1.Active Subscription 2.News Letter 3.Notification 4.Raise an issue");
+                System.out.print("0.Previous Menu 1.Active Subscription 2.News Letter 3.Notification 4.Raise an issue");
                 int option = sc.nextInt();
                 switch(option){
                     case 0:
@@ -42,7 +43,7 @@ public class SubscriberDashboard {
                         System.out.println("Invalid option");
                 }
             }while(true);
-        }catch(InvalidException e){
+        }catch(DatabaseException | InputException e){
             System.out.println(e.getMessage());
         }
     }
@@ -112,7 +113,7 @@ public class SubscriberDashboard {
                 System.out.println("Subscription cancelled");
                 return;
             }while(true);
-        }catch(InvalidException e){
+        }catch(DatabaseException e){
             System.out.println(e.getMessage());
         }
     }
@@ -126,7 +127,7 @@ public class SubscriberDashboard {
             String getDate = sc.next();
             LocalDate date = LocalDate.parse(getDate);
             subscriberController.pauseSubscription(productName, date);
-        }catch(InvalidException | SubscriptionException e){
+        }catch(DatabaseException | SubscriptionException e){
             System.out.println(e.getMessage());
         }
     }
@@ -135,7 +136,7 @@ public class SubscriberDashboard {
         Scanner sc = new Scanner(System.in);
         try{
             do{
-                System.out.println("0.Quit 1.Subscribe to newsletter 2.Unsubscribe news letter");
+                System.out.println("0.Previous Menu 1.Subscribe to newsletter 2.Unsubscribe news letter");
                 int option = sc.nextInt();
                 switch(option){
                     case 0:
@@ -147,7 +148,7 @@ public class SubscriberDashboard {
                         unSubscribeNewsletter();
                 }
             }while(true);
-        }catch(InvalidException e){
+        }catch(DatabaseException e){
         System.out.println(e.getMessage());
     }
     }
@@ -157,7 +158,7 @@ public class SubscriberDashboard {
         for(String product : subscriberController.getProductsByCompany()){
             System.out.println(product);
         }
-        System.out.println("Enter product names to subscribe newsletter or 0 to quit");
+        System.out.println("Enter product names to subscribe newsletter or 0 for previous Menu");
         Scanner sc = new Scanner(System.in);
         String productName  = sc.nextLine();
         if(productName.equals("0"))
@@ -197,7 +198,7 @@ public class SubscriberDashboard {
         String planName = sc.next();
         try{
             subscriberController.upgradeSubscriptionPlan(productName, planName);
-        }catch(InvalidException e){
+        }catch(DatabaseException e){
             System.out.println(e.getMessage());
         }
     }
@@ -246,7 +247,7 @@ public class SubscriberDashboard {
             for(String notification : subscriberController.getNotification()){
                 System.out.println(notification);
             }
-        }catch(InvalidException e){
+        }catch(DatabaseException e){
             System.out.println(e.getMessage());
         }
     }

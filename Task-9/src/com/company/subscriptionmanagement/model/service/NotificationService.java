@@ -1,24 +1,11 @@
 package com.company.subscriptionmanagement.model.service;
 
-import com.company.subscriptionmanagement.model.ICompany;
-import com.company.subscriptionmanagement.model.ISubscriber;
+import com.company.subscriptionmanagement.model.Company;
+import com.company.subscriptionmanagement.model.Subscriber;
 
-public class NotificationService{
+public interface NotificationService {
 
-    public void sendMail(){
-
-    }
-
-    public void sendMail(ICompany company, String message){
-        //sendNotification(message);
-    }
-
-    public void sendNotification(String invoice, ISubscriber subscriber){
-        subscriber.sendNotification(invoice);
-    }
-
-    public void sendNotification(ICompany company, String message){
-        //sendNotification(message);
-    }
-
+    void send(String invoice, Subscriber subscriber);
+    void send(Company company, String message);
+    
 }

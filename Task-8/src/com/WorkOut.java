@@ -1,7 +1,29 @@
 package com;
 
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.Scanner;
+
 public class WorkOut implements Cloneable{
+
+    public static void parsing(){
+        Scanner sc = new Scanner(System.in);
+        String date = null;
+        boolean isDate = false;
+        while(!isDate){
+            try{
+                System.out.println("enter date");
+                date = sc.next();
+                LocalDate.parse(date);
+                isDate = true;
+            }catch(DateTimeParseException e){
+                System.out.println("enter date");
+                date = sc.next();
+            }
+        }
+        System.out.println(date);
+    }
 
     public static String toString(int i){
         int tempInt = i;
@@ -32,5 +54,6 @@ public class WorkOut implements Cloneable{
         int i = 100000;
         String s = toString(i);
         System.out.println(s);
+        parsing();
     }
 }

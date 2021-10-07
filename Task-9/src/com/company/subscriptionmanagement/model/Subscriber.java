@@ -2,7 +2,7 @@ package com.company.subscriptionmanagement.model;
 
 import java.util.ArrayList;
 
-public class Subscriber implements ISubscriber{
+public class Subscriber{
 
     private Account account;
     private PaymentDetails paymentDetails;
@@ -17,7 +17,6 @@ public class Subscriber implements ISubscriber{
         userId = ID_GENERATE++;
     }
 
-    @Override
     public Account getAccount(){
         return account;
     }
@@ -26,12 +25,10 @@ public class Subscriber implements ISubscriber{
         this.account = account;
     }
 
-    @Override
     public PaymentDetails getPaymentDetails(){
         return paymentDetails;
     }
 
-    @Override
     public void setPaymentDetails(PaymentDetails paymentDetails){
         this.paymentDetails = paymentDetails;
     }
@@ -40,12 +37,10 @@ public class Subscriber implements ISubscriber{
         return userId;
     }
 
-    @Override
     public void sendNotification(String notification){
         this.notification.add(notification);
     }
 
-    @Override
     public ArrayList<String> getNotification(){
         return this.notification;
     }

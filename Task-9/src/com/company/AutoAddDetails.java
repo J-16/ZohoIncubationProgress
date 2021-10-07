@@ -4,8 +4,8 @@ import com.company.subscriptionmanagement.controllers.CompanyAuthenticationContr
 import com.company.subscriptionmanagement.controllers.CompanyController;
 import com.company.companiesuser.controller.UserAuthenticationController;
 import com.company.subscriptionmanagement.database.Database;
-import com.company.subscriptionmanagement.model.ISubscriber;
 import com.company.subscriptionmanagement.model.PaymentDetails;
+import com.company.subscriptionmanagement.model.Subscriber;
 import com.company.subscriptionmanagement.model.SubscriptionPlan;
 
 import java.time.LocalDate;
@@ -37,7 +37,7 @@ public class AutoAddDetails {
         company.addSubscriptionPlan("product1","Yearly", SubscriptionPlan.SubscriptionType.YEARLY,13);
 
         Database.registerSubscriber("u","u");
-        ISubscriber subscriber = Database.getSubscribersByEmail("u");
+        Subscriber subscriber = Database.getSubscribersByEmail("u");
         subscriber.setPaymentDetails(new PaymentDetails(123L,12, LocalDate.now()));
 
         UserAuthenticationController subController = new UserAuthenticationController();
@@ -48,6 +48,7 @@ public class AutoAddDetails {
 
 //        SubscriberDashboard subscriberDashboard = new SubscriberDashboard(subController.login("u","123"));
 //        subscriberDashboard.displaySubscription("company1","prod1");
+
     }
 
 }

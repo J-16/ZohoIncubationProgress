@@ -1,6 +1,8 @@
 package com.company.subscriptionmanagement.controllers;
 
 import com.company.subscriptionmanagement.database.Database;
+import com.company.subscriptionmanagement.exception.DatabaseException;
+import com.company.subscriptionmanagement.exception.ExceptionType;
 import com.company.subscriptionmanagement.exception.InputException;
 import com.company.subscriptionmanagement.model.*;
 import com.company.subscriptionmanagement.model.service.SubscriberService;
@@ -15,7 +17,7 @@ public class SubscriberController {
     private String email;
     private String name;
     private SubscriberService subscriptionService;
-    private ICompany company;
+    private Company company;
 
     public SubscriberController(String email, String name, String companyName){
         this.email = email;
@@ -98,8 +100,11 @@ public class SubscriberController {
         return subscriptionService.getSubscribedNewsletter();
     }
 
-    private ICompany getCompany(String companyName){
-        return Database.getCompanyByName(companyName);
+    private Company getCompany(String companyName){
+        Company company = Database.getCompanyByName(companyName);
+        if (company == null)
+            throw new DatabaseException("No company found", ExceptionType.NOT_FOUND_EXCEPTION);
+        return company;
     }
 
     public void giftSubscription(String productName, String planName, String coupon, String email) {
@@ -108,6 +113,10 @@ public class SubscriberController {
 
     public void raiseIssue(String complain){
         subscriptionService.raiseIssue(complain);
+    }
+
+    public static boolean isValidCompany(String companyName){
+        return Database.getCompanyByName(companyName) != null;
     }
 
 }

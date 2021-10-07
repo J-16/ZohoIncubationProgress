@@ -1,7 +1,7 @@
 package com.company.subscriptionmanagement.controllers;
 
 import com.company.subscriptionmanagement.exception.InputException;
-import com.company.subscriptionmanagement.model.ICompany;
+import com.company.subscriptionmanagement.model.Company;
 import com.company.subscriptionmanagement.model.Product;
 import com.company.subscriptionmanagement.model.service.ProductService;
 import com.company.subscriptionmanagement.model.SubscriptionPlan;
@@ -13,7 +13,7 @@ public class CompanyController {
 
     private ProductService productService;
 
-    public CompanyController(ICompany company){
+    public CompanyController(Company company){
         this.productService = new ProductService(company);
     }
 
@@ -40,7 +40,7 @@ public class CompanyController {
             productService.updateSubscriptionPlan(productName,subscriptionName, newSubscriptionName);
         if(subscriptionType != null)
             productService.updateSubscriptionPlan(productName,subscriptionName, subscriptionType);
-        if(discount > -1)
+        if(discount > 0)
             productService.updateSubscriptionPlan(productName,subscriptionName, discount);
     }
 

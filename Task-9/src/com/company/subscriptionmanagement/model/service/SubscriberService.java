@@ -2,8 +2,7 @@ package com.company.subscriptionmanagement.model.service;
 
 import com.company.subscriptionmanagement.controllers.PaymentController;
 import com.company.subscriptionmanagement.database.Database;
-import com.company.subscriptionmanagement.exception.InvalidException;
-import com.company.subscriptionmanagement.exception.SubscriptionException;
+import com.company.subscriptionmanagement.exception.*;
 import com.company.subscriptionmanagement.model.*;
 
 import java.time.LocalDate;
@@ -13,12 +12,13 @@ import java.util.LinkedList;
 
 public class SubscriberService {
 
-    private ISubscriber subscriber;
+    private Subscriber subscriber;
     private String email;
     private String name;
-    private ICompany company;
+    private Company company;
+    private NotificationService notificationService;
 
-    public SubscriberService(String email, String name, ICompany company){
+    public SubscriberService(String email, String name, Company company){
         this.email = email;
         this.name = name;
         this.company = company;
@@ -29,7 +29,7 @@ public class SubscriberService {
         if(isSubscribed(productName))
             throw new SubscriptionException("You have subscribed to the product already");
         if(product.getTrailSubscribers(email) != null){
-            throw new InvalidException("You have already enabled trail version");
+            throw new InvalidOperationException("You have already enabled trail version");
         }
         subscriber = registerSubscriber();
         product.addTrailSubscribers(email, LocalDate.now().plusDays(30));
@@ -48,7 +48,7 @@ public class SubscriberService {
             Coupon coupon = getCoupon(product, couponName);
             price = price + (coupon.getDiscount()/100);
         }
-        ISubscriber subscriber = registerSubscriber();
+        Subscriber subscriber = registerSubscriber();
         new PaymentController().processPayment(price,subscriber);
         CurrentSubscription currentSubscription = new CurrentSubscription(subscriber,subscriptionPlan, subscriber.getPaymentDetails());
         product.addProductSubscribers(subscriber.getAccount().getEmail(), currentSubscription);
@@ -68,10 +68,10 @@ public class SubscriberService {
         if(!isSubscribed(productName))
             throw new SubscriptionException("You have not subscribed to this product to pause");
         if(resumeDate.getDayOfMonth() < LocalDate.now().getDayOfMonth() && resumeDate.getMonthValue() < LocalDate.now().getMonthValue() && resumeDate.getYear() < LocalDate.now().getYear())
-            throw new InvalidException("Invalid date");
+            throw new InputException("Invalid date");
         Product product = getProductByCompany(productName);
         if(product.getProductSubscribers(email) == null)
-            throw new InvalidException("You have not subscribed to perform this operation");
+            throw new InvalidOperationException("You have not subscribed to perform this operation");
         CurrentSubscription currentSubscription = product.getProductSubscribers(email);
         cancelAutoRenewal(currentSubscription);
         currentSubscription.setCurrentlySubscribed(false);
@@ -82,7 +82,7 @@ public class SubscriberService {
 
     public void cancelSubscription(String productName){
         if(!isSubscribed(productName)) {
-            throw new InvalidException("You have not subscribed to perform this operation");
+            throw new InvalidOperationException("You have not subscribed to perform this operation");
         }
         Product product = getProductByCompany(productName);
         CurrentSubscription currentSubscription = product.getProductSubscribers(email);
@@ -108,7 +108,7 @@ public class SubscriberService {
                 return subscriptionPlan;
             }
         }
-        throw new InvalidException("Invalid subscription name");
+        throw new InputException("Invalid subscription name");
     }
 
     public Product getProductByCompany(String productName){
@@ -117,7 +117,7 @@ public class SubscriberService {
                 return product;
             }
         }
-        throw new InvalidException("No such product");
+        throw new DatabaseException("No such product", ExceptionType.NOT_FOUND_EXCEPTION);
     }
 
     public ArrayList<String> getProductsByCompany() {
@@ -126,7 +126,7 @@ public class SubscriberService {
             products.add(product.getProductName());
         }
         if(products.size() == 0)
-            throw new InvalidException("No Products available at the moment");
+            throw new DatabaseException("No Products available at the moment", ExceptionType.NOT_FOUND_EXCEPTION);
         return products;
     }
 
@@ -168,7 +168,7 @@ public class SubscriberService {
             }
         }
         if(subscriptionPlan == null)
-            throw new InvalidException("No subscription plans are available for this product at the moment");
+            throw new DatabaseException("No subscription plans are available for this product at the moment", ExceptionType.NOT_FOUND_EXCEPTION);
         return subscriptionPlan;
     }
 
@@ -180,7 +180,7 @@ public class SubscriberService {
             }
         }
         if(subscriptions.size() == 0)
-            throw new InvalidException("You have not subscribed to any products yet");
+            throw new DatabaseException("You have not subscribed to any products yet", ExceptionType.NOT_FOUND_EXCEPTION);
         return subscriptions;
     }
 
@@ -198,12 +198,12 @@ public class SubscriberService {
     public ArrayList<String> getNotification(){
         ArrayList<String> notification = subscriber.getNotification();
         if(notification == null)
-            throw new InvalidException("No notification");
+            throw new DatabaseException("No notification", ExceptionType.NOT_FOUND_EXCEPTION);
         return notification;
     }
 
-    private ISubscriber registerSubscriber() {
-        ISubscriber subscriber;
+    private Subscriber registerSubscriber() {
+        Subscriber subscriber;
         subscriber = Database.getSubscribersByEmail(email);
         if( subscriber == null ){
             Database.registerSubscriber(email, name);
@@ -214,14 +214,14 @@ public class SubscriberService {
 
     private Coupon getCoupon(Product product, String couponName) {
         if(product.getCoupons().size() == 0)
-            throw new InvalidException("Invalid coupon");
+            throw new DatabaseException("Invalid coupon", ExceptionType.NOT_FOUND_EXCEPTION);
         LocalDate date = LocalDate.now();
         for(Coupon coupon : product.getCoupons()){
             if(coupon.getCouponName().equals(couponName) && date.getDayOfMonth() <= coupon.getExpiryDate().getDayOfMonth()
                     && date.getMonthValue() <= coupon.getExpiryDate().getMonthValue() && date.getYear() <= coupon.getExpiryDate().getYear())
                 return coupon;
         }
-        throw new InvalidException("Invalid coupon");
+        throw new DatabaseException("Invalid coupon", ExceptionType.NOT_FOUND_EXCEPTION);
     }
 
     private boolean isSubscribed(String productName){
@@ -247,7 +247,7 @@ public class SubscriberService {
                 return subscriptionPlan;
             }
         }
-        throw new InvalidException("Invalid Subscription plan");
+        throw new DatabaseException("No such subscription plan", ExceptionType.NOT_FOUND_EXCEPTION);
     }
 
     public HashMap<String, LocalDate> getTrailSubscribedProducts() {
@@ -267,7 +267,7 @@ public class SubscriberService {
     public void giftSubscription(String productName, String planName, String coupon, String email) {
         //TODO: // check mail with the company and mail user with the subscription plan
         // Handle payment new PaymentController().processPayment(price,subscriber);
-        new NotificationService().sendMail();
+        //notificationService.send();
     }
 
     public void raiseIssue(String message){
