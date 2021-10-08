@@ -2,11 +2,11 @@ package com.company.subscriptionmanagement.view;
 
 import com.company.subscriptionmanagement.controllers.SubscriberController;
 import com.company.subscriptionmanagement.exception.DatabaseException;
+import com.company.subscriptionmanagement.exception.InputException;
 import com.company.subscriptionmanagement.exception.InvalidOperationException;
 import com.company.subscriptionmanagement.model.SubscriptionPlan;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 
 public class ProductView {
@@ -15,7 +15,6 @@ public class ProductView {
         SUBSCRIBE,GIFT;
     }
 
-    private Scanner sc = new Scanner(System.in);
     private SubscriberController subscribeController;
     private String companyName;
 
@@ -28,34 +27,34 @@ public class ProductView {
         ArrayList<String> products;
         try{
             products = subscribeController.getProductsByCompany();
-        }catch(Exception e){
+        }catch(DatabaseException e){
             System.out.println(e.getMessage());
             return;
         }
         for(String product : products)
             System.out.println(product);
-
         System.out.println("");
-        int option = GetValues.getIntegerValue(1, "1.Subscribe Product or any other number to go back to previous menu");
-        if(option == 1){
-            System.out.println("Enter product name to view details");
-            String productName = sc.next();
-            displaySubscription(productName);
+        String productName = null;
+        while(true){
+            int option = GetValues.getIntegerValue(1, "1.Subscribe Product or any other number to go back to previous menu");
+            if(option == 1){
+                try{
+                    productName = GetValues.getString("Enter product name to view details");
+                    displaySubscription(productName);
+                    return;
+                }catch(DatabaseException e){
+                    System.out.println(e.getMessage());
+                }catch(InputException e){
+                    System.out.println(e.getMessage());
+                    productName = null;
+                }
+            }
         }
     }
 
     public void displaySubscription(String productName){
         ArrayList<SubscriptionPlan> subscriptionPlans;
-        try{
-            subscriptionPlans = subscribeController.getAllSubscriptionPlanByCompany(productName);
-        }catch(Exception e){
-            System.out.println(e.getMessage());
-            return;
-        }
-        if(subscriptionPlans == null){
-            System.out.println("No subscription plan to subscribe");
-            return;
-        }
+        subscriptionPlans = subscribeController.getAllSubscriptionPlanByCompany(productName);
         System.out.println("------------------------------------------------------------------------------------------------------------");
         for(SubscriptionPlan subscriptionPlan : subscriptionPlans){
             System.out.print("|        plan : "  + subscriptionPlan.getPlanName() + "              ");
@@ -102,29 +101,25 @@ public class ProductView {
         try{
             subscribeController.activateTrail(productName);
             System.out.println("trail version activated");
-        }catch(DatabaseException | InvalidOperationException e){
+        }catch(InvalidOperationException e){
             System.out.println(e.getMessage());
         }
     }
 
     private void subscribeProduct(String productName, SubscriptionType type){
         try{
-            System.out.println("Enter Plan Name to subscribe");
-            String planName = sc.next();
+            String planName = GetValues.getString("Enter Plan Name to subscribe");
             String coupon = null;
-            System.out.println("1.Enter Coupon or any other key to ignore");
-            String option = sc.next();
+            String option = GetValues.getString("1.Enter Coupon or any other key to ignore");
             if (option.equals("1")) {
-                System.out.println("Enter coupon : ");
-                coupon = sc.next();
+                coupon = GetValues.getString("Enter coupon : ");
             }
             if(type == SubscriptionType.SUBSCRIBE) {
                 subscribeController.subscribeProduct(productName, planName, coupon);
                 System.out.println("Subscription Added successfully");
                 return;
             }
-            System.out.println("Enter email you want to gift");
-            String email = sc.next();
+            String email = GetValues.getString("Enter email you want to gift");
             subscribeController.giftSubscription(productName, planName, coupon, email);
             System.out.println("Subscription sent");
         }catch(DatabaseException | InvalidOperationException e){

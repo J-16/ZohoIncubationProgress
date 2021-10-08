@@ -5,7 +5,6 @@ import com.company.subscriptionmanagement.controllers.CompanyController;
 import com.company.subscriptionmanagement.exception.DatabaseException;
 import com.company.subscriptionmanagement.exception.InputException;
 
-import java.util.Scanner;
 
 public class CompanyPortal{
 
@@ -47,69 +46,71 @@ public class CompanyPortal{
                 case 0 :
                     return;
                 case 1 :
-                    try{
-                        register();
-                        System.out.println("Please login to continue");
-                    }catch(DatabaseException e){
-                        System.out.println(e.getMessage());
-                        if(e.getExceptionType().equals(DatabaseException.ExceptionType.EXISTS_EXCEPTION)){
-                            loginFlow();
-                            break;
-                        }
-                    }finally{
-                        name = null;
-                        password = null;
-                        email = null;
-                    }
+                    registerFlow();
                 case 2:
-                    try{
-                        loginFlow();
-                        break;
-                    }
-                    catch(InputException e){
-                        System.out.println(e.getMessage());
-                        if(e.getExceptionType().equals(InputException.ExceptionType.EMPTY_EXCEPTION)){
-                            if(e.getField().equals("email"))
-                                email = null;
-                            else
-                                password = null;
-                        }
-                    }
-                    catch(DatabaseException e){
-                        if(e.getExceptionType().equals(DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION)){
-                            System.out.println("Username and password doesn't match");
-                            loginFlow();
-                            break;
-                        }
-                    }
+                    loginFlow();
+                    break;
                 default:
                     System.out.println("Invalid option");
             }
         }
     }
 
+    private void registerFlow() {
+        while(true){
+            try{
+                register();
+                System.out.println("Please login to continue");
+                return;
+            }catch(DatabaseException e){
+                System.out.println(e.getMessage());
+                if(e.getExceptionType() == DatabaseException.ExceptionType.EXISTS_EXCEPTION){
+                    loginFlow();
+                    return;
+                }
+            }finally{
+                name = null;
+                password = null;
+                email = null;
+            }
+        }
+    }
+
     public void loginFlow(){
-        login();
-        new CompanyDashboard(companyController).control();
+        while(true){
+            try{
+                login();
+                new CompanyDashboard(companyController).control();
+                return;
+            }catch(InputException e){
+                System.out.println(e.getMessage());
+                if(e.getExceptionType().equals(InputException.ExceptionType.EMPTY_EXCEPTION)){
+                    if(e.getField().equals("email"))
+                        email = null;
+                    else
+                        password = null;
+                }
+                login();
+            }catch(DatabaseException e){
+                if(e.getExceptionType().equals(DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION)){
+                    System.out.println("Username and password doesn't match");
+                }
+            }
+        }
     }
 
     public static class Helper{
 
-        private static Scanner sc = new Scanner(System.in);
-
         public static String getName(){
-            System.out.println("Enter Name: ");
-            return sc.next();
+            return GetValues.getString("Enter Name: ");
         }
 
         public static String getEmail(){
-            System.out.println("Enter Email: ");
-            return sc.next();
+            return GetValues.getString("Enter Email: ");
         }
 
         public static String getPassword(){
-            System.out.println("Enter Password: ");
-            return  sc.next();
+            return  GetValues.getString("Enter Password: ");
         }
 
     }

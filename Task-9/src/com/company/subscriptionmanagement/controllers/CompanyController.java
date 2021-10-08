@@ -21,7 +21,7 @@ public class CompanyController {
         if(price < 0)
             throw new InputException("price must be positive value", InputException.ExceptionType.EMPTY_EXCEPTION, "price");
         if(trailDays < 0)
-            throw new InputException("discount must be positive value", InputException.ExceptionType.NEGATIVE_VALUE, "trailDays");
+            throw new InputException("trail days must be positive value", InputException.ExceptionType.NEGATIVE_VALUE, "trailDays");
         productService.addProduct(name, trailDays, price);
     }
 

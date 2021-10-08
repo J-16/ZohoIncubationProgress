@@ -17,7 +17,7 @@ public class CompanyAuthenticationController {
         if(password.isEmpty())
             throw new InputException("Empty fields are not allowed", InputException.ExceptionType.EMPTY_EXCEPTION, password);
         if(Database.getCompanyByEmail(email) != null)
-            throw new DatabaseException("Company already exists", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION);
+            throw new DatabaseException("Company already exists", DatabaseException.ExceptionType.EXISTS_EXCEPTION);
         Database.register(name, email, password);
     }
 

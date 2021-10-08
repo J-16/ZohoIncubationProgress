@@ -251,7 +251,7 @@ public class SubscriberService {
     }
 
     public HashMap<String, LocalDate> getTrailSubscribedProducts() {
-        HashMap<String, LocalDate> trail = new HashMap<String, LocalDate>();
+        HashMap<String, LocalDate> trail = new HashMap<>();
         for(Product product : company.getProducts()){
             LocalDate date = LocalDate.now();
             LocalDate expiryDate = product.getTrailSubscribers(email);

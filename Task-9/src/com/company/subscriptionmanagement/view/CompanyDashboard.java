@@ -7,14 +7,10 @@ import com.company.subscriptionmanagement.model.Product;
 import com.company.subscriptionmanagement.model.SubscriptionPlan;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.Scanner;
 
 public class CompanyDashboard {
 
-    private Scanner sc = new Scanner(System.in);
     CompanyController companyController;
 
     public CompanyDashboard(CompanyController companyController){
@@ -51,91 +47,160 @@ public class CompanyDashboard {
     }
 
     public void addProduct(){
-        System.out.println("Products Details : ");
         int trailDays = -1;
         double price  = -1;
-        System.out.println("Enter Product Name");
-        String name = sc.next();
-        trailDays = GetValues.getIntegerValue(0,"Enter Trail days if any else 0");
-        price = GetValues.getIntegerValue(0,"Enter Product price");
-        companyController.addProduct(name, trailDays, price);
+        String name = null;
+        System.out.println("Products Details : ");
+        while(true){
+            try{
+                if(name == null) {
+                    name = GetValues.getString("Enter Product Name");
+                }
+                if(trailDays < 0){
+                    trailDays =GetValues.getIntegerValue(0,"Enter Trail days if any else 0");
+                }
+            if(price < 0)
+                price = GetValues.getIntegerValue(0,"Enter Product price");
+                companyController.addProduct(name, trailDays, price);
+                System.out.println("Product added successfully");
+                return;
+            }catch(InputException e){
+                System.out.println(e.getMessage());
+                if(e.getExceptionType() == InputException.ExceptionType.EMPTY_EXCEPTION){
+                    if(e.getField().equals("price"))
+                        price = -1;
+                }
+                else if(e.getExceptionType() == InputException.ExceptionType.NEGATIVE_VALUE){
+                    if(e.getField().equals("trailDays"))
+                        trailDays = -1;
+                }
+            }
+        }
     }
 
     public void addSubscriptionPlan() {
-        String subscriptionName;
-        SubscriptionPlan.SubscriptionType subscriptionType = null;
         int subType = 10;
         double discount = -1;
+        String subscriptionName = null;
+        String productName = null;
+        SubscriptionPlan.SubscriptionType subscriptionType = null;
         displayProducts();
-        System.out.println("Enter Product name");
-        String productName =  sc.next();
-        System.out.println("Enter Subscription Name");
-        subscriptionName = sc.next();
-        while( subType > 3){
-            subType = GetValues.getIntegerValue(1,"Choose subscription plan 1.Monthly 2.Quarterly 3.Yearly");
-            switch(subType){
-                case 1:
-                    subscriptionType = SubscriptionPlan.SubscriptionType.MONTHLY;
-                    break;
-                case 2:
-                    subscriptionType = SubscriptionPlan.SubscriptionType.QUARTERLY;
-                    break;
-                case 3:
-                    subscriptionType = SubscriptionPlan.SubscriptionType.YEARLY;
-                default:
-                    System.out.print("Choose a valid subscription plan, ");
+        while(true){
+            if(productName == null){
+                productName = GetValues.getString("Enter Product name");
+            }
+            if(subscriptionName == null) {
+                subscriptionName = GetValues.getString("Enter Subscription Name");
+            }
+            try {
+                while (subType > 3){
+                    subType = GetValues.getIntegerValue(1, "Choose subscription plan 1.Monthly 2.Quarterly 3.Yearly");
+                    switch (subType) {
+                        case 1:
+                            subscriptionType = SubscriptionPlan.SubscriptionType.MONTHLY;
+                            break;
+                        case 2:
+                            subscriptionType = SubscriptionPlan.SubscriptionType.QUARTERLY;
+                            break;
+                        case 3:
+                            subscriptionType = SubscriptionPlan.SubscriptionType.YEARLY;
+                        default:
+                            System.out.print("Choose a valid subscription plan, ");
+                    }
+                }
+                if(discount < 0) discount = GetValues.getDoubleValue(0, "Enter discount if any or 0");
+                companyController.addSubscriptionPlan(productName, subscriptionName, subscriptionType, discount);
+                return;
+            }catch(InputException e){
+                System.out.println(e.getMessage());
+                if(e.getExceptionType() == InputException.ExceptionType.EMPTY_EXCEPTION){
+                    if(e.getField().equals("subscriptionName"))
+                        subscriptionName = null;
+                }
+                else if(e.getExceptionType() == InputException.ExceptionType.NEGATIVE_VALUE){
+                    if(e.getField().equals("discount"))
+                        discount = -1;
+                }
             }
         }
-        discount = GetValues.getDoubleValue(0,"Enter discount if any or 0");
-        companyController.addSubscriptionPlan(productName, subscriptionName, subscriptionType, discount);
     }
 
     public void updateSubscriptionPlan(){
         displayProducts();
-        String productName;
-        System.out.println("Select Product ");
-        productName = sc.next();
-        displaySubscriptions(productName);
-        String subscriptionName;
-        String newSubscriptionName;
+        String productName = null;
+        String newSubscriptionName = null;
+        String subscriptionName = null;
         SubscriptionPlan.SubscriptionType subscriptionType = null;
+        displaySubscriptions(productName);
         int subType = 10;
         double discount = -1;
-        System.out.println("Select Subscription you want to change");
-        subscriptionName = sc.next();
-        System.out.println("Enter New Subscription Name if applicable or \"null\" for no changes");
-        newSubscriptionName = sc.next();
-        System.out.println();
-        while( subType > 4){
-            subType = GetValues.getIntegerValue(0, "Choose new subscription plan 1.Monthly 2.Quarterly 3.Yearly or 0 for no changes");
-            switch(subType){
-                case 1:
-                    subscriptionType = SubscriptionPlan.SubscriptionType.MONTHLY;
-                    break;
-                case 2:
-                    subscriptionType = SubscriptionPlan.SubscriptionType.QUARTERLY;
-                    break;
-                case 3:
-                    subscriptionType = SubscriptionPlan.SubscriptionType.YEARLY;
-                default:
-                    System.out.println("invalid option");
+        while(true){
+            try {
+                if( productName == null){
+                    productName = GetValues.getString("Select Product ");
+                }
+                if(subscriptionName == null){
+                    subscriptionName = GetValues.getString("Select Subscription you want to change");
+                }
+                if(newSubscriptionName == null){
+                    newSubscriptionName = GetValues.getString("Enter New Subscription Name if applicable or \"null\" for no changes");
+                }
+                System.out.println();
+                while (subType > 4) {
+                    subType = GetValues.getIntegerValue(0, "Choose new subscription plan 1.Monthly 2.Quarterly 3.Yearly or 0 for no changes");
+                    switch (subType) {
+                        case 1:
+                            subscriptionType = SubscriptionPlan.SubscriptionType.MONTHLY;
+                            break;
+                        case 2:
+                            subscriptionType = SubscriptionPlan.SubscriptionType.QUARTERLY;
+                            break;
+                        case 3:
+                            subscriptionType = SubscriptionPlan.SubscriptionType.YEARLY;
+                        default:
+                            System.out.println("invalid option");
+                    }
+                }
+                System.out.println();
+                discount = GetValues.getDoubleValue(-1, "Enter discount if any or -1 if no changes");
+                companyController.updateSubscriptionPlan(productName, subscriptionName, newSubscriptionName, subscriptionType, discount);
+                return;
+            }catch(InputException e){
+                if(e.getExceptionType() == InputException.ExceptionType.NEGATIVE_VALUE){
+                    if(e.getField().equals("discount"))
+                        discount = -1;
+                }
+            }catch(DatabaseException e){
+                if(e.getExceptionType() == DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION){
+                    productName = null;
+                    subscriptionName = null;
+                }
             }
         }
-        System.out.println();
-        discount = GetValues.getDoubleValue(-1,"Enter discount if any or -1 if no changes");
-        companyController.updateSubscriptionPlan(productName, subscriptionName, newSubscriptionName, subscriptionType, discount);
     }
 
     public void addCoupon(){
+        String productName = null;
+        String coupon = null;
+        double discount = -1;
         displayProducts();
-        System.out.println("Select Product");
-        String productName = sc.next();
-        System.out.println("Enter coupon Code");
-        String coupon = sc.next();
-        System.out.println("Enter expiry date - yyyy-MM-dd");
-        String date = GetValues.getDate("Enter Exp date yyyy-MM-dd");
-        double discount = GetValues.getDoubleValue(1,"Enter discount in % example - 10");
-        companyController.addCoupon(productName, coupon, LocalDate.parse(date), discount);
+        while(true){
+            try{
+                productName = GetValues.getString("Select Product");
+                coupon = GetValues.getString("Enter coupon Code");
+                System.out.println("Enter expiry date - yyyy-MM-dd");
+                String date = GetValues.getDate("Enter Exp date yyyy-MM-dd");
+                if(discount < 1)
+                    discount = GetValues.getDoubleValue(1,"Enter discount in % example - 10");
+                companyController.addCoupon(productName, coupon, LocalDate.parse(date), discount);
+                return;
+            }catch(InputException e){
+                if(e.getExceptionType() == InputException.ExceptionType.NEGATIVE_VALUE){
+                    if(e.getField().equals("discount"))
+                        discount = -1;
+                }
+            }
+        }
     }
 
     private void displayProducts(){

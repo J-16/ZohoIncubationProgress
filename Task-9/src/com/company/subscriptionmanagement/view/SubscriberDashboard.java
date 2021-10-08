@@ -9,7 +9,6 @@ import com.company.subscriptionmanagement.model.CurrentSubscription;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
-import java.util.Scanner;
 
 public class SubscriberDashboard {
 
@@ -20,30 +19,26 @@ public class SubscriberDashboard {
     }
     
     public void control(){
-        try{
-            do{
-                int option = GetValues.getIntegerValue(0,"0.Previous Menu 1.Active Subscription 2.News Letter 3.Notification 4.Raise an issue");
-                switch(option){
-                    case 0:
-                        return;
-                    case 1:
-                        activeSubscription();
-                        break;
-                    case 2:
-                        newsletter();
-                        break;
-                    case 3:
-                        notification();
-                        break;
-                    case 4:
-                        raiseIssue();
-                    default:
-                        System.out.println("Invalid option");
-                }
-            }while(true);
-        }catch(DatabaseException | InputException e){
-            System.out.println(e.getMessage());
-        }
+        do{
+            int option = GetValues.getIntegerValue(0,"0.Previous Menu 1.Active Subscription 2.News Letter 3.Notification 4.Raise an issue");
+            switch(option){
+                case 0:
+                    return;
+                case 1:
+                    activeSubscription();
+                    break;
+                case 2:
+                    newsletter();
+                    break;
+                case 3:
+                    notification();
+                    break;
+                case 4:
+                    raiseIssue();
+                default:
+                    System.out.println("Invalid option");
+            }
+        }while(true);
     }
 
     private void activeSubscription(){
@@ -55,8 +50,13 @@ public class SubscriberDashboard {
             });
         }
         System.out.println();
-        HashMap<String, CurrentSubscription> subscriptions = subscriberController.getSubscriptionBySubscriber();
-        Scanner sc =  new Scanner(System.in);
+        HashMap<String, CurrentSubscription> subscriptions;
+        try{
+            subscriptions = subscriberController.getSubscriptionBySubscriber();
+        }catch(DatabaseException e){
+            System.out.println(e.getMessage());
+            return;
+        }
         subscriptions.forEach((product, currentSubscription)->{
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
             System.out.println("Product : " + product);
@@ -74,6 +74,10 @@ public class SubscriberDashboard {
                 System.out.println("Expiry Date : " + currentSubscription.getExpireDate().format(formatter));
             }
         });
+        subscriptionOption();
+    }
+
+    private void subscriptionOption(){
         System.out.println();
         do{
             System.out.println();
@@ -97,50 +101,53 @@ public class SubscriberDashboard {
     }
 
     private void cancelSubscription(){
-        Scanner sc = new Scanner(System.in);
-        try {
-            System.out.println("1.Cancel product subscription or any other key to quit");
-            int option = sc.nextInt();
+        try{
+            int option = GetValues.getIntegerValue(0,"1.Cancel product subscription or any other key to quit");
             if(option != 1)
                 return;
-            System.out.println("Enter Product name to cancel subscription");
-            String productName = sc.next();
+            String productName = GetValues.getString("Enter Product name to cancel subscription");
             subscriberController.cancelSubscription(productName);
             System.out.println("Subscription cancelled");
-        }catch(DatabaseException e){
+        }catch(InvalidOperationException e){
             System.out.println(e.getMessage());
         }
     }
 
-    private void pauseSubscription() {
-        try{
-            Scanner sc = new Scanner(System.in);
-            System.out.println("Enter Product name to pause subscription");
-            String productName = sc.next();
-            String date = GetValues.getDate("Enter date to resume subscription in yyyy-MM-dd");
-            subscriberController.pauseSubscription(productName, LocalDate.parse(date));
-        }catch(DatabaseException | InvalidOperationException e){
-            System.out.println(e.getMessage());
+    private void pauseSubscription(){
+        String productName = null;
+        String date = null;
+        while(true){
+            try{
+                if(productName == null){
+                    productName  = GetValues.getString("Enter Product name to pause subscription");
+                }
+                if(date == null)
+                    date = GetValues.getDate("Enter date to resume subscription in yyyy-MM-dd");
+                subscriberController.pauseSubscription(productName, LocalDate.parse(date));
+                return;
+            }catch(InputException e){
+                System.out.println(e.getMessage());
+                date = null;
+            }catch(InvalidOperationException e){
+                System.out.println(e.getMessage());
+                return;
+            }
         }
     }
 
     private void newsletter(){
-        try{
-            do{
-                int option = GetValues.getIntegerValue(0,"0.Previous Menu 1.Subscribe to newsletter 2.Unsubscribe news letter");
-                switch(option){
-                    case 0:
-                        return;
-                    case 1:
-                        subscribeNewsLetter();
-                        break;
-                    case 2:
-                        unSubscribeNewsletter();
-                }
-            }while(true);
-        }catch(DatabaseException e){
-        System.out.println(e.getMessage());
-    }
+        do{
+            int option = GetValues.getIntegerValue(0,"0.Previous Menu 1.Subscribe to newsletter 2.Unsubscribe news letter");
+            switch(option){
+                case 0:
+                    return;
+                case 1:
+                    subscribeNewsLetter();
+                    break;
+                case 2:
+                    unSubscribeNewsletter();
+            }
+        }while(true);
     }
 
     private void subscribeNewsLetter(){
@@ -148,20 +155,17 @@ public class SubscriberDashboard {
         for(String product : subscriberController.getProductsByCompany()){
             System.out.println(product);
         }
-        System.out.println("Enter product names to subscribe newsletter or 0 for previous Menu");
-        Scanner sc = new Scanner(System.in);
-        String productName  = sc.nextLine();
+        String productName = GetValues.getString("Enter product names to subscribe newsletter or 0 for previous Menu");
         if(productName.equals("0"))
             return;
-        subscriberController.subscribeNewsletter(getProductArray(productName));
+        try{
+            subscriberController.subscribeNewsletter(getProductArray(productName));
+        }catch(DatabaseException e){
+            System.out.println(e.getMessage());
+        }
     }
 
     private void changeSubscriptionPlan(){
-        HashMap<String, CurrentSubscription> subscriptions = subscriberController.getSubscriptionBySubscriber();
-        if(subscriptions.size() == 0){
-            System.out.println("You don't have any active subscription");
-            return;
-        }
         do{
             int option = GetValues.getIntegerValue(0,"0.Quit 1.UpGrade 2.DownGrade");
             switch(option){
@@ -178,29 +182,34 @@ public class SubscriberDashboard {
         }while(true);
     }
 
-    private void upgradeSubscription() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter product name");
-        String productName = sc.next();
-        System.out.println("Enter new plan name");
-        String planName = sc.next();
-        try{
-            subscriberController.upgradeSubscriptionPlan(productName, planName);
-        }catch(DatabaseException e){
-            System.out.println(e.getMessage());
+    private void upgradeSubscription(){
+        String productName = null;
+        String planName = null;
+        while(true){
+            try{
+                productName = GetValues.getString("Enter product name");
+                planName = GetValues.getString("Enter new plan name");
+                subscriberController.upgradeSubscriptionPlan(productName, planName);
+                return;
+            }catch(DatabaseException e){
+                System.out.println(e.getMessage());
+                productName = null;
+                planName = null;
+                int s = GetValues.getIntegerValue(0, "enter 0 for previous menu or");
+                if(s == 0)
+                    return;
+            }
         }
     }
 
-    private void unSubscribeNewsletter() {
+    private void unSubscribeNewsletter(){
         try {
             for (String product : subscriberController.getSubscribedNewsletter()) {
                 System.out.println(product);
             }
-            Scanner sc = new Scanner(System.in);
-            System.out.println("Enter product names to unsubscribe");
-            String productName = sc.nextLine();
+            String productName = GetValues.getString("Enter product names to unsubscribe");
             subscriberController.unSubscribeNewsletter(getProductArray(productName));
-        }catch(InvalidOperationException e){
+        }catch(DatabaseException | InvalidOperationException e){
             System.out.println(e.getMessage());
         }
     }
@@ -241,9 +250,7 @@ public class SubscriberDashboard {
     }
 
     private void raiseIssue() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Type your issue");
-        String complain = sc.next();
+        String complain = GetValues.getString("Type your issue");
         subscriberController.raiseIssue(complain);
     }
 
