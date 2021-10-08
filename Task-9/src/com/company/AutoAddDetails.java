@@ -12,28 +12,6 @@ import java.time.LocalDate;
 
 //TODO : update user payment info, notify customer care downgrade plan, track issue
 
-//TODO : interface > usage and naming convention [x]
-
-//TODO : email, password validation and exceptions [x]
-
-//TODO : Exception check >> redirects , message [x]
-
-//TODO : back button names [x]
-
-//TODO : input validation & input mismatch [x]
-
-//TODO : input exception and enter details again [x]
-
-//TODO : Scanner close [x]
-
-//TODO : previous menu names [x]
-
-//TODO : expiry date validation [x]
-
-//TODO : Helper class [x]
-
-//TODO : test [] test [] test []
-
 public class AutoAddDetails {
 
     {

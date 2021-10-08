@@ -120,6 +120,9 @@ public class CompanyDashboard {
                     if(e.getField().equals("discount"))
                         discount = -1;
                 }
+            }catch(DatabaseException e){
+                System.out.println(e.getMessage());
+                productName = null;
             }
         }
     }
@@ -171,8 +174,10 @@ public class CompanyDashboard {
                 }
             }catch(DatabaseException e){
                 if(e.getExceptionType() == DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION){
-                    productName = null;
-                    subscriptionName = null;
+                    if(e.getField().equals("subscriptionName"))
+                        subscriptionName = null;
+                    if(e.getField().equals("productName"))
+                        productName = null;
                 }
             }
         }

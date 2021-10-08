@@ -58,14 +58,14 @@ public class ProductService{
     public ArrayList<SubscriptionPlan> getSubscriptionPlanByProduct(String productName){
         ArrayList<Product> products = getProducts();
         if(products.size() == 0)
-            throw new DatabaseException("No products found Exception", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION);
+            throw new DatabaseException("No products found", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION);
         ArrayList<SubscriptionPlan> subscriptionPlans = null;
         for(Product product : products){
             if(product.getProductName().equals(productName))
                 subscriptionPlans = product.getSubscriptionPlan();
         }
         if(subscriptionPlans == null)
-            throw new DatabaseException("Invalid product name", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION);
+            throw new DatabaseException("No subscription plan is available at the moment", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION);
         return subscriptionPlans;
     }
 
@@ -75,18 +75,18 @@ public class ProductService{
             if(product.getProductName().equals(productName))
                 return product;
         }
-        throw new DatabaseException("No such product found", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION);
+        throw new DatabaseException("No such product name found", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION, "productName");
     }
 
-    private SubscriptionPlan getSubscriptionPlanByName(Product product, String planName){
+    private SubscriptionPlan getSubscriptionPlanByName(Product product, String subscriptionName){
         ArrayList<SubscriptionPlan> subscriptionPlans = product.getSubscriptionPlan();
-        if( subscriptionPlans.size() == 0)
+        if(subscriptionPlans.size() == 0)
             throw new DatabaseException("No subscription plan available so far", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION);
         for(SubscriptionPlan  subscriptionPlan : subscriptionPlans){
-            if( planName.equals(subscriptionPlan.getPlanName() ) )
+            if(subscriptionName.equals(subscriptionPlan.getPlanName()))
                 return subscriptionPlan;
         }
-        throw new DatabaseException("No such subscription", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION);
+        throw new DatabaseException("No such subscription name found", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION, "subscriptionName");
     }
 
     public void setNotificationService(NotificationService notificationService){

@@ -66,7 +66,7 @@ public class SubscriberService {
 
     public void pauseSubscription(String productName, LocalDate resumeDate){
         if(!isSubscribed(productName))
-            throw new InvalidOperationException("You have not subscribed to this product to pause");
+            throw new InvalidOperationException("You have not subscribed to this operation");
         if(resumeDate.getDayOfMonth() < LocalDate.now().getDayOfMonth() && resumeDate.getMonthValue() < LocalDate.now().getMonthValue() && resumeDate.getYear() < LocalDate.now().getYear())
             throw new InputException("Invalid date", InputException.ExceptionType.INVALID_FORMAT, "resumeDate");
         Product product = getProductByCompany(productName);
@@ -117,7 +117,7 @@ public class SubscriberService {
                 return product;
             }
         }
-        throw new DatabaseException("No such product", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION);
+        throw new DatabaseException("No such product name found", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION, "productName");
     }
 
     public ArrayList<String> getProductsByCompany() {
@@ -185,7 +185,7 @@ public class SubscriberService {
     }
 
     public ArrayList<String> getSubscribedNewsletter() {
-        ArrayList<String> newsletter = new ArrayList<String>();
+        ArrayList<String> newsletter = new ArrayList<>();
         for(Product product : company.getProducts()){
             if(product.getNewsLetterSubscribers().containsKey(email))
                 newsletter.add(product.getProductName());
@@ -214,14 +214,14 @@ public class SubscriberService {
 
     private Coupon getCoupon(Product product, String couponName) {
         if(product.getCoupons().size() == 0)
-            throw new DatabaseException("Invalid coupon", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION);
+            throw new DatabaseException("Invalid coupon name", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION, "couponName");
         LocalDate date = LocalDate.now();
         for(Coupon coupon : product.getCoupons()){
             if(coupon.getCouponName().equals(couponName) && date.getDayOfMonth() <= coupon.getExpiryDate().getDayOfMonth()
                     && date.getMonthValue() <= coupon.getExpiryDate().getMonthValue() && date.getYear() <= coupon.getExpiryDate().getYear())
                 return coupon;
         }
-        throw new DatabaseException("Invalid coupon", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION);
+        throw new DatabaseException("Invalid coupon name", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION, "couponName");
     }
 
     private boolean isSubscribed(String productName){
@@ -238,7 +238,7 @@ public class SubscriberService {
         SubscriptionPlan oldSubscriptionPlan = getSubscriptionPlan(product, product.getProductSubscribers(email).getSubscriptionPlan().getPlanName());
         SubscriptionPlan newSubscriptionPlan = getSubscriptionPlan(product, subscriptionPlan);
         if(oldSubscriptionPlan.getPrice() < newSubscriptionPlan.getPrice())
-            throw new InvalidOperationException("Your request will be processed soon");
+            throw new InvalidOperationException("Illegal operation");
     }
 
     private SubscriptionPlan getSubscriptionPlanByProduct(Product product, String planName) {

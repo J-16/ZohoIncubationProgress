@@ -73,8 +73,13 @@ public class ProductView {
         }
         System.out.print("|\n");
         System.out.println("------------------------------------------------------------------------------------------------------------");
-        if(subscribeController.getIsTrailAvailable(productName)){
-            System.out.println("Trail available for " + subscribeController.getTrailDays(productName));
+        try{
+            if(subscribeController.getIsTrailAvailable(productName)){
+                System.out.println("Trail available for " + subscribeController.getTrailDays(productName));
+            }
+        }catch (DatabaseException e){
+            System.out.println(e.getMessage());
+            return;
         }
         do{
             int option = GetValues.getIntegerValue(0,"0.Previous Menu 1.Use Trail version 2.Subscribe to product 3.Gift a Subscription");
@@ -109,14 +114,21 @@ public class ProductView {
         try{
             String planName = GetValues.getString("Enter Plan Name to subscribe");
             String coupon = null;
-            String option = GetValues.getString("1.Enter Coupon or any other key to ignore");
-            if (option.equals("1")) {
-                coupon = GetValues.getString("Enter coupon : ");
-            }
             if(type == SubscriptionType.SUBSCRIBE) {
-                subscribeController.subscribeProduct(productName, planName, coupon);
-                System.out.println("Subscription Added successfully");
-                return;
+                while(true){
+                    try{
+                        String option = GetValues.getString("1.Enter Coupon or any other key to ignore");
+                        if (option.equals("1")) {
+                            coupon = GetValues.getString("Enter coupon : ");
+                        }
+                        subscribeController.subscribeProduct(productName, planName, coupon);
+                        System.out.println("Subscription Added successfully");
+                        return;
+                    }catch(DatabaseException e){
+                        System.out.println(e.getMessage());
+                        coupon = null;
+                    }
+                }
             }
             String email = GetValues.getString("Enter email you want to gift");
             subscribeController.giftSubscription(productName, planName, coupon, email);

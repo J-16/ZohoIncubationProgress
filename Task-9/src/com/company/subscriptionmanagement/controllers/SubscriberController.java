@@ -102,7 +102,7 @@ public class SubscriberController {
     private Company getCompany(String companyName){
         Company company = Database.getCompanyByName(companyName);
         if (company == null)
-            throw new DatabaseException("No company found", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION);
+            throw new DatabaseException("No company name found", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION, "companyName");
         return company;
     }
 

@@ -8,7 +8,6 @@ import com.company.subscriptionmanagement.view.ProductView;
 import com.company.companiesuser.controller.UserAuthenticationController;
 import com.company.subscriptionmanagement.controllers.SubscriberController;
 
-
 public class UserPortal {
 
     private UserAuthenticationController userAuthenticationController = new UserAuthenticationController();
@@ -19,7 +18,7 @@ public class UserPortal {
         new CompanyListView().displayCompanies();
         companyName = GetValues.getString("Enter company name you want to login");
 
-        while( !SubscriberController.isValidCompany(companyName) ){
+        while(!SubscriberController.isValidCompany(companyName)){
             companyName = GetValues.getString("Invalid name, please enter a valid company name from the list above");
         }
         do{

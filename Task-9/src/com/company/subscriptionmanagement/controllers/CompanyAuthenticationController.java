@@ -7,7 +7,7 @@ import com.company.subscriptionmanagement.model.Company;
 
 import java.util.regex.Pattern;
 
-public class CompanyAuthenticationController {
+public class CompanyAuthenticationController{
 
     public void register(String name, String email, String password){
         empty(name, email, password);
@@ -28,7 +28,7 @@ public class CompanyAuthenticationController {
         return new CompanyController(companyAccount);
     }
 
-    private void empty(String name, String email, String password) {
+    private void empty(String name, String email, String password){
         if(name.isEmpty())
             throw new InputException("Empty fields are not allowed", InputException.ExceptionType.EMPTY_EXCEPTION, name);
         if(email.isEmpty())
