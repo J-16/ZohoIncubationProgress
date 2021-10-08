@@ -3,7 +3,6 @@ package com.company.subscriptionmanagement.view;
 import com.company.subscriptionmanagement.controllers.CompanyAuthenticationController;
 import com.company.subscriptionmanagement.controllers.CompanyController;
 import com.company.subscriptionmanagement.exception.DatabaseException;
-import com.company.subscriptionmanagement.exception.ExceptionType;
 import com.company.subscriptionmanagement.exception.InputException;
 
 import java.util.Scanner;
@@ -40,11 +39,10 @@ public class CompanyPortal{
     }
 
     public void main(){
-        Scanner sc = new Scanner(System.in);
-        do{
-            System.out.println("Welcome to Company portal");
-            System.out.println("0.Previous Menu 1.Register 2.Login ");
-            int option = sc.nextInt();
+        System.out.println("Welcome to Company portal");
+        int option = 10;
+        while(option > 2){
+            option = GetValues.getIntegerValue(0, "0.Previous Menu 1.Register 2.Login ");
             switch (option){
                 case 0 :
                     return;
@@ -54,8 +52,10 @@ public class CompanyPortal{
                         System.out.println("Please login to continue");
                     }catch(DatabaseException e){
                         System.out.println(e.getMessage());
-                        if(e.getError().equals(ExceptionType.EXISTS_EXCEPTION))
+                        if(e.getExceptionType().equals(DatabaseException.ExceptionType.EXISTS_EXCEPTION)){
                             loginFlow();
+                            break;
+                        }
                     }finally{
                         name = null;
                         password = null;
@@ -68,21 +68,24 @@ public class CompanyPortal{
                     }
                     catch(InputException e){
                         System.out.println(e.getMessage());
-                    }
-                    catch(DatabaseException e){
-                        if(e.getError().equals(ExceptionType.NOT_FOUND_EXCEPTION)){
-                            System.out.println("Username and password doesn't match");
-                            loginFlow();
+                        if(e.getExceptionType().equals(InputException.ExceptionType.EMPTY_EXCEPTION)){
+                            if(e.getField().equals("email"))
+                                email = null;
+                            else
+                                password = null;
                         }
                     }
-                    finally{
-                        password = null;
-                        email = null;
+                    catch(DatabaseException e){
+                        if(e.getExceptionType().equals(DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION)){
+                            System.out.println("Username and password doesn't match");
+                            loginFlow();
+                            break;
+                        }
                     }
                 default:
                     System.out.println("Invalid option");
             }
-        }while(true);
+        }
     }
 
     public void loginFlow(){

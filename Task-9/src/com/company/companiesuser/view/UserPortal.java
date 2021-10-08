@@ -1,9 +1,9 @@
 package com.company.companiesuser.view;
 
 import com.company.companiesuser.model.UserAccount;
-import com.company.subscriptionmanagement.exception.ExceptionType;
 import com.company.subscriptionmanagement.exception.DatabaseException;
 import com.company.subscriptionmanagement.view.CompanyPortal;
+import com.company.subscriptionmanagement.view.GetValues;
 import com.company.subscriptionmanagement.view.ProductView;
 import com.company.companiesuser.controller.UserAuthenticationController;
 import com.company.subscriptionmanagement.controllers.SubscriberController;
@@ -28,8 +28,7 @@ public class UserPortal {
         }
         do{
             System.out.println("Login to continue");
-            System.out.println("0.Previous Menu 1.Register 2.Login ");
-            int option = sc.nextInt();
+            int option = GetValues.getIntegerValue(0,"0.Previous Menu 1.Register 2.Login ");
             switch(option){
                 case 0 :
                     return;
@@ -38,7 +37,7 @@ public class UserPortal {
                             register();
                         }catch(DatabaseException e){
                             System.out.println(e.getMessage());
-                            if(e.getError().equals(ExceptionType.NOT_FOUND_EXCEPTION)){
+                            if(e.getExceptionType().equals(DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION)){
                                 System.out.println("Username and password doesn't match");
                                 login();
                             }
@@ -48,7 +47,7 @@ public class UserPortal {
                             login();
                             break;
                         }catch(DatabaseException e){
-                            if(e.getError().equals(ExceptionType.NOT_FOUND_EXCEPTION)){
+                            if(e.getExceptionType().equals(DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION)){
                                 System.out.println("Username and password doesn't match");
                                 login();
                             }
@@ -79,10 +78,7 @@ public class UserPortal {
         subscriptionController = new SubscriberController(email, name, companyName);
         do{
             try{
-                Scanner sc = new Scanner(System.in);
-                System.out.println("0.Logout 1.Check Available Products 2.User DashBoard");
-                int option = sc.nextInt();
-
+                int option = GetValues.getIntegerValue(0,"0.Logout 1.Check Available Products 2.User DashBoard");
                 switch(option){
                     case 0 :
                         return;

@@ -2,7 +2,7 @@ package com.company.subscriptionmanagement.view;
 
 import com.company.subscriptionmanagement.controllers.SubscriberController;
 import com.company.subscriptionmanagement.exception.DatabaseException;
-import com.company.subscriptionmanagement.exception.SubscriptionException;
+import com.company.subscriptionmanagement.exception.InvalidOperationException;
 import com.company.subscriptionmanagement.model.SubscriptionPlan;
 
 import java.util.ArrayList;
@@ -34,20 +34,18 @@ public class ProductView {
         }
         for(String product : products)
             System.out.println(product);
-        do{
-            System.out.println("1.Subscribe Product or any other number to go back to previous menu");
-            int option = sc.nextInt();
-            if(option == 1){
-                System.out.println("Enter product name to view details");
-                String productName = sc.next();
-                displaySubscription(productName);
-            }
-            return;
-        }while(true);
+
+        System.out.println("");
+        int option = GetValues.getIntegerValue(1, "1.Subscribe Product or any other number to go back to previous menu");
+        if(option == 1){
+            System.out.println("Enter product name to view details");
+            String productName = sc.next();
+            displaySubscription(productName);
+        }
     }
 
     public void displaySubscription(String productName){
-        ArrayList<SubscriptionPlan> subscriptionPlans = null;
+        ArrayList<SubscriptionPlan> subscriptionPlans;
         try{
             subscriptionPlans = subscribeController.getAllSubscriptionPlanByCompany(productName);
         }catch(Exception e){
@@ -81,8 +79,7 @@ public class ProductView {
             System.out.println("Trail available for " + subscribeController.getTrailDays(productName));
         }
         do{
-            System.out.println("0.Quit 1.Use Trail version 2.Subscribe to product 3.Gift a Subscription");
-            int option = sc.nextInt();
+            int option = GetValues.getIntegerValue(0,"0.Previous Menu 1.Use Trail version 2.Subscribe to product 3.Gift a Subscription");
             switch(option){
                 case 0:
                     return;
@@ -95,6 +92,8 @@ public class ProductView {
                 case 3:
                     subscribeProduct(productName, SubscriptionType.GIFT);
                     break;
+                default:
+                    System.out.println("invalid option");
             }
         }while(true);
     }
@@ -103,7 +102,7 @@ public class ProductView {
         try{
             subscribeController.activateTrail(productName);
             System.out.println("trail version activated");
-        }catch(DatabaseException | SubscriptionException e){
+        }catch(DatabaseException | InvalidOperationException e){
             System.out.println(e.getMessage());
         }
     }
@@ -128,7 +127,7 @@ public class ProductView {
             String email = sc.next();
             subscribeController.giftSubscription(productName, planName, coupon, email);
             System.out.println("Subscription sent");
-        }catch(DatabaseException | SubscriptionException e){
+        }catch(DatabaseException | InvalidOperationException e){
             System.out.println(e.getMessage());
         }
     }

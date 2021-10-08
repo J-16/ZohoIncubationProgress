@@ -2,7 +2,6 @@ package com.company.subscriptionmanagement.controllers;
 
 import com.company.subscriptionmanagement.database.Database;
 import com.company.subscriptionmanagement.exception.DatabaseException;
-import com.company.subscriptionmanagement.exception.ExceptionType;
 import com.company.subscriptionmanagement.exception.InputException;
 import com.company.subscriptionmanagement.model.*;
 import com.company.subscriptionmanagement.model.service.SubscriberService;
@@ -28,7 +27,7 @@ public class SubscriberController {
 
     public void activateTrail(String productName) {
         if(productName == null)
-            throw new InputException("product name cannot be empty");
+            throw new InputException("product name cannot be empty", InputException.ExceptionType.EMPTY_EXCEPTION, "productName");
         subscriptionService.activateTrail(productName);
     }
 
@@ -103,7 +102,7 @@ public class SubscriberController {
     private Company getCompany(String companyName){
         Company company = Database.getCompanyByName(companyName);
         if (company == null)
-            throw new DatabaseException("No company found", ExceptionType.NOT_FOUND_EXCEPTION);
+            throw new DatabaseException("No company found", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION);
         return company;
     }
 

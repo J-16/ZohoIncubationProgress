@@ -2,15 +2,19 @@ package com.company.subscriptionmanagement.exception;
 
 public class DatabaseException extends RuntimeException{
 
-    private ExceptionType error;
+    public enum  ExceptionType{
+        NOT_FOUND_EXCEPTION, EXISTS_EXCEPTION
+    }
+
+    private ExceptionType exceptionType;
 
     public DatabaseException(String exception, ExceptionType exceptionType){
         super(exception);
-        this.error = exceptionType;
+        this.exceptionType = exceptionType;
     }
 
-    public ExceptionType getError(){
-        return error;
+    public ExceptionType getExceptionType(){
+        return exceptionType;
     }
 
 }

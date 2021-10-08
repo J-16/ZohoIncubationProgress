@@ -24,7 +24,7 @@ public class CompanyDashboard {
     public void control(){
         try{
             do{
-                int option = getIntegerValue(0, "0.Logout 1.Add product 2.Add Subscription Plan 3.Change Subscription Plan 4.Add Coupon");
+                int option = GetValues.getIntegerValue(0, "0.Logout 1.Add product 2.Add Subscription Plan 3.Change Subscription Plan 4.Add Coupon");
                 switch(option){
                     case 0:
                         return;
@@ -56,22 +56,23 @@ public class CompanyDashboard {
         double price  = -1;
         System.out.println("Enter Product Name");
         String name = sc.next();
-        trailDays = getIntegerValue(0,"Enter Trail days if any else 0");
-        price = getIntegerValue(0,"Enter Product price");
+        trailDays = GetValues.getIntegerValue(0,"Enter Trail days if any else 0");
+        price = GetValues.getIntegerValue(0,"Enter Product price");
         companyController.addProduct(name, trailDays, price);
     }
 
     public void addSubscriptionPlan() {
         String subscriptionName;
         SubscriptionPlan.SubscriptionType subscriptionType = null;
-        int subType = -1;
+        int subType = 10;
         double discount = -1;
         displayProducts();
         System.out.println("Enter Product name");
         String productName =  sc.next();
         System.out.println("Enter Subscription Name");
         subscriptionName = sc.next();
-        while( (subType = getIntegerValue(0,"Choose subscription plan 1.Monthly 2.Quarterly 3.Yearly")) > 3){
+        while( subType > 3){
+            subType = GetValues.getIntegerValue(1,"Choose subscription plan 1.Monthly 2.Quarterly 3.Yearly");
             switch(subType){
                 case 1:
                     subscriptionType = SubscriptionPlan.SubscriptionType.MONTHLY;
@@ -82,10 +83,10 @@ public class CompanyDashboard {
                 case 3:
                     subscriptionType = SubscriptionPlan.SubscriptionType.YEARLY;
                 default:
-                    System.out.println("Choose a valid subscription plan");
+                    System.out.print("Choose a valid subscription plan, ");
             }
         }
-        discount = getDoubleValue(0,"Enter discount if any or 0");
+        discount = GetValues.getDoubleValue(0,"Enter discount if any or 0");
         companyController.addSubscriptionPlan(productName, subscriptionName, subscriptionType, discount);
     }
 
@@ -106,7 +107,7 @@ public class CompanyDashboard {
         newSubscriptionName = sc.next();
         System.out.println();
         while( subType > 4){
-            subType = getIntegerValue(0, "Choose new subscription plan 1.Monthly 2.Quarterly 3.Yearly or 0 for no changes")
+            subType = GetValues.getIntegerValue(0, "Choose new subscription plan 1.Monthly 2.Quarterly 3.Yearly or 0 for no changes");
             switch(subType){
                 case 1:
                     subscriptionType = SubscriptionPlan.SubscriptionType.MONTHLY;
@@ -120,8 +121,8 @@ public class CompanyDashboard {
                     System.out.println("invalid option");
             }
         }
-        System.out.println("Enter discount if any or -1 if no changes");
-        discount = getDoubleValue(0,"Enter discount if any or 0");
+        System.out.println();
+        discount = GetValues.getDoubleValue(-1,"Enter discount if any or -1 if no changes");
         companyController.updateSubscriptionPlan(productName, subscriptionName, newSubscriptionName, subscriptionType, discount);
     }
 
@@ -132,32 +133,13 @@ public class CompanyDashboard {
         System.out.println("Enter coupon Code");
         String coupon = sc.next();
         System.out.println("Enter expiry date - yyyy-MM-dd");
-        String date = null;
-        LocalDate expDate = null;
-        boolean isDate = false;
-        while(!isDate){
-            try{
-                System.out.print("Enter Exp date yyyy-MM-dd");
-                date = sc.next();
-                expDate = LocalDate.parse(date);
-                isDate = true;
-            }catch(DateTimeParseException e){
-                System.out.println("Incorrect date format, enter yyyy-MM-dd");
-                date = sc.next();
-            }
-        }
-        double discount = getDoubleValue(1,"Enter discount in % example - 10");
-        companyController.addCoupon(productName, coupon, expDate, discount);
+        String date = GetValues.getDate("Enter Exp date yyyy-MM-dd");
+        double discount = GetValues.getDoubleValue(1,"Enter discount in % example - 10");
+        companyController.addCoupon(productName, coupon, LocalDate.parse(date), discount);
     }
 
     private void displayProducts(){
-        ArrayList<Product> products;
-        try{
-            products = companyController.getProducts();
-        }catch(DatabaseException e){
-            System.out.println(e.getMessage());
-            return;
-        }
+        ArrayList<Product> products = companyController.getProducts();
         products.forEach(product -> {
             System.out.println( product.getProductName() );
         });
@@ -174,34 +156,6 @@ public class CompanyDashboard {
         subscriptionPlans.forEach(subscriptionPlan -> {
             System.out.println( subscriptionPlan.getPlanName() );
         });
-    }
-
-    private int getIntegerValue(int minLimit, String message){
-        int value = -1;
-        while(value < minLimit){
-            try{
-                System.out.println(message);
-                value = sc.nextInt();
-            }catch(InputMismatchException e){
-                System.out.println("Invalid input");
-                sc.nextLine();
-            }
-        }
-        return value;
-    }
-
-    private double getDoubleValue(int minLimit, String message){
-        int value = -1;
-        while(value < minLimit){
-            try{
-                System.out.println(message);
-                value = sc.nextInt();
-            }catch(InputMismatchException e){
-                System.out.println("Invalid input");
-                sc.nextLine();
-            }
-        }
-        return value;
     }
 
 }

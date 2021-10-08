@@ -45,8 +45,12 @@ public class PaymentController{
     }
 
     private void isValidDetails(HashMap<String, String> paymentDetails) {
-        if( !paymentDetails.containsKey("cardNo") || !paymentDetails.containsKey("cvv") || !paymentDetails.containsKey("expDate") )
-            throw new InputException("Missing information");
+        if(!paymentDetails.containsKey("cardNo"))
+            throw new InputException("Empty fields not allowed", InputException.ExceptionType.NEGATIVE_VALUE, "cardNo");
+        if(!paymentDetails.containsKey("cvv"))
+            throw new InputException("Empty fields not allowed", InputException.ExceptionType.NEGATIVE_VALUE, "cvv");
+        if(!paymentDetails.containsKey("expDate"))
+            throw new InputException("Empty fields not allowed", InputException.ExceptionType.NEGATIVE_VALUE, "expDate");
     }
 
 }

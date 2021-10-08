@@ -3,7 +3,7 @@ package com.company.subscriptionmanagement.view;
 import com.company.subscriptionmanagement.controllers.SubscriberController;
 import com.company.subscriptionmanagement.exception.DatabaseException;
 import com.company.subscriptionmanagement.exception.InputException;
-import com.company.subscriptionmanagement.exception.SubscriptionException;
+import com.company.subscriptionmanagement.exception.InvalidOperationException;
 import com.company.subscriptionmanagement.model.CurrentSubscription;
 
 import java.time.LocalDate;
@@ -20,11 +20,9 @@ public class SubscriberDashboard {
     }
     
     public void control(){
-        Scanner sc = new Scanner(System.in);
         try{
             do{
-                System.out.print("0.Previous Menu 1.Active Subscription 2.News Letter 3.Notification 4.Raise an issue");
-                int option = sc.nextInt();
+                int option = GetValues.getIntegerValue(0,"0.Previous Menu 1.Active Subscription 2.News Letter 3.Notification 4.Raise an issue");
                 switch(option){
                     case 0:
                         return;
@@ -78,9 +76,8 @@ public class SubscriberDashboard {
         });
         System.out.println();
         do{
-            System.out.print("0.Quit 1.Cancel Subscription 2.Pause subscription 3.Change subscription plan ");
             System.out.println();
-            int option = sc.nextInt();
+            int option = GetValues.getIntegerValue(0,"0.Quit 1.Cancel Subscription 2.Pause subscription 3.Change subscription plan");
             switch(option){
                 case 0 :
                     return;
@@ -102,17 +99,14 @@ public class SubscriberDashboard {
     private void cancelSubscription(){
         Scanner sc = new Scanner(System.in);
         try {
-            do {
-                System.out.println("1.Cancel product subscription or any other key to quit");
-                int option = sc.nextInt();
-                if(option != 1)
-                    return;
-                System.out.println("Enter Product name to cancel subscription");
-                String productName = sc.next();
-                subscriberController.cancelSubscription(productName);
-                System.out.println("Subscription cancelled");
+            System.out.println("1.Cancel product subscription or any other key to quit");
+            int option = sc.nextInt();
+            if(option != 1)
                 return;
-            }while(true);
+            System.out.println("Enter Product name to cancel subscription");
+            String productName = sc.next();
+            subscriberController.cancelSubscription(productName);
+            System.out.println("Subscription cancelled");
         }catch(DatabaseException e){
             System.out.println(e.getMessage());
         }
@@ -123,21 +117,17 @@ public class SubscriberDashboard {
             Scanner sc = new Scanner(System.in);
             System.out.println("Enter Product name to pause subscription");
             String productName = sc.next();
-            System.out.println("Enter date to resume subscription in yyyy-MM-dd");
-            String getDate = sc.next();
-            LocalDate date = LocalDate.parse(getDate);
-            subscriberController.pauseSubscription(productName, date);
-        }catch(DatabaseException | SubscriptionException e){
+            String date = GetValues.getDate("Enter date to resume subscription in yyyy-MM-dd");
+            subscriberController.pauseSubscription(productName, LocalDate.parse(date));
+        }catch(DatabaseException | InvalidOperationException e){
             System.out.println(e.getMessage());
         }
     }
 
     private void newsletter(){
-        Scanner sc = new Scanner(System.in);
         try{
             do{
-                System.out.println("0.Previous Menu 1.Subscribe to newsletter 2.Unsubscribe news letter");
-                int option = sc.nextInt();
+                int option = GetValues.getIntegerValue(0,"0.Previous Menu 1.Subscribe to newsletter 2.Unsubscribe news letter");
                 switch(option){
                     case 0:
                         return;
@@ -172,10 +162,8 @@ public class SubscriberDashboard {
             System.out.println("You don't have any active subscription");
             return;
         }
-        Scanner sc = new Scanner(System.in);
         do{
-            System.out.println("0.Quit 1.UpGrade 2.DownGrade");
-            int option = sc.nextInt();
+            int option = GetValues.getIntegerValue(0,"0.Quit 1.UpGrade 2.DownGrade");
             switch(option){
                 case 0:
                     return;
@@ -212,7 +200,7 @@ public class SubscriberDashboard {
             System.out.println("Enter product names to unsubscribe");
             String productName = sc.nextLine();
             subscriberController.unSubscribeNewsletter(getProductArray(productName));
-        }catch(SubscriptionException e){
+        }catch(InvalidOperationException e){
             System.out.println(e.getMessage());
         }
     }
