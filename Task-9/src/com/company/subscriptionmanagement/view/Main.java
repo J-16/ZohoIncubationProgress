@@ -5,11 +5,7 @@ import com.company.companiesuser.view.UserPortal;
 
 public class Main{
 
-    //TODO : update user payment info, notify customer care downgrade plan, track issue
-
     public static void main(String[] args){
-        System.out.println("Sample company email : c password 123");
-        System.out.println("Sample user email : u password 123");
         new AutoAddDetails();
         do{
             System.out.println();

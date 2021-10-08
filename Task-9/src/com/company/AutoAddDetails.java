@@ -10,15 +10,39 @@ import com.company.subscriptionmanagement.model.SubscriptionPlan;
 
 import java.time.LocalDate;
 
+//TODO : update user payment info, notify customer care downgrade plan, track issue
+
+//TODO : interface > usage and naming convention [x]
+
+//TODO : email, password validation and exceptions [x]
+
+//TODO : Exception check >> redirects , message [x]
+
+//TODO : back button names [x]
+
+//TODO : input validation & input mismatch [x]
+
+//TODO : input exception and enter details again [x]
+
+//TODO : Scanner close [x]
+
+//TODO : previous menu names [x]
+
+//TODO : expiry date validation [x]
+
+//TODO : Helper class [x]
+
+//TODO : test [] test [] test []
+
 public class AutoAddDetails {
 
     {
         CompanyAuthenticationController controller = new CompanyAuthenticationController();
-        controller.register("c", "c", "123");
-        controller.register("company1", "company1@gmail.com", "123");
-        controller.register("company2", "company2@gmail.com", "123");
+        //controller.register("c", "c", "123");
+        controller.register("company1", "company1@gmail.com", "123456789");
+        controller.register("company2", "company2@gmail.com", "123456789");
 
-        CompanyController company = new CompanyAuthenticationController().login("c", "123");
+        CompanyController company = new CompanyAuthenticationController().login("company1@gmail.com", "123456789");
         company.addProduct("prod1",10,500);
         company.addProduct("prod2",0,500);
         company.addProduct("prod3",10,100);
@@ -26,7 +50,7 @@ public class AutoAddDetails {
         company.addSubscriptionPlan("prod1","Pro", SubscriptionPlan.SubscriptionType.MONTHLY,13);
         company.addSubscriptionPlan("prod1","Premium", SubscriptionPlan.SubscriptionType.MONTHLY,13);
 
-        company = new CompanyAuthenticationController().login("company1@gmail.com", "123");
+        company = new CompanyAuthenticationController().login("company1@gmail.com", "123456789");
         company.addProduct("product1",10,500);
         company.addProduct("product2",0,500);
         company.addProduct("product3",10,100);

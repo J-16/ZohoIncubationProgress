@@ -12,9 +12,10 @@ public class GetValues {
             try{
                 System.out.println(message);
                 value = ScannerClass.getScanner().nextInt();
+                if(value < minLimit)
+                    System.out.println("Cannot be negative");
             }catch(InputMismatchException e){
-                System.out.print("Invalid input, ");
-                ScannerClass.getScanner().nextLine();
+                System.out.println("Invalid input,");
             }
         }
         return value;
@@ -26,9 +27,10 @@ public class GetValues {
             try{
                 System.out.println(message);
                 value = ScannerClass.getScanner().nextInt();
+                if(value < minLimit)
+                    System.out.println("Cannot be negative");
             }catch(InputMismatchException e){
-                System.out.print("Invalid input, ");
-                ScannerClass.getScanner().nextLine();
+                System.out.println("Invalid input, ");
             }
         }
         return value;
@@ -40,9 +42,10 @@ public class GetValues {
             try{
                 System.out.println(message);
                 value = ScannerClass.getScanner().nextLong();
+                if(value < minLimit)
+                    System.out.println("Cannot be negative");
             }catch(InputMismatchException e){
-                System.out.print("Invalid input, ");
-                ScannerClass.getScanner().nextLine();
+                System.out.println("Invalid input, ");
             }
         }
         return value;
@@ -55,11 +58,12 @@ public class GetValues {
             try{
                 System.out.print(message);
                 expDate = ScannerClass.getScanner().next();
-                LocalDate.parse(expDate);
-                isDate = true;
+                LocalDate date = LocalDate.parse(expDate);
+                if(date.isBefore(LocalDate.now()))
+                    System.out.println("Enter valid date");
+                else isDate = true;
             }catch(DateTimeParseException e){
-                System.out.print("Incorrect date format, ");
-                ScannerClass.getScanner().nextLine();
+                System.out.println("Incorrect date format, ");
             }
         }
         return expDate;
@@ -67,7 +71,7 @@ public class GetValues {
 
     public static String getString(String message){
         System.out.println(message);
-        return ScannerClass.getScanner().next();
+        return ScannerClass.getScanner().nextLine();
     }
 
 }

@@ -81,7 +81,7 @@ public class SubscriberDashboard {
         System.out.println();
         do{
             System.out.println();
-            int option = GetValues.getIntegerValue(0,"0.Quit 1.Cancel Subscription 2.Pause subscription 3.Change subscription plan");
+            int option = GetValues.getIntegerValue(0,"0.Previous Menu 1.Cancel Subscription 2.Pause subscription 3.Change subscription plan");
             switch(option){
                 case 0 :
                     return;
@@ -101,15 +101,18 @@ public class SubscriberDashboard {
     }
 
     private void cancelSubscription(){
-        try{
-            int option = GetValues.getIntegerValue(0,"1.Cancel product subscription or any other key to quit");
-            if(option != 1)
+        while(true){
+            try{
+                int option = GetValues.getIntegerValue(0,"1.Cancel product subscription or any other key to quit");
+                if(option != 1)
+                    return;
+                String productName = GetValues.getString("Enter Product name to cancel subscription");
+                subscriberController.cancelSubscription(productName);
+                System.out.println("Subscription cancelled");
                 return;
-            String productName = GetValues.getString("Enter Product name to cancel subscription");
-            subscriberController.cancelSubscription(productName);
-            System.out.println("Subscription cancelled");
-        }catch(InvalidOperationException e){
-            System.out.println(e.getMessage());
+            }catch(InvalidOperationException | DatabaseException e){
+                System.out.println(e.getMessage());
+            }
         }
     }
 
@@ -167,7 +170,7 @@ public class SubscriberDashboard {
 
     private void changeSubscriptionPlan(){
         do{
-            int option = GetValues.getIntegerValue(0,"0.Quit 1.UpGrade 2.DownGrade");
+            int option = GetValues.getIntegerValue(0,"0.Previous Menu 1.UpGrade 2.DownGrade");
             switch(option){
                 case 0:
                     return;
@@ -195,7 +198,7 @@ public class SubscriberDashboard {
                 System.out.println(e.getMessage());
                 productName = null;
                 planName = null;
-                int s = GetValues.getIntegerValue(0, "enter 0 for previous menu or");
+                int s = GetValues.getIntegerValue(0, "enter 0 for previous menu or any other key to continue");
                 if(s == 0)
                     return;
             }

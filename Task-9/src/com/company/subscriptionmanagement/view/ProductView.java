@@ -8,7 +8,6 @@ import com.company.subscriptionmanagement.model.SubscriptionPlan;
 
 import java.util.ArrayList;
 
-
 public class ProductView {
 
     private enum SubscriptionType{

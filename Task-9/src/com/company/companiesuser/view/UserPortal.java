@@ -74,6 +74,8 @@ public class UserPortal {
             }catch(DatabaseException e){
                 if(e.getExceptionType().equals(DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION)){
                     System.out.println("Username and password doesn't match");
+                    email = null;
+                    password = null;
                 }
             }
         }

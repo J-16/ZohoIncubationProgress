@@ -7,11 +7,11 @@ public class ScannerClass{
     private static Scanner scanner;
 
     private ScannerClass(){
-        if(scanner == null)
-            scanner = new Scanner(System.in);
     }
 
     public static Scanner getScanner(){
+        if(scanner == null)
+            scanner = new Scanner(System.in);
         return scanner;
     }
 

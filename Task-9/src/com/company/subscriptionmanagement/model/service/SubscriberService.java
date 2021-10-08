@@ -81,10 +81,10 @@ public class SubscriberService {
     }
 
     public void cancelSubscription(String productName){
-        if(!isSubscribed(productName)) {
+        Product product = getProductByCompany(productName);
+        if(!isSubscribed(productName)){
             throw new InvalidOperationException("You have not subscribed to perform this operation");
         }
-        Product product = getProductByCompany(productName);
         CurrentSubscription currentSubscription = product.getProductSubscribers(email);
         cancelAutoRenewal(currentSubscription);
         currentSubscription.setCurrentlySubscribed(false);

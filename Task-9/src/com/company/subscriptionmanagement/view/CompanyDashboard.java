@@ -38,7 +38,6 @@ public class CompanyDashboard {
                         break;
                     default :
                         System.out.println("Invalid option");
-                        System.out.println("0.Logout 1.Add product 2.Add Subscription Plan 3.Change Subscription Plan 4.Add Coupon");
                 }
             }while(true);
         }catch (DatabaseException e){
@@ -57,7 +56,7 @@ public class CompanyDashboard {
                     name = GetValues.getString("Enter Product Name");
                 }
                 if(trailDays < 0){
-                    trailDays =GetValues.getIntegerValue(0,"Enter Trail days if any else 0");
+                    trailDays = GetValues.getIntegerValue(0,"Enter Trail days if any else 0");
                 }
             if(price < 0)
                 price = GetValues.getIntegerValue(0,"Enter Product price");

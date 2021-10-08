@@ -19,7 +19,7 @@ public class WorkOut implements Cloneable{
                 isDate = true;
             }catch(DateTimeParseException e){
                 System.out.println("enter date");
-                date = sc.next();
+                sc.nextLine();
             }
         }
         System.out.println(date);
@@ -56,4 +56,5 @@ public class WorkOut implements Cloneable{
         System.out.println(s);
         parsing();
     }
+
 }
