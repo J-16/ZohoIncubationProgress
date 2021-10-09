@@ -1,5 +1,6 @@
 package com.company.subscriptionmanagement.controllers;
 
+import com.company.subscriptionmanagement.database.CompanyDatabase;
 import com.company.subscriptionmanagement.exception.DatabaseException;
 import com.company.subscriptionmanagement.exception.InputException;
 import com.company.subscriptionmanagement.model.*;
@@ -17,7 +18,7 @@ public class SubscriberController {
     private String name;
     private SubscriberService subscriptionService;
     private Company company;
-    private Database databaseService = new com.company.subscriptionmanagement.database.Database();
+    private Database databaseService = new CompanyDatabase();
 
     public SubscriberController(String email, String name, String companyName){
         this.email = email;
@@ -117,7 +118,7 @@ public class SubscriberController {
 
     //non functionality
     public static boolean isValidCompany(String companyName){
-        return new com.company.subscriptionmanagement.database.Database().getCompanyByName(companyName) != null;
+        return new CompanyDatabase().getCompanyByName(companyName) != null;
     }
 
 }

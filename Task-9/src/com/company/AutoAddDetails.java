@@ -3,7 +3,7 @@ package com.company;
 import com.company.subscriptionmanagement.controllers.CompanyAuthenticationController;
 import com.company.subscriptionmanagement.controllers.CompanyController;
 import com.company.companiesuser.controller.UserAuthenticationController;
-import com.company.subscriptionmanagement.database.Database;
+import com.company.subscriptionmanagement.database.CompanyDatabase;
 import com.company.subscriptionmanagement.model.PaymentDetails;
 import com.company.subscriptionmanagement.model.Subscriber;
 import com.company.subscriptionmanagement.model.SubscriptionPlan;
@@ -38,12 +38,12 @@ public class AutoAddDetails {
         company.addSubscriptionPlan("product1","Best Deal", SubscriptionPlan.SubscriptionType.QUARTERLY,13);
         company.addSubscriptionPlan("product1","Yearly", SubscriptionPlan.SubscriptionType.YEARLY,13);
 
-        new Database().registerSubscriber("u","u");
-        Subscriber subscriber = new Database().getSubscribersByEmail("u");
+        new CompanyDatabase().registerSubscriber("u","u");
+        Subscriber subscriber = new CompanyDatabase().getSubscribersByEmail("u");
         subscriber.setPaymentDetails(new PaymentDetails(123L,12, LocalDate.now()));
 
         UserAuthenticationController subController = new UserAuthenticationController();
-        subController.register("sub1","u","123");
+        subController.register("sub1","u@c.c","1234567890");
 
 //        SubscriberController subscriberController = new SubscriberController("u","u","c");
 //        subscriberController.subscribeProduct("prod1","Regular",null);

@@ -4,6 +4,7 @@ import com.company.companiesuser.controller.UserAuthenticationController;
 import com.company.companiesuser.dataBase.UserDatabase;
 import com.company.companiesuser.model.User;
 import com.company.subscriptionmanagement.controllers.AuthenticationController;
+import com.company.subscriptionmanagement.database.CompanyDatabase;
 import com.company.subscriptionmanagement.exception.DatabaseException;
 import com.company.subscriptionmanagement.exception.InputException;
 import com.company.subscriptionmanagement.model.Account;
@@ -14,7 +15,7 @@ import java.util.regex.Pattern;
 
 public class AuthenticationService{
 
-    private Database databaseService = new com.company.subscriptionmanagement.database.Database();
+    private Database databaseService = new CompanyDatabase();
     private UserDatabase userDatabase = new UserDatabase();
 
     public void register(String name, String email, String password, AuthenticationController authenticationController){
@@ -26,7 +27,7 @@ public class AuthenticationService{
             userDatabase.registerUser(name, email, password);
             return;
         }
-        if(com.company.subscriptionmanagement.database.Database.getCompanyByEmail(email) != null)
+        if(CompanyDatabase.getCompanyByEmail(email) != null)
             throw new DatabaseException("Company already exists", DatabaseException.ExceptionType.EXISTS_EXCEPTION);
         databaseService.register(name, email, password);
     }
@@ -42,7 +43,7 @@ public class AuthenticationService{
                 throw new DatabaseException("Password doesn't match", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION);
             return userAccount;
         }
-        Company companyAccount = com.company.subscriptionmanagement.database.Database.getCompanyByEmail(email);
+        Company companyAccount = CompanyDatabase.getCompanyByEmail(email);
         if(companyAccount == null)
             throw new DatabaseException("Username and password doesn't match", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION);
         if( !companyAccount.getAccount().getPassword().equals(password) )
