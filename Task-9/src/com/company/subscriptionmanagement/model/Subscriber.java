@@ -2,9 +2,9 @@ package com.company.subscriptionmanagement.model;
 
 import java.util.ArrayList;
 
-public class Subscriber implements Account{
+public class Subscriber implements Users {
 
-    private Information account;
+    private Account account;
     private PaymentDetails paymentDetails;
     private final long userId;
     private ArrayList<String> notification;
@@ -12,16 +12,16 @@ public class Subscriber implements Account{
     private static long ID_GENERATE = 0;
 
     public Subscriber(String name, String email){
-        this.account = new Information(name,email);
+        this.account = new Account(name,email);
         this.notification = new ArrayList<>();
         userId = ID_GENERATE++;
     }
 
-    public Information getAccount(){
+    public Account getAccount(){
         return account;
     }
 
-    public void setAccount(Information account){
+    public void setAccount(Account account){
         this.account = account;
     }
 

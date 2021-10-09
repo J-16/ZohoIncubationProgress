@@ -1,6 +1,6 @@
 package com.company.companiesuser.view;
 
-import com.company.companiesuser.model.User;
+import com.company.companiesuser.model.Customers;
 import com.company.subscriptionmanagement.exception.DatabaseException;
 import com.company.subscriptionmanagement.view.CompanyPortal;
 import com.company.subscriptionmanagement.view.GetValues;
@@ -68,7 +68,7 @@ public class UserPortal {
                     email = CompanyPortal.Helper.getEmail();
                 if(password == null)
                     password = CompanyPortal.Helper.getPassword();
-                User userAccount = userAuthenticationController.login(email, password);
+                Customers userAccount = userAuthenticationController.login(email, password);
                 loginFlow(email, userAccount.getAccount().getName());
                 return;
             }catch(DatabaseException e){

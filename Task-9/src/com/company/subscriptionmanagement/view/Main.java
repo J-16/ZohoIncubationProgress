@@ -5,6 +5,9 @@ import com.company.companiesuser.view.UserPortal;
 
 public class Main{
 
+    //TODO : why Account interface? use account interface // add new interface for company
+    // TODO : exception
+
     public static void main(String[] args){
         new AutoAddDetails();
         do{

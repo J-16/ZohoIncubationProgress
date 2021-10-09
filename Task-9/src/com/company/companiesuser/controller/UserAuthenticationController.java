@@ -1,6 +1,6 @@
 package com.company.companiesuser.controller;
 
-import com.company.companiesuser.model.User;
+import com.company.companiesuser.model.Customers;
 import com.company.subscriptionmanagement.controllers.AuthenticationController;
 import com.company.subscriptionmanagement.model.service.AuthenticationService;
 
@@ -12,8 +12,8 @@ public class UserAuthenticationController implements AuthenticationController {
         authenticationService.register(name, email, password, this);
     }
 
-    public User login(String email, String password){
-        return (User) authenticationService.login(email, password, this);
+    public Customers login(String email, String password){
+        return (Customers) authenticationService.login(email, password, this);
     }
 
 }

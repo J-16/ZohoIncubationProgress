@@ -5,25 +5,25 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-public class Company implements Account{
+public class Company implements Users {
 
-    private ProtectedInformation account;
+    private ProtectedAccount account;
     private ArrayList<Product> products;
     private LinkedList<Issue> issueQueue; //TODO: add company functionality (get the issue);
     private HashMap<LocalDate, LinkedList<CurrentSubscription> > autoRenewal;
 
     public Company(String name, String email, String password){
-        this.account = new ProtectedInformation(name,email,password);
+        this.account = new ProtectedAccount(name,email,password);
         this.products = new ArrayList<>();
         this.issueQueue = new LinkedList<>();
         this.autoRenewal = new HashMap<>();
     }
 
-    public void setAccount(Information account) {
-        this.account = (ProtectedInformation) account;
+    public void setAccount(Account account) {
+        this.account = (ProtectedAccount) account;
     }
 
-    public ProtectedInformation getAccount(){
+    public ProtectedAccount getAccount(){
         return account;
     }
 
