@@ -1,10 +1,10 @@
 package com.company.subscriptionmanagement.model;
 
-public class PasswordAccount extends Account{
+public class ProtectedInformation extends Information {
 
     private String password;
 
-    public PasswordAccount(String name, String email, String password) {
+    public ProtectedInformation(String name, String email, String password) {
         super(name, email);
         this.password = password;
     }

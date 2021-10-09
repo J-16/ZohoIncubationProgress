@@ -23,7 +23,7 @@ public class Main{
                 default:
                     System.out.println("Invalid option");
             }
-        }while (true);
+        }while(true);
     }
 
 }

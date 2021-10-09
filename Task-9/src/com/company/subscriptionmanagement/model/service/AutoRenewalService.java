@@ -11,14 +11,14 @@ import java.util.LinkedList;
 public class AutoRenewalService{
 
     public void autoRenewal(){
-        HashMap<String, Company> companies = Database.getCompanies();
+        HashMap<String, Company> companies = new Database().getCompanies();
         for(Company company : companies.values()){
             HashMap<LocalDate, LinkedList<CurrentSubscription>> autoRenewal = company.getAutoRenewal();
             LinkedList<CurrentSubscription> currentSubscriptions = autoRenewal.get(LocalDate.now());
             for(CurrentSubscription currentSubscription : currentSubscriptions){
                 if(paymentByProduct(currentSubscription)){
                     currentSubscription.setExpireDate(currentSubscription.getExpireDate().plusDays(currentSubscription.getSubscriptionPlan().getSubscriptionType().getValue()));
-                    new SubscriberService(currentSubscription.getSubscriber().getAccount().getEmail(), currentSubscription.getSubscriber().getAccount().getName(), company)
+                    new SubscriberService(currentSubscription.getSubscriber().getAccount().getEmail(), currentSubscription.getSubscriber().getAccount().getName(), company, new Database())
                             .setAutoRenewal(currentSubscription);
                 }
                 //Todo: auto cancel subscription if payment not done;

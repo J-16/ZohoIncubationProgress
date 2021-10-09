@@ -1,6 +1,6 @@
 package com.company.companiesuser.view;
 
-import com.company.companiesuser.model.UserAccount;
+import com.company.companiesuser.model.User;
 import com.company.subscriptionmanagement.exception.DatabaseException;
 import com.company.subscriptionmanagement.view.CompanyPortal;
 import com.company.subscriptionmanagement.view.GetValues;
@@ -21,6 +21,7 @@ public class UserPortal {
         while(!SubscriberController.isValidCompany(companyName)){
             companyName = GetValues.getString("Invalid name, please enter a valid company name from the list above");
         }
+
         do{
             System.out.println("Login to continue");
             int option = GetValues.getIntegerValue(0,"0.Previous Menu 1.Register 2.Login ");
@@ -67,8 +68,8 @@ public class UserPortal {
                     email = CompanyPortal.Helper.getEmail();
                 if(password == null)
                     password = CompanyPortal.Helper.getPassword();
-                UserAccount userAccount = userAuthenticationController.login(email, password);
-                loginFlow(email, userAccount.getName());
+                User userAccount = userAuthenticationController.login(email, password);
+                loginFlow(email, userAccount.getAccount().getName());
                 return;
             }catch(DatabaseException e){
                 if(e.getExceptionType().equals(DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION)){

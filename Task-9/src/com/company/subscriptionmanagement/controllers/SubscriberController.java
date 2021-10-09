@@ -1,9 +1,9 @@
 package com.company.subscriptionmanagement.controllers;
 
-import com.company.subscriptionmanagement.database.Database;
 import com.company.subscriptionmanagement.exception.DatabaseException;
 import com.company.subscriptionmanagement.exception.InputException;
 import com.company.subscriptionmanagement.model.*;
+import com.company.subscriptionmanagement.model.Database;
 import com.company.subscriptionmanagement.model.service.SubscriberService;
 import com.company.subscriptionmanagement.view.SubscriberDashboard;
 
@@ -17,12 +17,13 @@ public class SubscriberController {
     private String name;
     private SubscriberService subscriptionService;
     private Company company;
+    private Database databaseService = new com.company.subscriptionmanagement.database.Database();
 
     public SubscriberController(String email, String name, String companyName){
         this.email = email;
         this.name = name;
         this.company = getCompany(companyName);
-        this.subscriptionService = new SubscriberService(email, name, company);
+        this.subscriptionService = new SubscriberService(email, name, company, databaseService);
     }
 
     public void activateTrail(String productName) {
@@ -100,7 +101,7 @@ public class SubscriberController {
     }
 
     private Company getCompany(String companyName){
-        Company company = Database.getCompanyByName(companyName);
+        Company company = databaseService.getCompanyByName(companyName);
         if (company == null)
             throw new DatabaseException("No company name found", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION, "companyName");
         return company;
@@ -114,8 +115,9 @@ public class SubscriberController {
         subscriptionService.raiseIssue(complain);
     }
 
+    //non functionality
     public static boolean isValidCompany(String companyName){
-        return Database.getCompanyByName(companyName) != null;
+        return new com.company.subscriptionmanagement.database.Database().getCompanyByName(companyName) != null;
     }
 
 }

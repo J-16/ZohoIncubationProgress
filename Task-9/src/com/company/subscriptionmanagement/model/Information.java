@@ -1,15 +1,13 @@
-package com.company.companiesuser.model;
+package com.company.subscriptionmanagement.model;
 
-public class UserAccount {
+public class Information {
 
     private String name;
     private String email;
-    private String password;
 
-    public UserAccount(String name, String email, String password) {
+    public Information(String name, String email) {
         this.name = name;
         this.email = email;
-        this.password = password;
     }
 
     public String getName(){
@@ -26,14 +24,6 @@ public class UserAccount {
 
     public void setEmail(String email){
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
 }

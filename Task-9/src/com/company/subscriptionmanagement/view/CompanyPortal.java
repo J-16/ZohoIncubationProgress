@@ -33,7 +33,7 @@ public class CompanyPortal{
         do{
             password = Helper.getPassword();
         }while( password == null || password.isEmpty() );
-        companyController = companyAuthenticationController.login(email, password);
+        companyController = new CompanyController(companyAuthenticationController.login(email, password));
     }
 
     public void main(){

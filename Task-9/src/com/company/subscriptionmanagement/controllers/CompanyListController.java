@@ -1,16 +1,18 @@
 package com.company.subscriptionmanagement.controllers;
 
-import com.company.subscriptionmanagement.database.Database;
 import com.company.subscriptionmanagement.model.Company;
+import com.company.subscriptionmanagement.model.Database;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class CompanyListController {
 
+    private Database databaseService= new com.company.subscriptionmanagement.database.Database();
+
     public ArrayList<String> getCompanies(){
         ArrayList<String> companiesList = new ArrayList<>();
-        HashMap<String, Company> companies = Database.getCompanies();
+        HashMap<String, Company> companies = databaseService.getCompanies();
         for(Company company : companies.values()){
             companiesList.add(company.getAccount().getName());
         }

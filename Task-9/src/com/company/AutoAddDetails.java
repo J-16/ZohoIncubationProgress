@@ -20,7 +20,7 @@ public class AutoAddDetails {
         controller.register("company1", "company1@gmail.com", "123456789");
         controller.register("company2", "company2@gmail.com", "123456789");
 
-        CompanyController company = new CompanyAuthenticationController().login("company1@gmail.com", "123456789");
+        CompanyController company = new CompanyController(new CompanyAuthenticationController().login("company1@gmail.com", "123456789"));
         company.addProduct("prod1",10,500);
         company.addProduct("prod2",0,500);
         company.addProduct("prod3",10,100);
@@ -28,7 +28,7 @@ public class AutoAddDetails {
         company.addSubscriptionPlan("prod1","Pro", SubscriptionPlan.SubscriptionType.MONTHLY,13);
         company.addSubscriptionPlan("prod1","Premium", SubscriptionPlan.SubscriptionType.MONTHLY,13);
 
-        company = new CompanyAuthenticationController().login("company1@gmail.com", "123456789");
+        company = new CompanyController(new CompanyAuthenticationController().login("company1@gmail.com", "123456789"));
         company.addProduct("product1",10,500);
         company.addProduct("product2",0,500);
         company.addProduct("product3",10,100);
@@ -38,8 +38,8 @@ public class AutoAddDetails {
         company.addSubscriptionPlan("product1","Best Deal", SubscriptionPlan.SubscriptionType.QUARTERLY,13);
         company.addSubscriptionPlan("product1","Yearly", SubscriptionPlan.SubscriptionType.YEARLY,13);
 
-        Database.registerSubscriber("u","u");
-        Subscriber subscriber = Database.getSubscribersByEmail("u");
+        new Database().registerSubscriber("u","u");
+        Subscriber subscriber = new Database().getSubscribersByEmail("u");
         subscriber.setPaymentDetails(new PaymentDetails(123L,12, LocalDate.now()));
 
         UserAuthenticationController subController = new UserAuthenticationController();
