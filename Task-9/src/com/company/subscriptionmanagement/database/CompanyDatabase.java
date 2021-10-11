@@ -5,7 +5,7 @@ import com.company.subscriptionmanagement.model.Subscriber;
 
 import java.util.HashMap;
 
-public class CompanyDatabase implements Database{
+public class CompanyDatabase{
 
     private static HashMap<String, Subscriber> subscriber = new HashMap<>();
     private static HashMap<String, Company> companies = new HashMap<>();

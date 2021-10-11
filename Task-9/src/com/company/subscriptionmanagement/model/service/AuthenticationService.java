@@ -8,13 +8,12 @@ import com.company.subscriptionmanagement.database.CompanyDatabase;
 import com.company.subscriptionmanagement.exception.DatabaseException;
 import com.company.subscriptionmanagement.exception.InputException;
 import com.company.subscriptionmanagement.model.Company;
-import com.company.subscriptionmanagement.database.Database;
 
 import java.util.regex.Pattern;
 
 public class AuthenticationService{
 
-    private Database databaseService = new CompanyDatabase();
+    private CompanyDatabase database = new CompanyDatabase();
     private UserDatabase userDatabase = new UserDatabase();
 
     public void register(String name, String email, String password, AuthenticationController authenticationController){
@@ -28,7 +27,7 @@ public class AuthenticationService{
         }
         if(CompanyDatabase.getCompanyByEmail(email) != null)
             throw new DatabaseException("Company already exists", DatabaseException.ExceptionType.EXISTS_EXCEPTION);
-        databaseService.register(name, email, password);
+        database.register(name, email, password);
     }
 
     public Customer login(String email, String password, AuthenticationController authenticationController){

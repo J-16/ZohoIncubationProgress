@@ -4,7 +4,6 @@ import com.company.subscriptionmanagement.database.CompanyDatabase;
 import com.company.subscriptionmanagement.exception.DatabaseException;
 import com.company.subscriptionmanagement.exception.InputException;
 import com.company.subscriptionmanagement.model.*;
-import com.company.subscriptionmanagement.database.Database;
 import com.company.subscriptionmanagement.model.service.SubscriberService;
 import com.company.subscriptionmanagement.view.SubscriberDashboard;
 
@@ -18,13 +17,13 @@ public class SubscriberController {
     private String name;
     private SubscriberService subscriptionService;
     private Company company;
-    private Database databaseService = new CompanyDatabase();
+    private CompanyDatabase database = new CompanyDatabase();
 
     public SubscriberController(String email, String name, String companyName){
         this.email = email;
         this.name = name;
         this.company = getCompany(companyName);
-        this.subscriptionService = new SubscriberService(email, name, company, databaseService);
+        this.subscriptionService = new SubscriberService(email, name, company, database);
     }
 
     public void activateTrail(String productName) {
@@ -102,7 +101,7 @@ public class SubscriberController {
     }
 
     private Company getCompany(String companyName){
-        Company company = databaseService.getCompanyByName(companyName);
+        Company company = database.getCompanyByName(companyName);
         if (company == null)
             throw new DatabaseException("No company name found", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION, "companyName");
         return company;

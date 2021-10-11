@@ -1,7 +1,7 @@
 package com.company.subscriptionmanagement.model.service;
 
 import com.company.subscriptionmanagement.controllers.PaymentController;
-import com.company.subscriptionmanagement.database.Database;
+import com.company.subscriptionmanagement.database.CompanyDatabase;
 import com.company.subscriptionmanagement.exception.*;
 import com.company.subscriptionmanagement.model.*;
 
@@ -17,13 +17,13 @@ public class SubscriberService {
     private String name;
     private Company company;
     private NotificationService notificationService;
-    private Database databaseService; // TODO
+    private CompanyDatabase database; // TODO
 
-    public SubscriberService(String email, String name, Company company, Database databaseService){
+    public SubscriberService(String email, String name, Company company, CompanyDatabase database){
         this.email = email;
         this.name = name;
         this.company = company;
-        this.databaseService = databaseService;
+        this.database = database;
     }
 
     public void activateTrail(String productName) {
@@ -206,10 +206,10 @@ public class SubscriberService {
 
     private Subscriber registerSubscriber() {
         Subscriber subscriber;
-        subscriber = databaseService.getSubscribersByEmail(email);
+        subscriber = database.getSubscribersByEmail(email);
         if( subscriber == null ){
-            databaseService.registerSubscriber(email, name);
-            subscriber = databaseService.getSubscribersByEmail(email);
+            database.registerSubscriber(email, name);
+            subscriber = database.getSubscribersByEmail(email);
         }
         return subscriber;
     }
