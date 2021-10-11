@@ -1,12 +1,13 @@
 package com.company.subscriptionmanagement.view;
 
+import com.company.subscriptionmanagement.controllers.PaymentController;
 import com.company.subscriptionmanagement.exception.InputException;
 
 import java.util.HashMap;
 
-public class PaymentView{
+public class PaymentView implements PaymentViewInterface{
 
-    public HashMap<String, String> view(){
+    public void view(PaymentController paymentController){
         long cardNo =  -1;
         int cvv = -1;
         String expDate = null;
@@ -22,7 +23,8 @@ public class PaymentView{
                 paymentDetails.put("cardNo", Long.toString(cardNo));
                 paymentDetails.put("cvv", Integer.toString(cvv));
                 paymentDetails.put("expDate", expDate);
-                return paymentDetails;
+                paymentController.setPaymentDetails(paymentDetails);
+                return;
             }catch(InputException e){
                 System.out.println(e.getMessage());
                 if(e.getExceptionType() == InputException.ExceptionType.NEGATIVE_VALUE){
@@ -37,8 +39,9 @@ public class PaymentView{
         }
     }
 
-    public int getPaymentMethod() {
-        return GetValues.getIntegerValue(0,"1.Use previous payment details or any other key to enter New Payment details");
+    public void getPaymentMethod(PaymentController paymentController){
+        int option = GetValues.getIntegerValue(0,"1.Use previous payment details or any other key to enter New Payment details");
+        paymentController.setOption(option);
     }
 
 }

@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
-public class SubscriberDashboard {
+public class SubscriberDashboard implements Dashboard{
 
     private SubscriberController subscriberController;
 

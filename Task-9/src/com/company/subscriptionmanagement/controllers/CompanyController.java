@@ -28,7 +28,7 @@ public class CompanyController {
     public void addSubscriptionPlan(String productName, String subscriptionName, SubscriptionPlan.SubscriptionType subscriptionType, double discount){
         if(subscriptionName.isEmpty())
             throw new InputException("Empty fields are not allowed", InputException.ExceptionType.EMPTY_EXCEPTION, "subscriptionName");
-        if( discount < 0 )
+        if(discount < 0)
             throw new InputException("discount cannot be negative value", InputException.ExceptionType.NEGATIVE_VALUE, "discount");
         productService.addSubscriptionPlan(productName, subscriptionName, subscriptionType, discount);
     }

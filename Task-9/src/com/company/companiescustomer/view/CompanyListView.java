@@ -4,7 +4,7 @@ import com.company.subscriptionmanagement.controllers.CompanyListController;
 
 import java.util.ArrayList;
 
-public class CompanyListView {
+public class CompanyListView implements CompanyListViewInterface{
 
     public void displayCompanies(){
         CompanyListController companyListController = new CompanyListController();

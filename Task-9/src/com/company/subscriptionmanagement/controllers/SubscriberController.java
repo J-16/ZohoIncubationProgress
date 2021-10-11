@@ -5,6 +5,7 @@ import com.company.subscriptionmanagement.exception.DatabaseException;
 import com.company.subscriptionmanagement.exception.InputException;
 import com.company.subscriptionmanagement.model.*;
 import com.company.subscriptionmanagement.model.service.SubscriberService;
+import com.company.subscriptionmanagement.view.Dashboard;
 import com.company.subscriptionmanagement.view.SubscriberDashboard;
 
 import java.time.LocalDate;
@@ -18,6 +19,7 @@ public class SubscriberController {
     private SubscriberService subscriptionService;
     private Company company;
     private CompanyDatabase database = new CompanyDatabase();
+    private Dashboard dashboard;
 
     public SubscriberController(String email, String name, String companyName){
         this.email = email;
@@ -65,7 +67,8 @@ public class SubscriberController {
     }
 
     public void dashBoard(){
-        new SubscriberDashboard(this).control();
+        dashboard = new SubscriberDashboard(this);
+        dashboard.control();
     }
 
     public ArrayList<String> getProductsByCompany() {

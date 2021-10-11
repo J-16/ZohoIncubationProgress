@@ -9,7 +9,7 @@ import com.company.subscriptionmanagement.model.SubscriptionPlan;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class CompanyDashboard {
+public class CompanyDashboard implements Dashboard{
 
     CompanyController companyController;
 
@@ -45,7 +45,7 @@ public class CompanyDashboard {
         }
     }
 
-    public void addProduct(){
+    private void addProduct(){
         int trailDays = -1;
         double price  = -1;
         String name = null;
@@ -77,7 +77,7 @@ public class CompanyDashboard {
         }
     }
 
-    public void addSubscriptionPlan() {
+    private void addSubscriptionPlan() {
         int subType = 10;
         double discount = -1;
         String subscriptionName = null;
@@ -127,7 +127,7 @@ public class CompanyDashboard {
         }
     }
 
-    public void updateSubscriptionPlan(){
+    private void updateSubscriptionPlan(){
         displayProducts();
         String productName = null;
         String newSubscriptionName = null;
@@ -183,7 +183,7 @@ public class CompanyDashboard {
         }
     }
 
-    public void addCoupon(){
+    private void addCoupon(){
         String productName = null;
         String coupon = null;
         double discount = -1;

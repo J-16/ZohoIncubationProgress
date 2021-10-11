@@ -1,6 +1,6 @@
 package com.company.subscriptionmanagement.model;
 
-public class ProtectedAccount extends Account {
+public class ProtectedAccount extends Account{
 
     private String password;
 

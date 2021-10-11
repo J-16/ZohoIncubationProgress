@@ -2,11 +2,15 @@ package com.company.subscriptionmanagement.view;
 
 import com.company.AutoAddDetails;
 import com.company.companiescustomer.controller.UserAuthenticationController;
+import com.company.subscriptionmanagement.controllers.AuthenticationController;
 import com.company.subscriptionmanagement.controllers.CompanyAuthenticationController;
 
 public class Main{
 
     //TODO : why Account interface? use account interface // add new interface for company
+
+    private static Portal portal;
+    private static AuthenticationController authenticationController;
 
     public static void main(String[] args){
         new AutoAddDetails();
@@ -18,10 +22,14 @@ public class Main{
                     ScannerClass.closeScanner();
                     return;
                 case 1:
-                    new PortalControl().control(new CompanyPortal(new CompanyAuthenticationController()));
+                    authenticationController = new CompanyAuthenticationController();
+                    portal = new CompanyPortal(authenticationController);
+                    new PortalControl().control(portal);
                     break;
                 case 2:
-                    new PortalControl().control(new CompanyPortal(new UserAuthenticationController()));
+                    authenticationController = new UserAuthenticationController();
+                    portal = new CompanyPortal(authenticationController);
+                    new PortalControl().control(portal);
                     break;
                 default:
                     System.out.println("Invalid option");

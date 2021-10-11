@@ -8,7 +8,7 @@ import com.company.subscriptionmanagement.model.SubscriptionPlan;
 
 import java.util.ArrayList;
 
-public class ProductView {
+public class ProductView implements ProductViewInterface{
 
     private enum SubscriptionType{
         SUBSCRIBE,GIFT;
@@ -51,7 +51,7 @@ public class ProductView {
         }
     }
 
-    public void displaySubscription(String productName){
+    private void displaySubscription(String productName){
         ArrayList<SubscriptionPlan> subscriptionPlans;
         subscriptionPlans = subscribeController.getAllSubscriptionPlanByCompany(productName);
         System.out.println("------------------------------------------------------------------------------------------------------------");

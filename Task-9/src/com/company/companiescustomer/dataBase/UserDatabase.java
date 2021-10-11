@@ -5,6 +5,7 @@ import com.company.companiescustomer.model.Customer;
 import java.util.HashMap;
 
 public class UserDatabase {
+
     private static HashMap<String, Customer> users = new HashMap<>();
 
     public Customer getUserByEmail(String email){

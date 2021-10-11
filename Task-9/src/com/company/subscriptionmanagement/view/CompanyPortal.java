@@ -1,6 +1,7 @@
 package com.company.subscriptionmanagement.view;
 
 import com.company.companiescustomer.view.CompanyListView;
+import com.company.companiescustomer.view.CompanyListViewInterface;
 import com.company.subscriptionmanagement.controllers.AuthenticationController;
 import com.company.subscriptionmanagement.controllers.CompanyAuthenticationController;
 import com.company.subscriptionmanagement.controllers.CompanyController;
@@ -9,13 +10,16 @@ import com.company.subscriptionmanagement.exception.DatabaseException;
 import com.company.subscriptionmanagement.exception.InputException;
 import com.company.subscriptionmanagement.model.Company;
 
-public class CompanyPortal{
+public class CompanyPortal implements Portal{
 
     protected String name = null;
     protected String email = null;
     protected String password = null;
 
-    AuthenticationController authenticationController;
+    private AuthenticationController authenticationController;
+    private Dashboard dashboard;
+    private ProductViewInterface productViewInterface;
+    private CompanyListViewInterface companyListView;
 
     public CompanyPortal(AuthenticationController authenticationController){
         this.authenticationController = authenticationController;
@@ -53,9 +57,11 @@ public class CompanyPortal{
             try{
                 new Helper().login();
                 if(authenticationController instanceof CompanyAuthenticationController){
-                    new CompanyDashboard(new CompanyController((Company) authenticationController.login(email, password))).control();
+                    dashboard = new CompanyDashboard(new CompanyController((Company) authenticationController.login(email, password)));
+                    dashboard.control();
                 }else{
-                    new CompanyListView().displayCompanies();
+                    companyListView = new CompanyListView();
+                    companyListView.displayCompanies();
                     String companyName = GetValues.getString("Enter company name you want to login");
 
                     while(!SubscriberController.isValidCompany(companyName))
@@ -97,7 +103,8 @@ public class CompanyPortal{
                 case 0 :
                     return;
                 case 1 :
-                    new ProductView(subscriptionController, companyName).productsDetails();
+                    productViewInterface = new ProductView(subscriptionController, companyName);
+                    productViewInterface.productsDetails();
                     break;
                 case 2 :
                     subscriptionController.dashBoard();
