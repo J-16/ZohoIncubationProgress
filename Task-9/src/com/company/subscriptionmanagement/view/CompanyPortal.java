@@ -144,7 +144,7 @@ public class CompanyPortal implements Portal{
         }
 
         public String getPassword(){
-            return  GetValues.getString("Enter Password: ");
+            return  GetValues.getString("Enter Password: (must be 8 characters long) ");
         }
 
     }
