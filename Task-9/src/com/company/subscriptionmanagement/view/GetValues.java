@@ -77,9 +77,4 @@ public class GetValues{
         return ScannerClass.getScanner().next();
     }
 
-    public static String getNextString(String message){
-        System.out.println(message);
-        return ScannerClass.getScanner().nextLine();
-    }
-
 }
