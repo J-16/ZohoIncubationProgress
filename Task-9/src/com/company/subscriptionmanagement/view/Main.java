@@ -7,8 +7,6 @@ import com.company.subscriptionmanagement.controllers.CompanyAuthenticationContr
 
 public class Main{
 
-    //TODO : why Account interface? use account interface // add new interface for company
-
     private static Portal portal;
     private static AuthenticationController authenticationController;
 
