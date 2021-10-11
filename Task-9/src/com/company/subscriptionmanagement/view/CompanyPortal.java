@@ -105,10 +105,10 @@ public class CompanyPortal{
         System.out.println("Welcome back ");
         do{
             email = Helper.getEmail();
-        }while( email == null || email.isEmpty() );
+        }while(email == null);
         do{
             password = Helper.getPassword();
-        }while( password == null || password.isEmpty() );
+        }while(password == null);
     }
 
     public static class Helper{

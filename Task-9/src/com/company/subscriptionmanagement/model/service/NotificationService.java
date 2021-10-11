@@ -7,5 +7,5 @@ public interface NotificationService {
 
     void send(String invoice, Subscriber subscriber);
     void send(Company company, String message);
-    
+
 }
