@@ -8,8 +8,7 @@ import com.company.subscriptionmanagement.exception.InputException;
 public class CompanyPortal{
 
     private CompanyAuthenticationController companyAuthenticationController = new CompanyAuthenticationController();
-    private CompanyController companyController;
-    private String name =null , email = null, password = null;
+    private String name = null , email = null, password = null;
 
     public void register(){
         System.out.println("Register your account ");
@@ -22,7 +21,6 @@ public class CompanyPortal{
         while(password == null){
             password = Helper.getPassword();
         }
-        companyAuthenticationController.register(name,email, password);
     }
 
     public void login(){
@@ -33,7 +31,6 @@ public class CompanyPortal{
         do{
             password = Helper.getPassword();
         }while( password == null || password.isEmpty() );
-        companyController = new CompanyController(companyAuthenticationController.login(email, password));
     }
 
     public void main(){
@@ -59,6 +56,7 @@ public class CompanyPortal{
         while(true){
             try{
                 register();
+                companyAuthenticationController.register(name,email, password);
                 System.out.println("Please login to continue");
                 name = null;
                 password = null;
@@ -86,7 +84,9 @@ public class CompanyPortal{
         while(true){
             try{
                 login();
-                new CompanyDashboard(companyController).control();
+                new CompanyDashboard(new CompanyController(companyAuthenticationController.login(email, password))).control();
+                email = null;
+                password = null;
                 return;
             }catch(InputException e){
                 System.out.println(e.getMessage());
@@ -105,6 +105,7 @@ public class CompanyPortal{
             }catch(DatabaseException e){
                 if(e.getExceptionType().equals(DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION)){
                     System.out.println("Username and password doesn't match");
+                    return;
                 }
             }
         }

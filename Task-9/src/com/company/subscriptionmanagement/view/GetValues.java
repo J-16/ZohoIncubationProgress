@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.InputMismatchException;
 
-public class GetValues {
+public class GetValues{
 
     public static int getIntegerValue(int minLimit, String message){
         int value = -1;
@@ -16,6 +16,7 @@ public class GetValues {
                     System.out.println("Cannot be negative");
             }catch(InputMismatchException e){
                 System.out.println("Invalid input,");
+                ScannerClass.getScanner().nextLine();
             }
         }
         return value;
@@ -31,6 +32,7 @@ public class GetValues {
                     System.out.println("Cannot be negative");
             }catch(InputMismatchException e){
                 System.out.println("Invalid input, ");
+                ScannerClass.getScanner().nextLine();
             }
         }
         return value;
@@ -46,6 +48,7 @@ public class GetValues {
                     System.out.println("Cannot be negative");
             }catch(InputMismatchException e){
                 System.out.println("Invalid input, ");
+                ScannerClass.getScanner().nextLine();
             }
         }
         return value;
@@ -70,6 +73,11 @@ public class GetValues {
     }
 
     public static String getString(String message){
+        System.out.println(message);
+        return ScannerClass.getScanner().next();
+    }
+
+    public static String getNextString(String message){
         System.out.println(message);
         return ScannerClass.getScanner().nextLine();
     }

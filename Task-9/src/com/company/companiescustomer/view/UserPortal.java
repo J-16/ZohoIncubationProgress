@@ -2,13 +2,14 @@ package com.company.companiescustomer.view;
 
 import com.company.companiescustomer.model.Customer;
 import com.company.subscriptionmanagement.exception.DatabaseException;
+import com.company.subscriptionmanagement.exception.InputException;
 import com.company.subscriptionmanagement.view.CompanyPortal;
 import com.company.subscriptionmanagement.view.GetValues;
 import com.company.subscriptionmanagement.view.ProductView;
 import com.company.companiescustomer.controller.UserAuthenticationController;
 import com.company.subscriptionmanagement.controllers.SubscriberController;
 
-public class UserPortal {
+public class UserPortal{
 
     private UserAuthenticationController userAuthenticationController = new UserAuthenticationController();
     private SubscriberController subscriptionController;
@@ -41,18 +42,29 @@ public class UserPortal {
 
     public void register(){
         System.out.println("Register your account");
-        String name = CompanyPortal.Helper.getName();
-        String email = CompanyPortal.Helper.getEmail();
-        String password = CompanyPortal.Helper.getPassword();
+        String name = null;
+        String email = null;
+        String password = null;
         while(true){
             try{
-                userAuthenticationController.register(name,email, password);
+                 name = CompanyPortal.Helper.getName();
+                 email = CompanyPortal.Helper.getPassword();
+                 password = CompanyPortal.Helper.getPassword();
+                userAuthenticationController.register(name, email, password);
                 return;
             }catch(DatabaseException e){
                 System.out.println(e.getMessage());
                 if(e.getExceptionType().equals(DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION)){
                     System.out.println("Username and password doesn't match");
                     login();
+                }
+            }catch(InputException e){
+                System.out.println(e.getMessage());
+                if(e.getExceptionType() == InputException.ExceptionType.INVALID_FORMAT){
+                    if(e.getField().equals("email"))
+                        email = null;
+                    if(e.getField().equals("password"))
+                        password = null;
                 }
             }
         }
