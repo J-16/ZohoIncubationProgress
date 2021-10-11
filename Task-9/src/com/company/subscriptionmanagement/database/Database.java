@@ -1,4 +1,7 @@
-package com.company.subscriptionmanagement.model;
+package com.company.subscriptionmanagement.database;
+
+import com.company.subscriptionmanagement.model.Company;
+import com.company.subscriptionmanagement.model.Subscriber;
 
 import java.util.HashMap;
 

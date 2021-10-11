@@ -1,7 +1,6 @@
 package com.company.subscriptionmanagement.database;
 
 import com.company.subscriptionmanagement.model.Company;
-import com.company.subscriptionmanagement.model.Database;
 import com.company.subscriptionmanagement.model.Subscriber;
 
 import java.util.HashMap;
@@ -10,6 +9,7 @@ public class CompanyDatabase implements Database{
 
     private static HashMap<String, Subscriber> subscriber = new HashMap<>();
     private static HashMap<String, Company> companies = new HashMap<>();
+
     public static Company getCompanyByEmail(String email){
         return companies.get(email);
     }

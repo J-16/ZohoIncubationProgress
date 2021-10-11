@@ -4,7 +4,7 @@ import com.company.companiescustomer.model.Customers;
 import com.company.subscriptionmanagement.controllers.AuthenticationController;
 import com.company.subscriptionmanagement.model.service.AuthenticationService;
 
-public class UserAuthenticationController implements AuthenticationController {
+public class UserAuthenticationController implements AuthenticationController{
 
     private AuthenticationService authenticationService = new AuthenticationService();
 
@@ -13,7 +13,7 @@ public class UserAuthenticationController implements AuthenticationController {
     }
 
     public Customers login(String email, String password){
-        return (Customers) authenticationService.login(email, password, this);
+        return authenticationService.login(email, password, this);
     }
 
 }

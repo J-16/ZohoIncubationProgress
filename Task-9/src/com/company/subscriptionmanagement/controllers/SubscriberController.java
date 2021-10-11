@@ -4,7 +4,7 @@ import com.company.subscriptionmanagement.database.CompanyDatabase;
 import com.company.subscriptionmanagement.exception.DatabaseException;
 import com.company.subscriptionmanagement.exception.InputException;
 import com.company.subscriptionmanagement.model.*;
-import com.company.subscriptionmanagement.model.Database;
+import com.company.subscriptionmanagement.database.Database;
 import com.company.subscriptionmanagement.model.service.SubscriberService;
 import com.company.subscriptionmanagement.view.SubscriberDashboard;
 

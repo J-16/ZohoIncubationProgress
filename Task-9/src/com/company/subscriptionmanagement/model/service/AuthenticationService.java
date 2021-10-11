@@ -9,7 +9,7 @@ import com.company.subscriptionmanagement.database.CompanyDatabase;
 import com.company.subscriptionmanagement.exception.DatabaseException;
 import com.company.subscriptionmanagement.exception.InputException;
 import com.company.subscriptionmanagement.model.Company;
-import com.company.subscriptionmanagement.model.Database;
+import com.company.subscriptionmanagement.database.Database;
 
 import java.util.regex.Pattern;
 
@@ -53,7 +53,6 @@ public class AuthenticationService{
             throw new DatabaseException("Username and password doesn't match", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION);
         return companyAccount;
     }
-
 
     private void empty(String name, String email, String password){
         if(name.isEmpty())

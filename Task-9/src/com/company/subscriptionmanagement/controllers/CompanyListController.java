@@ -2,7 +2,7 @@ package com.company.subscriptionmanagement.controllers;
 
 import com.company.subscriptionmanagement.database.CompanyDatabase;
 import com.company.subscriptionmanagement.model.Company;
-import com.company.subscriptionmanagement.model.Database;
+import com.company.subscriptionmanagement.database.Database;
 
 import java.util.ArrayList;
 import java.util.HashMap;

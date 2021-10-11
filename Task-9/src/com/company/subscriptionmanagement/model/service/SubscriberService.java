@@ -1,6 +1,7 @@
 package com.company.subscriptionmanagement.model.service;
 
 import com.company.subscriptionmanagement.controllers.PaymentController;
+import com.company.subscriptionmanagement.database.Database;
 import com.company.subscriptionmanagement.exception.*;
 import com.company.subscriptionmanagement.model.*;
 
