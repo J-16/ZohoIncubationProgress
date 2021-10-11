@@ -47,9 +47,9 @@ public class UserPortal{
         String password = null;
         while(true){
             try{
-                 name = CompanyPortal.Helper.getName();
-                 email = CompanyPortal.Helper.getPassword();
-                 password = CompanyPortal.Helper.getPassword();
+                if(name == null) name = CompanyPortal.Helper.getName();
+                if(email == null) email = CompanyPortal.Helper.getEmail();
+                if(password == null) password = CompanyPortal.Helper.getPassword();
                 userAuthenticationController.register(name, email, password);
                 return;
             }catch(DatabaseException e){
