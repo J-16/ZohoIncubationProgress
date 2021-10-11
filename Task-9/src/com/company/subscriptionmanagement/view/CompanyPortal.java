@@ -10,29 +10,6 @@ public class CompanyPortal{
     private CompanyAuthenticationController companyAuthenticationController = new CompanyAuthenticationController();
     private String name = null , email = null, password = null;
 
-    public void register(){
-        System.out.println("Register your account ");
-        while(name == null){
-            name = Helper.getName();
-        }
-        while(email == null){
-            email = Helper.getEmail();
-        }
-        while(password == null){
-            password = Helper.getPassword();
-        }
-    }
-
-    public void login(){
-        System.out.println("Welcome back ");
-        do{
-           email = Helper.getEmail();
-        }while( email == null || email.isEmpty() );
-        do{
-            password = Helper.getPassword();
-        }while( password == null || password.isEmpty() );
-    }
-
     public void main(){
         System.out.println("Welcome to Company portal");
         int option = 10;
@@ -109,6 +86,29 @@ public class CompanyPortal{
                 }
             }
         }
+    }
+
+    private void register(){
+        System.out.println("Register your company ");
+        while(name == null){
+            name = Helper.getName();
+        }
+        while(email == null){
+            email = Helper.getEmail();
+        }
+        while(password == null){
+            password = Helper.getPassword();
+        }
+    }
+
+    private void login(){
+        System.out.println("Welcome back ");
+        do{
+            email = Helper.getEmail();
+        }while( email == null || email.isEmpty() );
+        do{
+            password = Helper.getPassword();
+        }while( password == null || password.isEmpty() );
     }
 
     public static class Helper{
