@@ -1,4 +1,4 @@
-package com.company.companiesuser.view;
+package com.company.companiescustomer.view;
 
 import com.company.subscriptionmanagement.controllers.CompanyListController;
 

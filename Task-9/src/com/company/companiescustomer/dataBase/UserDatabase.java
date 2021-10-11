@@ -1,6 +1,6 @@
-package com.company.companiesuser.dataBase;
+package com.company.companiescustomer.dataBase;
 
-import com.company.companiesuser.model.Customers;
+import com.company.companiescustomer.model.Customers;
 
 import java.util.HashMap;
 

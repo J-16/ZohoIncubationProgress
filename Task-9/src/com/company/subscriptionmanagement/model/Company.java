@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-public class Company implements Users {
+public class Company{
 
     private ProtectedAccount account;
     private ArrayList<Product> products;

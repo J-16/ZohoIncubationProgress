@@ -2,7 +2,7 @@ package com.company.subscriptionmanagement.model;
 
 import java.util.ArrayList;
 
-public class Subscriber implements Users {
+public class Subscriber{
 
     private Account account;
     private PaymentDetails paymentDetails;

@@ -1,11 +1,11 @@
-package com.company.companiesuser.view;
+package com.company.companiescustomer.view;
 
-import com.company.companiesuser.model.Customers;
+import com.company.companiescustomer.model.Customers;
 import com.company.subscriptionmanagement.exception.DatabaseException;
 import com.company.subscriptionmanagement.view.CompanyPortal;
 import com.company.subscriptionmanagement.view.GetValues;
 import com.company.subscriptionmanagement.view.ProductView;
-import com.company.companiesuser.controller.UserAuthenticationController;
+import com.company.companiescustomer.controller.UserAuthenticationController;
 import com.company.subscriptionmanagement.controllers.SubscriberController;
 
 public class UserPortal {

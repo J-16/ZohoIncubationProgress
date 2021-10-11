@@ -1,7 +1,7 @@
 package com.company.subscriptionmanagement.view;
 
 import com.company.AutoAddDetails;
-import com.company.companiesuser.view.UserPortal;
+import com.company.companiescustomer.view.UserPortal;
 
 public class Main{
 

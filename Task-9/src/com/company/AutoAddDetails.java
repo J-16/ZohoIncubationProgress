@@ -2,7 +2,7 @@ package com.company;
 
 import com.company.subscriptionmanagement.controllers.CompanyAuthenticationController;
 import com.company.subscriptionmanagement.controllers.CompanyController;
-import com.company.companiesuser.controller.UserAuthenticationController;
+import com.company.companiescustomer.controller.UserAuthenticationController;
 import com.company.subscriptionmanagement.database.CompanyDatabase;
 import com.company.subscriptionmanagement.model.PaymentDetails;
 import com.company.subscriptionmanagement.model.Subscriber;

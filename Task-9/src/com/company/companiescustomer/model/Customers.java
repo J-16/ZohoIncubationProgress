@@ -1,10 +1,9 @@
-package com.company.companiesuser.model;
+package com.company.companiescustomer.model;
 
-import com.company.subscriptionmanagement.model.Users;
 import com.company.subscriptionmanagement.model.Account;
 import com.company.subscriptionmanagement.model.ProtectedAccount;
 
-public class Customers implements Users {
+public class Customers{
 
     ProtectedAccount account;
 

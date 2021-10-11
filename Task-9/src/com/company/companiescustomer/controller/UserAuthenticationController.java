@@ -1,6 +1,6 @@
-package com.company.companiesuser.controller;
+package com.company.companiescustomer.controller;
 
-import com.company.companiesuser.model.Customers;
+import com.company.companiescustomer.model.Customers;
 import com.company.subscriptionmanagement.controllers.AuthenticationController;
 import com.company.subscriptionmanagement.model.service.AuthenticationService;
 
