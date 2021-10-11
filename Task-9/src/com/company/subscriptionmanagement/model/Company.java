@@ -1,30 +1,23 @@
 package com.company.subscriptionmanagement.model;
 
+import com.company.companiescustomer.model.Customer;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-public class Company{
+public class Company extends Customer{
 
-    private ProtectedAccount account;
     private ArrayList<Product> products;
     private LinkedList<Issue> issueQueue; //TODO: add company functionality (get the issue);
     private HashMap<LocalDate, LinkedList<CurrentSubscription> > autoRenewal;
 
     public Company(String name, String email, String password){
-        this.account = new ProtectedAccount(name,email,password);
+        super(name, email, password);
         this.products = new ArrayList<>();
         this.issueQueue = new LinkedList<>();
         this.autoRenewal = new HashMap<>();
-    }
-
-    public void setAccount(Account account) {
-        this.account = (ProtectedAccount) account;
-    }
-
-    public ProtectedAccount getAccount(){
-        return account;
     }
 
     public ArrayList<Product> getProducts(){

@@ -3,11 +3,11 @@ package com.company.companiescustomer.model;
 import com.company.subscriptionmanagement.model.Account;
 import com.company.subscriptionmanagement.model.ProtectedAccount;
 
-public class Customers{
+public class Customer {
 
     ProtectedAccount account;
 
-    public Customers(String name, String email, String password){
+    public Customer(String name, String email, String password){
         this.account = new ProtectedAccount(name, email, password);
     }
 

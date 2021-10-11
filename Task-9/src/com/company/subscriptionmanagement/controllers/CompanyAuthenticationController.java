@@ -12,7 +12,7 @@ public class CompanyAuthenticationController implements AuthenticationController
     }
 
     public Company login(String email, String password){
-        return authenticationService.login(email, password, this);
+        return (Company) authenticationService.login(email, password, this);
     }
 
 }

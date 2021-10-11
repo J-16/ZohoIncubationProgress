@@ -2,9 +2,8 @@ package com.company.subscriptionmanagement.model.service;
 
 import com.company.companiescustomer.controller.UserAuthenticationController;
 import com.company.companiescustomer.dataBase.UserDatabase;
-import com.company.companiescustomer.model.Customers;
+import com.company.companiescustomer.model.Customer;
 import com.company.subscriptionmanagement.controllers.AuthenticationController;
-import com.company.subscriptionmanagement.controllers.CompanyAuthenticationController;
 import com.company.subscriptionmanagement.database.CompanyDatabase;
 import com.company.subscriptionmanagement.exception.DatabaseException;
 import com.company.subscriptionmanagement.exception.InputException;
@@ -32,24 +31,22 @@ public class AuthenticationService{
         databaseService.register(name, email, password);
     }
 
-    public Customers login(String email, String password, UserAuthenticationController authenticationController){
+    public Customer login(String email, String password, AuthenticationController authenticationController){
         empty("name", email, password);
         validity(email, password);
-            Customers userAccount = userDatabase.getUserByEmail(email);
+        if(authenticationController instanceof UserAuthenticationController){
+            Customer userAccount = userDatabase.getUserByEmail(email);
             if( userAccount == null )
                 throw new DatabaseException("No such Subscriber found", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION);
             if( !userAccount.getAccount().getPassword().equals(password) )
                 throw new DatabaseException("Password doesn't match", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION);
             return userAccount;
-    }
 
-    public Company login(String email, String password, CompanyAuthenticationController authenticationController){
-        empty("name", email, password);
-        validity(email, password);
+        }
         Company companyAccount = CompanyDatabase.getCompanyByEmail(email);
         if(companyAccount == null)
             throw new DatabaseException("Username and password doesn't match", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION);
-        if( !companyAccount.getAccount().getPassword().equals(password) )
+        if(!companyAccount.getAccount().getPassword().equals(password) )
             throw new DatabaseException("Username and password doesn't match", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION);
         return companyAccount;
     }
