@@ -1,6 +1,6 @@
 package com.company.subscriptionmanagement.view;
 
-import com.company.subscriptionmanagement.controllers.SubscriberController;
+import com.company.subscriptionmanagement.controllers.SubscriberControllable;
 import com.company.subscriptionmanagement.exception.DatabaseException;
 import com.company.subscriptionmanagement.exception.InputException;
 import com.company.subscriptionmanagement.exception.InvalidOperationException;
@@ -12,9 +12,9 @@ import java.util.HashMap;
 
 public class SubscriberDashboard implements Dashboard{
 
-    private SubscriberController subscriberController;
+    private SubscriberControllable subscriberController;
 
-    public SubscriberDashboard(SubscriberController subscriberController){
+    public SubscriberDashboard(SubscriberControllable subscriberController){
         this.subscriberController = subscriberController;
     }
     

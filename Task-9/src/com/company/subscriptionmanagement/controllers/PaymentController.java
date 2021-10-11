@@ -8,14 +8,14 @@ import com.company.subscriptionmanagement.model.service.NotificationService;
 import com.company.subscriptionmanagement.model.service.PaymentService;
 import com.company.subscriptionmanagement.model.service.PushNotificationService;
 import com.company.subscriptionmanagement.view.PaymentView;
-import com.company.subscriptionmanagement.view.PaymentViewInterface;
+import com.company.subscriptionmanagement.view.PaymentViewable;
 
 import java.time.LocalDate;
 import java.util.HashMap;
 
-public class PaymentController{
+public class PaymentController implements PaymentControllable{
 
-    private PaymentViewInterface paymentView = new PaymentView();
+    private PaymentViewable paymentView = new PaymentView();
     private NotificationService notificationService;
     int option = 1;
 

@@ -1,5 +1,6 @@
 package com.company.subscriptionmanagement.view;
 
+import com.company.subscriptionmanagement.controllers.CompanyControllable;
 import com.company.subscriptionmanagement.controllers.CompanyController;
 import com.company.subscriptionmanagement.exception.DatabaseException;
 import com.company.subscriptionmanagement.exception.InputException;
@@ -11,9 +12,9 @@ import java.util.ArrayList;
 
 public class CompanyDashboard implements Dashboard{
 
-    CompanyController companyController;
+    CompanyControllable companyController;
 
-    public CompanyDashboard(CompanyController companyController){
+    public CompanyDashboard(CompanyControllable companyController){
         this.companyController = companyController;
     }
 

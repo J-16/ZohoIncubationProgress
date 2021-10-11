@@ -1,13 +1,14 @@
 package com.company.subscriptionmanagement.view;
 
+import com.company.subscriptionmanagement.controllers.PaymentControllable;
 import com.company.subscriptionmanagement.controllers.PaymentController;
 import com.company.subscriptionmanagement.exception.InputException;
 
 import java.util.HashMap;
 
-public class PaymentView implements PaymentViewInterface{
+public class PaymentView implements PaymentViewable {
 
-    public void view(PaymentController paymentController){
+    public void view(PaymentControllable paymentController){
         long cardNo =  -1;
         int cvv = -1;
         String expDate = null;
@@ -39,7 +40,7 @@ public class PaymentView implements PaymentViewInterface{
         }
     }
 
-    public void getPaymentMethod(PaymentController paymentController){
+    public void getPaymentMethod(PaymentControllable paymentController){
         int option = GetValues.getIntegerValue(0,"1.Use previous payment details or any other key to enter New Payment details");
         paymentController.setOption(option);
     }

@@ -1,5 +1,6 @@
 package com.company.subscriptionmanagement.view;
 
+import com.company.subscriptionmanagement.controllers.SubscriberControllable;
 import com.company.subscriptionmanagement.controllers.SubscriberController;
 import com.company.subscriptionmanagement.exception.DatabaseException;
 import com.company.subscriptionmanagement.exception.InputException;
@@ -8,16 +9,16 @@ import com.company.subscriptionmanagement.model.SubscriptionPlan;
 
 import java.util.ArrayList;
 
-public class ProductView implements ProductViewInterface{
+public class ProductView implements ProductViewable {
 
     private enum SubscriptionType{
         SUBSCRIBE,GIFT;
     }
 
-    private SubscriberController subscribeController;
+    private SubscriberControllable subscribeController;
     private String companyName;
 
-    public ProductView(SubscriberController subscriberController, String companyName) {
+    public ProductView(SubscriberControllable subscriberController, String companyName) {
         this.subscribeController = subscriberController;
         this.companyName = companyName;
     }

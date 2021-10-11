@@ -1,7 +1,7 @@
 package com.company.companiescustomer.view;
 
 
-public interface CompanyListViewInterface{
+public interface CompanyListViewable {
 
     void displayCompanies();
 

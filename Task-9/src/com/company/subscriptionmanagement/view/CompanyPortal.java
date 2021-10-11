@@ -1,11 +1,8 @@
 package com.company.subscriptionmanagement.view;
 
 import com.company.companiescustomer.view.CompanyListView;
-import com.company.companiescustomer.view.CompanyListViewInterface;
-import com.company.subscriptionmanagement.controllers.AuthenticationController;
-import com.company.subscriptionmanagement.controllers.CompanyAuthenticationController;
-import com.company.subscriptionmanagement.controllers.CompanyController;
-import com.company.subscriptionmanagement.controllers.SubscriberController;
+import com.company.companiescustomer.view.CompanyListViewable;
+import com.company.subscriptionmanagement.controllers.*;
 import com.company.subscriptionmanagement.exception.DatabaseException;
 import com.company.subscriptionmanagement.exception.InputException;
 import com.company.subscriptionmanagement.model.Company;
@@ -18,8 +15,8 @@ public class CompanyPortal implements Portal{
 
     private AuthenticationController authenticationController;
     private Dashboard dashboard;
-    private ProductViewInterface productViewInterface;
-    private CompanyListViewInterface companyListView;
+    private ProductViewable productViewInterface;
+    private CompanyListViewable companyListView;
 
     public CompanyPortal(AuthenticationController authenticationController){
         this.authenticationController = authenticationController;
@@ -96,7 +93,7 @@ public class CompanyPortal implements Portal{
     }
 
     private void loggedIn(String companyName){
-        SubscriberController subscriptionController = new SubscriberController(email, name, companyName);
+        SubscriberControllable subscriptionController = new SubscriberController(email, name, companyName);
         do{
             int option = GetValues.getIntegerValue(0,"0.Logout 1.Check Available Products 2.User DashBoard");
             switch(option){

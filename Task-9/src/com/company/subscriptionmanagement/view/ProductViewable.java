@@ -1,5 +1,5 @@
 package com.company.subscriptionmanagement.view;
 
-public interface ProductViewInterface{
+public interface ProductViewable {
     void productsDetails();
 }

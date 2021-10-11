@@ -1,5 +1,6 @@
 package com.company.subscriptionmanagement.model.service;
 
+import com.company.subscriptionmanagement.controllers.PaymentControllable;
 import com.company.subscriptionmanagement.controllers.PaymentController;
 import com.company.subscriptionmanagement.database.CompanyDatabase;
 import com.company.subscriptionmanagement.exception.*;
@@ -18,6 +19,7 @@ public class SubscriberService {
     private Company company;
     private NotificationService notificationService;
     private CompanyDatabase database; // TODO
+    private PaymentControllable paymentControllable;
 
     public SubscriberService(String email, String name, Company company, CompanyDatabase database){
         this.email = email;
@@ -51,7 +53,8 @@ public class SubscriberService {
             price = price + (coupon.getDiscount()/100);
         }
         Subscriber subscriber = registerSubscriber();
-        new PaymentController().processPayment(price,subscriber);
+        paymentControllable = new PaymentController();
+        paymentControllable.processPayment(price,subscriber);
         CurrentSubscription currentSubscription = new CurrentSubscription(subscriber,subscriptionPlan, subscriber.getPaymentDetails());
         product.addProductSubscribers(subscriber.getAccount().getEmail(), currentSubscription);
         setAutoRenewal(currentSubscription);
@@ -62,7 +65,8 @@ public class SubscriberService {
         checkUpgrade(product, subscriptionPlan);
         SubscriptionPlan newSubscriptionPlan = getSubscriptionPlan(product, subscriptionPlan);
         product.getProductSubscribers(subscriber.getAccount().getEmail()).setSubscriptionPlan(newSubscriptionPlan);
-        new PaymentController().processPayment(newSubscriptionPlan.getPrice(),subscriber);
+        paymentControllable = new PaymentController();
+        paymentControllable.processPayment(newSubscriptionPlan.getPrice(),subscriber);
         setAutoRenewal(product.getProductSubscribers(email));
     }
 
