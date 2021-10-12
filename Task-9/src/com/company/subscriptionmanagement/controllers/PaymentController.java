@@ -4,7 +4,7 @@ import com.company.subscriptionmanagement.exception.InputException;
 import com.company.subscriptionmanagement.model.PaymentDetails;
 import com.company.subscriptionmanagement.model.Subscriber;
 import com.company.subscriptionmanagement.model.service.*;
-import com.company.subscriptionmanagement.view.PaymentView;
+import com.company.subscriptionmanagement.view.CardPaymentView;
 import com.company.subscriptionmanagement.view.PaymentViewable;
 
 import java.time.LocalDate;
@@ -12,7 +12,7 @@ import java.util.HashMap;
 
 public class PaymentController{
 
-    private PaymentViewable paymentView = new PaymentView(this);
+    private PaymentViewable paymentView = new CardPaymentView(this);
     private NotificationService notificationService;
     private int option = 1;
     private PaymentService paymentService;
@@ -34,7 +34,7 @@ public class PaymentController{
     }
 
     private void makePayment(double price, Subscriber subscriber){
-        paymentService = new UPIPaymentService();
+        paymentService = new CardPaymentService();
         paymentService.makePayment();
         invoiceService = new InvoiceService();
         String invoice = invoiceService.generateInvoice(price, subscriber);

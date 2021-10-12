@@ -6,11 +6,11 @@ public class CardPaymentService implements PaymentService{
 
     @Override
     public boolean makePayment(String email, double price, PaymentDetails paymentDetails) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean makePayment() {
-        return false;
+        return true;
     }
 }

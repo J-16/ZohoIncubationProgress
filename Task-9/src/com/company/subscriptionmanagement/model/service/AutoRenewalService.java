@@ -29,7 +29,7 @@ public class AutoRenewalService{
     }
 
     private boolean paymentByProduct(CurrentSubscription currentSubscription){
-        paymentService = new UPIPaymentService();
+        paymentService = new CardPaymentService();
         return paymentService.makePayment(currentSubscription.getSubscriber().getAccount().getEmail(), currentSubscription.getSubscriptionPlan().getPrice(), currentSubscription.getPaymentDetails());
     }
 

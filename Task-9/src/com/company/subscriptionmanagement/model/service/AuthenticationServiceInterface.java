@@ -1,5 +1,5 @@
 package com.company.subscriptionmanagement.model.service;
 
-public class AuthenticationServiceInterface{
+public interface AuthenticationServiceInterface{
 
 }

@@ -6,7 +6,7 @@ import com.company.subscriptionmanagement.exception.DatabaseException;
 import com.company.subscriptionmanagement.exception.InputException;
 import com.company.subscriptionmanagement.model.Company;
 
-public class CompanyPortal implements Portal{
+public class CompanyPortal{
 
     protected String name = null;
     protected String email = null;

@@ -5,11 +5,11 @@ import com.company.subscriptionmanagement.exception.InputException;
 
 import java.util.HashMap;
 
-public class PaymentView implements PaymentViewable {
+public class CardPaymentView implements PaymentViewable {
 
     private PaymentController paymentController;
 
-    public PaymentView(PaymentController paymentController){
+    public CardPaymentView(PaymentController paymentController){
         this.paymentController = paymentController;
     }
 

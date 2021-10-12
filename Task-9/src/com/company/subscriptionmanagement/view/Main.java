@@ -7,7 +7,7 @@ import com.company.subscriptionmanagement.controllers.CompanyAuthenticationContr
 
 public class Main{
 
-    private static Portal portal;
+    private static CompanyPortal portal;
     private static AuthenticationController authenticationController;
 
     public static void main(String[] args){

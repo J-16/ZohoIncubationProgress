@@ -3,7 +3,7 @@ package com.company.subscriptionmanagement.view;
 
 public class PortalControl{
 
-    public void control(Portal portal){
+    public void control(CompanyPortal portal){
 
         System.out.println("Welcome to Company portal");
         int option = 10;
