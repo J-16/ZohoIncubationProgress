@@ -16,8 +16,8 @@ public class AuthenticationService {
     }
 
     public void register(String name, String email, String password){
-        emptyCredentials(email, password);
         emptyName(name);
+        emptyCredentials(email, password);
         validity(email, password);
         if(database.getUserByEmail(email) != null) {
             throw new DatabaseException("Account Already exists", DatabaseException.ExceptionType.EXISTS_EXCEPTION);
