@@ -1,6 +1,7 @@
 package com.company.subscriptionmanagement.model.service;
 
 import com.company.subscriptionmanagement.controllers.PaymentController;
+import com.company.subscriptionmanagement.controllers.PaymentMethodController;
 import com.company.subscriptionmanagement.database.CompanyDatabase;
 import com.company.subscriptionmanagement.exception.*;
 import com.company.subscriptionmanagement.model.*;
@@ -53,8 +54,9 @@ public class SubscriberService{
         }
         Subscriber subscriber = registerSubscriber();
         paymentController = new PaymentController();
-        paymentController.processPayment(price,subscriber);
-        CurrentSubscription currentSubscription = new CurrentSubscription(subscriber,subscriptionPlan, subscriber.getPaymentDetails());
+        paymentController.setPaymentView(new PaymentMethodController().getPaymentMethod(paymentController));
+        paymentController.processPayment(price, subscriber);
+        CurrentSubscription currentSubscription = new CurrentSubscription(subscriber, subscriptionPlan, subscriber.getPaymentDetails());
         product.addProductSubscribers(subscriber.getAccount().getEmail(), currentSubscription);
         setAutoRenewal(currentSubscription);
     }

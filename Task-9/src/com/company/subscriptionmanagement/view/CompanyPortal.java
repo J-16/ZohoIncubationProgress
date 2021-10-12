@@ -1,6 +1,6 @@
 package com.company.subscriptionmanagement.view;
 
-import com.company.companiescustomer.view.CompanyListView;
+
 import com.company.subscriptionmanagement.controllers.*;
 import com.company.subscriptionmanagement.exception.DatabaseException;
 import com.company.subscriptionmanagement.exception.InputException;
@@ -15,13 +15,14 @@ public class CompanyPortal{
     private AuthenticationController authenticationController;
     private Dashboard dashboard;
     private ProductView productView;
-    private CompanyListView companyListView;
+    private String companyName;
 
     public CompanyPortal(AuthenticationController authenticationController){
         this.authenticationController = authenticationController;
     }
 
     public void registerFlow(){
+        System.out.println("Register your company ");
         while(true){
             try{
                 new Helper().register();
@@ -30,6 +31,7 @@ public class CompanyPortal{
                 name = null;
                 password = null;
                 email = null;
+                return;
             }catch(DatabaseException e){
                 System.out.println(e.getMessage());
                 if(e.getExceptionType() == DatabaseException.ExceptionType.EXISTS_EXCEPTION){
@@ -49,6 +51,7 @@ public class CompanyPortal{
     }
 
     public void loginFlow(){
+        System.out.println("Welcome back ");
         while(true){
             try{
                 new Helper().login();
@@ -56,12 +59,6 @@ public class CompanyPortal{
                     dashboard = new CompanyDashboard(new CompanyController((Company) authenticationController.login(email, password)));
                     dashboard.control();
                 }else{
-                    companyListView = new CompanyListView();
-                    companyListView.displayCompanies();
-                    String companyName = GetValues.getString("Enter company name you want to login");
-
-                    while(!SubscriberController.isValidCompany(companyName))
-                        companyName = GetValues.getString("Invalid name, please enter a valid company name from the list above");
                     authenticationController.login(email, password);
                     loggedIn(companyName);
                 }
@@ -109,10 +106,14 @@ public class CompanyPortal{
         }while(true);
     }
 
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
     public class Helper{
 
         public void register(){
-            System.out.println("Register your company ");
+
             while(name == null){
                 name = getName();
             }
@@ -125,7 +126,6 @@ public class CompanyPortal{
         }
 
         public void login(){
-            System.out.println("Welcome back ");
             do{
                 email = getEmail();
             }while(email == null);

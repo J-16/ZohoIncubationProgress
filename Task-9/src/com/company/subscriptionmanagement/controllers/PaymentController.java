@@ -4,7 +4,6 @@ import com.company.subscriptionmanagement.exception.InputException;
 import com.company.subscriptionmanagement.model.PaymentDetails;
 import com.company.subscriptionmanagement.model.Subscriber;
 import com.company.subscriptionmanagement.model.service.*;
-import com.company.subscriptionmanagement.view.CardPaymentView;
 import com.company.subscriptionmanagement.view.PaymentViewable;
 
 import java.time.LocalDate;
@@ -12,13 +11,12 @@ import java.util.HashMap;
 
 public class PaymentController{
 
-    private PaymentViewable paymentView = new CardPaymentView(this);
-    private NotificationService notificationService;
     private int option = 1;
+    private NotificationService notificationService;
     private PaymentService paymentService;
     private InvoiceService invoiceService;
-
-    HashMap<String, String> paymentDetails = new HashMap<>();
+    private HashMap<String, String> paymentDetails = new HashMap<>();
+    private PaymentViewable paymentView;
 
     public void processPayment(double price, Subscriber subscriber){
         if(subscriber.getPaymentDetails() == null){
@@ -44,18 +42,9 @@ public class PaymentController{
 
     private void generatePaymentDetails(Subscriber subscriber){
         paymentView.view();
-        isValidDetails();
-        subscriber.setPaymentDetails( new PaymentDetails( Long.parseLong(paymentDetails.get("cardNo")), Integer.parseInt(paymentDetails.get("cvv")),
-                LocalDate.parse(paymentDetails.get("expDate")) ));
-    }
-
-    private void isValidDetails() {
-        if(!paymentDetails.containsKey("cardNo"))
-            throw new InputException("Empty fields not allowed", InputException.ExceptionType.NEGATIVE_VALUE, "cardNo");
-        if(!paymentDetails.containsKey("cvv"))
-            throw new InputException("Empty fields not allowed", InputException.ExceptionType.NEGATIVE_VALUE, "cvv");
-        if(!paymentDetails.containsKey("expDate"))
-            throw new InputException("Empty fields not allowed", InputException.ExceptionType.NEGATIVE_VALUE, "expDate");
+        if(paymentView instanceof CardPaymentService)
+            subscriber.setPaymentDetails( new PaymentDetails( Long.parseLong(paymentDetails.get("cardNo")), Integer.parseInt(paymentDetails.get("cvv")),
+                    LocalDate.parse(paymentDetails.get("expDate")) ));
     }
 
     public void setPaymentDetails(HashMap<String, String> paymentDetails){
@@ -64,6 +53,10 @@ public class PaymentController{
 
     public void setOption(int option) {
         this.option = option;
+    }
+
+    public void setPaymentView(PaymentViewable paymentView){
+        this.paymentView = paymentView;
     }
 
 }
