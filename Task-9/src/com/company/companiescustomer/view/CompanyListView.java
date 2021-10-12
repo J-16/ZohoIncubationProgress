@@ -1,6 +1,6 @@
 package com.company.companiescustomer.view;
 
-import com.company.subscriptionmanagement.controllers.CompanyListController;
+import com.company.companiescustomer.controller.CompanyListController;
 
 import java.util.ArrayList;
 

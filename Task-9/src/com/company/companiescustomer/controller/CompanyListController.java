@@ -1,4 +1,4 @@
-package com.company.subscriptionmanagement.controllers;
+package com.company.companiescustomer.controller;
 
 import com.company.subscriptionmanagement.database.CompanyDatabase;
 import com.company.subscriptionmanagement.model.Company;
