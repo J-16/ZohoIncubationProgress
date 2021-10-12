@@ -29,4 +29,5 @@ public class PaymentMethodController{
     public void setPaymentMethod(int option){
         this.option = option;
     }
+
 }
