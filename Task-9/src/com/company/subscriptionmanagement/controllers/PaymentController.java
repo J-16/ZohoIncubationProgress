@@ -3,10 +3,7 @@ package com.company.subscriptionmanagement.controllers;
 import com.company.subscriptionmanagement.exception.InputException;
 import com.company.subscriptionmanagement.model.PaymentDetails;
 import com.company.subscriptionmanagement.model.Subscriber;
-import com.company.subscriptionmanagement.model.service.InvoiceService;
-import com.company.subscriptionmanagement.model.service.NotificationService;
-import com.company.subscriptionmanagement.model.service.PaymentService;
-import com.company.subscriptionmanagement.model.service.PushNotificationService;
+import com.company.subscriptionmanagement.model.service.*;
 import com.company.subscriptionmanagement.view.PaymentView;
 import com.company.subscriptionmanagement.view.PaymentViewable;
 
@@ -17,7 +14,9 @@ public class PaymentController implements PaymentControllable{
 
     private PaymentViewable paymentView = new PaymentView();
     private NotificationService notificationService;
-    int option = 1;
+    private int option = 1;
+    private PaymentService paymentService;
+    private InvoiceService invoiceService;
 
     HashMap<String, String> paymentDetails = new HashMap<>();
 
@@ -35,9 +34,10 @@ public class PaymentController implements PaymentControllable{
     }
 
     private void makePayment(double price, Subscriber subscriber){
-        PaymentService paymentService = new PaymentService();
+        paymentService = new UPIPaymentService();
         paymentService.makePayment();
-        String invoice = new InvoiceService().generateInvoice(price, subscriber);
+        invoiceService = new Invoice();
+        String invoice = invoiceService.generateInvoice(price, subscriber);
         notificationService = new PushNotificationService();
         notificationService.send(invoice, subscriber);
     }

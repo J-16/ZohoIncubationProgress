@@ -2,16 +2,9 @@ package com.company.subscriptionmanagement.model.service;
 
 import com.company.subscriptionmanagement.model.PaymentDetails;
 
-public class PaymentService{
+public interface PaymentService {
 
-    public boolean makePayment(String email, double price, PaymentDetails paymentDetails){
-        //TODO - Make payment function here
-        /* IMPLEMENT */
-        return true;
-    }
-
-    public boolean makePayment(){
-        return true;
-    }
+    boolean makePayment(String email, double price, PaymentDetails paymentDetails);
+    boolean makePayment();
 
 }

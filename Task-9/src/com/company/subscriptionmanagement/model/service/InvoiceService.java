@@ -2,12 +2,8 @@ package com.company.subscriptionmanagement.model.service;
 
 import com.company.subscriptionmanagement.model.Subscriber;
 
-public class InvoiceService{
+public interface InvoiceService {
 
-    public String generateInvoice(double price, Subscriber subscriber){
-        return "Payment made for : " + price + "\n" +
-                "Name : " + subscriber.getAccount().getName() + "\n" +
-                "Email : " + subscriber.getAccount().getEmail();
-    }
+    String generateInvoice(double price, Subscriber subscriber);
 
 }

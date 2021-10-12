@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-public class SubscriberService {
+public class SubscriberService{
 
     private Subscriber subscriber;
     private String email;

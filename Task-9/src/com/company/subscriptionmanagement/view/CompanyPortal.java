@@ -140,7 +140,7 @@ public class CompanyPortal implements Portal{
         }
 
         public String getEmail(){
-            return GetValues.getString("Enter Email: ");
+            return GetValues.getString("Enter Email:    ");
         }
 
         public String getPassword(){

@@ -8,9 +8,11 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-public class AutoRenewalService{
+public class AutoRenewalService implements RenewalService{
 
-    public void autoRenewal(){
+    private PaymentService paymentService;
+
+    public void renewal(){
         HashMap<String, Company> companies = new CompanyDatabase().getCompanies();
         for(Company company : companies.values()){
             HashMap<LocalDate, LinkedList<CurrentSubscription>> autoRenewal = company.getAutoRenewal();
@@ -27,7 +29,7 @@ public class AutoRenewalService{
     }
 
     private boolean paymentByProduct(CurrentSubscription currentSubscription){
-        PaymentService paymentService = new PaymentService();
+        paymentService = new UPIPaymentService();
         return paymentService.makePayment(currentSubscription.getSubscriber().getAccount().getEmail(), currentSubscription.getSubscriptionPlan().getPrice(), currentSubscription.getPaymentDetails());
     }
 
