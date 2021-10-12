@@ -12,17 +12,17 @@ public class CompanyPortal{
     protected String email = null;
     protected String password = null;
 
-    private AuthenticationController authenticationController;
+    private CompanyAuthenticationController authenticationController;
     private Dashboard dashboard;
     private ProductView productView;
     private String companyName;
 
-    public CompanyPortal(AuthenticationController authenticationController){
-        this.authenticationController = authenticationController;
+    public CompanyPortal(CompanyAuthenticationController.LoginType type){
+        this.authenticationController = new CompanyAuthenticationController(type);
     }
 
     public void registerFlow(){
-        System.out.println("Register your company ");
+        System.out.println("Register");
         while(true){
             try{
                 new Helper().register();
@@ -55,8 +55,8 @@ public class CompanyPortal{
         while(true){
             try{
                 new Helper().login();
-                if(authenticationController instanceof CompanyAuthenticationController){
-                    dashboard = new CompanyDashboard(new CompanyController((Company) authenticationController.login(email, password)));
+                if(companyName == null){
+                    dashboard = new CompanyDashboard(new CompanyController( (Company) authenticationController.login(email, password)));
                     dashboard.control();
                 }else{
                     authenticationController.login(email, password);

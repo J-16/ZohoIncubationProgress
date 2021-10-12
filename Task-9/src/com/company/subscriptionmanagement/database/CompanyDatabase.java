@@ -5,7 +5,7 @@ import com.company.subscriptionmanagement.model.Subscriber;
 
 import java.util.HashMap;
 
-public class CompanyDatabase{
+public class CompanyDatabase implements Database{
 
     private static HashMap<String, Subscriber> subscriber = new HashMap<>();
     private static HashMap<String, Company> companies = new HashMap<>();
@@ -14,7 +14,7 @@ public class CompanyDatabase{
         companies.put(email, new Company(name, email, password));
     }
 
-    public Company getCompanyByEmail(String email){
+    public Company getUserByEmail(String email){
         return companies.get(email);
     }
 

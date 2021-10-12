@@ -1,20 +1,31 @@
 package com.company.subscriptionmanagement.controllers;
 
-import com.company.subscriptionmanagement.model.Company;
+import com.company.companiescustomer.dataBase.CustomerDatabase;
+import com.company.companiescustomer.model.Customer;
+import com.company.subscriptionmanagement.database.CompanyDatabase;
 import com.company.subscriptionmanagement.model.service.AuthenticationService;
 
-public class CompanyAuthenticationController implements AuthenticationController{
+public class CompanyAuthenticationController{
 
-    private AuthenticationService authenticationService;
-
-    public void register(String name, String email, String password){
-        authenticationService = new AuthenticationService();
-        authenticationService.register(name, email, password, this);
+    public enum LoginType{
+        COMPANY,CUSTOMER;
     }
 
-    public Company login(String email, String password){
-        authenticationService = new AuthenticationService();
-        return (Company) authenticationService.login(email, password, this);
+    protected AuthenticationService authenticationService;
+
+    public CompanyAuthenticationController(LoginType type){
+        if(type == LoginType.COMPANY)
+            this.authenticationService = new AuthenticationService(new CompanyDatabase());
+        else
+            this.authenticationService = new AuthenticationService(new CustomerDatabase());
+    }
+
+    public void register(String name, String email, String password){
+        authenticationService.register(name, email, password);
+    }
+
+    public Customer login(String email, String password){
+        return authenticationService.login(email, password );
     }
 
 }

@@ -1,10 +1,11 @@
 package com.company.companiescustomer.dataBase;
 
 import com.company.companiescustomer.model.Customer;
+import com.company.subscriptionmanagement.database.Database;
 
 import java.util.HashMap;
 
-public class UserDatabase {
+public class CustomerDatabase implements Database{
 
     private static HashMap<String, Customer> users = new HashMap<>();
 
