@@ -32,7 +32,6 @@ public class PaymentController{
     }
 
     private void makePayment(double price, Subscriber subscriber){
-        paymentService = new CardPaymentService();
         paymentService.makePayment();
         invoiceService = new InvoiceService();
         String invoice = invoiceService.generateInvoice(price, subscriber);
@@ -57,6 +56,10 @@ public class PaymentController{
 
     public void setPaymentView(PaymentViewable paymentView){
         this.paymentView = paymentView;
+    }
+
+    public void setPaymentService(PaymentService paymentService){
+        this.paymentService = paymentService;
     }
 
 }
