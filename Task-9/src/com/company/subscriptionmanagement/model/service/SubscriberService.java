@@ -54,7 +54,7 @@ public class SubscriberService{
         }
         Subscriber subscriber = registerSubscriber();
         paymentController = new PaymentController();
-        paymentController.setPaymentView(new PaymentMethodController().getPaymentMethod(paymentController));
+        new PaymentMethodController().getPaymentMethod(paymentController);
         paymentController.processPayment(price, subscriber);
         CurrentSubscription currentSubscription = new CurrentSubscription(subscriber, subscriptionPlan, subscriber.getPaymentDetails());
         product.addProductSubscribers(subscriber.getAccount().getEmail(), currentSubscription);
