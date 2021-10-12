@@ -10,9 +10,9 @@ import com.company.subscriptionmanagement.view.PaymentViewable;
 import java.time.LocalDate;
 import java.util.HashMap;
 
-public class PaymentController implements PaymentControllable{
+public class PaymentController{
 
-    private PaymentViewable paymentView = new PaymentView();
+    private PaymentViewable paymentView = new PaymentView(this);
     private NotificationService notificationService;
     private int option = 1;
     private PaymentService paymentService;
@@ -25,7 +25,7 @@ public class PaymentController implements PaymentControllable{
             generatePaymentDetails(subscriber);
         }
         else{
-            paymentView.getPaymentMethod(this);
+            paymentView.getPaymentMethod();
             if( option != 1 ){
                 generatePaymentDetails(subscriber);
             }
@@ -36,14 +36,14 @@ public class PaymentController implements PaymentControllable{
     private void makePayment(double price, Subscriber subscriber){
         paymentService = new UPIPaymentService();
         paymentService.makePayment();
-        invoiceService = new Invoice();
+        invoiceService = new InvoiceService();
         String invoice = invoiceService.generateInvoice(price, subscriber);
         notificationService = new PushNotificationService();
         notificationService.send(invoice, subscriber);
     }
 
     private void generatePaymentDetails(Subscriber subscriber){
-        paymentView.view(this);
+        paymentView.view();
         isValidDetails();
         subscriber.setPaymentDetails( new PaymentDetails( Long.parseLong(paymentDetails.get("cardNo")), Integer.parseInt(paymentDetails.get("cvv")),
                 LocalDate.parse(paymentDetails.get("expDate")) ));

@@ -9,7 +9,7 @@ import com.company.subscriptionmanagement.model.SubscriptionPlan;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class CompanyController implements CompanyControllable{
+public class CompanyController{
 
     private ProductService productService;
 

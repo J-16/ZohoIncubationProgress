@@ -1,11 +1,11 @@
 package com.company.subscriptionmanagement.view;
 
-import com.company.subscriptionmanagement.controllers.PaymentControllable;
 
+import com.company.subscriptionmanagement.controllers.PaymentController;
 
 public interface PaymentViewable {
 
-    void view(PaymentControllable paymentController);
-    void getPaymentMethod(PaymentControllable paymentController);
+    void view();
+    void getPaymentMethod();
 
 }

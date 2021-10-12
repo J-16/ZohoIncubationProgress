@@ -1,7 +1,6 @@
 package com.company;
 
 import com.company.subscriptionmanagement.controllers.CompanyAuthenticationController;
-import com.company.subscriptionmanagement.controllers.CompanyControllable;
 import com.company.subscriptionmanagement.controllers.CompanyController;
 import com.company.companiescustomer.controller.UserAuthenticationController;
 import com.company.subscriptionmanagement.database.CompanyDatabase;
@@ -21,7 +20,7 @@ public class AutoAddDetails {
         controller.register("company1", "company1@gmail.com", "123456789");
         controller.register("company2", "company2@gmail.com", "123456789");
 
-        CompanyControllable company = new CompanyController(new CompanyAuthenticationController().login("company1@gmail.com", "123456789"));
+        CompanyController company = new CompanyController(new CompanyAuthenticationController().login("company1@gmail.com", "123456789"));
         company.addProduct("prod1",10,500);
         company.addProduct("prod2",0,500);
         company.addProduct("prod3",10,100);

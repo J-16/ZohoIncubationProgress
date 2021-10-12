@@ -12,7 +12,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class SubscriberController implements SubscriberControllable{
+public class SubscriberController{
 
     private String email;
     private String name;

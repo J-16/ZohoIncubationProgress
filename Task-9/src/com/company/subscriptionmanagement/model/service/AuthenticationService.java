@@ -11,7 +11,7 @@ import com.company.subscriptionmanagement.model.Company;
 
 import java.util.regex.Pattern;
 
-public class AuthenticationService{
+public class AuthenticationService {
 
     private CompanyDatabase database = new CompanyDatabase();
     private UserDatabase userDatabase = new UserDatabase();
@@ -22,10 +22,10 @@ public class AuthenticationService{
         if(authenticationController instanceof UserAuthenticationController){
             if(userDatabase.getUserByEmail(email) != null)
                 throw new DatabaseException("User already exists", DatabaseException.ExceptionType.EXISTS_EXCEPTION);
-            userDatabase.registerUser(name, email, password);
+            userDatabase.register(name, email, password);
             return;
         }
-        if(CompanyDatabase.getCompanyByEmail(email) != null)
+        if(database.getCompanyByEmail(email) != null)
             throw new DatabaseException("Company already exists", DatabaseException.ExceptionType.EXISTS_EXCEPTION);
         database.register(name, email, password);
     }
@@ -40,9 +40,8 @@ public class AuthenticationService{
             if( !userAccount.getAccount().getPassword().equals(password) )
                 throw new DatabaseException("Password doesn't match", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION);
             return userAccount;
-
         }
-        Company companyAccount = CompanyDatabase.getCompanyByEmail(email);
+        Company companyAccount = database.getCompanyByEmail(email);
         if(companyAccount == null)
             throw new DatabaseException("Username and password doesn't match", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION);
         if(!companyAccount.getAccount().getPassword().equals(password) )

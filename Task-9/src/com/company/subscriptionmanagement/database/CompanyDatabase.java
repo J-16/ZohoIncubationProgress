@@ -10,20 +10,12 @@ public class CompanyDatabase{
     private static HashMap<String, Subscriber> subscriber = new HashMap<>();
     private static HashMap<String, Company> companies = new HashMap<>();
 
-    public static Company getCompanyByEmail(String email){
-        return companies.get(email);
-    }
-
     public void register(String name, String email, String password){
         companies.put(email, new Company(name, email, password));
     }
 
-    public void registerSubscriber(String email, String name){
-        subscriber.put(email, new Subscriber(name, email));
-    }
-
-    public Subscriber getSubscribersByEmail(String email){
-        return subscriber.get(email);
+    public Company getCompanyByEmail(String email){
+        return companies.get(email);
     }
 
     public HashMap<String, Company> getCompanies(){
@@ -36,6 +28,14 @@ public class CompanyDatabase{
                 return company;
         }
         return null;
+    }
+
+    public void registerSubscriber(String email, String name){
+        subscriber.put(email, new Subscriber(name, email));
+    }
+
+    public Subscriber getSubscribersByEmail(String email){
+        return subscriber.get(email);
     }
 
 }

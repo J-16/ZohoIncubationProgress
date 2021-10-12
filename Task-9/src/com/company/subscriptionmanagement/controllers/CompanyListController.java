@@ -6,7 +6,7 @@ import com.company.subscriptionmanagement.model.Company;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class CompanyListController implements CompanyListControllable{
+public class CompanyListController{
 
     private CompanyDatabase database= new CompanyDatabase();
 

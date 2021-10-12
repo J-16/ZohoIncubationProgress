@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-public class AutoRenewalService implements RenewalService{
+public class AutoRenewalService{
 
     private PaymentService paymentService;
 
