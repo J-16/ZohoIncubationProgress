@@ -18,38 +18,38 @@ public class CompanyDashboard implements Dashboard{
     }
 
     public void control(){
-        try{
             do{
-                int option = GetValues.getIntegerValue(0, "0.Logout 1.Add product 2.Add Subscription Plan 3.Change Subscription Plan 4.Add Coupon");
-                switch(option){
-                    case 0:
-                        return;
-                    case 1:
-                        addProduct();
-                        break;
-                    case 2:
-                        addSubscriptionPlan();
-                        break;
-                    case 3:
-                        updateSubscriptionPlan();
-                        break;
-                    case 4:
-                        addCoupon();
-                        break;
-                    default :
-                        System.out.println("Invalid option");
+                try{
+                    int option = GetValues.getIntegerValue(0, "0.Logout 1.Add product 2.Add Subscription Plan 3.Change Subscription Plan 4.Add Coupon");
+                    switch(option){
+                        case 0:
+                            return;
+                        case 1:
+                            addProduct();
+                            break;
+                        case 2:
+                            addSubscriptionPlan();
+                            break;
+                        case 3:
+                            changeSubscriptionPlan();
+                            break;
+                        case 4:
+                            addCoupon();
+                            break;
+                        default :
+                            System.out.println("Invalid option");
+                    }
+                }catch (DatabaseException e){
+                    System.out.println(e.getMessage());
                 }
             }while(true);
-        }catch (DatabaseException e){
-            System.out.println(e.getMessage());
-        }
     }
 
     private void addProduct(){
         int trailDays = -1;
         double price  = -1;
         String name = null;
-        System.out.println("Products Details : ");
+        System.out.println("---------------Products Details---------------");
         while(true){
             try{
                 if(name == null) {
@@ -62,16 +62,19 @@ public class CompanyDashboard implements Dashboard{
                 price = GetValues.getIntegerValue(0,"Enter Product price");
                 companyController.addProduct(name, trailDays, price);
                 System.out.println("Product added successfully");
+                System.out.println("------------------------------");
                 return;
             }catch(InputException e){
                 System.out.println(e.getMessage());
                 if(e.getExceptionType() == InputException.ExceptionType.EMPTY_EXCEPTION){
-                    if(e.getField().equals("price"))
+                    if(e.getField().equals("price")) {
                         price = -1;
+                    }
                 }
                 else if(e.getExceptionType() == InputException.ExceptionType.NEGATIVE_VALUE){
-                    if(e.getField().equals("trailDays"))
+                    if(e.getField().equals("trailDays")) {
                         trailDays = -1;
+                    }
                 }
             }
         }
@@ -103,6 +106,7 @@ public class CompanyDashboard implements Dashboard{
                             break;
                         case 3:
                             subscriptionType = SubscriptionPlan.SubscriptionType.YEARLY;
+                            break;
                         default:
                             System.out.print("Choose a valid subscription plan, ");
                     }
@@ -127,28 +131,32 @@ public class CompanyDashboard implements Dashboard{
         }
     }
 
-    private void updateSubscriptionPlan(){
+    private void changeSubscriptionPlan(){
         displayProducts();
         String productName = null;
         String newSubscriptionName = null;
         String subscriptionName = null;
         SubscriptionPlan.SubscriptionType subscriptionType = null;
-        displaySubscriptions(productName);
-        int subType = 10;
+        int subType = 5;
         double discount = -1;
         while(true){
-            try {
-                if( productName == null){
-                    productName = GetValues.getString("Select Product ");
+            if( productName == null){
+                productName = GetValues.getString("Enter Product name ");
+                try{
+                    displaySubscriptions(productName);
+                }catch(DatabaseException e){
+                    System.out.println(e.getMessage());
+                    return;
                 }
-                if(subscriptionName == null){
-                    subscriptionName = GetValues.getString("Select Subscription you want to change");
-                }
-                if(newSubscriptionName == null){
-                    newSubscriptionName = GetValues.getString("Enter New Subscription Name if applicable or \"null\" for no changes");
-                }
-                System.out.println();
-                while (subType > 4) {
+            }
+            if(subscriptionName == null){
+                subscriptionName = GetValues.getString("Select Subscription you want to change");
+            }
+            if(newSubscriptionName == null){
+                newSubscriptionName = GetValues.getString("Enter New Subscription Name if applicable or \"null\" for no changes");
+            }
+            try{
+                while(subType > 3){
                     subType = GetValues.getIntegerValue(0, "Choose new subscription plan 1.Monthly 2.Quarterly 3.Yearly or 0 for no changes");
                     switch (subType) {
                         case 1:
@@ -159,20 +167,23 @@ public class CompanyDashboard implements Dashboard{
                             break;
                         case 3:
                             subscriptionType = SubscriptionPlan.SubscriptionType.YEARLY;
-                        default:
-                            System.out.println("invalid option");
+                            break;
                     }
                 }
                 System.out.println();
-                discount = GetValues.getDoubleValue(-1, "Enter discount if any or -1 if no changes");
+                if(discount < 0)
+                    discount = GetValues.getDoubleValue(0, "Enter discount if any or 0 if no changes");
                 companyController.updateSubscriptionPlan(productName, subscriptionName, newSubscriptionName, subscriptionType, discount);
+                System.out.println("Changed Successfully");
                 return;
             }catch(InputException e){
+                System.out.println(e.getMessage());
                 if(e.getExceptionType() == InputException.ExceptionType.NEGATIVE_VALUE){
                     if(e.getField().equals("discount"))
                         discount = -1;
                 }
             }catch(DatabaseException e){
+                System.out.println(e.getMessage());
                 if(e.getExceptionType() == DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION){
                     if(e.getField().equals("subscriptionName"))
                         subscriptionName = null;
@@ -192,8 +203,7 @@ public class CompanyDashboard implements Dashboard{
             try{
                 productName = GetValues.getString("Select Product");
                 coupon = GetValues.getString("Enter coupon Code");
-                System.out.println("Enter expiry date - yyyy-MM-dd");
-                String date = GetValues.getDate("Enter Exp date yyyy-MM-dd");
+                String date = GetValues.getDate("Enter Expiry date yyyy-MM-dd");
                 if(discount < 1)
                     discount = GetValues.getDoubleValue(1,"Enter discount in % example - 10");
                 companyController.addCoupon(productName, coupon, LocalDate.parse(date), discount);
@@ -209,22 +219,20 @@ public class CompanyDashboard implements Dashboard{
 
     private void displayProducts(){
         ArrayList<Product> products = companyController.getProducts();
+        System.out.println("----------Products----------");
         products.forEach(product -> {
             System.out.println( product.getProductName() );
         });
+        System.out.println("---------------------------");
     }
 
     private void displaySubscriptions(String productName){
-        ArrayList<SubscriptionPlan> subscriptionPlans;
-        try{
-            subscriptionPlans = companyController.getSubscriptionPlanByProduct(productName);
-        }catch(DatabaseException | InputException e){
-            System.out.println( e.getMessage() );
-            return;
-        }
+        ArrayList<SubscriptionPlan> subscriptionPlans = companyController.getSubscriptionPlanByProduct(productName);
+        System.out.println("----------Subscription Plans----------");
         subscriptionPlans.forEach(subscriptionPlan -> {
             System.out.println( subscriptionPlan.getPlanName() );
         });
+        System.out.println("--------------------------------------");
     }
 
 }

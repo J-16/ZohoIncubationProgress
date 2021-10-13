@@ -15,7 +15,7 @@ public class Main{
         do{
             System.out.println();
             int option = GetValues.getIntegerValue(0,"0.Quit 1.Company Portal 2.Select company");
-            switch (option) {
+            switch (option){
                 case 0:
                     ScannerClass.closeScanner();
                     return;

@@ -19,6 +19,7 @@ public class AutoAddDetails {
         CompanyAuthenticationController controller = new CompanyAuthenticationController(CompanyAuthenticationController.LoginType.COMPANY);
         controller.register("company1", "company1@gmail.com", "123456789");
         controller.register("company2", "company2@gmail.com", "123456789");
+        controller.register("company3", "c@c.c", "123456789");
 
         CompanyController company = new CompanyController( (Company) new CompanyAuthenticationController(CompanyAuthenticationController.LoginType.COMPANY).login("company1@gmail.com", "123456789") );
         company.addProduct("prod1",10,500);

@@ -117,7 +117,7 @@ public class ProductView{
             if(type == SubscriptionType.SUBSCRIBE) {
                 while(true){
                     try{
-                        String option = GetValues.getString("1.Enter Coupon or any other key to ignore");
+                        String option = GetValues.getString("1.Enter Coupon or any other number to ignore");
                         if (option.equals("1")) {
                             coupon = GetValues.getString("Enter coupon : ");
                         }

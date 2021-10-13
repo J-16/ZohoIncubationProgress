@@ -100,8 +100,10 @@ public class SubscriberService{
     }
 
     public void subscribeNewsLetter(String subscriberEmail, String productName){
-        Product product = getProductByCompany(productName);
-        product.setNewsLetterSubscribedUsers(subscriberEmail, true);
+        try {
+            Product product = getProductByCompany(productName);
+            product.setNewsLetterSubscribedUsers(subscriberEmail, true);
+        }catch(DatabaseException e){};
     }
 
     public void cancelNewsLetterSubscription(String subscriberEmail, String productName){
@@ -194,7 +196,7 @@ public class SubscriberService{
     public ArrayList<String> getSubscribedNewsletter() {
         ArrayList<String> newsletter = new ArrayList<>();
         for(Product product : company.getProducts()){
-            if(product.getNewsLetterSubscribers().containsKey(email))
+            if(product.getNewsLetterSubscribers().containsKey(email) && product.getNewsLetterSubscribers().get(email))
                 newsletter.add(product.getProductName());
         }
         if(newsletter.size() == 0)
@@ -203,9 +205,12 @@ public class SubscriberService{
     }
 
     public ArrayList<String> getNotification(){
-        ArrayList<String> notification = subscriber.getNotification();
-        if(notification == null)
+        ArrayList<String> notification;
+        try{
+            notification = subscriber.getNotification();
+        }catch(NullPointerException e){
             throw new DatabaseException("No notification", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION);
+        }
         return notification;
     }
 
@@ -221,7 +226,7 @@ public class SubscriberService{
 
     private Coupon getCoupon(Product product, String couponName) {
         if(product.getCoupons().size() == 0)
-            throw new DatabaseException("Invalid coupon name", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION, "couponName");
+            throw new DatabaseException("Invalid coupon", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION, "couponName");
         LocalDate date = LocalDate.now();
         for(Coupon coupon : product.getCoupons()){
             if(coupon.getCouponName().equals(couponName) && date.getDayOfMonth() <= coupon.getExpiryDate().getDayOfMonth()

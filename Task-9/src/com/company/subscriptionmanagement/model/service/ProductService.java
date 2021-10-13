@@ -16,6 +16,12 @@ public class ProductService{
     }
 
     public void addProduct(String name, int trailDays, double price){
+        if(company.getProducts() != null){
+            for(Product products : company.getProducts()){
+                if(products.getProductName().equals(name))
+                    throw new DatabaseException("Product already exists", DatabaseException.ExceptionType.EXISTS_EXCEPTION);
+            }
+        }
         company.setProducts(new Product(name,trailDays, price));
     }
 
@@ -64,8 +70,8 @@ public class ProductService{
             if(product.getProductName().equals(productName))
                 subscriptionPlans = product.getSubscriptionPlan();
         }
-        if(subscriptionPlans == null)
-            throw new DatabaseException("No subscription plan is available at the moment", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION);
+        if(subscriptionPlans == null || subscriptionPlans.size() == 0)
+            throw new DatabaseException("No subscription plan is available at the moment for product : " + productName, DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION);
         return subscriptionPlans;
     }
 

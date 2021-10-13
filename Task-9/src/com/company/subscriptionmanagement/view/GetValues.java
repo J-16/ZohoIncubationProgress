@@ -13,7 +13,7 @@ public class GetValues{
                 System.out.println(message);
                 value = ScannerClass.getScanner().nextInt();
                 if(value < minLimit)
-                    System.out.println("Cannot be negative");
+                    System.out.println("Enter a valid input");
             }catch(InputMismatchException e){
                 System.out.println("Invalid input,");
                 ScannerClass.getScanner().nextLine();
@@ -29,7 +29,7 @@ public class GetValues{
                 System.out.println(message);
                 value = ScannerClass.getScanner().nextInt();
                 if(value < minLimit)
-                    System.out.println("Cannot be negative");
+                    System.out.println("Enter a valid input");
             }catch(InputMismatchException e){
                 System.out.println("Invalid input, ");
                 ScannerClass.getScanner().nextLine();
@@ -45,7 +45,7 @@ public class GetValues{
                 System.out.println(message);
                 value = ScannerClass.getScanner().nextLong();
                 if(value < minLimit)
-                    System.out.println("Cannot be negative");
+                    System.out.println("Enter a valid input");
             }catch(InputMismatchException e){
                 System.out.println("Invalid input, ");
                 ScannerClass.getScanner().nextLine();
@@ -75,6 +75,12 @@ public class GetValues{
     public static String getString(String message){
         System.out.println(message);
         return ScannerClass.getScanner().next();
+    }
+
+    public static String getLine(String message){
+        System.out.println(message);
+        ScannerClass.getScanner().nextLine();
+        return ScannerClass.getScanner().nextLine();
     }
 
 }

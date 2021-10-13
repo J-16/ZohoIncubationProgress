@@ -35,6 +35,7 @@ public class SubscriberDashboard implements Dashboard{
                     break;
                 case 4:
                     raiseIssue();
+                    break;
                 default:
                     System.out.println("Invalid option");
             }
@@ -158,13 +159,15 @@ public class SubscriberDashboard implements Dashboard{
         for(String product : subscriberController.getProductsByCompany()){
             System.out.println(product);
         }
-        String productName = GetValues.getString("Enter product names to subscribe newsletter or 0 for previous Menu");
+
+        String productName = GetValues.getLine("Enter product names to subscribe newsletter or 0 for previous Menu");
         if(productName.equals("0"))
             return;
         try{
             subscriberController.subscribeNewsletter(getProductArray(productName));
         }catch(DatabaseException e){
             System.out.println(e.getMessage());
+            productName = null;
         }
     }
 
@@ -207,10 +210,11 @@ public class SubscriberDashboard implements Dashboard{
 
     private void unSubscribeNewsletter(){
         try {
+            System.out.println("Currently subscribed to");
             for (String product : subscriberController.getSubscribedNewsletter()) {
                 System.out.println(product);
             }
-            String productName = GetValues.getString("Enter product names to unsubscribe");
+            String productName = GetValues.getLine("Enter product names to unsubscribe");
             subscriberController.unSubscribeNewsletter(getProductArray(productName));
         }catch(DatabaseException | InvalidOperationException e){
             System.out.println(e.getMessage());
@@ -236,7 +240,8 @@ public class SubscriberDashboard implements Dashboard{
                 s[len++] = sb.toString();
                 sb.setLength(0);
             }
-            sb.append(prod[i++]);
+            else sb.append(prod[i]);
+            i++;
         }
         s[len] = sb.toString();
         return s;

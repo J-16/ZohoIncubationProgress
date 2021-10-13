@@ -27,7 +27,7 @@ public class CompanyPortal{
             try{
                 new Helper().register();
                 authenticationController.register(name,email, password);
-                System.out.println("Please login to continue");
+                System.out.println("Registered successfully, Please login to continue");
                 name = null;
                 password = null;
                 email = null;
@@ -41,8 +41,10 @@ public class CompanyPortal{
             }catch(InputException e){
                 System.out.println(e.getMessage());
                 if(e.getExceptionType() == InputException.ExceptionType.INVALID_FORMAT){
-                    if(e.getField().equals("email"))
+                    if(e.getField().equals("email")){
                         email = null;
+                        password = null;
+                    }
                     if(e.getField().equals("password"))
                         password = null;
                 }
@@ -68,20 +70,26 @@ public class CompanyPortal{
             }catch(InputException e){
                 System.out.println(e.getMessage());
                 if(e.getExceptionType() == InputException.ExceptionType.EMPTY_EXCEPTION){
-                    if(e.getField().equals("email"))
+                    if(e.getField().equals("email")){
                         email = null;
+                        password = null;
+                    }
                     if(e.getField().equals("password"))
                         password = null;
                 }
                 if(e.getExceptionType() == InputException.ExceptionType.INVALID_FORMAT){
-                    if(e.getField().equals("email"))
+                    if(e.getField().equals("email")){
                         email = null;
+                        password = null;
+                    }
                     if(e.getField().equals("password"))
                         password = null;
                 }
             }catch(DatabaseException e){
                 if(e.getExceptionType().equals(DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION)){
                     System.out.println("Username and password doesn't match");
+                    email = null;
+                    password = null;
                     return;
                 }
             }
@@ -139,7 +147,7 @@ public class CompanyPortal{
         }
 
         public String getEmail(){
-            return GetValues.getString("Enter Email:    ");
+            return GetValues.getString("Enter Email:  (must be small letters only)");
         }
 
         public String getPassword(){

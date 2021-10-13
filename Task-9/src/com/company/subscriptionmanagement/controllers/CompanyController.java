@@ -34,7 +34,7 @@ public class CompanyController{
     }
 
     public void updateSubscriptionPlan(String productName, String subscriptionName, String  newSubscriptionName, SubscriptionPlan.SubscriptionType subscriptionType, double discount) {
-        if( discount < 0 )
+        if(discount < 0)
             throw new InputException("discount must be positive value", InputException.ExceptionType.NEGATIVE_VALUE, "discount");
         if(!newSubscriptionName.equals("null"))
             productService.updateSubscriptionPlan(productName,subscriptionName, newSubscriptionName);
