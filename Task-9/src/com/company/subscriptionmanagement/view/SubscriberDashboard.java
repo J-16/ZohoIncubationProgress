@@ -20,7 +20,10 @@ public class SubscriberDashboard implements Dashboard{
     
     public void control(){
         do{
-            int option = GetValues.getIntegerValue(0,"0.Previous Menu 1.Active Subscription 2.News Letter 3.Notification 4.Raise an issue");
+            int option = -1;
+            while(option < 0 || option > 4){
+                option = GetValues.getIntegerValue("0.Previous Menu 1.Active Subscription 2.News Letter 3.Notification 4.Raise an issue", "Choose a valid option");
+            }
             switch(option){
                 case 0:
                     return;
@@ -82,7 +85,10 @@ public class SubscriberDashboard implements Dashboard{
         System.out.println();
         do{
             System.out.println();
-            int option = GetValues.getIntegerValue(0,"0.Previous Menu 1.Cancel Subscription 2.Pause subscription 3.Change subscription plan");
+            int option = -1;
+            while(option < 0 || option > 3){
+                option = GetValues.getIntegerValue("0.Previous Menu 1.Cancel Subscription 2.Pause subscription 3.Change subscription plan", "Choose a valid option");
+            }
             switch(option){
                 case 0 :
                     return;
@@ -104,7 +110,10 @@ public class SubscriberDashboard implements Dashboard{
     private void cancelSubscription(){
         while(true){
             try{
-                int option = GetValues.getIntegerValue(0,"1.Cancel product subscription or any other key to quit");
+                int option = -1;
+                while(option < 0){
+                    option = GetValues.getIntegerValue("1.Cancel product subscription or any other key to quit", "Cannot be negative");
+                }
                 if(option != 1)
                     return;
                 String productName = GetValues.getString("Enter Product name to cancel subscription");
@@ -141,7 +150,10 @@ public class SubscriberDashboard implements Dashboard{
 
     private void newsletter(){
         do{
-            int option = GetValues.getIntegerValue(0,"0.Previous Menu 1.Subscribe to newsletter 2.Unsubscribe news letter");
+            int option = -1;
+            while(option < 0 || option > 2){
+                option = GetValues.getIntegerValue("0.Previous Menu 1.Subscribe to newsletter 2.Unsubscribe news letter", "Choose a valid option");
+            }
             switch(option){
                 case 0:
                     return;
@@ -173,7 +185,10 @@ public class SubscriberDashboard implements Dashboard{
 
     private void changeSubscriptionPlan(){
         do{
-            int option = GetValues.getIntegerValue(0,"0.Previous Menu 1.UpGrade 2.DownGrade");
+            int option = -1;
+            while(option < 0 || option > 2){
+                option = GetValues.getIntegerValue("0.Previous Menu 1.UpGrade 2.DownGrade", "Choose a valid option");
+            }
             switch(option){
                 case 0:
                     return;
@@ -201,7 +216,7 @@ public class SubscriberDashboard implements Dashboard{
                 System.out.println(e.getMessage());
                 productName = null;
                 planName = null;
-                int s = GetValues.getIntegerValue(0, "enter 0 for previous menu or any other key to continue");
+                int s = GetValues.getIntegerValue("enter 0 for previous menu or any other key to continue", "");
                 if(s == 0)
                     return;
             }

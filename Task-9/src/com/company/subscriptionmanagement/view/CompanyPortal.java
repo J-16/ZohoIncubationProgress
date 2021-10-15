@@ -99,7 +99,10 @@ public class CompanyPortal{
     private void loggedIn(String companyName){
         SubscriberController subscriptionController = new SubscriberController(email, name, companyName);
         do{
-            int option = GetValues.getIntegerValue(0,"0.Logout 1.Check Available Products 2.User DashBoard");
+            int option = -1;
+            while(option < 0 || option > 2){
+                option = GetValues.getIntegerValue("0.Logout 1.Check Available Products 2.User DashBoard", "Choose a valid option");
+            }
             switch(option){
                 case 0 :
                     return;

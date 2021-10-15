@@ -20,7 +20,10 @@ public class CompanyDashboard implements Dashboard{
     public void control(){
             do{
                 try{
-                    int option = GetValues.getIntegerValue(0, "0.Logout 1.Add product 2.Add Subscription Plan 3.Change Subscription Plan 4.Add Coupon");
+                    int option = -1;
+                    while(option < 0 || option > 4){
+                         option = GetValues.getIntegerValue("0.Logout 1.Add product 2.Add Subscription Plan 3.Change Subscription Plan 4.Add Coupon","Select a valid option");
+                    }
                     switch(option){
                         case 0:
                             return;
@@ -55,11 +58,12 @@ public class CompanyDashboard implements Dashboard{
                 if(name == null) {
                     name = GetValues.getString("Enter Product Name");
                 }
-                if(trailDays < 0){
-                    trailDays = GetValues.getIntegerValue(0,"Enter Trail days if any else 0");
+                while(trailDays < 0){
+                    trailDays = GetValues.getIntegerValue("Enter Trail days if any else 0", "Trail Days cannot be negative");
                 }
-            if(price < 0)
-                price = GetValues.getIntegerValue(0,"Enter Product price");
+            while(price < 0){
+                price = GetValues.getIntegerValue("Enter Product price","price cannot be negative");
+            }
                 companyController.addProduct(name, trailDays, price);
                 System.out.println("Product added successfully");
                 System.out.println("------------------------------");
@@ -95,8 +99,8 @@ public class CompanyDashboard implements Dashboard{
                 subscriptionName = GetValues.getString("Enter Subscription Name");
             }
             try {
-                while (subType > 3){
-                    subType = GetValues.getIntegerValue(1, "Choose subscription plan 1.Monthly 2.Quarterly 3.Yearly");
+                while(subType < 0 || subType > 3){
+                    subType = GetValues.getIntegerValue("Choose a subscription plan 1.Monthly 2.Quarterly 3.Yearly","Choose a valid subscription plan");
                     switch (subType) {
                         case 1:
                             subscriptionType = SubscriptionPlan.SubscriptionType.MONTHLY;
@@ -106,12 +110,9 @@ public class CompanyDashboard implements Dashboard{
                             break;
                         case 3:
                             subscriptionType = SubscriptionPlan.SubscriptionType.YEARLY;
-                            break;
-                        default:
-                            System.out.print("Choose a valid subscription plan, ");
                     }
                 }
-                if(discount < 0) discount = GetValues.getDoubleValue(0, "Enter discount if any or 0");
+                while(discount < 0) discount = GetValues.getDoubleValue("Enter discount if any or 0", "discount cannot be negative value");
                 companyController.addSubscriptionPlan(productName, subscriptionName, subscriptionType, discount);
                 return;
             }catch(InputException e){
@@ -156,8 +157,8 @@ public class CompanyDashboard implements Dashboard{
                 newSubscriptionName = GetValues.getString("Enter New Subscription Name if applicable or \"null\" for no changes");
             }
             try{
-                while(subType > 3){
-                    subType = GetValues.getIntegerValue(0, "Choose new subscription plan 1.Monthly 2.Quarterly 3.Yearly or 0 for no changes");
+                while(subType < 0 || subType > 3){
+                    subType = GetValues.getIntegerValue("Choose new subscription plan 1.Monthly 2.Quarterly 3.Yearly or 0 for no changes", "Choose a valid option");
                     switch (subType) {
                         case 1:
                             subscriptionType = SubscriptionPlan.SubscriptionType.MONTHLY;
@@ -171,8 +172,8 @@ public class CompanyDashboard implements Dashboard{
                     }
                 }
                 System.out.println();
-                if(discount < 0)
-                    discount = GetValues.getDoubleValue(0, "Enter discount if any or 0 if no changes");
+                while(discount < 0)
+                    discount = GetValues.getDoubleValue("Enter discount if any or 0 if no changes", "discount cannot be negative");
                 companyController.updateSubscriptionPlan(productName, subscriptionName, newSubscriptionName, subscriptionType, discount);
                 System.out.println("Changed Successfully");
                 return;
@@ -204,8 +205,8 @@ public class CompanyDashboard implements Dashboard{
                 productName = GetValues.getString("Select Product");
                 coupon = GetValues.getString("Enter coupon Code");
                 String date = GetValues.getDate("Enter Expiry date yyyy-MM-dd");
-                if(discount < 1)
-                    discount = GetValues.getDoubleValue(1,"Enter discount in % example - 10");
+                while(discount < 0)
+                    discount = GetValues.getDoubleValue("Enter discount in % example - 10", "Discount cannot be negative value");
                 companyController.addCoupon(productName, coupon, LocalDate.parse(date), discount);
                 return;
             }catch(InputException e){

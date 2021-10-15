@@ -14,7 +14,10 @@ public class Main{
         new AutoAddDetails();
         do{
             System.out.println();
-            int option = GetValues.getIntegerValue(0,"0.Quit 1.Company Portal 2.Select company");
+            int option = -1;
+            while(option < 0 || option > 2){
+                option = GetValues.getIntegerValue("0.Quit 1.Company Portal 2.Select company", "Choose a valid option");
+            }
             switch (option){
                 case 0:
                     ScannerClass.closeScanner();

@@ -13,8 +13,8 @@ public class UPIPaymentView implements PaymentViewable{
     @Override
     public void view(){
         System.out.println("not implemented");
-        long upid =  GetValues.getLongValue(0,"Enter Upi Id");
-        long pin =   GetValues.getIntegerValue(0,"Enter pin");
+        long upid =  GetValues.getLongValue("Enter Upi Id", "Upi cannot be negative");
+        long pin =   GetValues.getIntegerValue("Enter pin", "pin cannot be negative");
     }
 
     @Override

@@ -92,7 +92,7 @@ public class ProductService{
             if(subscriptionName.equals(subscriptionPlan.getPlanName()))
                 return subscriptionPlan;
         }
-        throw new DatabaseException("No such subscription name found", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION, "subscriptionName");
+        throw new DatabaseException("No such subscription found", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION, "subscriptionName");
     }
 
     public void setNotificationService(NotificationService notificationService){

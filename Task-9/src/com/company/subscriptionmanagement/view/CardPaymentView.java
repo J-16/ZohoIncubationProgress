@@ -19,10 +19,10 @@ public class CardPaymentView implements PaymentViewable {
         String expDate = null;
         while(true){
             try{
-                if(cardNo < 0)
-                    cardNo = GetValues.getLongValue(0,"Enter Card Number");
-                if(cvv < 0)
-                    cvv = GetValues.getIntegerValue(0,"Enter cvv");
+                while(cardNo < 0)
+                    cardNo = GetValues.getLongValue("Enter Card Number", "Card number cannot be negative");
+                while(cvv < 0)
+                    cvv = GetValues.getIntegerValue("Enter cvv", "Cvv cannot be negative");
                 if(expDate == null)
                     expDate = GetValues.getDate("Enter expiry date - yyyy-MM-dd");
                 HashMap<String, String> paymentDetails = new HashMap<>();
@@ -46,7 +46,7 @@ public class CardPaymentView implements PaymentViewable {
     }
 
     public void getPaymentMethod(){
-        int option = GetValues.getIntegerValue(0,"1.Use previous payment details or any other key to enter New Payment details");
+        int option = GetValues.getIntegerValue("1.Use previous payment details or any other key to enter New Payment details", "Select a valid option");
         paymentController.setOption(option);
     }
 

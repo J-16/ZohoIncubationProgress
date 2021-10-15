@@ -35,7 +35,10 @@ public class ProductView{
         System.out.println("");
         String productName = null;
         while(true){
-            int option = GetValues.getIntegerValue(1, "1.Subscribe Product or any other number to go back to previous menu");
+            int option = -1;
+            while(option < 0){
+                option = GetValues.getIntegerValue("1.Subscribe Product or any other number to go back to previous menu", "Cannot be negative");
+            }
             if(option == 1){
                 try{
                     productName = GetValues.getString("Enter product name to view details");
@@ -82,7 +85,9 @@ public class ProductView{
             return;
         }
         do{
-            int option = GetValues.getIntegerValue(0,"0.Previous Menu 1.Use Trail version 2.Subscribe to product 3.Gift a Subscription");
+            int option = -1;
+            while(option < 0 || option > 3)
+                option = GetValues.getIntegerValue("0.Previous Menu 1.Use Trail version 2.Subscribe to product 3.Gift a Subscription", "Choose a valid option");
             switch(option){
                 case 0:
                     return;

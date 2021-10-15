@@ -1,5 +1,6 @@
 package com.company.subscriptionmanagement.database;
 
+import com.company.companiescustomer.model.Customer;
 import com.company.subscriptionmanagement.model.Company;
 import com.company.subscriptionmanagement.model.Subscriber;
 
@@ -14,7 +15,7 @@ public class CompanyDatabase implements Database{
         companies.put(email, new Company(name, email, password));
     }
 
-    public Company getUserByEmail(String email){
+    public Customer getUserByEmail(String email){
         return companies.get(email);
     }
 

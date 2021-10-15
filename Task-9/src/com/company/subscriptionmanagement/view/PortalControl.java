@@ -9,7 +9,9 @@ public class PortalControl{
 
         int option = 10;
         while(true){
-            option = GetValues.getIntegerValue(0, "0.Previous Menu 1.Register 2.Login ");
+            while(option < 0 || option > 2){
+                option = GetValues.getIntegerValue( "0.Previous Menu 1.Register 2.Login ", "Select a valid option");
+            }
             switch (option){
                 case 0 :
                     return;
@@ -17,9 +19,8 @@ public class PortalControl{
                     portal.registerFlow();
                 case 2:
                     portal.loginFlow();
+                    option = -1;
                     break;
-                default:
-                    System.out.println("Invalid option");
             }
         }
     }

@@ -6,52 +6,58 @@ import java.util.InputMismatchException;
 
 public class GetValues{
 
-    public static int getIntegerValue(int minLimit, String message){
-        int value = -1;
-        while(value < minLimit){
+    public static final String PURPLE = "\033[0;35m";
+    public static final String RESET = "\033[0m";
+
+    public static int getIntegerValue(String message, String error){
+        int value = 0;
+        while(true){
             try{
-                System.out.println(message);
+                System.out.println(PURPLE + message + RESET);
                 value = ScannerClass.getScanner().nextInt();
-                if(value < minLimit)
-                    System.out.println("Enter a valid input");
+                if(value < 0) {
+                    System.out.println(error);
+                }
+                else return value;
             }catch(InputMismatchException e){
-                System.out.println("Invalid input,");
+                System.err.println("Invalid input, Enter a number");
                 ScannerClass.getScanner().nextLine();
             }
         }
-        return value;
     }
 
-    public static double getDoubleValue(int minLimit, String message){
-        int value = -1;
-        while(value < minLimit){
+    public static double getDoubleValue(String message, String error){
+        int value = 0;
+        while(true){
             try{
-                System.out.println(message);
+                System.out.println(PURPLE + message + RESET);
                 value = ScannerClass.getScanner().nextInt();
-                if(value < minLimit)
-                    System.out.println("Enter a valid input");
+                if(value < 0)
+                    System.err.println(error);
+                else return value;
             }catch(InputMismatchException e){
-                System.out.println("Invalid input, ");
+                System.out.println("Invalid input, Enter a number");
                 ScannerClass.getScanner().nextLine();
             }
+
         }
-        return value;
     }
 
-    public static long getLongValue(int minLimit, String message){
+    public static long getLongValue(String message, String error){
         long value = -1;
-        while(value < minLimit){
+        while(true){
             try{
-                System.out.println(message);
+                System.out.println(PURPLE + message + RESET);
                 value = ScannerClass.getScanner().nextLong();
-                if(value < minLimit)
-                    System.out.println("Enter a valid input");
+                if(value < 0)
+                    System.err.println(error);
+                else return value;
             }catch(InputMismatchException e){
-                System.out.println("Invalid input, ");
+                System.err.println("Invalid input, Enter a number");
                 ScannerClass.getScanner().nextLine();
             }
+
         }
-        return value;
     }
 
     public static String getDate(String message){
@@ -59,26 +65,26 @@ public class GetValues{
         boolean isDate = false;
         while(!isDate){
             try{
-                System.out.print(message);
+                System.out.println(PURPLE + message + RESET);
                 expDate = ScannerClass.getScanner().next();
                 LocalDate date = LocalDate.parse(expDate);
                 if(date.isBefore(LocalDate.now()))
                     System.out.println("Enter valid date");
                 else isDate = true;
             }catch(DateTimeParseException e){
-                System.out.println("Incorrect date format, ");
+                System.out.println("Incorrect date format");
             }
         }
         return expDate;
     }
 
     public static String getString(String message){
-        System.out.println(message);
+        System.out.println(PURPLE + message + RESET);
         return ScannerClass.getScanner().next();
     }
 
     public static String getLine(String message){
-        System.out.println(message);
+        System.out.println(PURPLE + message + RESET);
         ScannerClass.getScanner().nextLine();
         return ScannerClass.getScanner().nextLine();
     }
