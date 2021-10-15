@@ -18,7 +18,6 @@ public class UPIPaymentView implements PaymentViewable{
         int pin = -1;
         while(true){
             try{
-                System.out.println("not implemented");
                 //TODO:
                 String upid =  GetValues.getEmail("Enter Upi Id (eg: text442@oksbi.com)");
                 if(pin  < 0)
