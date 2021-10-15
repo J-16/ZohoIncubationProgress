@@ -12,8 +12,8 @@ public class PaymentMethod{
 
     public void selectPayment(){
         int option = -1;
-        while(option != 3){
-            option = GetValues.getIntegerValue("1.UPI 2.Internet Banking 3.Card Payment (Only card method is implemented for now)", "Select only option 3 for now");
+        while(option != 3 && option != 1){
+            option = GetValues.getIntegerValue("1.UPI 2.Internet Banking 3.Card Payment (1 and 3 are implemented for now)", "Select 1 or 3 only");
         }
         paymentMethodController.setPaymentMethod(option);
     }

@@ -1,5 +1,7 @@
 package com.company.subscriptionmanagement.view;
 
+import com.company.subscriptionmanagement.model.service.Validity;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.InputMismatchException;
@@ -82,6 +84,16 @@ public class GetValues{
         DisplayMessage.menu(message);
         ScannerClass.getScanner().nextLine();
         return ScannerClass.getScanner().nextLine();
+    }
+
+    public static String getEmail(String message){
+        while(true){
+            DisplayMessage.menu(message);
+            String email = ScannerClass.getScanner().next();
+            if(!Validity.isValidEmail(email))
+                DisplayMessage.errorMessage("not a valid email id");
+            else return email;
+        }
     }
 
 }

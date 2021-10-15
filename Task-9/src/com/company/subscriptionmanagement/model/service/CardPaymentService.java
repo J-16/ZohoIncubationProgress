@@ -5,12 +5,14 @@ import com.company.subscriptionmanagement.model.PaymentDetails;
 public class CardPaymentService implements PaymentService{
 
     @Override
-    public boolean makePayment(String email, double price, PaymentDetails paymentDetails) {
+    public boolean makePayment(String email, double price, PaymentDetails paymentDetails){
+        //TODO - Make payment function here
+        /* IMPLEMENT */
         return true;
     }
 
     @Override
-    public boolean makePayment() {
+    public boolean makePayment(){
         return true;
     }
 }

@@ -163,7 +163,7 @@ public class CompanyDashboard implements Dashboard{
                 subscriptionName = GetValues.getString("Select Subscription you want to change");
             }
             if(newSubscriptionName == null){
-                newSubscriptionName = GetValues.getString("Enter New Subscription Name if applicable or \"null\" for no changes");
+                newSubscriptionName = GetValues.getString("Enter the New Subscription plan name or \"null\" for no changes int the name : (" +subscriptionName+")");
             }
             try{
                 while(subType < 0 || subType > 3){

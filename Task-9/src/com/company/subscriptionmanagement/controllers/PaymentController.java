@@ -1,6 +1,6 @@
 package com.company.subscriptionmanagement.controllers;
 
-import com.company.subscriptionmanagement.exception.InputException;
+
 import com.company.subscriptionmanagement.model.PaymentDetails;
 import com.company.subscriptionmanagement.model.Subscriber;
 import com.company.subscriptionmanagement.model.service.*;
@@ -19,11 +19,11 @@ public class PaymentController{
     private PaymentViewable paymentView;
 
     public void processPayment(double price, Subscriber subscriber){
-        if(subscriber.getPaymentDetails() == null){
+        if(subscriber.getPaymentDetails() == null || !(paymentService instanceof CardPaymentService)){
             generatePaymentDetails(subscriber);
         }
         else{
-            paymentView.getPaymentMethod();
+            paymentView.getPaymentMethod(this);
             if( option != 1 ){
                 generatePaymentDetails(subscriber);
             }
@@ -44,13 +44,14 @@ public class PaymentController{
         if(paymentView instanceof CardPaymentService)
             subscriber.setPaymentDetails( new PaymentDetails( Long.parseLong(paymentDetails.get("cardNo")), Integer.parseInt(paymentDetails.get("cvv")),
                     LocalDate.parse(paymentDetails.get("expDate")) ));
+        //cannot save upi details and internet banking (only one time payment).
     }
 
     public void setPaymentDetails(HashMap<String, String> paymentDetails){
         this.paymentDetails = paymentDetails;
     }
 
-    public void setOption(int option) {
+    public void setOption(int option){
         this.option = option;
     }
 
