@@ -4,9 +4,6 @@ package com.company.subscriptionmanagement.view;
 public class PortalControl{
 
     public void control(CompanyPortal portal){
-
-        System.out.println("Welcome to the portal");
-
         while(true){
             int option = -1;
             while(option < 0 || option > 2){

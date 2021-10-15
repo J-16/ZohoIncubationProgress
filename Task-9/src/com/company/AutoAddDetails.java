@@ -12,6 +12,7 @@ import java.time.LocalDate;
 
 //TODO : update user payment info, notify customer care downgrade plan, track issue
 //TODO : sort products list and subscription plan by name (CompanyDashboard) and option as per [price,trail]
+//TODO : add view for send notification and mail about product updates(news letter)
 
 public class AutoAddDetails {
 

@@ -19,9 +19,11 @@ public class Main{
             }
             switch (option){
                 case 0:
+                    ToastMessage.SuccessMessage("Have a good day");
                     ScannerClass.closeScanner();
                     return;
                 case 1:
+                    System.out.println("Welcome to the Subscription management");
                     new PortalControl().control(portal);
                     break;
                 case 2:

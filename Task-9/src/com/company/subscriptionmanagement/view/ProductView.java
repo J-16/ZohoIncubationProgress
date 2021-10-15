@@ -30,15 +30,13 @@ public class ProductView{
             System.out.println(e.getMessage());
             return;
         }
+        System.out.println("---------Available Products---------");
         for(String product : products)
             System.out.println(product);
         System.out.println("");
         String productName = null;
         while(true){
-            int option = -1;
-            while(option < 0){
-                option = GetValues.getIntegerValue("1.Subscribe Product or any other number to go back to previous menu", "Cannot be negative");
-            }
+            int option = GetValues.getIntegerValue("1.Subscribe Product or any other number to go back to previous menu", "Cannot be negative");
             if(option == 1){
                 try{
                     productName = GetValues.getString("Enter product name to view details");
@@ -51,6 +49,7 @@ public class ProductView{
                     productName = null;
                 }
             }
+            else return;
         }
     }
 
@@ -100,8 +99,6 @@ public class ProductView{
                 case 3:
                     subscribeProduct(productName, SubscriptionType.GIFT);
                     break;
-                default:
-                    System.out.println("invalid option");
             }
         }while(true);
     }
@@ -109,7 +106,7 @@ public class ProductView{
     private void useTrail(String productName){
         try{
             subscribeController.activateTrail(productName);
-            System.out.println("trail version activated");
+            ToastMessage.SuccessMessage("trail version activated");
         }catch(InvalidOperationException e){
             System.out.println(e.getMessage());
         }
@@ -127,7 +124,7 @@ public class ProductView{
                             coupon = GetValues.getString("Enter coupon : ");
                         }
                         subscribeController.subscribeProduct(productName, planName, coupon);
-                        System.out.println("Subscription Added successfully");
+                        ToastMessage.SuccessMessage("Subscription Added successfully");
                         return;
                     }catch(DatabaseException e){
                         System.out.println(e.getMessage());

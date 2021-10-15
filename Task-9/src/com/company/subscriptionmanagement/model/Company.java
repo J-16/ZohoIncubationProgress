@@ -10,7 +10,7 @@ import java.util.LinkedList;
 public class Company extends Customer{
 
     private ArrayList<Product> products;
-    private LinkedList<Issue> issueQueue; //TODO: add company functionality (get the issue);
+    private LinkedList<Issue> issueQueue;
     private HashMap<LocalDate, LinkedList<CurrentSubscription> > autoRenewal;
 
     public Company(String name, String email, String password){

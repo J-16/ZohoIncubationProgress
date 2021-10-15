@@ -200,7 +200,7 @@ public class SubscriberService{
                 newsletter.add(product.getProductName());
         }
         if(newsletter.size() == 0)
-            throw new InvalidOperationException("No newsletter subscriptions so far");
+            throw new InvalidOperationException("You have not subscribed to any newsletters so far");
         return newsletter;
     }
 

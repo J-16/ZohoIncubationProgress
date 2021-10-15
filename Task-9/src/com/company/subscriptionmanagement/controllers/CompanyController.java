@@ -62,7 +62,6 @@ public class CompanyController{
         return productService.getSubscriptionPlanByProduct(productName);
     }
 
-    //TODO: add view
     public void sendMailToSubscribers(String message){
         productService.sendMail(message);
     }

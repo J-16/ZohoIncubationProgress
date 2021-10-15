@@ -8,6 +8,7 @@ import com.company.subscriptionmanagement.model.CurrentSubscription;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class SubscriberDashboard implements Dashboard{
@@ -118,7 +119,7 @@ public class SubscriberDashboard implements Dashboard{
                     return;
                 String productName = GetValues.getString("Enter Product name to cancel subscription");
                 subscriberController.cancelSubscription(productName);
-                System.out.println("Subscription cancelled");
+                ToastMessage.SuccessMessage("Subscription cancelled");
                 return;
             }catch(InvalidOperationException | DatabaseException e){
                 System.out.println(e.getMessage());
@@ -137,6 +138,7 @@ public class SubscriberDashboard implements Dashboard{
                 if(date == null)
                     date = GetValues.getDate("Enter date to resume subscription in yyyy-MM-dd");
                 subscriberController.pauseSubscription(productName, LocalDate.parse(date));
+                ToastMessage.SuccessMessage("Subscription paused");
                 return;
             }catch(InputException e){
                 System.out.println(e.getMessage());
@@ -167,16 +169,17 @@ public class SubscriberDashboard implements Dashboard{
     }
 
     private void subscribeNewsLetter(){
-        System.out.println("Products");
+        System.out.println("----------Products----------");
         for(String product : subscriberController.getProductsByCompany()){
             System.out.println(product);
         }
 
-        String productName = GetValues.getLine("Enter product names to subscribe newsletter or 0 for previous Menu");
+        String productName = GetValues.getLine("Enter product names to subscribe newsletter or 0 for previous Menu \n format : product names separated by space eg: (prod prod2 prod3)");
         if(productName.equals("0"))
             return;
         try{
             subscriberController.subscribeNewsletter(getProductArray(productName));
+            ToastMessage.SuccessMessage("Subscribed to news letter");
         }catch(DatabaseException e){
             System.out.println(e.getMessage());
             productName = null;
@@ -225,12 +228,14 @@ public class SubscriberDashboard implements Dashboard{
 
     private void unSubscribeNewsletter(){
         try {
+            ArrayList<String> products = subscriberController.getSubscribedNewsletter();
             System.out.println("Currently subscribed to");
-            for (String product : subscriberController.getSubscribedNewsletter()) {
+            for (String product : products) {
                 System.out.println(product);
             }
-            String productName = GetValues.getLine("Enter product names to unsubscribe");
+            String productName = GetValues.getLine("Enter product names to unsubscribe \n format : product names separated by space eg: (prod prod2 prod3)");
             subscriberController.unSubscribeNewsletter(getProductArray(productName));
+            ToastMessage.SuccessMessage("Unsubscribed from the products");
         }catch(DatabaseException | InvalidOperationException e){
             System.out.println(e.getMessage());
         }

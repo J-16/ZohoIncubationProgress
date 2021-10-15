@@ -16,7 +16,7 @@ public class GetValues{
                 System.out.println(PURPLE + message + RESET);
                 value = ScannerClass.getScanner().nextInt();
                 if(value < 0) {
-                    System.out.println(error);
+                    System.err.println(error);
                 }
                 else return value;
             }catch(InputMismatchException e){
@@ -36,10 +36,9 @@ public class GetValues{
                     System.err.println(error);
                 else return value;
             }catch(InputMismatchException e){
-                System.out.println("Invalid input, Enter a number");
+                System.err.println("Invalid input, Enter a number");
                 ScannerClass.getScanner().nextLine();
             }
-
         }
     }
 
@@ -56,7 +55,6 @@ public class GetValues{
                 System.err.println("Invalid input, Enter a number");
                 ScannerClass.getScanner().nextLine();
             }
-
         }
     }
 
@@ -69,10 +67,10 @@ public class GetValues{
                 expDate = ScannerClass.getScanner().next();
                 LocalDate date = LocalDate.parse(expDate);
                 if(date.isBefore(LocalDate.now()))
-                    System.out.println("Enter valid date");
+                    System.err.println("Enter valid date");
                 else isDate = true;
             }catch(DateTimeParseException e){
-                System.out.println("Incorrect date format");
+                System.err.println("Incorrect date format");
             }
         }
         return expDate;

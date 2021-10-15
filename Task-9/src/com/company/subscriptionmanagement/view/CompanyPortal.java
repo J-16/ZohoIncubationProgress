@@ -33,7 +33,7 @@ public class CompanyPortal{
                 else{
                     authenticationController.register(name,email, password, CompanyDatabase.UserType.CUSTOMER);
                 }
-                System.out.println("Registered successfully, Please login to continue");
+                ToastMessage.SuccessMessage("Registered successfully, Please login to continue");
                 Thread.sleep(1000);
                 name = null;
                 password = null;
@@ -65,7 +65,6 @@ public class CompanyPortal{
         while(true){
             try{
                 new Helper().login();
-                System.out.println("Welcome back ");
                 if(companyName == null){
                     dashboard = new CompanyDashboard(new CompanyController( (Company) authenticationController.login(email, password,CompanyDatabase.UserType.COMPANY)));
                     dashboard.control();
@@ -107,6 +106,7 @@ public class CompanyPortal{
 
     private void loggedIn(String companyName){
         SubscriberController subscriptionController = new SubscriberController(email, name, companyName);
+        ToastMessage.SuccessMessage("Welcome back ");
         do{
             int option = -1;
             while(option < 0 || option > 2){
@@ -120,6 +120,7 @@ public class CompanyPortal{
                     productView.productsDetails();
                     break;
                 case 2 :
+                    System.out.println("Welcome to subscription management subscriber portal");
                     subscriptionController.dashBoard();
                     break;
             }
@@ -146,12 +147,12 @@ public class CompanyPortal{
         }
 
         public void login(){
-            do{
+            while(email == null){
                 email = getEmail();
-            }while(email == null);
-            do{
+            }
+            while(password == null){
                 password = getPassword();
-            }while(password == null);
+            };
         }
 
         public String getName(){
@@ -159,7 +160,7 @@ public class CompanyPortal{
         }
 
         public String getEmail(){
-            return GetValues.getString("Enter Email:  (must be small letters only)");
+            return GetValues.getString("Enter Email:  (must be small letters only) ");
         }
 
         public String getPassword(){
