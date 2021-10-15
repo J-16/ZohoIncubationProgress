@@ -7,7 +7,7 @@ import com.company.subscriptionmanagement.controllers.SubscriberController;
 
 public class Main{
 
-    private static CompanyPortal portal;
+    private static CompanyPortal portal = new CompanyPortal();
     private static CompanyListView companyListView;
 
     public static void main(String[] args){
@@ -23,7 +23,6 @@ public class Main{
                     ScannerClass.closeScanner();
                     return;
                 case 1:
-                    portal = new CompanyPortal(CompanyAuthenticationController.LoginType.COMPANY);
                     new PortalControl().control(portal);
                     break;
                 case 2:
@@ -34,7 +33,6 @@ public class Main{
                     while(!SubscriberController.isValidCompany(companyName)) {
                         companyName = GetValues.getString("Invalid name, please enter a valid company name from the list above");
                     }
-                    portal = new CompanyPortal(CompanyAuthenticationController.LoginType.CUSTOMER);
                     portal.setCompanyName(companyName);
 
                     new PortalControl().control(portal);

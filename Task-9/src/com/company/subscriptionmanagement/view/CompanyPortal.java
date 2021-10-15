@@ -2,6 +2,7 @@ package com.company.subscriptionmanagement.view;
 
 
 import com.company.subscriptionmanagement.controllers.*;
+import com.company.subscriptionmanagement.database.CompanyDatabase;
 import com.company.subscriptionmanagement.exception.DatabaseException;
 import com.company.subscriptionmanagement.exception.InputException;
 import com.company.subscriptionmanagement.model.Company;
@@ -17,8 +18,8 @@ public class CompanyPortal{
     private ProductView productView;
     private String companyName;
 
-    public CompanyPortal(CompanyAuthenticationController.LoginType type){
-        this.authenticationController = new CompanyAuthenticationController(type);
+    public CompanyPortal(){
+        this.authenticationController = new CompanyAuthenticationController();
     }
 
     public void registerFlow(){
@@ -26,7 +27,12 @@ public class CompanyPortal{
         while(true){
             try{
                 new Helper().register();
-                authenticationController.register(name,email, password);
+                if(companyName == null){
+                    authenticationController.register(name,email, password, CompanyDatabase.UserType.COMPANY);
+                }
+                else{
+                    authenticationController.register(name,email, password, CompanyDatabase.UserType.CUSTOMER);
+                }
                 System.out.println("Registered successfully, Please login to continue");
                 name = null;
                 password = null;
@@ -58,10 +64,10 @@ public class CompanyPortal{
             try{
                 new Helper().login();
                 if(companyName == null){
-                    dashboard = new CompanyDashboard(new CompanyController( (Company) authenticationController.login(email, password)));
+                    dashboard = new CompanyDashboard(new CompanyController( (Company) authenticationController.login(email, password,CompanyDatabase.UserType.COMPANY)));
                     dashboard.control();
                 }else{
-                    authenticationController.login(email, password);
+                    authenticationController.login(email, password, CompanyDatabase.UserType.CUSTOMER);
                     loggedIn(companyName);
                 }
                 email = null;

@@ -1,6 +1,5 @@
 package com.company;
 
-import com.company.companiescustomer.dataBase.CustomerDatabase;
 import com.company.subscriptionmanagement.controllers.CompanyAuthenticationController;
 import com.company.subscriptionmanagement.controllers.CompanyController;
 import com.company.subscriptionmanagement.database.CompanyDatabase;
@@ -16,12 +15,12 @@ import java.time.LocalDate;
 public class AutoAddDetails {
 
     {
-        CompanyAuthenticationController controller = new CompanyAuthenticationController(CompanyAuthenticationController.LoginType.COMPANY);
-        controller.register("company1", "company1@gmail.com", "123456789");
-        controller.register("company2", "company2@gmail.com", "123456789");
-        controller.register("company3", "c@c.c", "123456789");
+        CompanyAuthenticationController controller = new CompanyAuthenticationController();
+        controller.register("company1", "company1@gmail.com", "123456789", CompanyDatabase.UserType.COMPANY);
+        controller.register("company2", "company2@gmail.com", "123456789",CompanyDatabase.UserType.COMPANY);
+        controller.register("company3", "c@c.c", "123456789",CompanyDatabase.UserType.COMPANY);
 
-        CompanyController company = new CompanyController( (Company) new CompanyAuthenticationController(CompanyAuthenticationController.LoginType.COMPANY).login("company1@gmail.com", "123456789") );
+        CompanyController company = new CompanyController( (Company) new CompanyAuthenticationController().login("company1@gmail.com", "123456789",CompanyDatabase.UserType.COMPANY) );
         company.addProduct("prod1",10,500);
         company.addProduct("prod2",0,500);
         company.addProduct("prod3",10,100);
@@ -29,7 +28,7 @@ public class AutoAddDetails {
         company.addSubscriptionPlan("prod1","Pro", SubscriptionPlan.SubscriptionType.MONTHLY,13);
         company.addSubscriptionPlan("prod1","Premium", SubscriptionPlan.SubscriptionType.MONTHLY,13);
 
-        company = new CompanyController( (Company) new CompanyAuthenticationController(CompanyAuthenticationController.LoginType.COMPANY).login("company1@gmail.com", "123456789"));
+        company = new CompanyController( (Company) new CompanyAuthenticationController().login("company1@gmail.com", "123456789",CompanyDatabase.UserType.COMPANY));
         company.addProduct("product1",10,500);
         company.addProduct("product2",0,500);
         company.addProduct("product3",10,100);
@@ -42,10 +41,10 @@ public class AutoAddDetails {
         Subscriber subscriber = new CompanyDatabase().getSubscribersByEmail("u@c.c");
         subscriber.setPaymentDetails(new PaymentDetails(123L,12, LocalDate.now()));
 
-        CustomerDatabase database = new CustomerDatabase();
-        database.register("u", "u@c.c", "123456789");
-        database.register("u", "u1@c.c", "123456789");
-        database.register("u", "u2@c.c", "123456789");
+        CompanyDatabase database = new CompanyDatabase();
+        database.register("u", "u@c.c", "123456789", CompanyDatabase.UserType.CUSTOMER);
+        database.register("u", "u1@c.c", "123456789", CompanyDatabase.UserType.CUSTOMER);
+        database.register("u", "u2@c.c", "123456789", CompanyDatabase.UserType.CUSTOMER);
 
 //        SubscriberController subscriberController = new SubscriberController("u","u","c");
 //        subscriberController.subscribeProduct("prod1","Regular",null);

@@ -1,7 +1,7 @@
 package com.company.subscriptionmanagement.model.service;
 
 import com.company.companiescustomer.model.Customer;
-import com.company.subscriptionmanagement.database.Database;
+import com.company.subscriptionmanagement.database.CompanyDatabase;
 import com.company.subscriptionmanagement.exception.DatabaseException;
 import com.company.subscriptionmanagement.exception.InputException;
 
@@ -9,25 +9,25 @@ import java.util.regex.Pattern;
 
 public class AuthenticationService {
 
-    private Database database;
+    private CompanyDatabase database;
 
-    public AuthenticationService(Database database){
-        this.database = database;
+    public AuthenticationService(){
+        database = new CompanyDatabase();
     }
 
-    public void register(String name, String email, String password){
+    public <T extends Customer> void register(String name, String email, String password, CompanyDatabase.UserType userType){
         emptyName(name);
         emptyCredentials(email, password);
         validity(email, password);
-        if(database.getUserByEmail(email) != null) {
+        if(database.getUserByEmail(email, userType) != null){
             throw new DatabaseException("Account Already exists", DatabaseException.ExceptionType.EXISTS_EXCEPTION);
         }
-        database.register(name, email, password);
+        database.register(name, email, password, userType);
     }
 
-    public Customer login(String email, String password){
+    public <T extends Customer> Customer login(String email, String password, CompanyDatabase.UserType userType){
         emptyCredentials(email, password);
-        Customer userAccount = database.getUserByEmail(email);
+        Customer userAccount = database.getUserByEmail(email, userType);
         validity(email, password);
         if( userAccount == null )
             throw new DatabaseException("No such User found", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION);

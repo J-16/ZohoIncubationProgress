@@ -78,7 +78,7 @@ public class ProductView{
         System.out.println("------------------------------------------------------------------------------------------------------------");
         try{
             if(subscribeController.getIsTrailAvailable(productName)){
-                System.out.println("Trail available for " + subscribeController.getTrailDays(productName));
+                System.out.println("Trail available for " + subscribeController.getTrailDays(productName) + "days");
             }
         }catch (DatabaseException e){
             System.out.println(e.getMessage());
