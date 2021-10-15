@@ -34,6 +34,7 @@ public class CompanyPortal{
                     authenticationController.register(name,email, password, CompanyDatabase.UserType.CUSTOMER);
                 }
                 System.out.println("Registered successfully, Please login to continue");
+                Thread.sleep(1000);
                 name = null;
                 password = null;
                 email = null;
@@ -54,6 +55,8 @@ public class CompanyPortal{
                     if(e.getField().equals("password"))
                         password = null;
                 }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
     }
