@@ -7,7 +7,7 @@ import com.company.subscriptionmanagement.controllers.SubscriberController;
 public class Main{
 
     private static CompanyPortal portal = new CompanyPortal();
-    private static CompanyListView companyListView;
+    private static CompanyListView companyListView = new CompanyListView();
 
     public static void main(String[] args){
         new AutoAddDetails();
@@ -25,7 +25,6 @@ public class Main{
                     new PortalControl().control(portal);
                     break;
                 case 2:
-                    companyListView = new CompanyListView();
                     companyListView.displayCompanies();
                     String companyName = GetValues.getString("Enter company name you want to login");
 
@@ -33,7 +32,6 @@ public class Main{
                         companyName = GetValues.getString("Invalid name, please enter a valid company name from the list above");
                     }
                     portal.setCompanyName(companyName);
-
                     new PortalControl().control(portal);
                     break;
                 default:
@@ -41,5 +39,4 @@ public class Main{
             }
         }while(true);
     }
-
 }
