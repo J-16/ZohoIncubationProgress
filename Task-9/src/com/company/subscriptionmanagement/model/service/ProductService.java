@@ -81,7 +81,7 @@ public class ProductService{
             if(product.getProductName().equals(productName))
                 return product;
         }
-        throw new DatabaseException("No such product name found", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION, "productName");
+        throw new DatabaseException("No such product found", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION, "productName");
     }
 
     private SubscriptionPlan getSubscriptionPlanByName(Product product, String subscriptionName){

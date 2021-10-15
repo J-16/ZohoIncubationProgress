@@ -213,18 +213,29 @@ public class CompanyDashboard implements Dashboard{
         displayProducts();
         while(true){
             try{
-                productName = GetValues.getString("Select Product");
+                while(productName == null){
+                    productName = GetValues.getString("Select Product");
+                    try{
+                        companyController.getProductByName(productName);
+                    }catch(DatabaseException e){
+                        System.out.println(e.getMessage());
+                        productName = null;
+                    }
+                }
                 coupon = GetValues.getString("Enter coupon Code");
                 String date = GetValues.getDate("Enter Expiry date yyyy-MM-dd");
                 while(discount < 0)
                     discount = GetValues.getDoubleValue("Enter discount in % example - 10", "Discount cannot be negative value");
                 companyController.addCoupon(productName, coupon, LocalDate.parse(date), discount);
+                System.out.println("Coupon added successfully");
                 return;
             }catch(InputException e){
                 if(e.getExceptionType() == InputException.ExceptionType.NEGATIVE_VALUE){
                     if(e.getField().equals("discount"))
                         discount = -1;
                 }
+            }catch(DatabaseException e){
+                System.out.println(e.getMessage());
             }
         }
     }
