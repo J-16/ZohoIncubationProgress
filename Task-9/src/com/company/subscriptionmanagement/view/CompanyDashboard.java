@@ -100,10 +100,7 @@ public class CompanyDashboard implements Dashboard{
                 productName = GetValues.getString("Enter Product name");
                 try{
                     displaySubscriptions(productName);
-                }catch(DatabaseException e){
-                    System.out.println(e.getMessage());
-                    return;
-                }
+                }catch(DatabaseException e){}
             }
             if(subscriptionName == null) {
                 subscriptionName = GetValues.getString("Enter new subscription plan name");
@@ -248,7 +245,7 @@ public class CompanyDashboard implements Dashboard{
         products.forEach(product -> {
             System.out.println( product.getProductName() + "                 " +  product.getPrice()  + "          " +  product.getTrailDays());
         });
-        System.out.println("---------------------------");
+        System.out.println("--------------------------------------");
     }
 
     private void displaySubscriptions(String productName){
@@ -259,7 +256,7 @@ public class CompanyDashboard implements Dashboard{
         subscriptionPlans.forEach(subscriptionPlan -> {
             System.out.println( subscriptionPlan.getPlanName() + "                " + subscriptionPlan.getSubscriptionType() + "          " + subscriptionPlan.getPrice() );
         });
-        System.out.println("--------------------------------------");
+        System.out.println("------------------------------------------------");
     }
 
 }

@@ -120,7 +120,7 @@ public class CompanyPortal{
                     productView.productsDetails();
                     break;
                 case 2 :
-                    System.out.println("Welcome to subscription management subscriber portal");
+                    System.out.println("Welcome to subscription management System subscriber portal");
                     subscriptionController.dashBoard();
                     break;
             }

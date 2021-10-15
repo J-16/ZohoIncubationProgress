@@ -23,7 +23,7 @@ public class Main{
                     ScannerClass.closeScanner();
                     return;
                 case 1:
-                    System.out.println("Welcome to the Subscription management");
+                    System.out.println("Welcome to the Subscription management System");
                     new PortalControl().control(portal);
                     break;
                 case 2:
@@ -36,8 +36,6 @@ public class Main{
                     portal.setCompanyName(companyName);
                     new PortalControl().control(portal);
                     break;
-                default:
-                    System.out.println("Invalid option");
             }
         }while(true);
     }

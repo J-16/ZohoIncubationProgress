@@ -15,7 +15,7 @@ public class AuthenticationService {
         database = new CompanyDatabase();
     }
 
-    public <T extends Customer> void register(String name, String email, String password, CompanyDatabase.UserType userType){
+    public void register(String name, String email, String password, CompanyDatabase.UserType userType){
         emptyName(name);
         emptyCredentials(email, password);
         validity(email, password);
@@ -25,7 +25,7 @@ public class AuthenticationService {
         database.register(name, email, password, userType);
     }
 
-    public <T extends Customer> Customer login(String email, String password, CompanyDatabase.UserType userType){
+    public Customer login(String email, String password, CompanyDatabase.UserType userType){
         emptyCredentials(email, password);
         Customer userAccount = database.getUserByEmail(email, userType);
         validity(email, password);
