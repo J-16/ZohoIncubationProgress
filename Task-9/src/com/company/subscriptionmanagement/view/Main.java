@@ -2,7 +2,6 @@ package com.company.subscriptionmanagement.view;
 
 import com.company.AutoAddDetails;
 import com.company.companiescustomer.view.CompanyListView;
-import com.company.subscriptionmanagement.controllers.CompanyAuthenticationController;
 import com.company.subscriptionmanagement.controllers.SubscriberController;
 
 public class Main{

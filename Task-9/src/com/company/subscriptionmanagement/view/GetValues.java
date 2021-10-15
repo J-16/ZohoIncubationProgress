@@ -6,8 +6,8 @@ import java.util.InputMismatchException;
 
 public class GetValues{
 
-    public static final String PURPLE = "\033[0;35m";
-    public static final String RESET = "\033[0m";
+    public static final String PURPLE = "\u001B[35m";
+    public static final String RESET = "\u001B[0m";
 
     public static int getIntegerValue(String message, String error){
         int value = 0;
