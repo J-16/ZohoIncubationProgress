@@ -13,7 +13,7 @@ import java.util.LinkedList;
 
 public class SubscriberService{
 
-    private Subscriber subscriber;
+    private Subscriber subscriber = null;
     private String email;
     private String name;
     private Company company;
@@ -35,7 +35,7 @@ public class SubscriberService{
         if(product.getTrailSubscribers(email) != null){
             throw new InvalidOperationException("You have already enabled trail version");
         }
-        subscriber = registerSubscriber();
+        subscriber = getSubscriber();
         product.addTrailSubscribers(email, LocalDate.now().plusDays(30));
     }
 
@@ -52,9 +52,9 @@ public class SubscriberService{
             Coupon coupon = getCoupon(product, couponName);
             price = price + (coupon.getDiscount()/100);
         }
-        Subscriber subscriber = registerSubscriber();
+        Subscriber subscriber = getSubscriber();
         paymentController = new PaymentController();
-        new PaymentMethodController().getPaymentMethod(paymentController);
+        new PaymentMethodController().getPaymentMethod(paymentController, price);
         paymentController.processPayment(price, subscriber);
         CurrentSubscription currentSubscription = new CurrentSubscription(subscriber, subscriptionPlan, subscriber.getPaymentDetails());
         product.addProductSubscribers(subscriber.getAccount().getEmail(), currentSubscription);
@@ -176,7 +176,7 @@ public class SubscriberService{
                 break;
             }
         }
-        if(subscriptionPlan == null)
+        if(subscriptionPlan == null || subscriptionPlan.size() == 0)
             throw new DatabaseException("No subscription plans are available for this product at the moment", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION);
         return subscriptionPlan;
     }
@@ -205,17 +205,16 @@ public class SubscriberService{
     }
 
     public ArrayList<String> getNotification(){
-        ArrayList<String> notification;
-        try{
-            notification = subscriber.getNotification();
-        }catch(NullPointerException e){
-            throw new DatabaseException("No notification", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION);
+        if(subscriber == null){
+            throw new DatabaseException("No notification so far", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION);
         }
+        ArrayList<String> notification  = subscriber.getNotification();
+        if(notification == null || notification.size() == 0)
+            throw new DatabaseException("No notification so far", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION);
         return notification;
     }
 
-    private Subscriber registerSubscriber() {
-        Subscriber subscriber;
+    private Subscriber getSubscriber(){
         subscriber = database.getSubscribersByEmail(email);
         if( subscriber == null ){
             database.registerSubscriber(email, name);

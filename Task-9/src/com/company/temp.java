@@ -1,13 +1,18 @@
 package com.company;
 
-import com.company.subscriptionmanagement.view.ScannerClass;
+import com.company.subscriptionmanagement.controllers.AuthenticationController;
+import com.company.subscriptionmanagement.controllers.CompanyController;
+import com.company.subscriptionmanagement.database.CompanyDatabase;
+import com.company.subscriptionmanagement.model.Company;
+import com.company.subscriptionmanagement.view.CompanyDashboard;
 
 public class temp{
 
     public static void main(String ...args){
-        System.out.println("input");
-        String s = ScannerClass.getScanner().nextLine();
-        System.out.println(s);
+        new AutoAddDetails();
+        Company company = (Company) new AuthenticationController().login("company1@gmail.com","123456789", CompanyDatabase.UserType.COMPANY);
+        CompanyDashboard companyDashboard = new CompanyDashboard(new CompanyController(company));
+        //companyDashboard.displaySubscriptions("prod1");
     }
 
 }

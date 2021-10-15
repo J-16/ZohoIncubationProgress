@@ -42,7 +42,7 @@ public class Subscriber{
     }
 
     public ArrayList<String> getNotification(){
-        return this.notification;
+        return notification;
     }
 
 }

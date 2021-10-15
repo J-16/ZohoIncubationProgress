@@ -75,7 +75,7 @@ public class ProductService{
         return subscriptionPlans;
     }
 
-    private Product getProductByName(String productName){
+    public Product getProductByName(String productName){
         ArrayList<Product> products = getProducts();
         for(Product product : products){
             if(product.getProductName().equals(productName))

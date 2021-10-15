@@ -13,13 +13,13 @@ public class CompanyPortal{
     protected String email = null;
     protected String password = null;
 
-    private CompanyAuthenticationController authenticationController;
+    private AuthenticationController authenticationController;
     private Dashboard dashboard;
     private ProductView productView;
     private String companyName;
 
     public CompanyPortal(){
-        this.authenticationController = new CompanyAuthenticationController();
+        this.authenticationController = new AuthenticationController();
     }
 
     public void registerFlow(){
@@ -62,10 +62,10 @@ public class CompanyPortal{
     }
 
     public void loginFlow(){
-        System.out.println("Welcome back ");
         while(true){
             try{
                 new Helper().login();
+                System.out.println("Welcome back ");
                 if(companyName == null){
                     dashboard = new CompanyDashboard(new CompanyController( (Company) authenticationController.login(email, password,CompanyDatabase.UserType.COMPANY)));
                     dashboard.control();

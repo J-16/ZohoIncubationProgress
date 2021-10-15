@@ -1,6 +1,6 @@
 package com.company;
 
-import com.company.subscriptionmanagement.controllers.CompanyAuthenticationController;
+import com.company.subscriptionmanagement.controllers.AuthenticationController;
 import com.company.subscriptionmanagement.controllers.CompanyController;
 import com.company.subscriptionmanagement.database.CompanyDatabase;
 import com.company.subscriptionmanagement.model.Company;
@@ -11,16 +11,17 @@ import com.company.subscriptionmanagement.model.SubscriptionPlan;
 import java.time.LocalDate;
 
 //TODO : update user payment info, notify customer care downgrade plan, track issue
+//TODO : sort products list and subscription plan by name (CompanyDashboard) and option as per [price,trail]
 
 public class AutoAddDetails {
 
     {
-        CompanyAuthenticationController controller = new CompanyAuthenticationController();
+        AuthenticationController controller = new AuthenticationController();
         controller.register("company1", "company1@gmail.com", "123456789", CompanyDatabase.UserType.COMPANY);
         controller.register("company2", "company2@gmail.com", "123456789",CompanyDatabase.UserType.COMPANY);
         controller.register("company3", "c@c.c", "123456789",CompanyDatabase.UserType.COMPANY);
 
-        CompanyController company = new CompanyController( (Company) new CompanyAuthenticationController().login("company1@gmail.com", "123456789",CompanyDatabase.UserType.COMPANY) );
+        CompanyController company = new CompanyController( (Company) new AuthenticationController().login("company1@gmail.com", "123456789",CompanyDatabase.UserType.COMPANY) );
         company.addProduct("prod1",10,500);
         company.addProduct("prod2",0,500);
         company.addProduct("prod3",10,100);
@@ -28,7 +29,7 @@ public class AutoAddDetails {
         company.addSubscriptionPlan("prod1","Pro", SubscriptionPlan.SubscriptionType.MONTHLY,13);
         company.addSubscriptionPlan("prod1","Premium", SubscriptionPlan.SubscriptionType.MONTHLY,13);
 
-        company = new CompanyController( (Company) new CompanyAuthenticationController().login("company1@gmail.com", "123456789",CompanyDatabase.UserType.COMPANY));
+        company = new CompanyController( (Company) new AuthenticationController().login("company1@gmail.com", "123456789",CompanyDatabase.UserType.COMPANY));
         company.addProduct("product1",10,500);
         company.addProduct("product2",0,500);
         company.addProduct("product3",10,100);

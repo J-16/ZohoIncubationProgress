@@ -6,7 +6,7 @@ import com.company.subscriptionmanagement.model.Subscriber;
 
 import java.util.HashMap;
 
-public class CompanyDatabase<T extends Customer>{
+public class CompanyDatabase{
 
     public enum UserType{
         CUSTOMER, COMPANY;

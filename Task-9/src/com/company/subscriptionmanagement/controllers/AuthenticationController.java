@@ -4,11 +4,11 @@ import com.company.companiescustomer.model.Customer;
 import com.company.subscriptionmanagement.database.CompanyDatabase;
 import com.company.subscriptionmanagement.model.service.AuthenticationService;
 
-public class CompanyAuthenticationController{
+public class AuthenticationController {
 
     protected AuthenticationService authenticationService;
 
-    public CompanyAuthenticationController(){
+    public AuthenticationController(){
             this.authenticationService = new AuthenticationService();
     }
 

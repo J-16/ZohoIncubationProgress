@@ -52,11 +52,14 @@ public class CompanyDashboard implements Dashboard{
         int trailDays = -1;
         double price  = -1;
         String name = null;
+        try{
+            displayProducts();
+        }catch(DatabaseException e){}
         System.out.println("---------------Products Details---------------");
         while(true){
             try{
                 if(name == null) {
-                    name = GetValues.getString("Enter Product Name");
+                    name = GetValues.getString("Enter new product name");
                 }
                 while(trailDays < 0){
                     trailDays = GetValues.getIntegerValue("Enter Trail days if any else 0", "Trail Days cannot be negative");
@@ -66,7 +69,7 @@ public class CompanyDashboard implements Dashboard{
             }
                 companyController.addProduct(name, trailDays, price);
                 System.out.println("Product added successfully");
-                System.out.println("------------------------------");
+                displayProducts();
                 return;
             }catch(InputException e){
                 System.out.println(e.getMessage());
@@ -94,9 +97,15 @@ public class CompanyDashboard implements Dashboard{
         while(true){
             if(productName == null){
                 productName = GetValues.getString("Enter Product name");
+                try{
+                    displaySubscriptions(productName);
+                }catch(DatabaseException e){
+                    System.out.println(e.getMessage());
+                    return;
+                }
             }
             if(subscriptionName == null) {
-                subscriptionName = GetValues.getString("Enter Subscription Name");
+                subscriptionName = GetValues.getString("Enter new subscription plan name");
             }
             try {
                 while(subType < 0 || subType > 3){
@@ -114,6 +123,8 @@ public class CompanyDashboard implements Dashboard{
                 }
                 while(discount < 0) discount = GetValues.getDoubleValue("Enter discount if any or 0", "discount cannot be negative value");
                 companyController.addSubscriptionPlan(productName, subscriptionName, subscriptionType, discount);
+                System.out.println("new subscription plan added");
+                displaySubscriptions(productName);
                 return;
             }catch(InputException e){
                 System.out.println(e.getMessage());
@@ -220,18 +231,21 @@ public class CompanyDashboard implements Dashboard{
 
     private void displayProducts(){
         ArrayList<Product> products = companyController.getProducts();
-        System.out.println("----------Products----------");
+        System.out.println("----------Available Products----------");
+        System.out.println( "\u001B[34m" + "Product               Price         Trail" + "\u001B[0m");
         products.forEach(product -> {
-            System.out.println( product.getProductName() );
+            System.out.println( product.getProductName() + "                 " +  product.getPrice()  + "          " +  product.getTrailDays());
         });
         System.out.println("---------------------------");
     }
 
     private void displaySubscriptions(String productName){
         ArrayList<SubscriptionPlan> subscriptionPlans = companyController.getSubscriptionPlanByProduct(productName);
-        System.out.println("----------Subscription Plans----------");
+        System.out.println("----------Available Subscription Plans----------");
+        System.out.println("Actual price for the product : " + companyController.getProductByName(productName).getPrice());
+        System.out.println( "\u001B[34m" + "Plan                 Type              Price" + "\u001B[0m");
         subscriptionPlans.forEach(subscriptionPlan -> {
-            System.out.println( subscriptionPlan.getPlanName() );
+            System.out.println( subscriptionPlan.getPlanName() + "                " + subscriptionPlan.getSubscriptionType() + "          " + subscriptionPlan.getPrice() );
         });
         System.out.println("--------------------------------------");
     }

@@ -28,7 +28,7 @@ public class Product{
         this.trailSubscribers = new HashMap<>();
     }
 
-    public double getPrice() {
+    public double getPrice(){
         return price;
     }
 

@@ -266,6 +266,7 @@ public class SubscriberDashboard implements Dashboard{
         try {
             for(String notification : subscriberController.getNotification()){
                 System.out.println(notification);
+                System.out.println("----------------------------");
             }
         }catch(DatabaseException e){
             System.out.println(e.getMessage());

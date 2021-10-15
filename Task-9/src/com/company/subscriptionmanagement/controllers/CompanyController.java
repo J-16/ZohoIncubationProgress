@@ -54,6 +54,10 @@ public class CompanyController{
         return productService.getProducts();
     }
 
+    public Product getProductByName(String productName){
+        return productService.getProductByName(productName);
+    }
+
     public ArrayList<SubscriptionPlan> getSubscriptionPlanByProduct(String productName){
         return productService.getSubscriptionPlanByProduct(productName);
     }

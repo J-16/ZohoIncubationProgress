@@ -10,7 +10,8 @@ public class PaymentMethodController{
 
     private int option = -1;
 
-    public void getPaymentMethod(PaymentController paymentController){
+    public void getPaymentMethod(PaymentController paymentController, double price){
+        System.out.println("Amount to be paid : " + price);
         PaymentMethod paymentMethod = new PaymentMethod(this);
         paymentMethod.selectPayment();
         switch (option){
