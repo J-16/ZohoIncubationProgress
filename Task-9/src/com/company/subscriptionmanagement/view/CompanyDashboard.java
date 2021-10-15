@@ -18,7 +18,7 @@ public class CompanyDashboard implements Dashboard{
     }
 
     public void control(){
-        ToastMessage.SuccessMessage("Welcome back");
+        DisplayMessage.successMessage("Welcome back");
             do{
                 try{
                     int option = -1;
@@ -69,7 +69,7 @@ public class CompanyDashboard implements Dashboard{
                 price = GetValues.getIntegerValue("Enter Product price","price cannot be negative");
             }
                 companyController.addProduct(name, trailDays, price);
-                ToastMessage.SuccessMessage("Product added successfully");
+                DisplayMessage.successMessage("Product added successfully");
                 displayProducts();
                 return;
             }catch(InputException e){
@@ -121,7 +121,7 @@ public class CompanyDashboard implements Dashboard{
                 }
                 while(discount < 0) discount = GetValues.getDoubleValue("Enter discount if any or 0", "discount cannot be negative value");
                 companyController.addSubscriptionPlan(productName, subscriptionName, subscriptionType, discount);
-                ToastMessage.SuccessMessage("new subscription plan added");
+                DisplayMessage.successMessage("new subscription plan added");
                 displaySubscriptions(productName);
                 return;
             }catch(InputException e){
@@ -184,7 +184,8 @@ public class CompanyDashboard implements Dashboard{
                 while(discount < 0)
                     discount = GetValues.getDoubleValue("Enter discount if any or 0 if no changes", "discount cannot be negative");
                 companyController.updateSubscriptionPlan(productName, subscriptionName, newSubscriptionName, subscriptionType, discount);
-                ToastMessage.SuccessMessage("Subscription Changed Successfully");
+                DisplayMessage.successMessage("Subscription Changed Successfully");
+                displaySubscriptions(productName);
                 return;
             }catch(InputException e){
                 System.out.println(e.getMessage());
@@ -225,7 +226,7 @@ public class CompanyDashboard implements Dashboard{
                 while(discount < 0)
                     discount = GetValues.getDoubleValue("Enter discount in % example - 10", "Discount cannot be negative value");
                 companyController.addCoupon(productName, coupon, LocalDate.parse(date), discount);
-                ToastMessage.SuccessMessage("Coupon added successfully");
+                DisplayMessage.successMessage("Coupon added successfully");
                 return;
             }catch(InputException e){
                 if(e.getExceptionType() == InputException.ExceptionType.NEGATIVE_VALUE){
@@ -252,9 +253,9 @@ public class CompanyDashboard implements Dashboard{
         ArrayList<SubscriptionPlan> subscriptionPlans = companyController.getSubscriptionPlanByProduct(productName);
         System.out.println("----------Available Subscription Plans----------");
         System.out.println("Actual price for the product : " + companyController.getProductByName(productName).getPrice());
-        System.out.println( "\u001B[34m" + "Plan                 Type              Price" + "\u001B[0m");
+        System.out.println( "\u001B[34m" + "Plan                     Type              Price" + "\u001B[0m");
         subscriptionPlans.forEach(subscriptionPlan -> {
-            System.out.println( subscriptionPlan.getPlanName() + "                " + subscriptionPlan.getSubscriptionType() + "          " + subscriptionPlan.getPrice() );
+            System.out.println( subscriptionPlan.getPlanName() + "                 " + subscriptionPlan.getSubscriptionType() + "          " + subscriptionPlan.getPrice() );
         });
         System.out.println("------------------------------------------------");
     }

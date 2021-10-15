@@ -33,7 +33,7 @@ public class CompanyPortal{
                 else{
                     authenticationController.register(name,email, password, CompanyDatabase.UserType.CUSTOMER);
                 }
-                ToastMessage.SuccessMessage("Registered successfully, Please login to continue");
+                DisplayMessage.successMessage("Registered successfully, Please login to continue");
                 Thread.sleep(1000);
                 name = null;
                 password = null;
@@ -106,7 +106,7 @@ public class CompanyPortal{
 
     private void loggedIn(String companyName){
         SubscriberController subscriptionController = new SubscriberController(email, name, companyName);
-        ToastMessage.SuccessMessage("Welcome back ");
+        DisplayMessage.successMessage("Welcome back ");
         do{
             int option = -1;
             while(option < 0 || option > 2){

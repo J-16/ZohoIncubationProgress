@@ -6,21 +6,18 @@ import java.util.InputMismatchException;
 
 public class GetValues{
 
-    public static final String PURPLE = "\u001B[35m";
-    public static final String RESET = "\u001B[0m";
-
     public static int getIntegerValue(String message, String error){
         int value = 0;
         while(true){
             try{
-                System.out.println(PURPLE + message + RESET);
+                DisplayMessage.menu(message);
                 value = ScannerClass.getScanner().nextInt();
                 if(value < 0) {
-                    System.err.println(error);
+                    DisplayMessage.errorMessage(error);
                 }
                 else return value;
             }catch(InputMismatchException e){
-                System.err.println("Invalid input, Enter a number");
+                DisplayMessage.errorMessage("Invalid input, Enter a number");
                 ScannerClass.getScanner().nextLine();
             }
         }
@@ -30,13 +27,13 @@ public class GetValues{
         int value = 0;
         while(true){
             try{
-                System.out.println(PURPLE + message + RESET);
+                DisplayMessage.menu(message);
                 value = ScannerClass.getScanner().nextInt();
                 if(value < 0)
-                    System.err.println(error);
+                    DisplayMessage.errorMessage(error);
                 else return value;
             }catch(InputMismatchException e){
-                System.err.println("Invalid input, Enter a number");
+                DisplayMessage.errorMessage("Invalid input, Enter a number");
                 ScannerClass.getScanner().nextLine();
             }
         }
@@ -46,13 +43,13 @@ public class GetValues{
         long value = -1;
         while(true){
             try{
-                System.out.println(PURPLE + message + RESET);
+                DisplayMessage.menu(message);
                 value = ScannerClass.getScanner().nextLong();
                 if(value < 0)
                     System.err.println(error);
                 else return value;
             }catch(InputMismatchException e){
-                System.err.println("Invalid input, Enter a number");
+                DisplayMessage.errorMessage("Invalid input, Enter a number");
                 ScannerClass.getScanner().nextLine();
             }
         }
@@ -63,26 +60,26 @@ public class GetValues{
         boolean isDate = false;
         while(!isDate){
             try{
-                System.out.println(PURPLE + message + RESET);
+                DisplayMessage.menu(message);
                 expDate = ScannerClass.getScanner().next();
                 LocalDate date = LocalDate.parse(expDate);
                 if(date.isBefore(LocalDate.now()))
-                    System.err.println("Enter valid date");
+                    DisplayMessage.errorMessage("Enter valid date");
                 else isDate = true;
             }catch(DateTimeParseException e){
-                System.err.println("Incorrect date format");
+                DisplayMessage.errorMessage("Incorrect date format");
             }
         }
         return expDate;
     }
 
     public static String getString(String message){
-        System.out.println(PURPLE + message + RESET);
+        DisplayMessage.menu(message);
         return ScannerClass.getScanner().next();
     }
 
     public static String getLine(String message){
-        System.out.println(PURPLE + message + RESET);
+        DisplayMessage.menu(message);
         ScannerClass.getScanner().nextLine();
         return ScannerClass.getScanner().nextLine();
     }

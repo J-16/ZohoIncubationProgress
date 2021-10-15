@@ -106,7 +106,7 @@ public class ProductView{
     private void useTrail(String productName){
         try{
             subscribeController.activateTrail(productName);
-            ToastMessage.SuccessMessage("trail version activated");
+            DisplayMessage.successMessage("trail version activated");
         }catch(InvalidOperationException e){
             System.out.println(e.getMessage());
         }
@@ -124,7 +124,7 @@ public class ProductView{
                             coupon = GetValues.getString("Enter coupon : ");
                         }
                         subscribeController.subscribeProduct(productName, planName, coupon);
-                        ToastMessage.SuccessMessage("Subscription Added successfully");
+                        DisplayMessage.successMessage("Subscription Added successfully");
                         return;
                     }catch(DatabaseException e){
                         System.out.println(e.getMessage());
@@ -134,7 +134,7 @@ public class ProductView{
             }
             String email = GetValues.getString("Enter email you want to gift");
             subscribeController.giftSubscription(productName, planName, coupon, email);
-            System.out.println("Subscription sent");
+            DisplayMessage.successMessage("Gifted subscription to " + email);
         }catch(DatabaseException | InvalidOperationException e){
             System.out.println(e.getMessage());
         }

@@ -83,7 +83,6 @@ public class SubscriberDashboard implements Dashboard{
     }
 
     private void subscriptionOption(){
-        System.out.println();
         do{
             System.out.println();
             int option = -1;
@@ -113,13 +112,13 @@ public class SubscriberDashboard implements Dashboard{
             try{
                 int option = -1;
                 while(option < 0){
-                    option = GetValues.getIntegerValue("1.Cancel product subscription or any other key to quit", "Cannot be negative");
+                    option = GetValues.getIntegerValue("1.Cancel product subscription or any other number key get back to previous menu", "Cannot be negative");
                 }
                 if(option != 1)
                     return;
                 String productName = GetValues.getString("Enter Product name to cancel subscription");
                 subscriberController.cancelSubscription(productName);
-                ToastMessage.SuccessMessage("Subscription cancelled");
+                DisplayMessage.successMessage("Subscription cancelled");
                 return;
             }catch(InvalidOperationException | DatabaseException e){
                 System.out.println(e.getMessage());
@@ -138,7 +137,7 @@ public class SubscriberDashboard implements Dashboard{
                 if(date == null)
                     date = GetValues.getDate("Enter date to resume subscription in yyyy-MM-dd");
                 subscriberController.pauseSubscription(productName, LocalDate.parse(date));
-                ToastMessage.SuccessMessage("Subscription paused");
+                DisplayMessage.successMessage("Subscription paused");
                 return;
             }catch(InputException e){
                 System.out.println(e.getMessage());
@@ -179,7 +178,7 @@ public class SubscriberDashboard implements Dashboard{
             return;
         try{
             subscriberController.subscribeNewsletter(getProductArray(productName));
-            ToastMessage.SuccessMessage("Subscribed to news letter");
+            DisplayMessage.successMessage("Subscribed to news letter");
         }catch(DatabaseException e){
             System.out.println(e.getMessage());
             productName = null;
@@ -199,8 +198,8 @@ public class SubscriberDashboard implements Dashboard{
                     upgradeSubscription();
                     break;
                 case 2 :
-                    System.out.println("Your request will be processed soon");
                     subscriberController.requestDownGrade();
+                    DisplayMessage.successMessage("Your request will be processed soon");
                     break;
             }
         }while(true);
@@ -214,6 +213,7 @@ public class SubscriberDashboard implements Dashboard{
                 productName = GetValues.getString("Enter product name");
                 planName = GetValues.getString("Enter new plan name");
                 subscriberController.upgradeSubscriptionPlan(productName, planName);
+                DisplayMessage.successMessage("Successfully upgraded");
                 return;
             }catch(DatabaseException e){
                 System.out.println(e.getMessage());
@@ -235,7 +235,7 @@ public class SubscriberDashboard implements Dashboard{
             }
             String productName = GetValues.getLine("Enter product names to unsubscribe \n format : product names separated by space eg: (prod prod2 prod3)");
             subscriberController.unSubscribeNewsletter(getProductArray(productName));
-            ToastMessage.SuccessMessage("Unsubscribed from the products");
+            DisplayMessage.successMessage("Unsubscribed from the products");
         }catch(DatabaseException | InvalidOperationException e){
             System.out.println(e.getMessage());
         }

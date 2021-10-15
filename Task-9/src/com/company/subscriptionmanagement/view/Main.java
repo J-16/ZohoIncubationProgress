@@ -19,7 +19,7 @@ public class Main{
             }
             switch (option){
                 case 0:
-                    ToastMessage.SuccessMessage("Have a good day");
+                    DisplayMessage.successMessage("Have a good day");
                     ScannerClass.closeScanner();
                     return;
                 case 1:

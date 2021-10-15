@@ -64,16 +64,19 @@ public class SubscriberService{
     public void changeSubscription(String productName, String subscriptionPlan){
         Product product = getProductByCompany(productName);
         checkUpgrade(product, subscriptionPlan);
+        CurrentSubscription currentSubscription = product.getProductSubscribers(email);
+        cancelAutoRenewal(currentSubscription);
         SubscriptionPlan newSubscriptionPlan = getSubscriptionPlan(product, subscriptionPlan);
-        product.getProductSubscribers(subscriber.getAccount().getEmail()).setSubscriptionPlan(newSubscriptionPlan);
         paymentController = new PaymentController();
+        new PaymentMethodController().getPaymentMethod(paymentController, newSubscriptionPlan.getPrice());
         paymentController.processPayment(newSubscriptionPlan.getPrice(),subscriber);
+        product.getProductSubscribers(subscriber.getAccount().getEmail()).setSubscriptionPlan(newSubscriptionPlan);
         setAutoRenewal(product.getProductSubscribers(email));
     }
 
     public void pauseSubscription(String productName, LocalDate resumeDate){
         if(!isSubscribed(productName))
-            throw new InvalidOperationException("You have not subscribed to this operation");
+            throw new InvalidOperationException("You have not subscribed to perform this operation");
         if(resumeDate.getDayOfMonth() < LocalDate.now().getDayOfMonth() && resumeDate.getMonthValue() < LocalDate.now().getMonthValue() && resumeDate.getYear() < LocalDate.now().getYear())
             throw new InputException("Invalid date", InputException.ExceptionType.INVALID_FORMAT, "resumeDate");
         Product product = getProductByCompany(productName);
@@ -159,7 +162,6 @@ public class SubscriberService{
         HashMap<LocalDate, LinkedList<CurrentSubscription>> autoRenewal = company.getAutoRenewal();
         LinkedList<CurrentSubscription> currentSubscriptions = autoRenewal.get(currentSubscription.getExpireDate());
         for(int i =0; i< currentSubscriptions.size(); i++){
-            System.out.println( currentSubscriptions.get(i).getSubscriber().getAccount().getEmail() );
             if(currentSubscriptions.get(i).getSubscriber().getAccount().getEmail().equals(currentSubscription.getSubscriber().getAccount().getEmail())) {
                 currentSubscriptions.removeFirstOccurrence(i);
             }
