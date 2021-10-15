@@ -19,7 +19,7 @@ public class PaymentController{
     private PaymentViewable paymentView;
 
     public void processPayment(double price, Subscriber subscriber){
-        if(subscriber.getPaymentDetails() == null || !(paymentService instanceof CardPaymentService)){
+        if(subscriber.getPaymentDetails() == null){
             generatePaymentDetails(subscriber);
         }
         else{
