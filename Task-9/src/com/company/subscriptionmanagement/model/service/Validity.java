@@ -2,20 +2,26 @@ package com.company.subscriptionmanagement.model.service;
 
 import com.company.subscriptionmanagement.exception.InputException;
 
+import java.time.LocalDate;
 import java.util.regex.Pattern;
 
 public class Validity{
 
-    public static void emptyCheck(String email, String password){
-        if(email.isEmpty())
-            throw new InputException("Empty fields are not allowed", InputException.ExceptionType.EMPTY_EXCEPTION, "email");
-        if(password.isEmpty())
-            throw new InputException("Empty fields are not allowed", InputException.ExceptionType.EMPTY_EXCEPTION, "password");
+    public static void emptyCheck(String paramOneName, String paramOne, String paramTwoName, String paramTwo){
+        if(paramOne == null || paramOne.isEmpty())
+            throw new InputException("Empty fields are not allowed", InputException.ExceptionType.EMPTY_EXCEPTION, paramOneName);
+        if(paramTwo == null || paramTwo.isEmpty())
+            throw new InputException("Empty fields are not allowed", InputException.ExceptionType.EMPTY_EXCEPTION, paramTwoName);
     }
 
-    public static void emptyCheck(String name){
-        if(name.isEmpty())
-            throw new InputException("Empty fields are not allowed", InputException.ExceptionType.EMPTY_EXCEPTION, "name");
+    public static void emptyCheck(String paramOneName, String paramOne){
+        if(paramOne == null || paramOne.isEmpty())
+            throw new InputException("Empty fields are not allowed", InputException.ExceptionType.EMPTY_EXCEPTION, paramOneName);
+    }
+
+    public static void nullCheck(String paramOneName, LocalDate date){
+        if(date == null)
+            throw new InputException("Empty fields are not allowed", InputException.ExceptionType.EMPTY_EXCEPTION, paramOneName);
     }
 
     public static boolean isValidEmail(String email){

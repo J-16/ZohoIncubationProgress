@@ -5,6 +5,7 @@ import com.company.subscriptionmanagement.exception.DatabaseException;
 import com.company.subscriptionmanagement.exception.InputException;
 import com.company.subscriptionmanagement.model.*;
 import com.company.subscriptionmanagement.model.service.SubscriberService;
+import com.company.subscriptionmanagement.model.service.Validity;
 import com.company.subscriptionmanagement.view.Dashboard;
 import com.company.subscriptionmanagement.view.SubscriberDashboard;
 
@@ -28,17 +29,19 @@ public class SubscriberController{
         this.subscriptionService = new SubscriberService(email, name, company, database);
     }
 
-    public void activateTrail(String productName) {
+    public void activateTrail(String productName){
         if(productName == null)
             throw new InputException("product name cannot be empty", InputException.ExceptionType.EMPTY_EXCEPTION, "productName");
         subscriptionService.activateTrail(productName);
     }
 
     public void subscribeProduct(String productName, String planName, String couponName){
+        Validity.emptyCheck("productName", productName);
         subscriptionService.subscribeProduct(productName,planName,couponName);
     }
 
     public void upgradeSubscriptionPlan(String productName, String subscriptionPlan){
+        Validity.emptyCheck("productName", productName,"subscriptionPlan", subscriptionPlan);
         subscriptionService.changeSubscription(productName, subscriptionPlan);
     }
 
@@ -47,10 +50,13 @@ public class SubscriberController{
     }
 
     public void pauseSubscription(String productName, LocalDate resumeDate){
+        Validity.emptyCheck("productName", productName);
+        Validity.nullCheck("resumeDate", resumeDate);
         subscriptionService.pauseSubscription(productName,resumeDate);
     }
 
     public void cancelSubscription(String productName){
+        Validity.emptyCheck("productName", productName);
         subscriptionService.cancelSubscription(productName);
     }
 
@@ -76,6 +82,7 @@ public class SubscriberController{
     }
 
     public ArrayList<SubscriptionPlan> getAllSubscriptionPlanByCompany(String productName){
+        Validity.emptyCheck("productName", productName);
         return subscriptionService.getAllSubscriptionPlanByCompany(productName);
     }
 
@@ -88,10 +95,12 @@ public class SubscriberController{
     }
 
     public boolean getIsTrailAvailable(String productName) {
+        Validity.emptyCheck("productName", productName);
         return subscriptionService.getProductByCompany(productName).isTrailAvailable();
     }
 
     public int getTrailDays(String productName) {
+        Validity.emptyCheck("productName", productName);
         return subscriptionService.getProductByCompany(productName).getTrailDays();
     }
 
@@ -103,19 +112,23 @@ public class SubscriberController{
         return subscriptionService.getSubscribedNewsletter();
     }
 
+    public void giftSubscription(String productName, String planName, String coupon, String email) {
+        Validity.emptyCheck("productName", productName, "planName", planName);
+        Validity.isValidEmail(email);
+        Validity.emptyCheck("email", email);
+        subscriptionService.giftSubscription(productName, planName, coupon, email);
+    }
+
+    public void raiseIssue(String complain){
+        Validity.emptyCheck("complain", complain);
+        subscriptionService.raiseIssue(complain);
+    }
+
     private Company getCompany(String companyName){
         Company company = database.getCompanyByName(companyName);
         if (company == null)
             throw new DatabaseException("No company name found", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION, "companyName");
         return company;
-    }
-
-    public void giftSubscription(String productName, String planName, String coupon, String email) {
-        subscriptionService.giftSubscription(productName, planName, coupon, email);
-    }
-
-    public void raiseIssue(String complain){
-        subscriptionService.raiseIssue(complain);
     }
 
     //non functionality
