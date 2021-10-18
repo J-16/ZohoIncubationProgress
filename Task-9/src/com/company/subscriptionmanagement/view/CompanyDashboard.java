@@ -265,6 +265,7 @@ public class CompanyDashboard implements Dashboard{
 
 
     private void sendProductUpdates(){
+        displayProducts();
         String productName = null;
         String message = null;
         while(true){
