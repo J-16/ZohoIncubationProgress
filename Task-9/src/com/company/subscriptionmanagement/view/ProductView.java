@@ -58,28 +58,41 @@ public class ProductView{
         }
     }
 
-    private void displaySubscription(String productName){
+    public void displaySubscription(String productName){
         ArrayList<SubscriptionPlan> subscriptionPlans;
         subscriptionPlans = subscribeController.getAllSubscriptionPlanByCompany(productName);
-        System.out.println("------------------------------------------------------------------------------------------------------------");
+        DisplayMessage.border("------------------------------------------------------------------------------------------------------------");
+        System.out.println();
+        DisplayMessage.border("|");
         for(SubscriptionPlan subscriptionPlan : subscriptionPlans){
-            System.out.print("|        plan : "  + subscriptionPlan.getPlanName() + "              ");
+            DisplayMessage.listHeading("    Subscription plan name         ");
+            DisplayMessage.border("|");
         }
-        System.out.print("|\n");
+        DisplayMessage.border("\n");
         for(SubscriptionPlan subscriptionPlan : subscriptionPlans){
-            System.out.print("|          ("  + subscriptionPlan.getSubscriptionType() + " )              ");
+            DisplayMessage.border("|");
+            System.out.print("              "  + subscriptionPlan.getPlanName() + "              ");
         }
-        System.out.print("  |\n");
-        System.out.println("------------------------------------------------------------------------------------------------------------");
+        DisplayMessage.border("|\n");
         for(SubscriptionPlan subscriptionPlan : subscriptionPlans){
-            System.out.print("|       Price: "  + subscriptionPlan.getPrice() + "                ");
+            DisplayMessage.border("|");
+            System.out.print("          ("  + subscriptionPlan.getSubscriptionType() + ")              ");
         }
-        System.out.print("|\n");
+        DisplayMessage.border("|\n");
+        DisplayMessage.border("------------------------------------------------------------------------------------------------------------");
+        System.out.println();
         for(SubscriptionPlan subscriptionPlan : subscriptionPlans){
-            System.out.print("|      discount: "  + subscriptionPlan.getDiscount() + "%              ");
+            DisplayMessage.border("|");
+            System.out.print("       Price: "  + subscriptionPlan.getPrice() + "                ");
         }
-        System.out.print("|\n");
-        System.out.println("------------------------------------------------------------------------------------------------------------");
+        DisplayMessage.border("|\n");
+        for(SubscriptionPlan subscriptionPlan : subscriptionPlans){
+            DisplayMessage.border("|");
+            System.out.print("      discount: "  + subscriptionPlan.getDiscount() + "%              ");
+        }
+        DisplayMessage.border("|\n");
+        DisplayMessage.border("------------------------------------------------------------------------------------------------------------");
+        System.out.println();
         try{
             if(subscribeController.getIsTrailAvailable(productName)){
                 System.out.println("Trail available for " + subscribeController.getTrailDays(productName) + "days");
@@ -119,7 +132,7 @@ public class ProductView{
 
     private void subscribeProduct(String productName, SubscriptionType type){
         try{
-            String planName = GetValues.getString("Enter Plan Name to subscribe");
+            String planName = GetValues.getString("Enter Subscription Plan Name to subscribe");
             String coupon = null;
             if(type == SubscriptionType.SUBSCRIBE) {
                 while(true){

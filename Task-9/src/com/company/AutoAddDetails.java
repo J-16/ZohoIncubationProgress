@@ -28,8 +28,8 @@ public class AutoAddDetails {
         company.addProduct("prod2",0,500);
         company.addProduct("prod3",10,100);
         company.addSubscriptionPlan("prod1","Regular", SubscriptionPlan.SubscriptionType.MONTHLY,10);
-        company.addSubscriptionPlan("prod1","Pro", SubscriptionPlan.SubscriptionType.MONTHLY,13);
-        company.addSubscriptionPlan("prod1","Premium", SubscriptionPlan.SubscriptionType.MONTHLY,13);
+        company.addSubscriptionPlan("prod1","Pro", SubscriptionPlan.SubscriptionType.QUARTERLY,13);
+        company.addSubscriptionPlan("prod1","Premium", SubscriptionPlan.SubscriptionType.YEARLY,13);
 
         company.addCoupon("prod1","one", LocalDate.parse("2021-12-12"),20);
 
