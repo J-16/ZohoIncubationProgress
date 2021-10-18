@@ -11,4 +11,4 @@ You can create customized subscription plans for each of your products easily. C
 
 1. Clone this repo.
 2. Navigate to folder _"ZohoIncubationProgress/tree/main/Task-9/out/production/Task-9/"_
-3. run - *java com.company.subscriptionmanagement.view.Main*
+3. Run - *java com.company.subscriptionmanagement.view.Main*
