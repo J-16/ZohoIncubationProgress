@@ -4,6 +4,7 @@ import com.company.subscriptionmanagement.controllers.SubscriberController;
 import com.company.subscriptionmanagement.exception.DatabaseException;
 import com.company.subscriptionmanagement.exception.InputException;
 import com.company.subscriptionmanagement.exception.InvalidOperationException;
+import com.company.subscriptionmanagement.exception.TransactionException;
 import com.company.subscriptionmanagement.model.SubscriptionPlan;
 
 import java.util.ArrayList;
@@ -123,7 +124,7 @@ public class ProductView{
             if(type == SubscriptionType.SUBSCRIBE) {
                 while(true){
                     try{
-                        String option = GetValues.getString("1.Enter Coupon or any other number to ignore");
+                        String option = GetValues.getString("1.Enter Coupon or any other key to ignore");
                         if (option.equals("1")) {
                             coupon = GetValues.getString("Enter coupon : ");
                         }
@@ -133,6 +134,10 @@ public class ProductView{
                     }catch(DatabaseException e){
                         System.out.println(e.getMessage());
                         coupon = null;
+                    }
+                    catch(TransactionException e ){
+                        System.out.println(e.getMessage());
+                        return;
                     }
                 }
             }

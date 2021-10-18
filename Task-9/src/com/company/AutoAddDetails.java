@@ -8,6 +8,7 @@ import com.company.subscriptionmanagement.model.PaymentDetails;
 import com.company.subscriptionmanagement.model.Subscriber;
 import com.company.subscriptionmanagement.model.SubscriptionPlan;
 
+import javax.swing.text.DateFormatter;
 import java.time.LocalDate;
 
 //TODO : update user payment info, notify customer care downgrade plan, track issue
@@ -29,6 +30,8 @@ public class AutoAddDetails {
         company.addSubscriptionPlan("prod1","Regular", SubscriptionPlan.SubscriptionType.MONTHLY,10);
         company.addSubscriptionPlan("prod1","Pro", SubscriptionPlan.SubscriptionType.MONTHLY,13);
         company.addSubscriptionPlan("prod1","Premium", SubscriptionPlan.SubscriptionType.MONTHLY,13);
+
+        company.addCoupon("prod1","one", LocalDate.parse("2021-12-12"),20);
 
         company = new CompanyController( (Company) new AuthenticationController().login("company1@gmail.com", "123456789",CompanyDatabase.UserType.COMPANY));
         company.addProduct("product1",10,500);

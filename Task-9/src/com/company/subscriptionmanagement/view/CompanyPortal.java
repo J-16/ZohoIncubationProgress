@@ -110,7 +110,7 @@ public class CompanyPortal{
         do{
             int option = -1;
             while(option < 0 || option > 2){
-                option = GetValues.getIntegerValue("0.Logout 1.Check Available Products 2.User DashBoard", "Choose a valid option");
+                option = GetValues.getIntegerValue("0.Logout 1.Available Products 2.User DashBoard", "Choose a valid option");
             }
             switch(option){
                 case 0 :

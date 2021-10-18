@@ -4,6 +4,7 @@ import com.company.subscriptionmanagement.controllers.SubscriberController;
 import com.company.subscriptionmanagement.exception.DatabaseException;
 import com.company.subscriptionmanagement.exception.InputException;
 import com.company.subscriptionmanagement.exception.InvalidOperationException;
+import com.company.subscriptionmanagement.exception.TransactionException;
 import com.company.subscriptionmanagement.model.CurrentSubscription;
 
 import java.time.LocalDate;
@@ -222,6 +223,9 @@ public class SubscriberDashboard implements Dashboard{
                 int s = GetValues.getIntegerValue("enter 0 for previous menu or any other key to continue", "");
                 if(s == 0)
                     return;
+            }
+            catch(TransactionException e){
+                System.out.println(e.getMessage());
             }
         }
     }

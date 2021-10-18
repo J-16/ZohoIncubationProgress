@@ -17,21 +17,28 @@ public class PaymentController{
     private InvoiceService invoiceService;
     private HashMap<String, String> paymentDetails = new HashMap<>();
     private PaymentViewable paymentView;
+    private double price;
+    private Subscriber subscriber;
 
-    public void processPayment(double price, Subscriber subscriber){
+    public PaymentController(double price, Subscriber subscriber){
+        this.price = price;
+        this.subscriber = subscriber;
+    }
+
+    public void processPayment(){
         if(subscriber.getPaymentDetails() == null){
-            generatePaymentDetails(subscriber);
+            generatePaymentDetails();
         }
         else{
             paymentView.getPaymentMethod(this);
             if( option != 1 ){
-                generatePaymentDetails(subscriber);
+                generatePaymentDetails();
             }
         }
-        makePayment(price, subscriber);
+        makePayment();
     }
 
-    private void makePayment(double price, Subscriber subscriber){
+    private void makePayment(){
         paymentService.makePayment();
         invoiceService = new InvoiceService();
         String invoice = invoiceService.generateInvoice(price, subscriber);
@@ -39,7 +46,7 @@ public class PaymentController{
         notificationService.send(invoice, subscriber);
     }
 
-    private void generatePaymentDetails(Subscriber subscriber){
+    private void generatePaymentDetails(){
         paymentView.view();
         if(paymentView instanceof CardPaymentService)
             subscriber.setPaymentDetails( new PaymentDetails( Long.parseLong(paymentDetails.get("cardNo")), Integer.parseInt(paymentDetails.get("cvv")),

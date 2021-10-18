@@ -47,15 +47,16 @@ public class SubscriberService{
         if(product.getTrailSubscribers(email) != null){
            product.setTrailSubscribers(email, LocalDate.now().minusDays(1));
         }
-        double price = subscriptionPlan.getPrice();
+        double actualPrice = subscriptionPlan.getPrice();
+        double discountPrice = actualPrice;
         if(couponName != null){
             Coupon coupon = getCoupon(product, couponName);
-            price = price + (coupon.getDiscount()/100);
+            discountPrice = discountPrice - (coupon.getDiscount()/100);
         }
         Subscriber subscriber = getSubscriber();
-        paymentController = new PaymentController();
-        new PaymentMethodController().getPaymentMethod(paymentController, price);
-        paymentController.processPayment(price, subscriber);
+        paymentController = new PaymentController(discountPrice, subscriber);
+        new PaymentMethodController(actualPrice, discountPrice, subscriber,paymentController).getPaymentMethod();
+        paymentController.processPayment();
         CurrentSubscription currentSubscription = new CurrentSubscription(subscriber, subscriptionPlan, subscriber.getPaymentDetails());
         product.addProductSubscribers(subscriber.getAccount().getEmail(), currentSubscription);
         setAutoRenewal(currentSubscription);
@@ -67,9 +68,10 @@ public class SubscriberService{
         CurrentSubscription currentSubscription = product.getProductSubscribers(email);
         cancelAutoRenewal(currentSubscription);
         SubscriptionPlan newSubscriptionPlan = getSubscriptionPlan(product, subscriptionPlan);
-        paymentController = new PaymentController();
-        new PaymentMethodController().getPaymentMethod(paymentController, newSubscriptionPlan.getPrice());
-        paymentController.processPayment(newSubscriptionPlan.getPrice(),subscriber);
+        paymentController = new PaymentController(newSubscriptionPlan.getPrice(),subscriber);
+        double price  = newSubscriptionPlan.getPrice();
+        new PaymentMethodController(price, price ,subscriber, paymentController).getPaymentMethod();
+        paymentController.processPayment();
         product.getProductSubscribers(subscriber.getAccount().getEmail()).setSubscriptionPlan(newSubscriptionPlan);
         setAutoRenewal(product.getProductSubscribers(email));
     }
@@ -225,13 +227,12 @@ public class SubscriberService{
         return subscriber;
     }
 
-    private Coupon getCoupon(Product product, String couponName) {
+    private Coupon getCoupon(Product product, String couponName){
         if(product.getCoupons().size() == 0)
             throw new DatabaseException("Invalid coupon", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION, "couponName");
         LocalDate date = LocalDate.now();
         for(Coupon coupon : product.getCoupons()){
-            if(coupon.getCouponName().equals(couponName) && date.getDayOfMonth() <= coupon.getExpiryDate().getDayOfMonth()
-                    && date.getMonthValue() <= coupon.getExpiryDate().getMonthValue() && date.getYear() <= coupon.getExpiryDate().getYear())
+            if(coupon.getCouponName().equals(couponName) && date.isBefore(coupon.getExpiryDate()))
                 return coupon;
         }
         throw new DatabaseException("Invalid coupon name", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION, "couponName");
@@ -268,8 +269,7 @@ public class SubscriberService{
         for(Product product : company.getProducts()){
             LocalDate date = LocalDate.now();
             LocalDate expiryDate = product.getTrailSubscribers(email);
-            if( expiryDate != null && date.getDayOfMonth() <= expiryDate.getDayOfMonth()
-                    && date.getMonthValue() <= expiryDate.getMonthValue() && date.getYear() <= expiryDate.getYear())
+            if( expiryDate != null && date.isBefore(expiryDate))
                 trail.put(product.getProductName(),product.getTrailSubscribers(email));
         }
         if(trail.size() == 0)
