@@ -12,6 +12,7 @@ public class AuthenticationController {
             this.authenticationService = new AuthenticationService();
     }
 
+    //Empty
     public void register(String name, String email, String password, CompanyDatabase.UserType userType){
         authenticationService.register(name, email, password, userType);
     }

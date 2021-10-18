@@ -51,12 +51,9 @@ public class SubscriberService{
         double discountPrice = actualPrice;
         if(couponName != null){
             Coupon coupon = getCoupon(product, couponName);
-            discountPrice = discountPrice - (coupon.getDiscount()/100);
+            discountPrice = actualPrice - actualPrice * (coupon.getDiscount()/100);
         }
-        Subscriber subscriber = getSubscriber();
-        paymentController = new PaymentController(discountPrice, subscriber);
-        new PaymentMethodController(actualPrice, discountPrice, subscriber,paymentController).getPaymentMethod();
-        paymentController.processPayment();
+        processPayment(actualPrice,discountPrice);
         CurrentSubscription currentSubscription = new CurrentSubscription(subscriber, subscriptionPlan, subscriber.getPaymentDetails());
         product.addProductSubscribers(subscriber.getAccount().getEmail(), currentSubscription);
         setAutoRenewal(currentSubscription);
@@ -68,12 +65,17 @@ public class SubscriberService{
         CurrentSubscription currentSubscription = product.getProductSubscribers(email);
         cancelAutoRenewal(currentSubscription);
         SubscriptionPlan newSubscriptionPlan = getSubscriptionPlan(product, subscriptionPlan);
-        paymentController = new PaymentController(newSubscriptionPlan.getPrice(),subscriber);
         double price  = newSubscriptionPlan.getPrice();
-        new PaymentMethodController(price, price ,subscriber, paymentController).getPaymentMethod();
-        paymentController.processPayment();
+        processPayment(price,price);
         product.getProductSubscribers(subscriber.getAccount().getEmail()).setSubscriptionPlan(newSubscriptionPlan);
         setAutoRenewal(product.getProductSubscribers(email));
+    }
+
+    private void processPayment(double actualPrice, double discountPrice){
+        subscriber = getSubscriber();
+        paymentController = new PaymentController(actualPrice,subscriber);
+        new PaymentMethodController(actualPrice, discountPrice ,subscriber, paymentController).getPaymentMethod();
+        paymentController.processPayment();
     }
 
     public void pauseSubscription(String productName, LocalDate resumeDate){

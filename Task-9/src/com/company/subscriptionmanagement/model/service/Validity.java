@@ -19,7 +19,7 @@ public class Validity{
     }
 
     public static boolean isValidEmail(String email){
-        Pattern pattern = Pattern.compile("^[a-z1-9]+@[a-z]+.[a-z]+$");
+        Pattern pattern = Pattern.compile("^[a-z1-9]+[@][a-z]+[.][a-z]+$");
         return pattern.matcher(email).matches();
     }
 

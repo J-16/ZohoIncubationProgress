@@ -226,6 +226,7 @@ public class SubscriberDashboard implements Dashboard{
             }
             catch(TransactionException e){
                 System.out.println(e.getMessage());
+                return;
             }
         }
     }
