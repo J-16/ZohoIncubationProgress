@@ -6,8 +6,8 @@ import com.company.subscriptionmanagement.model.Subscriber;
 public class PushNotificationService implements NotificationService{
 
     @Override
-    public void send(String invoice, Subscriber subscriber){
-        subscriber.sendNotification(invoice);
+    public void send(String message, Subscriber subscriber){
+        subscriber.sendNotification(message);
     }
 
     @Override

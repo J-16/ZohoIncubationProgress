@@ -211,8 +211,9 @@ public class SubscriberService{
     }
 
     public ArrayList<String> getNotification(){
+        subscriber = getSubscriber();
         if(subscriber == null){
-            throw new DatabaseException("No notification so far", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION);
+            throw new DatabaseException("You are not a subscriber to receive notification", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION);
         }
         ArrayList<String> notification  = subscriber.getNotification();
         if(notification == null || notification.size() == 0)

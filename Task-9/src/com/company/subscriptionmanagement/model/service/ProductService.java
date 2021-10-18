@@ -1,10 +1,12 @@
 package com.company.subscriptionmanagement.model.service;
 
+import com.company.subscriptionmanagement.database.CompanyDatabase;
 import com.company.subscriptionmanagement.exception.DatabaseException;
 import com.company.subscriptionmanagement.model.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ProductService{
 
@@ -99,14 +101,28 @@ public class ProductService{
         this.notificationService = notificationService;
     }
 
-    public void sendMail(String message){
+    public void sendMails(String message){
+
+    }
+
+    public void sendNotifications(String productName, String message){
+        CompanyDatabase database = new CompanyDatabase();
+        Product product = getProductByName(productName);
+        HashMap<String, Boolean> newsLetterSubscribers = product.getNewsLetterSubscribers();
+        newsLetterSubscribers.forEach( (email, isSubscribed) ->{
+                if(isSubscribed)
+                    sendNotification(message, database.getSubscribersByEmail(email));
+        });
+    }
+
+    private void sendMail(String message){
         notificationService = new MailNotificationService();
         notificationService.send(company, message);
     }
 
-    public void sendNotification(String message){
+    private void sendNotification(String message, Subscriber subscriber){
         notificationService = new PushNotificationService();
-        notificationService.send(company, message);
+        notificationService.send(message,subscriber);
     }
 
 }

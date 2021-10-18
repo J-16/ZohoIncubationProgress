@@ -179,7 +179,7 @@ public class SubscriberDashboard implements Dashboard{
             return;
         try{
             subscriberController.subscribeNewsletter(getProductArray(productName));
-            DisplayMessage.successMessage("Subscribed to news letter");
+            DisplayMessage.successMessage("Subscribed to newsletters");
         }catch(DatabaseException e){
             System.out.println(e.getMessage());
             productName = null;
@@ -240,7 +240,7 @@ public class SubscriberDashboard implements Dashboard{
             }
             String productName = GetValues.getLine("Enter product names to unsubscribe \n format : product names separated by space eg: (prod prod2 prod3)");
             subscriberController.unSubscribeNewsletter(getProductArray(productName));
-            DisplayMessage.successMessage("Unsubscribed from the products");
+            DisplayMessage.successMessage("Unsubscribed from the newsletter successfully");
         }catch(DatabaseException | InvalidOperationException e){
             System.out.println(e.getMessage());
         }
@@ -273,7 +273,7 @@ public class SubscriberDashboard implements Dashboard{
     }
 
     private void notification() {
-        try {
+        try{
             for(String notification : subscriberController.getNotification()){
                 System.out.println(notification);
                 System.out.println("----------------------------");

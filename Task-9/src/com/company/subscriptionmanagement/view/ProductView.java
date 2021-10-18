@@ -45,14 +45,15 @@ public class ProductView{
                 return;
             else{
                 try{
-                    productName = GetValues.getString("Enter product name to view details");
+                    if(productName == null)
+                        productName = GetValues.getString("Enter product name to view details");
                     displaySubscription(productName);
                     return;
                 }catch(DatabaseException e){
                     System.out.println(e.getMessage());
+                    productName = null;
                 }catch(InputException e){
                     System.out.println(e.getMessage());
-                    productName = null;
                 }
             }
         }

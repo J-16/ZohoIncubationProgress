@@ -1,6 +1,6 @@
 package com.company.subscriptionmanagement.view;
 
-import com.company.subscriptionmanagement.controllers.CompanyController;
+import com.company.subscriptionmanagement.controllers.ProductController;
 import com.company.subscriptionmanagement.exception.DatabaseException;
 import com.company.subscriptionmanagement.exception.InputException;
 import com.company.subscriptionmanagement.model.Product;
@@ -11,9 +11,9 @@ import java.util.ArrayList;
 
 public class CompanyDashboard implements Dashboard{
 
-    CompanyController companyController;
+    ProductController companyController;
 
-    public CompanyDashboard(CompanyController companyController){
+    public CompanyDashboard(ProductController companyController){
         this.companyController = companyController;
     }
 
@@ -22,8 +22,8 @@ public class CompanyDashboard implements Dashboard{
             do{
                 try{
                     int option = -1;
-                    while(option < 0 || option > 4){
-                         option = GetValues.getIntegerValue("0.Logout 1.Add product 2.Add Subscription Plan 3.Change Subscription Plan 4.Add Coupon","Select a valid option");
+                    while(option < 0 || option > 5){
+                         option = GetValues.getIntegerValue("0.Logout 1.Add product 2.Add Subscription Plan 3.Change Subscription Plan 4.Add Coupon 5.Send product updates","Select a valid option");
                     }
                     switch(option){
                         case 0:
@@ -39,6 +39,9 @@ public class CompanyDashboard implements Dashboard{
                             break;
                         case 4:
                             addCoupon();
+                            break;
+                        case 5:
+                            sendProductUpdates();
                             break;
                         default :
                             System.out.println("Invalid option");
@@ -260,4 +263,25 @@ public class CompanyDashboard implements Dashboard{
         System.out.println("------------------------------------------------");
     }
 
+
+    private void sendProductUpdates(){
+        String productName = null;
+        String message = null;
+        while(true){
+            try{
+                if(productName == null )
+                    productName = GetValues.getString("Enter Product name");
+                if(message == null)
+                    message = GetValues.getLine("Enter updates");
+                companyController.sendNotificationToSubscribers(productName,message);
+                System.out.println("Notification sent!");
+                return;
+            }catch(DatabaseException e){
+                if(e.getField().equals("productName")){
+                    System.out.println(e.getMessage());
+                    productName = null;
+                }
+            }
+        }
+    }
 }

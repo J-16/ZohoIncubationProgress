@@ -9,11 +9,11 @@ import com.company.subscriptionmanagement.model.SubscriptionPlan;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class CompanyController{
+public class ProductController {
 
     private ProductService productService;
 
-    public CompanyController(Company company){
+    public ProductController(Company company){
         this.productService = new ProductService(company);
     }
 
@@ -63,11 +63,11 @@ public class CompanyController{
     }
 
     public void sendMailToSubscribers(String message){
-        productService.sendMail(message);
+        productService.sendMails(message);
     }
 
-    public void sendNotificationToSubscribers(String message){
-        productService.sendNotification(message);
+    public void sendNotificationToSubscribers(String productName, String message){
+        productService.sendNotifications(productName, message);
     }
 
 }

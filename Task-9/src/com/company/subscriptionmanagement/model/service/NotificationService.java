@@ -5,7 +5,7 @@ import com.company.subscriptionmanagement.model.Subscriber;
 
 public interface NotificationService {
 
-    void send(String invoice, Subscriber subscriber);
+    void send(String message, Subscriber subscriber);
     void send(Company company, String message);
 
 }

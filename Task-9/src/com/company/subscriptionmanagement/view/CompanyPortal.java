@@ -66,7 +66,7 @@ public class CompanyPortal{
             try{
                 new Helper().login();
                 if(companyName == null){
-                    dashboard = new CompanyDashboard(new CompanyController( (Company) authenticationController.login(email, password,CompanyDatabase.UserType.COMPANY)));
+                    dashboard = new CompanyDashboard(new ProductController( (Company) authenticationController.login(email, password,CompanyDatabase.UserType.COMPANY)));
                     dashboard.control();
                 }else{
                     authenticationController.login(email, password, CompanyDatabase.UserType.CUSTOMER);
