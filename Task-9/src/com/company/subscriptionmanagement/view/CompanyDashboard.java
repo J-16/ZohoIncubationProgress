@@ -43,8 +43,6 @@ public class CompanyDashboard implements Dashboard{
                         case 5:
                             sendProductUpdates();
                             break;
-                        default :
-                            System.out.println("Invalid option");
                     }
                 }catch (DatabaseException e){
                     System.out.println(e.getMessage());

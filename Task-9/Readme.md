@@ -1,4 +1,4 @@
-#Subscription management System
+# Subscription management System
 
 You can create customized subscription plans for each of your products easily. Change the existing plan. Also, add coupon cards to each of the products. We have different payment method which covers all the customers. It lets your subscriber manage their subscription plans across your products. You can also make use of newsletter management which is included in the subscription system to keep your subscribers updated with the latest product updates and offers if any.
 
