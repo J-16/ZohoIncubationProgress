@@ -66,9 +66,9 @@ public class CompanyDashboard implements Dashboard{
                 while(trailDays < 0){
                     trailDays = GetValues.getIntegerValue("Enter Trail days if any else 0", "Trail Days cannot be negative");
                 }
-            while(price < 0){
-                price = GetValues.getIntegerValue("Enter Product price","price cannot be negative");
-            }
+                while(price < 0){
+                    price = GetValues.getIntegerValue("Enter Product price","price cannot be negative");
+                }
                 companyController.addProduct(name, trailDays, price);
                 DisplayMessage.successMessage("Product added successfully");
                 displayProducts();

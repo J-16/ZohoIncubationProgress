@@ -24,7 +24,7 @@ public class ProductService{
                     throw new DatabaseException("Product already exists", DatabaseException.ExceptionType.EXISTS_EXCEPTION);
             }
         }
-        company.setProducts(new Product(name,trailDays, price));
+        company.setProducts(new Product(name, trailDays, price));
     }
 
     public void addSubscriptionPlan(String productName, String planName, SubscriptionPlan.SubscriptionType subscriptionType, double discount){

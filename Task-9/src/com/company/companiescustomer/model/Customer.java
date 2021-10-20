@@ -3,7 +3,7 @@ package com.company.companiescustomer.model;
 import com.company.subscriptionmanagement.model.Account;
 import com.company.subscriptionmanagement.model.ProtectedAccount;
 
-public class Customer {
+public class Customer{
 
     ProtectedAccount account;
 

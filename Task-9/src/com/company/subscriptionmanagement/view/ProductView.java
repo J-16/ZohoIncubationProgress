@@ -133,21 +133,28 @@ public class ProductView{
 
     private void subscribeProduct(String productName, SubscriptionType type){
         try{
-            String planName = GetValues.getString("Enter Subscription Plan Name to subscribe");
+            String planName = null;
             String coupon = null;
             if(type == SubscriptionType.SUBSCRIBE) {
                 while(true){
                     try{
-                        String option = GetValues.getString("1.Enter Coupon or any other key to ignore");
-                        if (option.equals("1")) {
-                            coupon = GetValues.getString("Enter coupon : ");
+                        if(planName == null)
+                            planName = GetValues.getString("Enter Subscription Plan Name to subscribe");
+                        if(coupon == null){
+                            String option = GetValues.getString("1.Enter Coupon or any other key to ignore");
+                            if (option.equals("1")) {
+                                coupon = GetValues.getString("Enter coupon : ");
+                            }
                         }
                         subscribeController.subscribeProduct(productName, planName, coupon);
                         DisplayMessage.successMessage("Subscription Added successfully");
                         return;
                     }catch(DatabaseException e){
                         System.out.println(e.getMessage());
-                        coupon = null;
+                        if(e.getField() != null && e.getField().equals("couponName"))
+                            coupon = null;
+                        else
+                            planName = null;
                     }
                     catch(TransactionException e ){
                         System.out.println(e.getMessage());
