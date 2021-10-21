@@ -17,9 +17,11 @@ public class CompanyPortal{
     private Dashboard dashboard;
     private ProductView productView;
     private String companyName;
+    private CompanyDatabase.UserType userType;
 
-    public CompanyPortal(){
+    public CompanyPortal(CompanyDatabase.UserType userType){
         this.authenticationController = new AuthenticationController();
+        this.userType = userType;
     }
 
     public void registerFlow(){
@@ -65,7 +67,7 @@ public class CompanyPortal{
         while(true){
             try{
                 new Helper().login();
-                if(companyName == null){
+                if(userType.equals(CompanyDatabase.UserType.COMPANY)){
                     dashboard = new CompanyDashboard(new ProductController( (Company) authenticationController.login(email, password,CompanyDatabase.UserType.COMPANY)));
                     dashboard.control();
                 }else{

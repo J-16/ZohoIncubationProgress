@@ -5,10 +5,14 @@ import com.company.subscriptionmanagement.model.ProtectedAccount;
 
 public class Customer{
 
-    ProtectedAccount account;
+    private ProtectedAccount account;
+    private final int ID;
+
+    private static int IDGenerate = 1;
 
     public Customer(String name, String email, String password){
         this.account = new ProtectedAccount(name, email, password);
+        this.ID = IDGenerate++;
     }
 
     public void setAccount(Account account) {
@@ -17,6 +21,10 @@ public class Customer{
 
     public ProtectedAccount getAccount(){
         return account;
+    }
+
+    public int getID(){
+        return ID;
     }
 
 }
