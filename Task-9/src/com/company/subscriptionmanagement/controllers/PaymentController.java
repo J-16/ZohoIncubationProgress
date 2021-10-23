@@ -30,7 +30,7 @@ public class PaymentController{
     }
 
     public void processPayment(){
-        if(paymentDetailsDB.getBySubscriberID(subscriber.getAccount().getID()) == null){
+        if(paymentDetailsDB.getBySubscriberID(subscriber.getID()) == null){
             generatePaymentDetails();
         }
         else{
@@ -54,7 +54,7 @@ public class PaymentController{
         paymentView.view();
         if(paymentView instanceof CardPaymentService)
             paymentDetailsDB.save( new PaymentDetails( Long.parseLong(paymentDetails.get("cardNo")), Integer.parseInt(paymentDetails.get("cvv")),
-                    LocalDate.parse(paymentDetails.get("expDate")), subscriber.getAccount().getID() ));
+                    LocalDate.parse(paymentDetails.get("expDate")), subscriber.getID() ));
         //cannot save upi details and internet banking (only one time payment).
     }
 

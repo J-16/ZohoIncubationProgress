@@ -19,7 +19,7 @@ public class CompanyListController{
         ArrayList<String> companiesList = new ArrayList<>();
         HashMap<String, Company> companies = database.getCompanies();
         for(Company company : companies.values()){
-            companiesList.add(company.getAccount().getName());
+            companiesList.add(company.getName());
         }
         return companiesList;
     }

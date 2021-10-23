@@ -24,7 +24,7 @@ public class AuthenticationService {
         Company userAccount = database.getUserByEmail(email, userType);
         if(userAccount == null)
             throw new DatabaseException("No such User found", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION);
-        if( !userAccount.getAccount().getPassword().equals(password) )
+        if( !userAccount.getPassword().equals(password) )
             throw new DatabaseException("Password doesn't match", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION);
         return userAccount;
     }

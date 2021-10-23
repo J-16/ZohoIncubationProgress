@@ -39,7 +39,7 @@ public class UserDS implements UserDB {
 
     public Company getCompanyByName(String companyName){
         for(Company company : companies.values()){
-            if(company.getAccount().getName().equals(companyName))
+            if(company.getName().equals(companyName))
                 return company;
         }
         return null;

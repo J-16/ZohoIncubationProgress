@@ -32,7 +32,7 @@ public class AutoRenewalService{
             for(CurrentSubscription currentSubscription : currentSubscriptions){
                 if(paymentByProduct(currentSubscription)){
                     currentSubscription.setExpireDate(currentSubscription.getExpireDate().plusDays(subscriptionPlanDB.getByID(currentSubscription.getSubscriptionPlanId()).getSubscriptionType().getValue()));
-                    new SubscriberService(database.getSubscribersByID(currentSubscription.getSubscriberID()).getAccount().getEmail(),database.getSubscribersByID(currentSubscription.getSubscriberID()).getAccount().getName(),company)
+                    new SubscriberService(database.getSubscribersByID(currentSubscription.getSubscriberID()).getEmail(),database.getSubscribersByID(currentSubscription.getSubscriberID()).getName(),company)
                             .setAutoRenewal(currentSubscription);
                 }
                 //Todo: auto cancel subscription if payment not done;

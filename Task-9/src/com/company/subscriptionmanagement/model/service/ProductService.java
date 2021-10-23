@@ -32,12 +32,12 @@ public class ProductService{
                     throw new DatabaseException("Product already exists", DatabaseException.ExceptionType.EXISTS_EXCEPTION);
             }
         }
-        productsDB.save(new Product(name, trailDays, price, company.getAccount().getID()));
+        productsDB.save(new Product(name, trailDays, price, company.getID()));
     }
 
     public void addSubscriptionPlan(String productName, String planName, SubscriptionPlan.SubscriptionType subscriptionType, double discount){
         Product product = getProductByName(productName);
-        subscriptionPlanDB.save( new SubscriptionPlan(planName, subscriptionType, discount, product.getPrice(), company.getAccount().getID(), product.getID()) );
+        subscriptionPlanDB.save( new SubscriptionPlan(planName, subscriptionType, discount, product.getPrice(), company.getID(), product.getID()) );
     }
 
     public void updateSubscriptionPlan(String productName, String subscriptionName, String newPlanName){
@@ -63,7 +63,7 @@ public class ProductService{
 
     public void addCoupon(String productName, String couponName, LocalDate expiryDate, double discount){
         Product product = getProductByName(productName);
-        couponDB.save( new Coupon(couponName, expiryDate, discount, company.getAccount().getID(), product.getID()) );
+        couponDB.save( new Coupon(couponName, expiryDate, discount, company.getID(), product.getID()) );
     }
 
     public ArrayList<Product> getProducts(){

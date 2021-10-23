@@ -50,7 +50,7 @@ public class AutoAddDetails {
 
         CurrentDatabase.getUserDatabase().registerSubscriber("u@c.c","u");
         Subscriber subscriber = CurrentDatabase.getUserDatabase().getSubscribersByEmail("u@c.c");
-        CurrentDatabase.getPaymentDetailsDB().save(new PaymentDetails(123L,12, LocalDate.now(), subscriber.getAccount().getID()));
+        CurrentDatabase.getPaymentDetailsDB().save(new PaymentDetails(123L,12, LocalDate.now(), subscriber.getID()));
 
         String[] letters = {"prod1", "prod2"};
         new SubscriberController("u@c.c","u@c.c","company1").subscribeNewsletter(letters);

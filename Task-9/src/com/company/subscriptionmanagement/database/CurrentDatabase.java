@@ -16,6 +16,7 @@ public class CurrentDatabase{
     private static final NewsLetterSubscribersDB newsLetterSubscribersDB = new NewsLetterSubscribersDS();
     private static final TrailSubscribersDB trailSubscribersDB = new TrailSubscribersDS();
     private static final ProductSubscribersDB productSubscribersDB = new ProductSubscribersDS();
+    private static final NotificationDB notificationDB = new NotificationDS();
 
     private CurrentDatabase(){
 
@@ -65,4 +66,7 @@ public class CurrentDatabase{
         return productSubscribersDB;
     }
 
+    public static NotificationDB getNotificationDB() {
+        return notificationDB;
+    }
 }
