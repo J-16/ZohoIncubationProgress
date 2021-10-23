@@ -2,7 +2,7 @@ package com.company.subscriptionmanagement.view;
 
 
 import com.company.subscriptionmanagement.controllers.*;
-import com.company.subscriptionmanagement.database.CompanyDatabase;
+import com.company.subscriptionmanagement.database.UserDB;
 import com.company.subscriptionmanagement.exception.DatabaseException;
 import com.company.subscriptionmanagement.exception.InputException;
 import com.company.subscriptionmanagement.model.Company;
@@ -17,9 +17,9 @@ public class CompanyPortal{
     private Dashboard dashboard;
     private ProductView productView;
     private String companyName;
-    private CompanyDatabase.UserType userType;
+    private UserDB.UserType userType;
 
-    public CompanyPortal(CompanyDatabase.UserType userType){
+    public CompanyPortal(UserDB.UserType userType){
         this.authenticationController = new AuthenticationController();
         this.userType = userType;
     }
@@ -30,10 +30,10 @@ public class CompanyPortal{
             try{
                 new Helper().register();
                 if(companyName == null){
-                    authenticationController.register(name,email, password, CompanyDatabase.UserType.COMPANY);
+                    authenticationController.register(name,email, password, UserDB.UserType.COMPANY);
                 }
                 else{
-                    authenticationController.register(name,email, password, CompanyDatabase.UserType.CUSTOMER);
+                    authenticationController.register(name,email, password, UserDB.UserType.CUSTOMER);
                 }
                 DisplayMessage.successMessage("Registered successfully, Please login to continue");
                 Thread.sleep(1000);
@@ -67,11 +67,11 @@ public class CompanyPortal{
         while(true){
             try{
                 new Helper().login();
-                if(userType.equals(CompanyDatabase.UserType.COMPANY)){
-                    dashboard = new CompanyDashboard(new ProductController( (Company) authenticationController.login(email, password,CompanyDatabase.UserType.COMPANY)));
+                if(userType.equals(UserDB.UserType.COMPANY)){
+                    dashboard = new CompanyDashboard(new ProductController( (Company) authenticationController.login(email, password, UserDB.UserType.COMPANY)));
                     dashboard.control();
                 }else{
-                    authenticationController.login(email, password, CompanyDatabase.UserType.CUSTOMER);
+                    authenticationController.login(email, password, UserDB.UserType.CUSTOMER);
                     loggedIn(companyName);
                 }
                 email = null;

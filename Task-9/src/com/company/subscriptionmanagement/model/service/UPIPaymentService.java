@@ -1,13 +1,13 @@
 package com.company.subscriptionmanagement.model.service;
 
-import com.company.subscriptionmanagement.model.PaymentDetails;
 
 public class UPIPaymentService implements PaymentService{
 
-    public boolean makePayment(String email, double price, PaymentDetails paymentDetails){
+    @Override
+    public boolean makePayment(long subscriberID, double price) {
         //TODO - Make payment function here
         /* IMPLEMENT */
-        return true;
+        return false;
     }
 
     public boolean makePayment(){

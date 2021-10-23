@@ -1,27 +1,27 @@
 package com.company.subscriptionmanagement.controllers;
 
-import com.company.companiescustomer.model.Customer;
-import com.company.subscriptionmanagement.database.CompanyDatabase;
+import com.company.subscriptionmanagement.database.CurrentDatabase;
+import com.company.subscriptionmanagement.database.UserDB;
 import com.company.subscriptionmanagement.exception.InputException;
+import com.company.subscriptionmanagement.model.Company;
 import com.company.subscriptionmanagement.model.service.AuthenticationService;
-import com.company.subscriptionmanagement.model.service.Validity;
 
 public class AuthenticationController {
 
     protected AuthenticationService authenticationService;
 
     public AuthenticationController(){
-            this.authenticationService = new AuthenticationService();
+            this.authenticationService = new AuthenticationService(CurrentDatabase.getUserDatabase());
     }
 
-    public void register(String name, String email, String password, CompanyDatabase.UserType userType){
+    public void register(String name, String email, String password, UserDB.UserType userType){
         Validity.emptyCheck("name",name);
         Validity.emptyCheck("email", email,"password", password);
         validity(email, password);
         authenticationService.register(name, email, password, userType);
     }
 
-    public Customer login(String email, String password, CompanyDatabase.UserType userType){
+    public Company login(String email, String password, UserDB.UserType userType){
         Validity.emptyCheck("email",email, "password", password);
         validity(email, password);
         return authenticationService.login(email, password, userType);

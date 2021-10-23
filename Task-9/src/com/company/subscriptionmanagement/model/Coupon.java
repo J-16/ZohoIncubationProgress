@@ -7,11 +7,18 @@ public class Coupon{
     private String couponName;
     private LocalDate expiryDate;
     private double discount;
+    private final long ID;
+    private final long productID;
+    private final long companyID;
+    private static long generateID = 0;
 
-    public Coupon(String couponName, LocalDate expiryDate, double discount){
+    public Coupon(String couponName, LocalDate expiryDate, double discount, long companyID, long productID){
         this.couponName = couponName;
         this.expiryDate = expiryDate;
         this.discount = discount;
+        this.ID = generateID++;
+        this.productID = productID;
+        this.companyID = companyID;
     }
 
     public String getCouponName(){
@@ -38,4 +45,11 @@ public class Coupon{
         this.discount = discount;
     }
 
+    public long getID(){
+        return ID;
+    }
+
+    public long getProductID(){
+        return productID;
+    }
 }

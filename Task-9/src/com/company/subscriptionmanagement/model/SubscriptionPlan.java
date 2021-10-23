@@ -1,6 +1,8 @@
 package com.company.subscriptionmanagement.model;
 
-public class SubscriptionPlan{
+import java.io.Serializable;
+
+public class SubscriptionPlan implements Serializable {
 
     public enum SubscriptionType{
         MONTHLY(30), QUARTERLY(180), YEARLY(365);
@@ -17,12 +19,20 @@ public class SubscriptionPlan{
     private SubscriptionType subscriptionType;
     private double price;
     private double discount;
+    private final long ID;
+    private final long companyID;
+    private final long productID;
 
-    public SubscriptionPlan(String planName, SubscriptionType subscriptionType, double discount, double price){
+    private static long generateID = 0;
+
+    public SubscriptionPlan(String planName, SubscriptionType subscriptionType, double discount, double price, long companyID, long productID){
         this.planName = planName;
         this.subscriptionType = subscriptionType;
         this.discount = discount;
         this.price = price;
+        ID = generateID++;
+        this.companyID = companyID;
+        this.productID = productID;
         setPrice(discount);
     }
 
@@ -60,4 +70,7 @@ public class SubscriptionPlan{
         setPrice(discount);
     }
 
+    public long getID() {
+        return ID;
+    }
 }

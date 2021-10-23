@@ -3,7 +3,7 @@ package com.company.subscriptionmanagement.view;
 import com.company.AutoAddDetails;
 import com.company.companiescustomer.view.CompanyListView;
 import com.company.subscriptionmanagement.controllers.SubscriberController;
-import com.company.subscriptionmanagement.database.CompanyDatabase;
+import com.company.subscriptionmanagement.database.UserDB;
 
 public class Main{
 
@@ -24,12 +24,12 @@ public class Main{
                     ScannerClass.closeScanner();
                     return;
                 case 1:
-                    portal = new CompanyPortal(CompanyDatabase.UserType.COMPANY);
+                    portal = new CompanyPortal(UserDB.UserType.COMPANY);
                     System.out.println("Welcome to the Subscription management System");
                     new PortalControl().control(portal);
                     break;
                 case 2:
-                    portal = new CompanyPortal(CompanyDatabase.UserType.CUSTOMER);
+                    portal = new CompanyPortal(UserDB.UserType.CUSTOMER);
                     companyListView.displayCompanies();
                     String companyName = GetValues.getString("Enter company name you want to login");
 

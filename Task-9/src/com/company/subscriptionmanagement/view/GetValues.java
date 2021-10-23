@@ -1,6 +1,6 @@
 package com.company.subscriptionmanagement.view;
 
-import com.company.subscriptionmanagement.model.service.Validity;
+import com.company.subscriptionmanagement.controllers.Validity;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;

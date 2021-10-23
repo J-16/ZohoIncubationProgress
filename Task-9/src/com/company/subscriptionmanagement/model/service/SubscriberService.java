@@ -2,7 +2,7 @@ package com.company.subscriptionmanagement.model.service;
 
 import com.company.subscriptionmanagement.controllers.PaymentController;
 import com.company.subscriptionmanagement.controllers.PaymentMethodController;
-import com.company.subscriptionmanagement.database.CompanyDatabase;
+import com.company.subscriptionmanagement.database.*;
 import com.company.subscriptionmanagement.exception.*;
 import com.company.subscriptionmanagement.model.*;
 
@@ -18,25 +18,43 @@ public class SubscriberService{
     private String name;
     private Company company;
     private NotificationService notificationService;
-    private CompanyDatabase database; // TODO
+    private UserDB database; // TODO
     private PaymentController paymentController;
 
-    public SubscriberService(String email, String name, Company company, CompanyDatabase database){
+    private ProductsDB productsDB;
+    private SubscriptionPlanDB subscriptionPlanDB;
+    private CouponDB couponDB;
+    private NewsLetterSubscribersDB newsLetterSubscribersDB;
+    private TrailSubscribersDB trailSubscribersDB;
+    private ProductSubscribersDB productSubscribersDB;
+    private AutoRenewalDB autoRenewalDB;
+    private IssueDB issueDB;
+
+    public SubscriberService(String email, String name, Company company){
         this.email = email;
         this.name = name;
         this.company = company;
-        this.database = database;
+
+        this.database = CurrentDatabase.getUserDatabase();
+        this.productsDB = CurrentDatabase.getProductsDB();
+        this.subscriptionPlanDB = CurrentDatabase.getSubscriptionPlanDBB();
+        this.couponDB = CurrentDatabase.getCouponDB();
+        this.newsLetterSubscribersDB = CurrentDatabase.getNewsLetterSubscribersDB();
+        this.trailSubscribersDB = CurrentDatabase.getTrailSubscribersDB();
+        this.productSubscribersDB = CurrentDatabase.getProductSubscribersDB();
+        this.autoRenewalDB = CurrentDatabase.getAutoRenewalDB();
+        this.issueDB = CurrentDatabase.getIssueDB();
     }
 
     public void activateTrail(String productName) {
         Product product = getProductByCompany(productName);
         if(isSubscribed(productName))
             throw new InvalidOperationException("You have subscribed to the product already");
-        if(product.getTrailSubscribers(email) != null){
+        if(subscriber != null && trailSubscribersDB.getByID(subscriber.getAccount().getID()) != null){
             throw new InvalidOperationException("You have already enabled trail version");
         }
         subscriber = getSubscriber();
-        product.addTrailSubscribers(email, LocalDate.now().plusDays(30));
+        trailSubscribersDB.save(new TrailVersion(company.getAccount().getID(), subscriber.getAccount().getID(), product.getID(), LocalDate.now().plusDays(product.getTrailDays())));
     }
 
     public void subscribeProduct(String productName, String planName, String couponName){
@@ -44,8 +62,11 @@ public class SubscriberService{
             throw new InvalidOperationException("You have subscribed to the product already");
         Product product  = getProductByCompany(productName);
         SubscriptionPlan subscriptionPlan = getSubscriptionPlanByProduct(product, planName);
-        if(product.getTrailSubscribers(email) != null){
-           product.setTrailSubscribers(email, LocalDate.now().minusDays(1));
+        subscriber = getSubscriber();
+        TrailVersion trailVersion = trailSubscribersDB.getByID(subscriber.getAccount().getID());
+        if( trailVersion != null ){
+            trailVersion.setOver(true);
+            trailSubscribersDB.update(trailVersion);
         }
         double actualPrice = subscriptionPlan.getPrice();
         double discountPrice = actualPrice;
@@ -54,21 +75,22 @@ public class SubscriberService{
             discountPrice = actualPrice - actualPrice * (coupon.getDiscount()/100);
         }
         processPayment(actualPrice,discountPrice);
-        CurrentSubscription currentSubscription = new CurrentSubscription(subscriber, subscriptionPlan, subscriber.getPaymentDetails());
-        product.addProductSubscribers(subscriber.getAccount().getEmail(), currentSubscription);
+        CurrentSubscription currentSubscription = new CurrentSubscription(subscriber.getAccount().getID(), company.getAccount().getID(), subscriptionPlan);
+        productSubscribersDB.save(currentSubscription);
         setAutoRenewal(currentSubscription);
     }
 
-    public void changeSubscription(String productName, String subscriptionPlan){
+    public void changeSubscription(String productName, long subscriptionPlanID){
         Product product = getProductByCompany(productName);
-        checkUpgrade(product, subscriptionPlan);
-        CurrentSubscription currentSubscription = product.getProductSubscribers(email);
+        checkUpgrade(product, subscriptionPlanID);
+        CurrentSubscription currentSubscription = productSubscribersDB.getByID(company.getAccount().getID(), subscriber.getAccount().getID());
         cancelAutoRenewal(currentSubscription);
-        SubscriptionPlan newSubscriptionPlan = getSubscriptionPlan(product, subscriptionPlan);
+        SubscriptionPlan newSubscriptionPlan = getSubscriptionPlan(product, subscriptionPlanID);
         double price  = newSubscriptionPlan.getPrice();
         processPayment(price,price);
-        product.getProductSubscribers(subscriber.getAccount().getEmail()).setSubscriptionPlan(newSubscriptionPlan);
-        setAutoRenewal(product.getProductSubscribers(email));
+        currentSubscription.setSubscriptionPlanId(newSubscriptionPlan.getID());
+        productSubscribersDB.update(currentSubscription);
+        setAutoRenewal(productSubscribersDB.getByID(company.getAccount().getID(), subscriber.getAccount().getID()));
     }
 
     private void processPayment(double actualPrice, double discountPrice){
@@ -84,12 +106,12 @@ public class SubscriberService{
         if(resumeDate.getDayOfMonth() < LocalDate.now().getDayOfMonth() && resumeDate.getMonthValue() < LocalDate.now().getMonthValue() && resumeDate.getYear() < LocalDate.now().getYear())
             throw new InputException("Invalid date", InputException.ExceptionType.INVALID_FORMAT, "resumeDate");
         Product product = getProductByCompany(productName);
-        if(product.getProductSubscribers(email) == null)
+        CurrentSubscription currentSubscription = productSubscribersDB.getByID(company.getAccount().getID(), subscriber.getAccount().getID());
+        if(currentSubscription == null)
             throw new InvalidOperationException("You have not subscribed to perform this operation");
-        CurrentSubscription currentSubscription = product.getProductSubscribers(email);
         cancelAutoRenewal(currentSubscription);
         currentSubscription.setCurrentlySubscribed(false);
-        currentSubscription.setPausedDate(LocalDate.now());
+        currentSubscription.setPausedDate(LocalDate.now(),getSubscriptionPlan(product,currentSubscription.getSubscriptionPlanId()));
         currentSubscription.setResumeSubscriptionDate(resumeDate);
         setAutoRenewal(currentSubscription);
     }
@@ -99,7 +121,7 @@ public class SubscriberService{
         if(!isSubscribed(productName)){
             throw new InvalidOperationException("You have not subscribed to perform this operation");
         }
-        CurrentSubscription currentSubscription = product.getProductSubscribers(email);
+        CurrentSubscription currentSubscription = productSubscribersDB.getByID(company.getAccount().getID(), subscriber.getAccount().getID());
         cancelAutoRenewal(currentSubscription);
         currentSubscription.setCurrentlySubscribed(false);
         currentSubscription.setCancelledDate(LocalDate.now());
@@ -107,20 +129,24 @@ public class SubscriberService{
     }
 
     public void subscribeNewsLetter(String subscriberEmail, String productName){
+        subscriber = getSubscriber();
         try {
             Product product = getProductByCompany(productName);
-            product.setNewsLetterSubscribedUsers(subscriberEmail, true);
+            newsLetterSubscribersDB.save(new NewsLetter(subscriber.getAccount().getID(), company.getAccount().getID(), product.getID()));
         }catch(DatabaseException e){};
     }
 
-    public void cancelNewsLetterSubscription(String subscriberEmail, String productName){
-        Product product = getProductByCompany(productName);
-        product.setNewsLetterSubscribedUsers(subscriberEmail, false);
+    public void cancelNewsLetterSubscription(String productName){
+        subscriber = getSubscriber();
+        try {
+            Product product = getProductByCompany(productName);
+            newsLetterSubscribersDB.delete(subscriber.getAccount().getID(), product.getID());
+        }catch(DatabaseException e){};
     }
 
-    public SubscriptionPlan getSubscriptionPlan(Product product, String newSubscriptionPlan){
-        for(SubscriptionPlan subscriptionPlan : product.getSubscriptionPlan()){
-            if(subscriptionPlan.getPlanName().equals(newSubscriptionPlan)){
+    public SubscriptionPlan getSubscriptionPlan(Product product, long SubscriptionPlanID){
+        for(SubscriptionPlan subscriptionPlan : subscriptionPlanDB.getSubscriptionPlan()){
+            if(subscriptionPlan.getID() == SubscriptionPlanID){
                 return subscriptionPlan;
             }
         }
@@ -128,7 +154,7 @@ public class SubscriberService{
     }
 
     public Product getProductByCompany(String productName){
-        for(Product product : company.getProducts()){
+        for(Product product : productsDB.getProducts()){
             if(product.getProductName().equals(productName)){
                 return product;
             }
@@ -138,7 +164,7 @@ public class SubscriberService{
 
     public ArrayList<String> getProductsByCompany() {
         ArrayList<String> products = new ArrayList<>();
-        for(Product product : company.getProducts()){
+        for(Product product : productsDB.getProducts()){
             products.add(product.getProductName());
         }
         if(products.size() == 0)
@@ -147,38 +173,23 @@ public class SubscriberService{
     }
 
     public void setAutoRenewal(CurrentSubscription currentSubscription){
-        HashMap<LocalDate, LinkedList<CurrentSubscription>> autoRenewal = company.getAutoRenewal();
-        LinkedList<CurrentSubscription> currentSubscriptions;
+        HashMap<LocalDate, LinkedList<CurrentSubscription>> autoRenewal = autoRenewalDB.getAutoRenewal();
         if(autoRenewal.containsKey(currentSubscription.getExpireDate())){
-            currentSubscriptions = autoRenewal.get(currentSubscription.getExpireDate());
-            currentSubscriptions.add(currentSubscription);
-            autoRenewal.put(currentSubscription.getExpireDate(), currentSubscriptions);
-            company.setAutoRenewal(autoRenewal);
+            autoRenewalDB.update(currentSubscription);
             return;
         }
-        currentSubscriptions = new LinkedList<>();
-        currentSubscriptions.add(currentSubscription);
-        autoRenewal.put(currentSubscription.getExpireDate(), currentSubscriptions);
-        company.setAutoRenewal(autoRenewal);
+        autoRenewalDB.save(currentSubscription);
     }
 
     private void cancelAutoRenewal(CurrentSubscription currentSubscription){
-        HashMap<LocalDate, LinkedList<CurrentSubscription>> autoRenewal = company.getAutoRenewal();
-        LinkedList<CurrentSubscription> currentSubscriptions = autoRenewal.get(currentSubscription.getExpireDate());
-        for(int i =0; i< currentSubscriptions.size(); i++){
-            if(currentSubscriptions.get(i).getSubscriber().getAccount().getEmail().equals(currentSubscription.getSubscriber().getAccount().getEmail())) {
-                currentSubscriptions.removeFirstOccurrence(i);
-            }
-        }
-        autoRenewal.put(currentSubscription.getExpireDate(), currentSubscriptions);
-        company.setAutoRenewal(autoRenewal);
+        autoRenewalDB.delete(currentSubscription);
     }
 
     public ArrayList<SubscriptionPlan> getAllSubscriptionPlanByCompany(String productName){
         ArrayList<SubscriptionPlan> subscriptionPlan = null;
-        for(Product product : company.getProducts()){
+        for(Product product : productsDB.getProducts()){
             if(product.getProductName().equals(productName)){
-                subscriptionPlan = product.getSubscriptionPlan();
+                subscriptionPlan = subscriptionPlanDB.getSubscriptionPlan();
                 break;
             }
         }
@@ -189,9 +200,10 @@ public class SubscriberService{
 
     public HashMap<String,CurrentSubscription> getSubscriptionBySubscriber(){
         HashMap<String,CurrentSubscription> subscriptions = new HashMap<>();
-        for(Product product : company.getProducts()){
-            if(product.getProductSubscribers(email) != null){
-                subscriptions.put(product.getProductName(), product.getProductSubscribers(email));
+        for(Product product : productsDB.getProducts()){
+            CurrentSubscription currentSubscription = productSubscribersDB.getByID(company.getAccount().getID(), subscriber.getAccount().getID());
+            if(currentSubscription != null){
+                subscriptions.put(product.getProductName(), currentSubscription);
             }
         }
         if(subscriptions.size() == 0)
@@ -201,8 +213,8 @@ public class SubscriberService{
 
     public ArrayList<String> getSubscribedNewsletter() {
         ArrayList<String> newsletter = new ArrayList<>();
-        for(Product product : company.getProducts()){
-            if(product.getNewsLetterSubscribers().containsKey(email) && product.getNewsLetterSubscribers().get(email))
+        for(Product product : productsDB.getProducts()){
+            if( newsLetterSubscribersDB.getBySubscriberID(subscriber.getAccount().getID()) && newsLetterSubscribersDB.getByCompanyID(company.getAccount().getID()) )
                 newsletter.add(product.getProductName());
         }
         if(newsletter.size() == 0)
@@ -230,11 +242,12 @@ public class SubscriberService{
         return subscriber;
     }
 
+
     private Coupon getCoupon(Product product, String couponName){
-        if(product.getCoupons().size() == 0)
+        if(couponDB.getCoupons().size() == 0)
             throw new DatabaseException("Invalid coupon", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION, "couponName");
         LocalDate date = LocalDate.now();
-        for(Coupon coupon : product.getCoupons()){
+        for(Coupon coupon : couponDB.getCoupons()){
             if(coupon.getCouponName().equals(couponName) && date.isBefore(coupon.getExpiryDate()))
                 return coupon;
         }
@@ -242,24 +255,25 @@ public class SubscriberService{
     }
 
     private boolean isSubscribed(String productName){
-        for(Product product : company.getProducts()){
+        for(Product product : productsDB.getProducts()){
             if(product.getProductName().equals(productName)){
-                if(product.getProductSubscribers(email) != null && product.getProductSubscribers(email).isCurrentlySubscribed())
+                CurrentSubscription currentSubscription = productSubscribersDB.getByID(company.getAccount().getID(), subscriber.getAccount().getID());
+                if(currentSubscription != null && currentSubscription.isCurrentlySubscribed())
                     return true;
             }
         }
         return false;
     }
 
-    private void checkUpgrade(Product product, String subscriptionPlan){
-        SubscriptionPlan oldSubscriptionPlan = getSubscriptionPlan(product, product.getProductSubscribers(email).getSubscriptionPlan().getPlanName());
-        SubscriptionPlan newSubscriptionPlan = getSubscriptionPlan(product, subscriptionPlan);
+    private void checkUpgrade(Product product, long subscriptionPlanID){
+        SubscriptionPlan oldSubscriptionPlan = getSubscriptionPlan(product, productSubscribersDB.getByID(company.getAccount().getID(), subscriber.getAccount().getID()).getSubscriptionPlanId());
+        SubscriptionPlan newSubscriptionPlan = getSubscriptionPlan(product, subscriptionPlanID);
         if(oldSubscriptionPlan.getPrice() < newSubscriptionPlan.getPrice())
             throw new InvalidOperationException("Illegal operation");
     }
 
     private SubscriptionPlan getSubscriptionPlanByProduct(Product product, String planName) {
-        for(SubscriptionPlan subscriptionPlan : product.getSubscriptionPlan()){
+        for(SubscriptionPlan subscriptionPlan : subscriptionPlanDB.getSubscriptionPlan()){
             if(subscriptionPlan.getPlanName().equals(planName)){
                 return subscriptionPlan;
             }
@@ -269,11 +283,11 @@ public class SubscriberService{
 
     public HashMap<String, LocalDate> getTrailSubscribedProducts() {
         HashMap<String, LocalDate> trail = new HashMap<>();
-        for(Product product : company.getProducts()){
+        for(Product product : productsDB.getProducts()){
             LocalDate date = LocalDate.now();
-            LocalDate expiryDate = product.getTrailSubscribers(email);
+            LocalDate expiryDate = trailSubscribersDB.getByID(subscriber.getAccount().getID()).getExpiryDate();
             if( expiryDate != null && date.isBefore(expiryDate))
-                trail.put(product.getProductName(),product.getTrailSubscribers(email));
+                trail.put(product.getProductName(),expiryDate);
         }
         if(trail.size() == 0)
             return null;
@@ -287,7 +301,7 @@ public class SubscriberService{
     }
 
     public void raiseIssue(String message){
-        company.addIssue(new Issue(email,LocalDate.now(),message));
+        issueDB.save(new Issue(email,message,company.getAccount().getID()));
     }
 
 }

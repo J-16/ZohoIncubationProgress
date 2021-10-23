@@ -1,63 +1,73 @@
 package com.company.subscriptionmanagement.model.service;
 
-import com.company.subscriptionmanagement.database.CompanyDatabase;
+import com.company.subscriptionmanagement.database.*;
 import com.company.subscriptionmanagement.exception.DatabaseException;
 import com.company.subscriptionmanagement.model.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
-
 public class ProductService{
 
-    private Company company;
     private NotificationService notificationService;
+    private Company company;
+
+    private ProductsDB productsDB;
+    private SubscriptionPlanDB subscriptionPlanDB;
+    private CouponDB couponDB;
+    private NewsLetterSubscribersDB newsLetterSubscribersDB;
 
     public ProductService(Company company){
         this.company = company;
+        this.productsDB = CurrentDatabase.getProductsDB();
+        this.subscriptionPlanDB = CurrentDatabase.getSubscriptionPlanDBB();
+        this.couponDB = CurrentDatabase.getCouponDB();
+        this.newsLetterSubscribersDB = CurrentDatabase.getNewsLetterSubscribersDB();
     }
 
     public void addProduct(String name, int trailDays, double price){
-        if(company.getProducts() != null){
-            for(Product products : company.getProducts()){
-                if(products.getProductName().equals(name))
+        ArrayList<Product> products = productsDB.getProducts();
+        if(products != null){
+            for(Product product : products){
+                if(product.getProductName().equals(name))
                     throw new DatabaseException("Product already exists", DatabaseException.ExceptionType.EXISTS_EXCEPTION);
             }
         }
-        company.setProducts(new Product(name, trailDays, price));
+        productsDB.save(new Product(name, trailDays, price, company.getAccount().getID()));
     }
 
     public void addSubscriptionPlan(String productName, String planName, SubscriptionPlan.SubscriptionType subscriptionType, double discount){
         Product product = getProductByName(productName);
-
-        product.setSubscriptionPlan( new SubscriptionPlan(planName, subscriptionType, discount, product.getPrice()) );
+        subscriptionPlanDB.save( new SubscriptionPlan(planName, subscriptionType, discount, product.getPrice(), company.getAccount().getID(), product.getID()) );
     }
 
     public void updateSubscriptionPlan(String productName, String subscriptionName, String newPlanName){
         Product product = getProductByName(productName);
         SubscriptionPlan subscriptionPlan = getSubscriptionPlanByName(product, subscriptionName);
         subscriptionPlan.setPlanName(newPlanName);
+        subscriptionPlanDB.update(subscriptionPlan);
     }
 
     public void updateSubscriptionPlan(String productName, String subscriptionName,  SubscriptionPlan.SubscriptionType newSubscriptionType){
         Product product = getProductByName(productName);
         SubscriptionPlan subscriptionPlan = getSubscriptionPlanByName(product, subscriptionName);
         subscriptionPlan.setSubscriptionType(newSubscriptionType);
+        subscriptionPlanDB.update(subscriptionPlan);
     }
 
     public void updateSubscriptionPlan(String productName, String subscriptionName, double newDiscount){
         Product product = getProductByName(productName);
         SubscriptionPlan subscriptionPlan = getSubscriptionPlanByName(product, subscriptionName);
         subscriptionPlan.setDiscount(newDiscount);
+        subscriptionPlanDB.update(subscriptionPlan);
     }
 
     public void addCoupon(String productName, String couponName, LocalDate expiryDate, double discount){
         Product product = getProductByName(productName);
-        product.setCoupons( new Coupon(couponName, expiryDate, discount) );
+        couponDB.save( new Coupon(couponName, expiryDate, discount, company.getAccount().getID(), product.getID()) );
     }
 
     public ArrayList<Product> getProducts(){
-        ArrayList<Product> products = company.getProducts();
+        ArrayList<Product> products = productsDB.getProducts();
         if(products.size() == 0)
             throw new DatabaseException("No products found", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION);
         return products;
@@ -70,7 +80,7 @@ public class ProductService{
         ArrayList<SubscriptionPlan> subscriptionPlans = null;
         for(Product product : products){
             if(product.getProductName().equals(productName))
-                subscriptionPlans = product.getSubscriptionPlan();
+                subscriptionPlans = subscriptionPlanDB.getSubscriptionPlan();
         }
         if(subscriptionPlans == null || subscriptionPlans.size() == 0)
             throw new DatabaseException("No subscription plan is available at the moment for product : " + productName, DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION);
@@ -87,7 +97,7 @@ public class ProductService{
     }
 
     private SubscriptionPlan getSubscriptionPlanByName(Product product, String subscriptionName){
-        ArrayList<SubscriptionPlan> subscriptionPlans = product.getSubscriptionPlan();
+        ArrayList<SubscriptionPlan> subscriptionPlans = subscriptionPlanDB.getSubscriptionPlan();
         if(subscriptionPlans.size() == 0)
             throw new DatabaseException("No subscription plan available so far", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION);
         for(SubscriptionPlan  subscriptionPlan : subscriptionPlans){
@@ -106,11 +116,10 @@ public class ProductService{
     }
 
     public void sendNotifications(String productName, String message){
-        CompanyDatabase database = new CompanyDatabase();
+        UserDB database = CurrentDatabase.getUserDatabase();
         Product product = getProductByName(productName);
-        HashMap<String, Boolean> newsLetterSubscribers = product.getNewsLetterSubscribers();
-        newsLetterSubscribers.forEach( (email, isSubscribed) ->{
-                if(isSubscribed)
+        ArrayList<String> newsLetterSubscribers = newsLetterSubscribersDB.getNewsNewsLetterSubscribers();
+        newsLetterSubscribers.forEach( (email) ->{
                     sendNotification(message, database.getSubscribersByEmail(email));
         });
     }

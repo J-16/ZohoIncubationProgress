@@ -4,7 +4,7 @@ import com.company.subscriptionmanagement.model.PaymentDetails;
 
 public interface PaymentService {
 
-    boolean makePayment(String email, double price, PaymentDetails paymentDetails);
+    boolean makePayment(long subscriberID, double price);
     boolean makePayment();
 
 }

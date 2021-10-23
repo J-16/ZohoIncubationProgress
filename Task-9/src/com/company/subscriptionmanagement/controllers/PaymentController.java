@@ -1,6 +1,8 @@
 package com.company.subscriptionmanagement.controllers;
 
 
+import com.company.subscriptionmanagement.database.CurrentDatabase;
+import com.company.subscriptionmanagement.database.PaymentDetailsDB;
 import com.company.subscriptionmanagement.model.PaymentDetails;
 import com.company.subscriptionmanagement.model.Subscriber;
 import com.company.subscriptionmanagement.model.service.*;
@@ -19,14 +21,16 @@ public class PaymentController{
     private PaymentViewable paymentView;
     private double price;
     private Subscriber subscriber;
+    private PaymentDetailsDB paymentDetailsDB;
 
     public PaymentController(double price, Subscriber subscriber){
         this.price = price;
         this.subscriber = subscriber;
+        this.paymentDetailsDB = CurrentDatabase.getPaymentDetailsDB();
     }
 
     public void processPayment(){
-        if(subscriber.getPaymentDetails() == null){
+        if(paymentDetailsDB.getBySubscriberID(subscriber.getAccount().getID()) == null){
             generatePaymentDetails();
         }
         else{
@@ -49,8 +53,8 @@ public class PaymentController{
     private void generatePaymentDetails(){
         paymentView.view();
         if(paymentView instanceof CardPaymentService)
-            subscriber.setPaymentDetails( new PaymentDetails( Long.parseLong(paymentDetails.get("cardNo")), Integer.parseInt(paymentDetails.get("cvv")),
-                    LocalDate.parse(paymentDetails.get("expDate")) ));
+            paymentDetailsDB.save( new PaymentDetails( Long.parseLong(paymentDetails.get("cardNo")), Integer.parseInt(paymentDetails.get("cvv")),
+                    LocalDate.parse(paymentDetails.get("expDate")), subscriber.getAccount().getID() ));
         //cannot save upi details and internet banking (only one time payment).
     }
 

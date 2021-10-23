@@ -75,7 +75,8 @@ public class SubscriberDashboard implements Dashboard{
                 }
             }
             else {
-                System.out.println("Subscription Plan : " + currentSubscription.getSubscriptionPlan().getPlanName());
+                //System.out.println("Subscription Plan : " + currentSubscription.getSubscriptionPlan().getPlanName());
+                System.out.println("Subscription Plan ID: " + currentSubscription.getSubscriberID());
                 System.out.println("Subscribed Date : " + currentSubscription.getFirstSubscribedDate().format(formatter));
                 System.out.println("Expiry Date : " + currentSubscription.getExpireDate().format(formatter));
             }
@@ -208,11 +209,11 @@ public class SubscriberDashboard implements Dashboard{
 
     private void upgradeSubscription(){
         String productName = null;
-        String planName = null;
+        Long planName = null;
         while(true){
             try{
                 productName = GetValues.getString("Enter product name");
-                planName = GetValues.getString("Enter new plan name");
+                planName = GetValues.getLongValue("Enter new plan ID","Enter valid ID");
                 subscriberController.upgradeSubscriptionPlan(productName, planName);
                 DisplayMessage.successMessage("Successfully upgraded");
                 return;

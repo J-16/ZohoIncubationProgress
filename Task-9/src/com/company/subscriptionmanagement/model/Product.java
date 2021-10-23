@@ -1,31 +1,27 @@
 package com.company.subscriptionmanagement.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Product{
+public class Product implements Serializable {
 
     private String productName;
     private int trailDays;
     private double price;
     private boolean isTrailAvailable = false;
+    private final long ID;
+    private final long companyID;
 
-    private final ArrayList<SubscriptionPlan> subscriptionPlans;
-    private final ArrayList<Coupon> coupons;
-    private final HashMap<String, Boolean> newsLetterSubscribers;
-    private final HashMap<String, CurrentSubscription> productSubscribers; //String - email
-    private final HashMap<String, LocalDate> trailSubscribers; // email, endDate
+    private static long generateID = 0;
 
-    public Product(String productName, int trailDays, double price){
+    public Product(String productName, int trailDays, double price, long companyID){
         this.productName = productName;
         setTrailDays(trailDays);
         this.price = price;
-        this.subscriptionPlans = new ArrayList<>();
-        this.coupons = new ArrayList<>();
-        this.newsLetterSubscribers = new HashMap<>();
-        this.productSubscribers = new HashMap<>();
-        this.trailSubscribers = new HashMap<>();
+        this.ID = generateID++;
+        this.companyID = companyID;
     }
 
     public double getPrice(){
@@ -53,46 +49,7 @@ public class Product{
             isTrailAvailable = true;
             this.trailDays = trailDays;
         }
-    }
-
-    public ArrayList<SubscriptionPlan> getSubscriptionPlan(){
-        return subscriptionPlans;
-    }
-
-    public void setSubscriptionPlan(SubscriptionPlan subscriptionPlan){
-        this.subscriptionPlans.add(subscriptionPlan);
-    }
-
-    public ArrayList<Coupon> getCoupons(){
-        return coupons;
-    }
-
-    public void setCoupons(Coupon coupons){
-        this.coupons.add(coupons);
-    }
-
-    public HashMap<String, Boolean> getNewsLetterSubscribers(){
-        return newsLetterSubscribers;
-    }
-
-    public void setNewsLetterSubscribedUsers(String email, Boolean isSubscribed){
-        this.newsLetterSubscribers.put(email,isSubscribed);
-    }
-
-    public HashMap<String, CurrentSubscription> getProductSubscribers(){
-        return productSubscribers;
-    }
-
-    public CurrentSubscription getProductSubscribers(String email){
-        return productSubscribers.get(email);
-    }
-
-    public void addProductSubscribers(String email, CurrentSubscription currentSubscription){
-        this.productSubscribers.put(email, currentSubscription);
-    }
-
-    public void addTrailSubscribers(String email, LocalDate endDate){
-        this.trailSubscribers.put(email, endDate);
+        this.trailDays = 0;
     }
 
     public boolean isTrailAvailable() {
@@ -103,16 +60,11 @@ public class Product{
         isTrailAvailable = trailAvailable;
     }
 
-    public HashMap<String, LocalDate> getTrailSubscribers() {
-        return trailSubscribers;
+    public long getID() {
+        return ID;
     }
 
-    public LocalDate getTrailSubscribers(String email) {
-        return trailSubscribers.get(email);
+    public long getCompanyID() {
+        return companyID;
     }
-
-    public LocalDate setTrailSubscribers(String email, LocalDate endDate) {
-        return trailSubscribers.put(email, endDate);
-    }
-
 }

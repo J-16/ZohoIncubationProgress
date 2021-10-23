@@ -1,11 +1,11 @@
 package com.company.subscriptionmanagement.controllers;
 
-import com.company.subscriptionmanagement.database.CompanyDatabase;
+import com.company.subscriptionmanagement.database.CurrentDatabase;
+import com.company.subscriptionmanagement.database.UserDB;
 import com.company.subscriptionmanagement.exception.DatabaseException;
 import com.company.subscriptionmanagement.exception.InputException;
 import com.company.subscriptionmanagement.model.*;
 import com.company.subscriptionmanagement.model.service.SubscriberService;
-import com.company.subscriptionmanagement.model.service.Validity;
 import com.company.subscriptionmanagement.view.Dashboard;
 import com.company.subscriptionmanagement.view.SubscriberDashboard;
 
@@ -19,14 +19,15 @@ public class SubscriberController{
     private String name;
     private SubscriberService subscriptionService;
     private Company company;
-    private CompanyDatabase database = new CompanyDatabase();
+    private UserDB database;
     private Dashboard dashboard;
 
     public SubscriberController(String email, String name, String companyName){
         this.email = email;
         this.name = name;
+        this.database = CurrentDatabase.getUserDatabase();
         this.company = getCompany(companyName);
-        this.subscriptionService = new SubscriberService(email, name, company, database);
+        this.subscriptionService = new SubscriberService(email, name, company);
     }
 
     public void activateTrail(String productName){
@@ -40,9 +41,9 @@ public class SubscriberController{
         subscriptionService.subscribeProduct(productName,planName,couponName);
     }
 
-    public void upgradeSubscriptionPlan(String productName, String subscriptionPlan){
-        Validity.emptyCheck("productName", productName,"subscriptionPlan", subscriptionPlan);
-        subscriptionService.changeSubscription(productName, subscriptionPlan);
+    public void upgradeSubscriptionPlan(String productName, long subscriptionPlanID){
+        //Validity.emptyCheck("productName", productName,"subscriptionPlan", subscriptionPlanID);
+        subscriptionService.changeSubscription(productName, subscriptionPlanID);
     }
 
     public void requestDownGrade() {
@@ -62,7 +63,7 @@ public class SubscriberController{
 
     public void unSubscribeNewsletter(String ...productName) {
         for(String product : productName){
-            subscriptionService.cancelNewsLetterSubscription(email,product);
+            subscriptionService.cancelNewsLetterSubscription(product);
         }
     }
 
@@ -133,7 +134,7 @@ public class SubscriberController{
 
     //non functionality
     public static boolean isValidCompany(String companyName){
-        return new CompanyDatabase().getCompanyByName(companyName) != null;
+        return CurrentDatabase.getUserDatabase().getCompanyByName(companyName) != null;
     }
 
 }

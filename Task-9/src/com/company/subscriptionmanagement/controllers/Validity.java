@@ -1,4 +1,4 @@
-package com.company.subscriptionmanagement.model.service;
+package com.company.subscriptionmanagement.controllers;
 
 import com.company.subscriptionmanagement.exception.InputException;
 

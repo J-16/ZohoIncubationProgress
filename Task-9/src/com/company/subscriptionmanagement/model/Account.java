@@ -1,13 +1,19 @@
 package com.company.subscriptionmanagement.model;
 
-public class Account {
+import java.io.Serializable;
+
+public class Account implements Serializable {
 
     private String name;
     private String email;
+    private final long ID;
+
+    private static long generateID = 0;
 
     public Account(String name, String email) {
         this.name = name;
         this.email = email;
+        ID = generateID++;
     }
 
     public String getName(){
@@ -26,4 +32,7 @@ public class Account {
         this.email = email;
     }
 
+    public long getID() {
+        return ID;
+    }
 }

@@ -1,6 +1,8 @@
 package com.company.subscriptionmanagement.model;
 
-public class ProtectedAccount extends Account{
+import java.io.Serializable;
+
+public class ProtectedAccount extends Account implements Serializable {
 
     private String password;
 
