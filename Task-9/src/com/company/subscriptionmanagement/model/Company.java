@@ -1,20 +1,21 @@
 package com.company.subscriptionmanagement.model;
 
 
-public class Company{
+public class Company extends Subscriber{
 
-    private ProtectedAccount account;
+    private String password;
 
     public Company(String name, String email, String password){
-        this.account = new ProtectedAccount(name, email, password);
+        super(name, email);
+        this.password = password;
     }
 
-    public void setAccount(Account account) {
-        this.account = (ProtectedAccount) account;
+    public String getPassword() {
+        return password;
     }
 
-    public ProtectedAccount getAccount(){
-        return account;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
 }
