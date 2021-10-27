@@ -1,7 +1,5 @@
 package com.company.subscriptionmanagement.model;
 
-import java.util.ArrayList;
-
 public class NewsLetter{
 
     private final long ID;
@@ -26,7 +24,11 @@ public class NewsLetter{
         return companyID;
     }
 
-    public long getSubscribersIDs() {
+    public long getSubscribersID() {
         return subscribersIDs;
+    }
+
+    public long getProductID() {
+        return productID;
     }
 }

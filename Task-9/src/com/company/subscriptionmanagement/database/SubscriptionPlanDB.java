@@ -5,8 +5,9 @@ import com.company.subscriptionmanagement.model.SubscriptionPlan;
 import java.util.ArrayList;
 
 public interface SubscriptionPlanDB{
-    public void save(SubscriptionPlan issue);
-    public void update(SubscriptionPlan updateSubscriptionPlan);
-    public ArrayList<SubscriptionPlan> getSubscriptionPlan();
-    public SubscriptionPlan getByID(long ID);
+    void save(SubscriptionPlan issue);
+    void update(SubscriptionPlan updateSubscriptionPlan);
+    ArrayList<SubscriptionPlan> getByCompanyID(long companyID);
+    ArrayList<SubscriptionPlan> getByProductID(long companyID, long productID);
+    SubscriptionPlan getByID(long ID);
 }

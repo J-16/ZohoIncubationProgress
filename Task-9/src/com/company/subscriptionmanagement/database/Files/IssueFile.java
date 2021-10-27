@@ -13,11 +13,18 @@ public class IssueFile implements IssueDB {
 
     }
 
-    public void update(){
+    @Override
+    public void update(Issue updateIssue) {
 
     }
 
-    public Issue get(){
+    @Override
+    public Issue getByID(long ID) {
+        return null;
+    }
+
+    @Override
+    public Issue getByCompanyID(long companyID) {
         return null;
     }
 

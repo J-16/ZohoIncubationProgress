@@ -64,12 +64,11 @@ public class ProductView{
         subscriptionPlans = subscribeController.getAllSubscriptionPlanByCompany(productName);
         DisplayMessage.border("------------------------------------------------------------------------------------------------------------");
         System.out.println();
-        DisplayMessage.border("|");
         for(SubscriptionPlan subscriptionPlan : subscriptionPlans){
-            DisplayMessage.listHeading("    Subscription plan name         ");
             DisplayMessage.border("|");
+            DisplayMessage.listHeading("    Subscription plan ID : " + subscriptionPlan.getID() + "     ");
         }
-        DisplayMessage.border("\n");
+        DisplayMessage.border("|\n");
         for(SubscriptionPlan subscriptionPlan : subscriptionPlans){
             DisplayMessage.border("|");
             System.out.print("              "  + subscriptionPlan.getPlanName() + "              ");
@@ -133,20 +132,20 @@ public class ProductView{
 
     private void subscribeProduct(String productName, SubscriptionType type){
         try{
-            String planName = null;
+            Long planID = null;
             String coupon = null;
             if(type == SubscriptionType.SUBSCRIBE) {
                 while(true){
                     try{
-                        if(planName == null)
-                            planName = GetValues.getString("Enter Subscription Plan Name to subscribe");
+                        if(planID == null)
+                            planID = GetValues.getLongValue("Enter Subscription Plan ID to subscribe","Enter valid ID");
                         if(coupon == null){
                             String option = GetValues.getString("1.Enter Coupon or any other key to ignore");
                             if (option.equals("1")) {
                                 coupon = GetValues.getString("Enter coupon : ");
                             }
                         }
-                        subscribeController.subscribeProduct(productName, planName, coupon);
+                        subscribeController.subscribeProduct(productName, planID, coupon);
                         DisplayMessage.successMessage("Subscription Added successfully");
                         return;
                     }catch(DatabaseException e){
@@ -154,7 +153,7 @@ public class ProductView{
                         if(e.getField() != null && e.getField().equals("couponName"))
                             coupon = null;
                         else
-                            planName = null;
+                            planID = null;
                     }
                     catch(TransactionException e ){
                         System.out.println(e.getMessage());
@@ -163,7 +162,7 @@ public class ProductView{
                 }
             }
             String email = GetValues.getString("Enter email you want to gift");
-            subscribeController.giftSubscription(productName, planName, coupon, email);
+            subscribeController.giftSubscription(productName, planID, coupon, email);
             DisplayMessage.successMessage("Gifted subscription to " + email);
         }catch(DatabaseException | InvalidOperationException e){
             System.out.println(e.getMessage());

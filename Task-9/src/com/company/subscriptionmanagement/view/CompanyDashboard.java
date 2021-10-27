@@ -261,7 +261,6 @@ public class CompanyDashboard implements Dashboard{
         System.out.println("------------------------------------------------");
     }
 
-
     private void sendProductUpdates(){
         displayProducts();
         String productName = null;

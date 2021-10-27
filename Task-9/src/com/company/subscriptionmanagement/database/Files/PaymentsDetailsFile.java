@@ -13,11 +13,14 @@ public class PaymentsDetailsFile implements PaymentDetailsDB{
 
     }
 
-    public void update(){
+    @Override
+    public void update(PaymentDetails updatedPaymentDetail) {
 
     }
 
-    public PaymentDetails getBySubscriberID(long subscriberID){
+    @Override
+    public PaymentDetails getBySubscriberID(long subscriberID) {
         return null;
     }
+
 }

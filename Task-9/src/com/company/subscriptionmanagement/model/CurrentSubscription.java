@@ -16,17 +16,19 @@ public class CurrentSubscription implements Serializable {
     private final long companyID;
     private final long ID;
     private double price;
+    private final double productID;
 
     private static long generateID = 0;
 
     public CurrentSubscription(long subscriberID, long companyID, SubscriptionPlan subscriptionPlan){
         FIRST_SUBSCRIBED_DATE = LocalDate.now();
-        isCurrentlySubscribed = true;
+        this.isCurrentlySubscribed = true;
         this.subscriberID = subscriberID;
         subscriptionPlanId = subscriptionPlan.getID();
         this.ID = generateID++;
         this.companyID = companyID;
         this.price = subscriptionPlan.getPrice();
+        productID = subscriptionPlan.getProductID();
         this.expireDate = FIRST_SUBSCRIBED_DATE.plusDays(subscriptionPlan.getSubscriptionType().getValue());
     }
 
@@ -98,5 +100,13 @@ public class CurrentSubscription implements Serializable {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public long getID() {
+        return ID;
+    }
+
+    public double getProductID() {
+        return productID;
     }
 }

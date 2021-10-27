@@ -25,7 +25,7 @@ public class ProductService{
     }
 
     public void addProduct(String name, int trailDays, double price){
-        ArrayList<Product> products = productsDB.getProducts();
+        ArrayList<Product> products = productsDB.getProductsByCompanyID(company.getID());
         if(products != null){
             for(Product product : products){
                 if(product.getProductName().equals(name))
@@ -67,7 +67,7 @@ public class ProductService{
     }
 
     public ArrayList<Product> getProducts(){
-        ArrayList<Product> products = productsDB.getProducts();
+        ArrayList<Product> products = productsDB.getProductsByCompanyID(company.getID());
         if(products.size() == 0)
             throw new DatabaseException("No products found", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION);
         return products;
@@ -80,7 +80,7 @@ public class ProductService{
         ArrayList<SubscriptionPlan> subscriptionPlans = null;
         for(Product product : products){
             if(product.getProductName().equals(productName))
-                subscriptionPlans = subscriptionPlanDB.getSubscriptionPlan();
+                subscriptionPlans = subscriptionPlanDB.getByProductID(company.getID(), product.getID());
         }
         if(subscriptionPlans == null || subscriptionPlans.size() == 0)
             throw new DatabaseException("No subscription plan is available at the moment for product : " + productName, DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION);
@@ -97,7 +97,7 @@ public class ProductService{
     }
 
     private SubscriptionPlan getSubscriptionPlanByName(Product product, String subscriptionName){
-        ArrayList<SubscriptionPlan> subscriptionPlans = subscriptionPlanDB.getSubscriptionPlan();
+        ArrayList<SubscriptionPlan> subscriptionPlans = subscriptionPlanDB.getByCompanyID(company.getID());
         if(subscriptionPlans.size() == 0)
             throw new DatabaseException("No subscription plan available so far", DatabaseException.ExceptionType.NOT_FOUND_EXCEPTION);
         for(SubscriptionPlan  subscriptionPlan : subscriptionPlans){
@@ -118,9 +118,9 @@ public class ProductService{
     public void sendNotifications(String productName, String message){
         UserDB database = CurrentDatabase.getUserDatabase();
         Product product = getProductByName(productName);
-        ArrayList<String> newsLetterSubscribers = newsLetterSubscribersDB.getNewsNewsLetterSubscribers();
-        newsLetterSubscribers.forEach( (email) ->{
-                    sendNotification(message, database.getSubscribersByEmail(email));
+        ArrayList<NewsLetter> newsLetterSubscribers = newsLetterSubscribersDB.getNewsNewsLetterSubscribers();
+        newsLetterSubscribers.forEach( (newsLetter) ->{
+                    sendNotification(message, database.getSubscribersByID(newsLetter.getSubscribersID()));
         });
     }
 

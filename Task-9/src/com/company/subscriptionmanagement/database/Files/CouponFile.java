@@ -24,7 +24,7 @@ public class CouponFile implements CouponDB{
     }
 
     @Override
-    public Coupon getByID() {
+    public Coupon getByID(long ID) {
         return null;
     }
 

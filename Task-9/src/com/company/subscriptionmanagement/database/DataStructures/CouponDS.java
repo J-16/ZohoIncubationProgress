@@ -7,9 +7,15 @@ import java.util.ArrayList;
 
 public class CouponDS implements CouponDB{
 
-    @Override
-    public void save(Coupon issue) {
+    private ArrayList<Coupon> coupons;
 
+    public CouponDS(){
+        coupons = new ArrayList<>();
+    }
+
+    @Override
+    public void save(Coupon coupon){
+        coupons.add(coupon);
     }
 
     @Override
@@ -19,11 +25,16 @@ public class CouponDS implements CouponDB{
 
     @Override
     public ArrayList<Coupon> getCoupons() {
-        return null;
+        return coupons;
     }
 
     @Override
-    public Coupon getByID() {
+    public Coupon getByID(long ID) {
+        for(Coupon coupon : coupons){
+            if(coupon.getID() == ID)
+                return coupon;
+        }
         return null;
     }
+
 }

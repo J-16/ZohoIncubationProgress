@@ -22,7 +22,7 @@ public class AutoAddDetails {
         AuthenticationController controller = new AuthenticationController();
         controller.register("company1", "company1@gmail.com", "123456789", UserDB.UserType.COMPANY);
         controller.register("company2", "company2@gmail.com", "123456789",UserDB.UserType.COMPANY);
-        controller.register("company3", "c@c.c", "123456789",UserDB.UserType.COMPANY);
+        controller.register("company3", "u@c.c", "123456789",UserDB.UserType.COMPANY);
 
         ProductController productController = new ProductController( (Company) new AuthenticationController().login("company1@gmail.com", "123456789", UserDB.UserType.COMPANY) );
         productController.addProduct("prod1",10,500);

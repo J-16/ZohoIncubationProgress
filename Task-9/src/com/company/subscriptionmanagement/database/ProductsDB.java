@@ -7,6 +7,6 @@ import java.util.ArrayList;
 public interface ProductsDB{
     void save(Product issue);
     void update(Product updateProduct);
-    ArrayList<Product> getProducts();
+    ArrayList<Product> getProductsByCompanyID(long companyID);
     Product getByID(long ID);
 }

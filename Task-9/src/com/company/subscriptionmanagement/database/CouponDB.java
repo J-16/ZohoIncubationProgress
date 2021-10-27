@@ -8,5 +8,5 @@ public interface CouponDB{
     public void save(Coupon issue);
     public void update();
     public ArrayList<Coupon> getCoupons();
-    public Coupon getByID();
+    public Coupon getByID(long ID);
 }

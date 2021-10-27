@@ -73,4 +73,12 @@ public class SubscriptionPlan implements Serializable {
     public long getID() {
         return ID;
     }
+
+    public long getCompanyID() {
+        return companyID;
+    }
+
+    public long getProductID() {
+        return productID;
+    }
 }

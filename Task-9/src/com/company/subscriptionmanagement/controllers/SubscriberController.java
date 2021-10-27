@@ -36,9 +36,9 @@ public class SubscriberController{
         subscriptionService.activateTrail(productName);
     }
 
-    public void subscribeProduct(String productName, String planName, String couponName){
+    public void subscribeProduct(String productName, Long planID, String couponName){
         Validity.emptyCheck("productName", productName);
-        subscriptionService.subscribeProduct(productName,planName,couponName);
+        subscriptionService.subscribeProduct(productName, planID, couponName);
     }
 
     public void upgradeSubscriptionPlan(String productName, long subscriptionPlanID){
@@ -67,9 +67,9 @@ public class SubscriberController{
         }
     }
 
-    public void subscribeNewsletter(String ...productName) {
+    public void subscribeNewsletter(String ...productName){
         for(String product : productName){
-            subscriptionService.subscribeNewsLetter(email, product);
+            subscriptionService.subscribeNewsLetter(product);
         }
     }
 
@@ -78,7 +78,7 @@ public class SubscriberController{
         dashboard.control();
     }
 
-    public ArrayList<String> getProductsByCompany() {
+    public ArrayList<String> getProductsByCompany(){
         return subscriptionService.getProductsByCompany();
     }
 
@@ -95,12 +95,12 @@ public class SubscriberController{
         return subscriptionService.getTrailSubscribedProducts();
     }
 
-    public boolean getIsTrailAvailable(String productName) {
+    public boolean getIsTrailAvailable(String productName){
         Validity.emptyCheck("productName", productName);
         return subscriptionService.getProductByCompany(productName).isTrailAvailable();
     }
 
-    public int getTrailDays(String productName) {
+    public int getTrailDays(String productName){
         Validity.emptyCheck("productName", productName);
         return subscriptionService.getProductByCompany(productName).getTrailDays();
     }
@@ -113,11 +113,11 @@ public class SubscriberController{
         return subscriptionService.getSubscribedNewsletter();
     }
 
-    public void giftSubscription(String productName, String planName, String coupon, String email) {
-        Validity.emptyCheck("productName", productName, "planName", planName);
+    public void giftSubscription(String productName, Long planID, String coupon, String email) {
+        Validity.emptyCheck("productName", productName);
         Validity.isValidEmail(email);
         Validity.emptyCheck("email", email);
-        subscriptionService.giftSubscription(productName, planName, coupon, email);
+        subscriptionService.giftSubscription(productName, planID, coupon, email);
     }
 
     public void raiseIssue(String complain){

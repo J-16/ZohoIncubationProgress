@@ -63,24 +63,27 @@ public class SubscriberDashboard implements Dashboard{
             System.out.println(e.getMessage());
             return;
         }
-        subscriptions.forEach((product, currentSubscription)->{
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-            System.out.println("Product : " + product);
-            if(!currentSubscription.isCurrentlySubscribed()){
-                if(currentSubscription.getCancelledDate() != null)
-                    System.out.println("Cancelled Date : " + currentSubscription.getCancelledDate().format(formatter));
-                else {
-                    System.out.println("Paused date : " + currentSubscription.getPausedDate().format(formatter));
-                    System.out.println("Resume subscription date : " + currentSubscription.getResumeSubscriptionDate().format(formatter));
+        if(subscriptions != null){
+            DisplayMessage.listHeading("Subscribed Products : \n");
+            subscriptions.forEach((product, currentSubscription)->{
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                System.out.println("Product Name : " + product);
+                if(!currentSubscription.isCurrentlySubscribed()){
+                    if(currentSubscription.getCancelledDate() != null)
+                        System.out.println("Cancelled Date : " + currentSubscription.getCancelledDate().format(formatter));
+                    else {
+                        System.out.println("Paused date : " + currentSubscription.getPausedDate().format(formatter));
+                        System.out.println("Resume subscription date : " + currentSubscription.getResumeSubscriptionDate().format(formatter));
+                    }
                 }
-            }
-            else {
-                //System.out.println("Subscription Plan : " + currentSubscription.getSubscriptionPlan().getPlanName());
-                System.out.println("Subscription Plan ID: " + currentSubscription.getSubscriberID());
-                System.out.println("Subscribed Date : " + currentSubscription.getFirstSubscribedDate().format(formatter));
-                System.out.println("Expiry Date : " + currentSubscription.getExpireDate().format(formatter));
-            }
-        });
+                else {
+                    //System.out.println("Subscription Plan : " + currentSubscription.getSubscriptionPlan().getPlanName());
+                    System.out.println("Subscription Plan ID: " + currentSubscription.getSubscriberID());
+                    System.out.println("Subscribed Date : " + currentSubscription.getFirstSubscribedDate().format(formatter));
+                    System.out.println("Expiry Date : " + currentSubscription.getExpireDate().format(formatter));
+                }
+            });
+        }
         subscriptionOption();
     }
 
@@ -183,7 +186,6 @@ public class SubscriberDashboard implements Dashboard{
             DisplayMessage.successMessage("Subscribed to newsletters");
         }catch(DatabaseException e){
             System.out.println(e.getMessage());
-            productName = null;
         }
     }
 
@@ -287,6 +289,7 @@ public class SubscriberDashboard implements Dashboard{
     private void raiseIssue() {
         String complain = GetValues.getString("Type your issue");
         subscriberController.raiseIssue(complain);
+        System.out.println("issue sent");
     }
 
 }

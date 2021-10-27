@@ -28,6 +28,11 @@ public class ProductsFile implements ProductsDB{
     }
 
     @Override
+    public ArrayList<Product> getProductsByCompanyID(long companyID) {
+        return null;
+    }
+
+    @Override
     public Product getByID(long ID) {
         return null;
     }

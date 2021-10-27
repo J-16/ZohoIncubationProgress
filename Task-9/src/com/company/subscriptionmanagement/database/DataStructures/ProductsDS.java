@@ -28,8 +28,13 @@ public class ProductsDS implements ProductsDB{
     }
 
     @Override
-    public ArrayList<Product> getProducts() {
-        return products;
+    public ArrayList<Product> getProductsByCompanyID(long companyID) {
+        ArrayList<Product> companyProducts = new ArrayList<>();
+        for(Product product : products){
+            if(product.getCompanyID() == companyID)
+                companyProducts.add(product);
+        }
+        return companyProducts;
     }
 
     @Override

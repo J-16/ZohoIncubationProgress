@@ -10,4 +10,5 @@ public interface TrailSubscribersDB{
     public void update(TrailVersion updateTrailVersion);
     public LinkedList<TrailVersion> getTrailSubscribers();
     public TrailVersion getByID(long ID);
+    public TrailVersion getByCompanyID(long companyID, long productID, long subscriberID);
 }

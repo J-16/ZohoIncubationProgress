@@ -21,7 +21,12 @@ public class SubscriptionPlansFile implements SubscriptionPlanDB {
     }
 
     @Override
-    public ArrayList<SubscriptionPlan> getSubscriptionPlan() {
+    public ArrayList<SubscriptionPlan> getByCompanyID(long companyID) {
+        return null;
+    }
+
+    @Override
+    public ArrayList<SubscriptionPlan> getByProductID(long companyID, long productID) {
         return null;
     }
 

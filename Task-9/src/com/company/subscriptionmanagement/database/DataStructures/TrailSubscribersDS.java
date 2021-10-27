@@ -20,7 +20,13 @@ public class TrailSubscribersDS implements TrailSubscribersDB{
 
     @Override
     public void update(TrailVersion updateTrailVersion){
-
+        for(TrailVersion trailVersion : trailSubscribers){
+            if(trailVersion.getID() == updateTrailVersion.getID()){
+                trailSubscribers.remove(trailVersion);
+                trailSubscribers.add(updateTrailVersion);
+                return;
+            }
+        }
     }
 
     @Override
@@ -30,6 +36,20 @@ public class TrailSubscribersDS implements TrailSubscribersDB{
 
     @Override
     public TrailVersion getByID(long ID) {
+        for(TrailVersion trailVersion : trailSubscribers){
+            if(trailVersion.getID() == ID){
+                return trailVersion;
+            }
+        }
+        return null;
+    }
+
+    public TrailVersion getByCompanyID(long companyID, long productID, long subscriberID){
+        for(TrailVersion trailVersion : trailSubscribers){
+            if(trailVersion.getCompanyID() == companyID && trailVersion.getProductID() == productID && trailVersion.getSubscriberID() == subscriberID){
+                return trailVersion;
+            }
+        }
         return null;
     }
 }
